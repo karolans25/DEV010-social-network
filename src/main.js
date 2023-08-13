@@ -2,37 +2,43 @@
 
 import { myFunction } from './lib/index.js';
 import init from './components/init.js';
+import error from './components/error.js';
+import signin from './components/signin.js';
+import signup from './components/signup.js';
+import password from './components/password.js';
+
 myFunction();
 
 const routes = [
-	{ path: '/', component: init }
+  { path: '/', component: init },
+  { path: '/error', component: error },
+  { path: '/signin', component: signin },
+  { path: '/signup', component: signup },
+  { path: '/password', component: password },
 ];
 
 const defaultRoute = '/';
 const root = document.getElementById('root');
 
-function navigateTo(hash){
-	const route = routes.find((routeFound) => routeFound.path === hash);
-	if(route && route.component){
-		window.history.pushState(
-			{},
-			route.path,
-			window.location.origin + route.path,
-		);
-		while(root.firstChild){
-			root.removeChild(root.firstChild);
-		}
-		root.appendChild(route.component(navigateTo));
-	} else {
-		navigateTo('/error');	
-	}
+function navigateTo(hash) {
+  const route = routes.find((routeFound) => routeFound.path === hash);
+  if (route && route.component) {
+    window.history.pushState(
+      {},
+      route.path,
+      window.location.origin + route.path,
+    );
+    while (root.firstChild) {
+      root.removeChild(root.firstChild);
+    }
+    root.appendChild(route.component(navigateTo));
+  } else {
+    navigateTo('/error');
+  }
 }
 
 window.onpopstate = () => {
-	navigateTo(window.location.pathname);
+  navigateTo(window.location.pathname);
 };
 
 navigateTo(window.location.pathname || defaultRoute);
-
-
-
