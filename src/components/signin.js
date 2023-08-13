@@ -2,6 +2,7 @@
 
 function signin(navigateTo) {
   const section = document.createElement('section');
+  const back = document.createElement('a');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
   const title = document.createElement('h2');
@@ -20,6 +21,10 @@ function signin(navigateTo) {
 
   // section
   section.className = 'signin';
+
+  // link back
+  back.innerHTML = 'back';
+  back.href = '/';
 
   // image
   img.src = './assets/icons/gorra.webp';
@@ -44,6 +49,8 @@ function signin(navigateTo) {
   inputPass.required = true;
   buttonSignIn.textContent = 'Sign In';
   buttonSignIn.type = 'submit';
+  recoverPass.innerHTML = 'Recover password';
+  recoverPass.href = '/password';
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
 
   form.addEventListener('submit', async (e) => {
@@ -75,13 +82,11 @@ function signin(navigateTo) {
   });
   op2.append(buttonSignInGithub);
 
-  // links
-  recoverPass.innerHTML = 'Recover password';
-  recoverPass.href = '/password';
+  // link sign up
   signUp.innerHTML = 'Sign Up';
   signUp.href = '/signup';
 
-  section.append(figure, title, form, op1, op2, signUp);
+  section.append(back, figure, title, form, op1, op2, signUp);
 
   return section;
 }

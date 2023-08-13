@@ -148,7 +148,7 @@ form{
 /* sign In */
 .signin{
   padding: 10px 10px 10px 10px;
-	background-image: url(assets/signin.png);
+	/* background-image: url(assets/signin.png); */
 	background-size: 100% 100%;
 	display: grid;
 	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
@@ -173,7 +173,16 @@ form{
 /* sign Up */
 .signup{
   padding: 10px 10px 10px 10px;
-	background-image: url(assets/signup.png);
+	/* background-image: url(assets/signup.png); */
+	background-size: 100% 100%;
+	display: grid;
+	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
+}
+
+/* recover password */
+.pass{
+  padding: 10px 10px 10px 10px;
+	/* background-image: url(assets/password.png); */
 	background-size: 100% 100%;
 	display: grid;
 	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */

@@ -1,8 +1,8 @@
 // import { signUpAuth } from '../lib/auth';
 
 function signup(navigateTo) {
-  const back = document.createElement('a');
   const section = document.createElement('section');
+  const back = document.createElement('a');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
   const title = document.createElement('h2');
