@@ -1,0 +1,85 @@
+[debug] [2023-08-13T15:25:20.174Z] ----------------------------------------------------------------------
+[debug] [2023-08-13T15:25:20.176Z] Command:       /home/karolans/.nvm/versions/node/v18.16.1/bin/node /home/karolans/.nvm/versions/node/v18.16.1/bin/firebase emulators:start
+[debug] [2023-08-13T15:25:20.177Z] CLI Version:   12.4.7
+[debug] [2023-08-13T15:25:20.177Z] Platform:      linux
+[debug] [2023-08-13T15:25:20.177Z] Node Version:  v18.16.1
+[debug] [2023-08-13T15:25:20.178Z] Time:          Sun Aug 13 2023 10:25:20 GMT-0500 (Colombia Standard Time)
+[debug] [2023-08-13T15:25:20.178Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-13T15:25:20.314Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-13T15:25:20.314Z] > authorizing via signed-in user (priyacarito@gmail.com)
+[debug] [2023-08-13T15:25:20.360Z] openjdk version "11.0.18" 2023-01-17
+
+[debug] [2023-08-13T15:25:20.361Z] OpenJDK Runtime Environment (build 11.0.18+10-post-Debian-1deb11u1)
+OpenJDK 64-Bit Server VM (build 11.0.18+10-post-Debian-1deb11u1, mixed mode, sharing)
+
+[debug] [2023-08-13T15:25:20.373Z] Parsed Java major version: 11
+[info] i  emulators: Starting emulators: auth, firestore, hosting, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, hosting, storage"}}
+[debug] [2023-08-13T15:25:20.380Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-13T15:25:20.381Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-13T15:25:20.381Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-13T15:25:20.381Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-13T15:25:20.381Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-13T15:25:20.381Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-13T15:25:20.382Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5000}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-08-13T15:25:20.392Z] [hub] writing locator at /tmp/hub-social-network-karolans25.json
+[debug] [2023-08-13T15:25:20.401Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-13T15:25:20.402Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-08-13T15:25:20.402Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/karolans/.cache/firebase/emulators/cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","social-network-karolans25","--rules","/home/karolans/Documents/Github/Laboratoria/Bootcamp/Project_03/DEV010-social-network/firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/karolans/.cache/firebase/emulators/cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"social-network-karolans25\",\"--rules\",\"/home/karolans/Documents/Github/Laboratoria/Bootcamp/Project_03/DEV010-social-network/firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2023-08-13T15:25:21.626Z] Aug 13, 2023 10:25:21 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 13, 2023 10:25:21 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2023-08-13T15:25:21.684Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2023-08-13T15:25:21.684Z] 127.0.0.1:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080\n\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2023-08-13T15:25:32.287Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-13T15:25:33.247Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2023-08-13T15:25:33.261Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites 
+[debug] [2023-08-13T15:25:34.274Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites 200
+[debug] [2023-08-13T15:25:34.275Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites {"sites":[{"name":"projects/social-network-karolans25/sites/social-network-karolans25","defaultUrl":"https://social-network-karolans25.web.app","appId":"1:236349133039:web:0c71132ba72b7d473d8b1a","type":"DEFAULT_SITE"}]}
+[debug] [2023-08-13T15:25:34.275Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config [none]
+[debug] [2023-08-13T15:25:35.334Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config 200
+[debug] [2023-08-13T15:25:35.335Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config {"projectId":"social-network-karolans25","appId":"1:236349133039:web:0c71132ba72b7d473d8b1a","storageBucket":"social-network-karolans25.appspot.com","locationId":"us-central","apiKey":"AIzaSyD1k1NAyCqN-At-Um6MrejqTyHvMMA83fI","authDomain":"social-network-karolans25.firebaseapp.com","messagingSenderId":"236349133039"}
+[debug] [2023-08-13T15:25:35.427Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 [none]
+[debug] [2023-08-13T15:25:35.890Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 200
+[debug] [2023-08-13T15:25:35.890Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 {"projectId":"social-network-karolans25","projectNumber":"236349133039","displayName":"social-network-karolans25","name":"projects/social-network-karolans25","resources":{"hostingSite":"social-network-karolans25","storageBucket":"social-network-karolans25.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_8614a973-55cd-4ab7-8a9a-a2945519482a"}
+[info] i  hosting[social-network-karolans25]: Serving hosting files from: src {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1msrc\u001b[22m"}}
+[info] ✔  hosting[social-network-karolans25]: Local server: http://127.0.0.1:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5000\u001b[22m\u001b[24m"}}
+[debug] [2023-08-13T15:25:35.937Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-13T15:25:35.938Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-13T15:25:35.938Z] Starting Emulator UI with command {"binary":"node","args":["/home/karolans/.cache/firebase/emulators/ui-v1.11.7/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/home/karolans/.cache/firebase/emulators/ui-v1.11.7/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-08-13T15:25:36.063Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-08-13T15:25:36.064Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5000 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
