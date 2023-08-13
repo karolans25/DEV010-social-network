@@ -1,62 +1,66 @@
 // import { signUpAuth } from '../lib/auth';
 
 function signup(navigateTo) {
+  const back = document.createElement('a');
   const section = document.createElement('section');
+  const figure = document.createElement('figure');
+  const img = document.createElement('img');
   const title = document.createElement('h2');
-  const buttonReturn = document.createElement('button');
   const form = document.createElement('form');
-  // const inputName = document.createElement('input');
-  // const inputLastName = document.createElement('input');
   const inputEmail = document.createElement('input');
   const inputPass = document.createElement('input');
   const inputPassCheck = document.createElement('input');
-  // const labelName = document.createElement('label');
-  // const labelLastName = document.createElement('label');
   const labelEmail = document.createElement('label');
   const labelPass = document.createElement('label');
   const labelPassCheck = document.createElement('label');
   const buttonSignUp = document.createElement('button');
 
-  form.className = 'sign-up';
+  // section
+  section.className = 'signup';
+
+  // link back
+  back.innerHTML = 'back';
+  back.href = '/signin';
+
+  // figure
+  img.src = './assets/icons/nina.webp';
+  img.alt = 'user icon';
+  figure.append(img);
+
+  // title
   title.textContent = 'Sign Up';
   buttonSignUp.textContent = 'Sign Up';
 
-  // labelName.innerHTML = 'Name: ';
-  // labelLastName.innerHTML = 'Last Name: ';
+  // form
   labelEmail.innerHTML = 'Email: ';
-  labelPass.innerHTML = 'Password: ';
-  labelPassCheck.innerHTML = 'Password again: ';
-
-  // inputName.name = 'name';
-  // inputLastName.name = 'lastName';
-  inputEmail.name = 'email';
-  inputPass.name = 'pass';
-  inputPassCheck.name = 'passCheck';
-
-  // inputName.placeholder = 'Write name';
-  // inputLastName.placeholder = 'Write last name';
-  inputEmail.placeholder = 'Write email';
-  inputPass.placeholder = 'pass';
-  inputPassCheck.placeholder = 'pass again';
-
-  // labelName.htmlFor = inputName.name;
-  // labelLastName.htmlFor = inputLastName.name;
   labelEmail.htmlFor = inputEmail.name;
-  labelPass.htmlFor = inputPass.name;
-  labelPassCheck.htmlFor = inputPassCheck.name;
-
-  // inputName.type = 'text';
-  // inputLastName.type = 'text';
+  inputEmail.name = 'email';
+  inputEmail.placeholder = 'Write email';
   inputEmail.type = 'email';
+  inputEmail.required = true;
+  labelPass.innerHTML = 'Password: ';
+  labelPass.htmlFor = inputPass.name;
+  inputPass.name = 'pass';
+  inputPass.placeholder = 'Write password';
   inputPass.type = 'password';
+  inputPass.required = true;
+  labelPassCheck.innerHTML = 'Confirm Password: ';
+  labelPassCheck.htmlFor = inputPassCheck.name;
+  inputPassCheck.name = 'passCheck';
+  inputPassCheck.placeholder = 'Write password again';
   inputPassCheck.type = 'password';
+  inputPassCheck.required = true;
   buttonSignUp.type = 'submit';
 
-  // inputName.required = true;
-  // inputLastName.required = true;
-  inputEmail.required = true;
-  inputPass.required = true;
-  inputPassCheck.required = true;
+  form.append(
+    labelEmail,
+    inputEmail,
+    labelPass,
+    inputPass,
+    labelPassCheck,
+    inputPassCheck,
+    buttonSignUp,
+  );
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -82,25 +86,7 @@ function signup(navigateTo) {
     }
   });
 
-  buttonReturn.textContent = 'Return to home';
-  buttonReturn.addEventListener('click', () => {
-    navigateTo('/');
-  });
-
-  form.append(
-    // labelName,
-    // inputName,
-    // labelLastName,
-    // inputLastName,
-    labelEmail,
-    inputEmail,
-    labelPass,
-    inputPass,
-    labelPassCheck,
-    inputPassCheck,
-    buttonSignUp,
-  );
-  section.append(title, form, buttonReturn);
+  section.append(back, figure, title, form);
 
   return section;
 }

@@ -170,6 +170,16 @@ form{
   border-bottom-style: dashed;
 }
 
+/* sign Up */
+.signup{
+  padding: 10px 10px 10px 10px;
+	background-image: url(assets/signup.png);
+	background-size: 100% 100%;
+	display: grid;
+	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
+}
+
+/* mix */
 .signin img, .signup img, .pass img{
 	background: transparent;
   width: 95%;

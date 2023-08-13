@@ -22,8 +22,8 @@ function signin(navigateTo) {
   section.className = 'signin';
 
   // image
-  img.src = './assets/icons/gorra.png';
-  img.alt = 'user img';
+  img.src = './assets/icons/gorra.webp';
+  img.alt = 'user icon';
   figure.append(img);
 
   // title
