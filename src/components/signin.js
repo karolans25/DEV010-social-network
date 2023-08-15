@@ -1,3 +1,5 @@
+import { signInAuth } from '../lib/auth';
+import { createUserStore } from '../lib/store';
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
 
 function signin(navigateTo) {
@@ -54,20 +56,27 @@ function signin(navigateTo) {
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    // try {
-    //   const credential = await signInAuth(inputEmail.value, inputPass.value);
-    //   console.log(credential);
-    // } catch (err) {
-    //   console.error(err);
-    // }
-    navigateTo('/');
+    try {
+      e.preventDefault();
+      signInAuth(inputEmail.value, inputPass.value)
+        .then((credential) => {
+          createUserStore();
+          alert(`User logged with email ${credential.user.email}.`);
+          setTimeout(navigateTo('/'), 1000);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   });
 
   // sign in with Google
   op1.className = 'google';
   buttonSignInGoogle.textContent = 'Sign In with Google';
   buttonSignInGoogle.addEventListener('click', () => {
+    // signInAuthGoogle();
     // signInAuthGoogle();
     // navigateTo('/home');
   });

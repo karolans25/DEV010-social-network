@@ -1,3 +1,5 @@
+import { sendPasswordResetEmailAuth } from '../lib/auth';
+
 function password(navigateTo) {
   const section = document.createElement('section');
   const back = document.createElement('a');
@@ -35,12 +37,16 @@ function password(navigateTo) {
 
   form.append(labelEmail, inputEmail, buttonRecoverPassword);
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // console.log(inputEmail.value);
-    // alert(inputEmail.value);
-    // // navigateTo('/signIn');
-    // navigateTo('/home');
+  form.addEventListener('submit', async (e) => {
+    try {
+      e.preventDefault();
+      sendPasswordResetEmailAuth(inputEmail.value)
+        .catch((err) => {
+          // console.log(err.message);
+        });
+    } catch (err) {
+      // console.log(err.message.split('Firebase: ')[1]);
+    }
   });
 
   section.append(back, figure, title, form);

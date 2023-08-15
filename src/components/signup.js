@@ -1,4 +1,5 @@
-// import { signUpAuth } from '../lib/auth';
+import { signUpAuth, sendEmailVerificationAuth } from '../lib/auth';
+// import { dataJson } from '../lib/authui';
 
 function signup(navigateTo) {
   const section = document.createElement('section');
@@ -9,10 +10,10 @@ function signup(navigateTo) {
   const form = document.createElement('form');
   const inputEmail = document.createElement('input');
   const inputPass = document.createElement('input');
-  const inputPassCheck = document.createElement('input');
+  const inputPassConfirm = document.createElement('input');
   const labelEmail = document.createElement('label');
   const labelPass = document.createElement('label');
-  const labelPassCheck = document.createElement('label');
+  const labelPassConfirm = document.createElement('label');
   const buttonSignUp = document.createElement('button');
 
   // section
@@ -44,12 +45,12 @@ function signup(navigateTo) {
   inputPass.placeholder = 'Write password';
   inputPass.type = 'password';
   inputPass.required = true;
-  labelPassCheck.innerHTML = 'Confirm Password: ';
-  labelPassCheck.htmlFor = inputPassCheck.name;
-  inputPassCheck.name = 'passCheck';
-  inputPassCheck.placeholder = 'Write password again';
-  inputPassCheck.type = 'password';
-  inputPassCheck.required = true;
+  labelPassConfirm.innerHTML = 'Confirm Password: ';
+  labelPassConfirm.htmlFor = inputPassConfirm.name;
+  inputPassConfirm.name = 'passCheck';
+  inputPassConfirm.placeholder = 'Write password again';
+  inputPassConfirm.type = 'password';
+  inputPassConfirm.required = true;
   buttonSignUp.type = 'submit';
 
   form.append(
@@ -57,32 +58,30 @@ function signup(navigateTo) {
     inputEmail,
     labelPass,
     inputPass,
-    labelPassCheck,
-    inputPassCheck,
+    labelPassConfirm,
+    inputPassConfirm,
     buttonSignUp,
   );
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (inputPass.value === inputPassCheck.value) {
-    //   try {
-    //     const credential = await signUpAuth(inputEmail.value, inputPass.value);
-    //     console.log(credential);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-      //   form.reset();
-      //   navigateTo('/home');
-      /*
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          alert(err.message.split('Firebase: ')[1]);
-        });
-        */
-    } else {
-      alert('Error (auth/passwords-does-not-match');
+    try {
+      e.preventDefault();
+      if (inputPass.value === inputPassConfirm.value) {
+        signUpAuth(inputEmail.value, inputPass.value)
+          .then((credential) => {
+            alert(`User created with email ${credential.user.email}.\nAn email has been sent to confirm your account.`);
+            sendEmailVerificationAuth();
+            form.reset();
+            setTimeout(navigateTo('/signin'), 1000);
+          })
+          .catch((err) => {
+            alert(err.message.split('Firebase: ')[1]);
+          });
+      } else {
+        alert('Error (auth/passwords-does-not-match)');
+      }
+    } catch (err) {
+      alert(err.message);
     }
   });
 
