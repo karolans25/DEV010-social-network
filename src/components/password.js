@@ -42,7 +42,8 @@ function password(navigateTo) {
       e.preventDefault();
       sendPasswordResetEmailAuth(inputEmail.value)
         .then(() => {
-          alert('An email has been sent')
+          alert('An email has been sent to recover password');
+          navigateTo('/signin');
         })
         .catch((err) => {
           alert(err.message);

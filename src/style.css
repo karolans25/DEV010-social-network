@@ -14,6 +14,7 @@
   --main-color: rgb(166, 124, 132, 1);
   --accompanying-color: rgb(242, 242, 242, 1);
   --moving-things-color: rgb(88, 89, 79, 0.5);
+  --contrast-color: rgb(235, 228, 43, 1);
   --max-buble: 25px;
   --middle-buble: 12px;
   --min-buble: 8px;
@@ -118,6 +119,7 @@ form{
   margin-left: 10px;
   height: fit-content;
   /* margin-bottom: 5px; */
+  justify-content: center;
 }
 
 /* Init */
@@ -307,8 +309,11 @@ form{
 	/* background-image: url(assets/signin.png); */
 	background-size: 100% 100%;
 	display: grid;
+  height: fit-content;
+  justify-content: center;
 	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
 }
+
 
 .google{
   margin-left: 15px;
@@ -333,6 +338,8 @@ form{
 	background-size: 100% 100%;
 	display: grid;
 	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
+  height: fit-content;
+  justify-content: center;
 }
 
 /* recover password */
@@ -342,6 +349,8 @@ form{
 	background-size: 100% 100%;
 	display: grid;
 	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
+  height: fit-content;
+  justify-content: center;
 }
 
 /* mix */
@@ -352,6 +361,10 @@ form{
   /* grid-template-rows: 3fr 1fr 1fr; */
 }
 
+/* Feed */
+.feed{
+
+}
 /*
 .pulse {
     width: 100px;

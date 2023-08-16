@@ -4,7 +4,7 @@ function init(navigateTo) {
   const img = document.createElement('img');
   const title = document.createElement('h1');
   const buttonStart = document.createElement('button');
-  const bubles = document.createElement('section');
+  // const bubles = document.createElement('section');
   // const buttonSignUp = document.createElement('button');
 
   section.className = 'init';

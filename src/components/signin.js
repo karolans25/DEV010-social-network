@@ -1,5 +1,4 @@
-import { signInAuth } from '../lib/auth';
-// import { signInAuth, signInAuthGoogle } from '../lib/auth';
+import { signInAuth, signInAuthGoogle } from '../lib/auth';
 
 function signin(navigateTo) {
   const section = document.createElement('section');
@@ -60,7 +59,7 @@ function signin(navigateTo) {
       signInAuth(inputEmail.value, inputPass.value)
         .then((credential) => {
           alert(`User logged with email ${credential.user.email}.`);
-          setTimeout(navigateTo('/'), 1000);
+          setTimeout(navigateTo('/feed'), 1000);
         })
         .catch((err) => {
           alert(err.message);
@@ -74,9 +73,17 @@ function signin(navigateTo) {
   op1.className = 'google';
   buttonSignInGoogle.textContent = 'Sign In with Google';
   buttonSignInGoogle.addEventListener('click', () => {
-    // signInAuthGoogle();
-    // signInAuthGoogle();
-    // navigateTo('/home');
+    try {
+      signInAuthGoogle()
+        .then(() => {
+          navigateTo('/feed');
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   });
   op1.append(buttonSignInGoogle);
 

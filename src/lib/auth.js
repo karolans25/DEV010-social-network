@@ -13,73 +13,9 @@ import { auth } from './firebaseConfig';
 // const provider = new GoogleAuthProvider();
 
 /**
- * Sign Up
- * It's for register a user into the platform (using firebase/auth)
- * @param {string} theEmail :create account by email
- * @param {string} thePassword :create accout by email and password
- */
-export function signUpAuth(theEmail, thePassword) {
-  return createUserWithEmailAndPassword(auth, theEmail, thePassword);
-}
-
-/**
- * Sign In
- * Logging with email and password
- * @param {string} theEmail :sign in the account by email
- * @param {string} thePassword :sign in the account by email and password
- */
-export function signInAuth(theEmail, thePassword) {
-  const user = auth.currentUser;
-  if (user) {
-    if (user.emailVerified) {
-    // Falta crear el usuario en la collection
-      return signInWithEmailAndPassword(auth, theEmail, thePassword);
-    }
-    const send = confirm('Your email hasn\'t been verified. Do you want to receive the confirm email again?', false);
-    if (send) {
-      sendEmailVerificationAuth();
-    }
-  } else {
-    alert('User doesn\'t have an active session');
-    throw new Error('User with no active session');
-  }
-  // Debo agregar un pop up para preguntar si quiere que se le envíe el correo de nuevo
-}
-
-export function signInAuthGoogle() {
-  const provider = GoogleAuthProvider();
-  return signInWithPopup(auth, provider)
-    .then((result) => {
-    // El usuario ha iniciado sesión con éxito
-      const user = result.user;
-      console.log(user.email);
-      // Puedes acceder a la información del usuario a través de la variable user
-      createUserStore(user.email, 'thePassword');
-    })
-    .catch((error) => {
-      // Ocurrió un error durante el inicio de sesión con Google
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // Maneja el error adecuadamente
-      alert(error.message);
-    });
-}
-
-export function deleteUserAuth() {
-  const user = auth.currentUser;
-
-  return deleteUser(user).then(() => {
-  // User deleted.
-  });// .catch((error) => {
-  // An error ocurred
-  // ...
-// });
-}
-
-/**
  * Send an email for verifyng account
  */
-export const sendEmailVerificationAuth = () => {
+export function sendEmailVerificationAuth() {
   const actionCodeSettings = {
     url: 'http://localhost:5173/signin',
     // iOS: {
@@ -113,6 +49,70 @@ export function sendPasswordResetEmailAuth(theEmail) {
     .catch((err) => {
       alert(err.message.split('Firebase: ')[1]);
     });
+}
+
+/**
+ * Sign Up
+ * It's for register a user into the platform (using firebase/auth)
+ * @param {string} theEmail :create account by email
+ * @param {string} thePassword :create accout by email and password
+ */
+export function signUpAuth(theEmail, thePassword) {
+  return createUserWithEmailAndPassword(auth, theEmail, thePassword);
+}
+
+/**
+ * Sign In
+ * Logging with email and password
+ * @param {string} theEmail :sign in the account by email
+ * @param {string} thePassword :sign in the account by email and password
+ */
+export function signInAuth(theEmail, thePassword) {
+  const user = auth.currentUser;
+  if (user) {
+    if (user.emailVerified) {
+    // Falta crear el usuario en la collection
+      return signInWithEmailAndPassword(auth, theEmail, thePassword);
+    }
+    const send = confirm('Your email hasn\'t been verified. Do you want to receive the confirm email again?', false);
+    if (send) {
+      sendEmailVerificationAuth();
+    }
+  } else {
+    alert('User doesn\'t have an active session or not exist');
+    throw new Error('User with no active session');
+  }
+  // Debo agregar un pop up para preguntar si quiere que se le envíe el correo de nuevo
+}
+
+export function signInAuthGoogle() {
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider)
+    .then((result) => {
+    // El usuario ha iniciado sesión con éxito
+      const user = result.user;
+      alert(`User registered and logged with email ${user.email}`);
+      // Puedes acceder a la información del usuario a través de la variable user
+      createUserStore(user.email);
+    })
+    .catch((error) => {
+      // Ocurrió un error durante el inicio de sesión con Google
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // Maneja el error adecuadamente
+      alert(error.message);
+    });
+}
+
+export function deleteUserAuth() {
+  const user = auth.currentUser;
+
+  return deleteUser(user).then(() => {
+  // User deleted.
+  });// .catch((error) => {
+  // An error ocurred
+  // ...
+// });
 }
 
 /** reauthenticate an user

@@ -6,6 +6,7 @@ import error from './components/error.js';
 import signin from './components/signin.js';
 import signup from './components/signup.js';
 import password from './components/password.js';
+import feed from './components/feed.js';
 
 myFunction();
 
@@ -15,6 +16,7 @@ const routes = [
   { path: '/signin', component: signin },
   { path: '/signup', component: signup },
   { path: '/password', component: password },
+  { path: '/feed', component: feed },
 ];
 
 const defaultRoute = '/';
