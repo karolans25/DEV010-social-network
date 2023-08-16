@@ -1,4 +1,5 @@
 import { signUpAuth, sendEmailVerificationAuth } from '../lib/auth';
+import { createUserStore } from '../lib/store';
 // import { dataJson } from '../lib/authui';
 
 function signup(navigateTo) {
@@ -70,6 +71,7 @@ function signup(navigateTo) {
         signUpAuth(inputEmail.value, inputPass.value)
           .then((credential) => {
             alert(`User created with email ${credential.user.email}.\nAn email has been sent to confirm your account.`);
+            createUserStore();
             sendEmailVerificationAuth();
             form.reset();
             setTimeout(navigateTo('/signin'), 1000);

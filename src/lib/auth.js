@@ -35,11 +35,13 @@ export function signInAuth(theEmail, thePassword) {
     // Falta crear el usuario en la collection
       return signInWithEmailAndPassword(auth, theEmail, thePassword);
     }
-    throw new Error('The email is not verified.');
-    alert('Check your email, it hasn\'t been verified yet.\n Send the email verification');
+    const send = confirm('Your email hasn\'t been verified. Do you want to receive the confirm email again?', false);
+    if (send) {
+      sendEmailVerificationAuth();
+    }
   } else {
-    alert('Can\'t sign in');
-    throw new Error('Don\'t know why can\'t sign in');
+    alert('User doesn\'t have an active session');
+    throw new Error('User with no active session');
   }
   // Debo agregar un pop up para preguntar si quiere que se le envíe el correo de nuevo
 }
@@ -77,7 +79,7 @@ export function deleteUserAuth() {
 /**
  * Send an email for verifyng account
  */
-export function sendEmailVerificationAuth() {
+export const sendEmailVerificationAuth = () => {
   const actionCodeSettings = {
     url: 'http://localhost:5173/signin',
     // iOS: {

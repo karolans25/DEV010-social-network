@@ -1,5 +1,4 @@
 import { signInAuth } from '../lib/auth';
-import { createUserStore } from '../lib/store';
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
 
 function signin(navigateTo) {
@@ -60,7 +59,6 @@ function signin(navigateTo) {
       e.preventDefault();
       signInAuth(inputEmail.value, inputPass.value)
         .then((credential) => {
-          createUserStore();
           alert(`User logged with email ${credential.user.email}.`);
           setTimeout(navigateTo('/'), 1000);
         })

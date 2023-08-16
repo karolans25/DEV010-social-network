@@ -41,7 +41,11 @@ function password(navigateTo) {
     try {
       e.preventDefault();
       sendPasswordResetEmailAuth(inputEmail.value)
+        .then(() => {
+          alert('An email has been sent')
+        })
         .catch((err) => {
+          alert(err.message);
           // console.log(err.message);
         });
     } catch (err) {
