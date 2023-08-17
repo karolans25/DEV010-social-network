@@ -53,7 +53,7 @@ function signin(navigateTo) {
   recoverPass.href = '/password';
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     try {
       e.preventDefault();
       signInAuth(inputEmail.value, inputPass.value)
