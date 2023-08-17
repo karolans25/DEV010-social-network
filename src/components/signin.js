@@ -1,4 +1,5 @@
-import { signInAuth, signInAuthGoogle } from '../lib/auth';
+// import { signInAuth, signInAuthGoogle } from '../lib/auth';
+import { signInUser } from '../lib/index';
 
 function signin(navigateTo) {
   const section = document.createElement('section');
@@ -53,34 +54,39 @@ function signin(navigateTo) {
   recoverPass.href = '/password';
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     try {
       e.preventDefault();
-      signInAuth(inputEmail.value, inputPass.value)
-        .then((credential) => {
-          alert(`User logged with email ${credential.user.email}.`);
-          setTimeout(navigateTo('/feed'), 1000);
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+      signInUser(inputEmail.value, inputPass.value)
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err));
+      // form.reset();
+      // setTimeout(navigateTo('/signin'), 1000);
     } catch (err) {
-      console.error(err);
+      alert(err.message);
     }
   });
+  //   signInAuth(inputEmail.value, inputPass.value)
+  //     .then((credential) => {
+  //       alert(`User logged with email ${credential.user.email}.`);
+  //       setTimeout(navigateTo('/feed'), 1000);
+  //     })
+  //     .catch((err) => {
+  //       alert(err.message);
+  //     });
 
   // sign in with Google
   op1.className = 'google';
   buttonSignInGoogle.textContent = 'Sign In with Google';
   buttonSignInGoogle.addEventListener('click', () => {
     try {
-      signInAuthGoogle()
-        .then(() => {
-          navigateTo('/feed');
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+      // signInAuthGoogle()
+      //   .then(() => {
+      //     navigateTo('/feed');
+      //   })
+      //   .catch((err) => {
+      //     alert(err.message);
+      //   });
     } catch (err) {
       console.error(err);
     }

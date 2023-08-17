@@ -8,7 +8,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { createUserStore } from './store';
-import { auth } from './firebaseConfig';
+import { auth, db } from './firebaseConfig';
 
 // const provider = new GoogleAuthProvider();
 
@@ -58,7 +58,12 @@ export function sendPasswordResetEmailAuth(theEmail) {
  * @param {string} thePassword :create accout by email and password
  */
 export function signUpAuth(theEmail, thePassword) {
-  return createUserWithEmailAndPassword(auth, theEmail, thePassword);
+  return createUserWithEmailAndPassword(auth, theEmail, thePassword)
+  .then(credential => {
+    return db.collection('user').doc(credential.user.uid).set({
+      
+    })
+  });
 }
 
 /**
@@ -89,7 +94,7 @@ export function signInAuthGoogle() {
   const provider = new GoogleAuthProvider();
   return signInWithPopup(auth, provider)
     .then((result) => {
-    // El usuario ha iniciado sesión con éxito
+      // El usuario ha iniciado sesión con éxito
       const user = result.user;
       alert(`User registered and logged with email ${user.email}`);
       // Puedes acceder a la información del usuario a través de la variable user
@@ -188,8 +193,19 @@ onAuthStateChanged(auth, (user) => {
     // https://firebase.google.com/docs/reference/js/auth.user
     const uid = user.uid;
     console.log(uid);
-    // ...
+    /*
+    db.collection('user').onSnapshot(snapshot => {
+      setupUsers(snapshot.docs);
+      setupUI(user);
+    }, err => {
+      console.log(err.message);
+    });
+    */
   } else {
+    /*
+    setupUI();
+    setupUsers([]);
+    */
     // User is signed out
     // ...
   }

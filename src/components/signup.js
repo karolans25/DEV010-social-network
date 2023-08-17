@@ -1,17 +1,18 @@
-import { signUpAuth, sendEmailVerificationAuth } from '../lib/auth';
-import { createUserStore } from '../lib/store';
-// import { dataJson } from '../lib/authui';
+import { signUpUser } from '../lib/index';
 
 function signup(navigateTo) {
   const section = document.createElement('section');
   const back = document.createElement('a');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
+  const imgUrl = document.createElement('input');
   const title = document.createElement('h2');
   const form = document.createElement('form');
+  const inputName = document.createElement('input');
   const inputEmail = document.createElement('input');
   const inputPass = document.createElement('input');
   const inputPassConfirm = document.createElement('input');
+  const labelName = document.createElement('label');
   const labelEmail = document.createElement('label');
   const labelPass = document.createElement('label');
   const labelPassConfirm = document.createElement('label');
@@ -29,11 +30,24 @@ function signup(navigateTo) {
   img.alt = 'user icon';
   figure.append(img);
 
+  // button to update img
+  imgUrl.type = 'file';
+  imgUrl.id = 'imgUrl';
+  imgUrl.addEventListener('change', (e) => {
+    img.src = URL.createObjectURL(e.target.files[0]);
+  });
+
   // title
   title.textContent = 'Sign Up';
   buttonSignUp.textContent = 'Sign Up';
 
   // form
+  labelName.innerHTML = 'Display Name:';
+  labelName.htmlFor = inputName.name;
+  inputName.name = 'name';
+  inputName.placeholder = 'Write display name';
+  inputName.type = 'text';
+  inputName.required = false;
   labelEmail.innerHTML = 'Email: ';
   labelEmail.htmlFor = inputEmail.name;
   inputEmail.name = 'email';
@@ -55,6 +69,8 @@ function signup(navigateTo) {
   buttonSignUp.type = 'submit';
 
   form.append(
+    labelName,
+    inputName,
     labelEmail,
     inputEmail,
     labelPass,
@@ -64,30 +80,20 @@ function signup(navigateTo) {
     buttonSignUp,
   );
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     try {
       e.preventDefault();
-      if (inputPass.value === inputPassConfirm.value) {
-        signUpAuth(inputEmail.value, inputPass.value)
-          .then((credential) => {
-            alert(`User created with email ${credential.user.email}.\nAn email has been sent to confirm your account.`);
-            createUserStore();
-            sendEmailVerificationAuth();
-            form.reset();
-            setTimeout(navigateTo('/signin'), 1000);
-          })
-          .catch((err) => {
-            alert(err.message.split('Firebase: ')[1]);
-          });
-      } else {
-        alert('Error (auth/passwords-does-not-match)');
-      }
+      signUpUser(inputEmail.value, inputPass.value, inputName.value)
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err));
+      // form.reset();
+      // setTimeout(navigateTo('/signin'), 1000);
     } catch (err) {
       alert(err.message);
     }
   });
 
-  section.append(back, figure, title, form);
+  section.append(back, figure, imgUrl, title, form);
 
   return section;
 }

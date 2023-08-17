@@ -8,8 +8,6 @@ function feed(navigateTo) {
   title.innerHTML = 'Feed';
   p.innerHTML = 'Welcome to the app';
 
-  for 
-
   section.append(title, p);
 
   return section;
