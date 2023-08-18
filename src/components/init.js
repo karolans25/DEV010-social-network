@@ -1,3 +1,5 @@
+import { loadDefaultImages } from '../lib/index';
+
 function init(navigateTo) {
   const section = document.createElement('section');
   const figure = document.createElement('figure');
@@ -28,6 +30,9 @@ function init(navigateTo) {
   title.textContent = 'Title';
 
   section.append(figure, buttonStart, title);
+
+  console.log(loadDefaultImages());
+
   return section;
 }
 

@@ -106,6 +106,7 @@ figure{
   max-width: 162px;
   max-height: 162px;
   margin: 15px 15px 15px 15px;
+  margin: 0px 8px 0px 10px;
   padding: 20px 20px 20px 20px;
   display: flex;
   justify-content: center;
@@ -123,28 +124,25 @@ form{
 }
 
 input[type='file']{
-  /*width: 350px;*/
-  /*max-width: 100%;*/
-  /*color: #444;*/
-  /*padding: 5px;*/
-  /*background: #fff;*/
-  /*border-radius: none;*/
-  /*border: 1px solid #555;*/
   border: none;
   box-shadow: none;
+  background: transparent;
+  color: var(--accompanying-color);
+  line-height: 35px;
+  min-width: 110px;
 }
 
 input[type=file]::file-selector-button {
-  border-radius: 50%;
-  /*margin-right: 20px;*/
-  /*border: none;*/
-  background: #084cdf;
-  /*padding: 10px 20px;*/
-  /*border-radius: 10px;*/
-  place-content: '';
-  /*color: #fff;*/
+  border-radius: 7px;
+  background: var(--main-color);
   cursor: pointer;
-  /*transition: background .2s ease-in-out;*/
+  color: var(--accompanying-color);
+  box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /*transition: background .2s ease-in-out;*/
+}
+
+img{
+  justify-self: center;
+  align-self: center;
 }
 
 /* Init */
@@ -364,16 +362,55 @@ input[type=file]::file-selector-button {
 	display: grid;
 	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
   height: fit-content;
+  align-self: center;
+  justify-self:center;
   justify-content: center;
 }
 
+.signup .sec-figure{
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.signup .sec-figure button{
+  min-width: 27px;
+  max-width: 27px;
+  height: 30px;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  margin: 0;
+}
+
+.signup .sec-figure button[name='left']{
+  justify-self: end;
+}
+
+.signup .sec-figure button[name='right']{
+  justify-self: start;
+}
+
+.signin .link{
+  justify-self: end;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 25px;
+  /* border: solid 1px var(--contrast-color); */
+}
+
+.signup .sec-figure input[type='file']::file-selector-button{
+  /* display: grid; */
+  position: absolute;
+  bottom: 69%;
+  right: 42.5%;
+}
+  
 /* recover password */
 .pass{
   padding: 10px 10px 10px 10px;
 	/* background-image: url(assets/password.png); */
 	background-size: 100% 100%;
 	display: grid;
-	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
   height: fit-content;
   justify-content: center;
 }
@@ -381,8 +418,8 @@ input[type=file]::file-selector-button {
 /* mix */
 .signin img, .signup img, .pass img{
 	background: transparent;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   /* grid-template-rows: 3fr 1fr 1fr; */
 }
 

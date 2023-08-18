@@ -52,6 +52,7 @@ function signin(navigateTo) {
   buttonSignIn.type = 'submit';
   recoverPass.innerHTML = 'Recover password';
   recoverPass.href = '/password';
+  recoverPass.className = 'link';
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
 
   form.addEventListener('submit', (e) => {
@@ -104,7 +105,7 @@ function signin(navigateTo) {
   // link sign up
   signUp.innerHTML = 'Sign Up';
   signUp.href = '/signup';
-
+  signUp.className = 'link';
   section.append(back, figure, title, form, op1, op2, signUp);
 
   return section;

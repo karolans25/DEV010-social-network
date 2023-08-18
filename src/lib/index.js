@@ -6,16 +6,19 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  deleteUser,
 } from 'firebase/auth';
 import {
   serverTimestamp,
   collection, doc, setDoc,
-  // onSnapshot, getDocs, addDoc, deleteDoc, query, where, orderBy, getDoc, updateDoc,
+  onSnapshot,
+  // getDocs, addDoc, deleteDoc, query, where, orderBy, getDoc, updateDoc,
 } from 'firebase/firestore';
 import {
   ref,
   uploadBytes,
   getDownloadURL,
+  listAll,
 } from 'firebase/storage';
 import { auth, db, storage } from './firebaseConfig';
 
@@ -24,44 +27,55 @@ const actionCodeSettings = {
   handleCodeInApp: true,
 };
 
-/**
- * Send an email for verifyng account
- */
+// eslint-disable-next-line max-len
+const displayImage = (imageRef) => getDownloadURL(imageRef).catch((err) => err.message);
+
 const sendEmailVerificationAuth = (user) => sendEmailVerification(user, actionCodeSettings)
   .then(() => 'The email to confirm your account has been sent.')
   .catch((err) => err.message);
 
-/**
- * Send an email for verifyng account
- */
 // eslint-disable-next-line max-len
 export const sendPasswordResetEmailAuth = (theEmail) => sendPasswordResetEmail(auth, theEmail, actionCodeSettings)
   .then(() => 'The email to restore the password has been sent.')
   .catch((err) => err.message);
 
-/**
- * Sign Up
- * It's for register a user into the platform (using firebase/auth)
- * @param {string} theEmail :create account by email
- * @param {string} thePassword :create accout by email and password
- */
 // eslint-disable-next-line max-len
 export const signUpUser = (theEmail, thePassword, ...extra) => createUserWithEmailAndPassword(auth, theEmail, thePassword)
   .then((credential) => {
-    const ext = extra[1].name.split('.')[1];
-    const storageRef = ref(storage, `${credential.user.uid}/profile.${ext}`);
-    const metadata = { contentType: `image/${ext}` };
-    uploadBytes(storageRef, extra[1], metadata).then(() => getDownloadURL(storageRef).then((url) => setDoc(doc(collection(db, 'user'), credential.user.uid), {
-      email: credential.user.email,
-      name: extra[0],
-      photo: url,
-      createdAt: serverTimestamp(),
-      friends: [],
-    })));
-    sendEmailVerificationAuth(credential.user);
-    return `The user has been registered with email ${credential.user.email}\nCheck your email to confirm the account.`;
+    let message = '';
+    if (credential.user) {
+      const storageRef = ref(storage, `${credential.user.uid}/profile.${extra[1].type.split('/')[1]}`);
+      const metadata = { contentType: extra[1].type };
+      uploadBytes(storageRef, extra[1], metadata).then(() => displayImage(storageRef).then((url) => setDoc(doc(collection(db, 'user'), credential.user.uid), {
+        email: credential.user.email,
+        name: extra[0],
+        photo: url,
+        createdAt: serverTimestamp(),
+        friends: [],
+      })));
+      sendEmailVerificationAuth(credential.user);
+      message = `The user has been registered with email ${credential.user.email}\nCheck your email to confirm the account.`;
+    }
+    if (message === '') {
+      deleteUser(auth.currentUser).then(() => {
+        // User deleted.
+      });// .catch((error) => {
+      // An error ocurred
+      // ...
+      // });
+    }
+    return message;
   })
-  .catch((err) => err.message);
+  .catch((err) => {
+    deleteUser(auth.currentUser).then(() => {
+      // User deleted.
+    });// .catch((error) => {
+    // An error ocurred
+    // ...
+    // });
+
+    return err.message;
+  });
 
 /**
  * Sign In
@@ -131,14 +145,15 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/auth.user
-    const uid = user.uid;
-    console.log(uid);
-    db.collection('user').onSnapshot((snapshot) => {
+    // const uid = user.uid;
+    // console.log(uid);
+    const colRef = collection(db, 'user');
+    onSnapshot(colRef, (snapshot) => {
       console.log('Línea 85 de index.js');
       console.log(snapshot.docs);
       // setupUsers(snapshot.docs);
       // setupUI(user);
-    }, (err) => {
+    }).catch((err) => {
       console.log(err.message);
     });
   } else {
@@ -146,3 +161,17 @@ auth.onAuthStateChanged((user) => {
     // setupUsers([]);
   }
 });
+
+// Since you mentioned your images are in a folder,
+// we'll create a Reference to that folder:
+export const loadDefaultImages = () => {
+  const storageRef = ref(storage, 'default');
+
+  const defaultArr = [];
+
+  listAll(storageRef).then((result) => {
+    result.items.forEach((imageRef) => {
+      displayImage(imageRef).then((url) => defaultArr.push(url));
+    });
+  }).then(() => defaultArr).catch((err) => err.message);
+};

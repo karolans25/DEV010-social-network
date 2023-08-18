@@ -3,8 +3,11 @@ import { signUpUser } from '../lib/index';
 function signup(navigateTo) {
   const section = document.createElement('section');
   const back = document.createElement('a');
+  const sectionFig = document.createElement('section');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
+  const buttonLeft = document.createElement('button');
+  const buttonRight = document.createElement('button');
   const imgUrl = document.createElement('input');
   const title = document.createElement('h2');
   const form = document.createElement('form');
@@ -36,10 +39,22 @@ function signup(navigateTo) {
   imgUrl.type = 'file';
   imgUrl.id = 'imgUrl';
   imgUrl.value = '';
+  imgUrl.setAttribute('accept', 'image/*');
   imgUrl.addEventListener('change', (e) => {
     file = e.target.files[0];
     img.src = URL.createObjectURL(file);
+    img.style.width = '162px';
+    img.style.height = '162px';
+    img.style.borderRadius = '50%';
+    img.style.alignSelf = 'center';
   });
+  sectionFig.className = 'sec-figure';
+  buttonLeft.innerHTML = '<';
+  buttonLeft.name = 'left';
+  buttonRight.innerHTML = '>';
+  buttonRight.name = 'right';
+  buttonRight.append(imgUrl);
+  sectionFig.append(buttonLeft, figure, buttonRight);
 
   // title
   title.textContent = 'Sign Up';
@@ -88,15 +103,17 @@ function signup(navigateTo) {
     try {
       e.preventDefault();
       if (inputPass.value === inputPassConfirm.value) {
-        signUpUser(inputEmail.value, inputPass.value, inputName.value, file)
-          .then((response) => {
-            if (response === `The user has been registered with email ${inputEmail.value}\nCheck your email to confirm the account.`) {
-              form.reset();
-              navigateTo('/signin');
-            }
-            alert(response);
-          })
-          .catch((err) => console.log(err));
+        fetch(img.src).then((res) => res.blob()).then((blob) => {
+          signUpUser(inputEmail.value, inputPass.value, inputName.value, blob)
+            .then((response) => {
+              if (response === `The user has been registered with email ${inputEmail.value}\nCheck your email to confirm the account.`) {
+                form.reset();
+                navigateTo('/signin');
+              }
+              alert(response);
+            })
+            .catch((err) => console.log(err));
+        });
       } else {
         throw new Error('The passwords don\'t match');
       }
@@ -105,7 +122,7 @@ function signup(navigateTo) {
     }
   });
 
-  section.append(back, figure, imgUrl, title, form);
+  section.append(back, sectionFig, title, form);
 
   return section;
 }
