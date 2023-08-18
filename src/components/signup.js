@@ -83,11 +83,19 @@ function signup(navigateTo) {
   form.addEventListener('submit', (e) => {
     try {
       e.preventDefault();
-      signUpUser(inputEmail.value, inputPass.value, inputName.value)
-        .then((response) => console.log(response))
-        .catch((err) => console.log(err));
-      // form.reset();
-      // setTimeout(navigateTo('/signin'), 1000);
+      if (inputPass.value === inputPassConfirm.value) {
+        signUpUser(inputEmail.value, inputPass.value, inputName.value)
+          .then((response) => {
+            if (response === `The user has been registered with email ${inputEmail.value}\nCheck your email to confirm the account.`) {
+              form.reset();
+              navigateTo('/signin');
+            }
+            alert(response);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        throw new Error('The passwords don\'t match');
+      }
     } catch (err) {
       alert(err.message);
     }

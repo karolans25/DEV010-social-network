@@ -1,5 +1,5 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
-import { signInUser } from '../lib/index';
+import { signInUser, signInGoogle } from '../lib/index';
 
 function signin(navigateTo) {
   const section = document.createElement('section');
@@ -58,37 +58,36 @@ function signin(navigateTo) {
     try {
       e.preventDefault();
       signInUser(inputEmail.value, inputPass.value)
-        .then((response) => console.log(response))
-        .catch((err) => console.log(err));
-      // form.reset();
-      // setTimeout(navigateTo('/signin'), 1000);
+        .then((response) => {
+          if (response === `The user has been logged with email ${inputEmail.value}`) {
+            form.reset();
+            navigateTo('/feed');
+          }
+          alert(response);
+        })
+        .catch((err) => console.log(err.message));
     } catch (err) {
       alert(err.message);
     }
   });
-  //   signInAuth(inputEmail.value, inputPass.value)
-  //     .then((credential) => {
-  //       alert(`User logged with email ${credential.user.email}.`);
-  //       setTimeout(navigateTo('/feed'), 1000);
-  //     })
-  //     .catch((err) => {
-  //       alert(err.message);
-  //     });
 
   // sign in with Google
   op1.className = 'google';
   buttonSignInGoogle.textContent = 'Sign In with Google';
-  buttonSignInGoogle.addEventListener('click', () => {
+  buttonSignInGoogle.addEventListener('click', (e) => {
     try {
-      // signInAuthGoogle()
-      //   .then(() => {
-      //     navigateTo('/feed');
-      //   })
-      //   .catch((err) => {
-      //     alert(err.message);
-      //   });
+      e.preventDefault();
+      signInGoogle()
+        .then((response) => {
+          if (response.startsWith('The user has been registered and looged with email')) {
+            form.reset();
+            navigateTo('/feed');
+          }
+          alert(response);
+        })
+        .catch((err) => console.log(err.message));
     } catch (err) {
-      console.error(err);
+      alert(err.message);
     }
   });
   op1.append(buttonSignInGoogle);
