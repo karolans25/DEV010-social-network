@@ -18,6 +18,8 @@ function signup(navigateTo) {
   const labelPassConfirm = document.createElement('label');
   const buttonSignUp = document.createElement('button');
 
+  let file;
+
   // section
   section.className = 'signup';
 
@@ -33,8 +35,10 @@ function signup(navigateTo) {
   // button to update img
   imgUrl.type = 'file';
   imgUrl.id = 'imgUrl';
+  imgUrl.value = '';
   imgUrl.addEventListener('change', (e) => {
-    img.src = URL.createObjectURL(e.target.files[0]);
+    file = e.target.files[0];
+    img.src = URL.createObjectURL(file);
   });
 
   // title
@@ -84,7 +88,7 @@ function signup(navigateTo) {
     try {
       e.preventDefault();
       if (inputPass.value === inputPassConfirm.value) {
-        signUpUser(inputEmail.value, inputPass.value, inputName.value)
+        signUpUser(inputEmail.value, inputPass.value, inputName.value, file)
           .then((response) => {
             if (response === `The user has been registered with email ${inputEmail.value}\nCheck your email to confirm the account.`) {
               form.reset();

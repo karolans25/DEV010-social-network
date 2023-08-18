@@ -122,6 +122,31 @@ form{
   justify-content: center;
 }
 
+input[type='file']{
+  /*width: 350px;*/
+  /*max-width: 100%;*/
+  /*color: #444;*/
+  /*padding: 5px;*/
+  /*background: #fff;*/
+  /*border-radius: none;*/
+  /*border: 1px solid #555;*/
+  border: none;
+  box-shadow: none;
+}
+
+input[type=file]::file-selector-button {
+  border-radius: 50%;
+  /*margin-right: 20px;*/
+  /*border: none;*/
+  background: #084cdf;
+  /*padding: 10px 20px;*/
+  /*border-radius: 10px;*/
+  place-content: '';
+  /*color: #fff;*/
+  cursor: pointer;
+  /*transition: background .2s ease-in-out;*/
+}
+
 /* Init */
 .init{
   background: var(--main-color);

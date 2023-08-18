@@ -12,6 +12,11 @@ import {
   collection, doc, setDoc,
   // onSnapshot, getDocs, addDoc, deleteDoc, query, where, orderBy, getDoc, updateDoc,
 } from 'firebase/firestore';
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/storage';
 import { auth, db, storage } from './firebaseConfig';
 
 const actionCodeSettings = {
@@ -43,13 +48,16 @@ export const sendPasswordResetEmailAuth = (theEmail) => sendPasswordResetEmail(a
 // eslint-disable-next-line max-len
 export const signUpUser = (theEmail, thePassword, ...extra) => createUserWithEmailAndPassword(auth, theEmail, thePassword)
   .then((credential) => {
-    setDoc(doc(collection(db, 'user'), credential.user.uid), {
+    const ext = extra[1].name.split('.')[1];
+    const storageRef = ref(storage, `${credential.user.uid}/profile.${ext}`);
+    const metadata = { contentType: `image/${ext}` };
+    uploadBytes(storageRef, extra[1], metadata).then(() => getDownloadURL(storageRef).then((url) => setDoc(doc(collection(db, 'user'), credential.user.uid), {
       email: credential.user.email,
-      name: extra[0] ? extra[0] : credential.user.displayName,
-      photo: extra[1] ? extra[1] : credential.user.photoURL,
+      name: extra[0],
+      photo: url,
       createdAt: serverTimestamp(),
       friends: [],
-    });
+    })));
     sendEmailVerificationAuth(credential.user);
     return `The user has been registered with email ${credential.user.email}\nCheck your email to confirm the account.`;
   })
@@ -91,8 +99,8 @@ export const signInUser = (theEmail, thePassword) => signInWithEmailAndPassword(
   .catch((err) => err.message);
 
 /**
- * 
- * @returns 
+ *
+ * @returns
  */
 export const signInGoogle = () => signInWithPopup(auth, new GoogleAuthProvider())
   .then((credential) => {
