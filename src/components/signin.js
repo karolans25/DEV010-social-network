@@ -80,7 +80,7 @@ function signin(navigateTo) {
       e.preventDefault();
       signInGoogle()
         .then((response) => {
-          if (response.startsWith('The user has been registered and looged with email')) {
+          if (response.startsWith('The user has been registered and logged with email')) {
             form.reset();
             navigateTo('/feed');
           }

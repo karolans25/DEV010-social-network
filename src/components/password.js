@@ -40,6 +40,7 @@ function password(navigateTo) {
   form.addEventListener('submit', async (e) => {
     try {
       e.preventDefault();
+      // Check if the user has the email verified before to send the email
       sendPasswordResetEmailAuth(inputEmail.value)
         .then((response) => {
           if (response === 'The email to restore the password has been sent.') {

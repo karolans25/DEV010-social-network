@@ -30,10 +30,25 @@ function signup(navigateTo) {
   back.innerHTML = 'back';
   back.href = '/signin';
 
+  // const urls = [];
+  // const storageRef = ref(storage, 'default');
+  // listAll(storageRef).then((result) => {
+  //   result.items.forEach((imageRef) => {
+  //     getDownloadURL(imageRef).then((res) => urls.push(res))
+  //       .catch((err) => console.log(err.message));
+  //   });
+  //   urls.forEach((item) => {
+  //     img.src = item;
+  //     img.alt = `icon ${urls.indexOf(item) + 1}`;
+  //   });
+  // }).catch((err) => err.message);
+
   // figure
   img.src = './assets/icons/nina.webp';
   img.alt = 'user icon';
-  figure.append(img);
+  const caption = document.createElement('caption');
+  caption.append(imgUrl);
+  figure.append(img, caption);
 
   // button to update img
   imgUrl.type = 'file';
@@ -46,15 +61,22 @@ function signup(navigateTo) {
     img.style.width = '162px';
     img.style.height = '162px';
     img.style.borderRadius = '50%';
-    img.style.alignSelf = 'center';
+    figure.style.padding = '0';
+    caption.style.position = 'relative';
+    caption.style.bottom = '-41.5%';
+    caption.style.right = '87%';
+    caption.style.height = '30px';
+    // img.style.alignSelf = 'center';
   });
   sectionFig.className = 'sec-figure';
   buttonLeft.innerHTML = '<';
   buttonLeft.name = 'left';
   buttonRight.innerHTML = '>';
   buttonRight.name = 'right';
-  buttonRight.append(imgUrl);
   sectionFig.append(buttonLeft, figure, buttonRight);
+
+  buttonRight.addEventListener('click', () => { console.log('Right'); });
+  buttonLeft.addEventListener('click', () => { console.log('Left'); });
 
   // title
   title.textContent = 'Sign Up';
