@@ -1,4 +1,4 @@
-import { sendPasswordResetEmailAuth } from '../lib/auth';
+import { sendPasswordResetEmailAuth } from '../lib/index';
 
 function password(navigateTo) {
   const section = document.createElement('section');
@@ -40,17 +40,18 @@ function password(navigateTo) {
   form.addEventListener('submit', async (e) => {
     try {
       e.preventDefault();
+      // Check if the user has the email verified before to send the email
       sendPasswordResetEmailAuth(inputEmail.value)
-        .then(() => {
-          alert('An email has been sent to recover password');
-          navigateTo('/signin');
+        .then((response) => {
+          if (response === 'The email to restore the password has been sent.') {
+            form.reset();
+            navigateTo('/signin');
+          }
+          alert(response);
         })
-        .catch((err) => {
-          alert(err.message);
-          // console.log(err.message);
-        });
+        .catch((err) => console.log(err.message));
     } catch (err) {
-      // console.log(err.message.split('Firebase: ')[1]);
+      alert(err.message);
     }
   });
 

@@ -21,11 +21,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // firebaseApps previously initialized using initializeApp()
-export const db = getFirestore();
+export const db = getFirestore(app);
 
-export const storage = getStorage();
+export const storage = getStorage(app);
 
-export const auth = getAuth();
+export const auth = getAuth(app);
 
 // connectFirestoreEmulator(db, '127.0.0.1', 8080);
 // if (window.location.hostname === 'localhost') {

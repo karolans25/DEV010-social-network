@@ -1,0 +1,269 @@
+[debug] [2023-08-17T00:51:06.015Z] ----------------------------------------------------------------------
+[debug] [2023-08-17T00:51:06.019Z] Command:       /home/karolans/.nvm/versions/node/v18.16.1/bin/node /home/karolans/.nvm/versions/node/v18.16.1/bin/firebase emulators:start
+[debug] [2023-08-17T00:51:06.020Z] CLI Version:   12.4.7
+[debug] [2023-08-17T00:51:06.021Z] Platform:      linux
+[debug] [2023-08-17T00:51:06.021Z] Node Version:  v18.16.1
+[debug] [2023-08-17T00:51:06.022Z] Time:          Wed Aug 16 2023 19:51:06 GMT-0500 (Colombia Standard Time)
+[debug] [2023-08-17T00:51:06.022Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-17T00:51:06.248Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-17T00:51:06.249Z] > authorizing via signed-in user (priyacarito@gmail.com)
+[debug] [2023-08-17T00:51:08.787Z] openjdk version "11.0.18" 2023-01-17
+
+[debug] [2023-08-17T00:51:08.789Z] OpenJDK Runtime Environment (build 11.0.18+10-post-Debian-1deb11u1)
+OpenJDK 64-Bit Server VM (build 11.0.18+10-post-Debian-1deb11u1, mixed mode, sharing)
+
+[debug] [2023-08-17T00:51:08.811Z] Parsed Java major version: 11
+[info] i  emulators: Starting emulators: auth, firestore, hosting, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, hosting, storage"}}
+[debug] [2023-08-17T00:51:08.819Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T00:51:08.819Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T00:51:08.819Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T00:51:08.819Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T00:51:08.820Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T00:51:08.820Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T00:51:08.820Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5000}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-08-17T00:51:08.864Z] [hub] writing locator at /tmp/hub-social-network-karolans25.json
+[debug] [2023-08-17T00:51:08.875Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-17T00:51:08.875Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-08-17T00:51:08.876Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/karolans/.cache/firebase/emulators/cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","social-network-karolans25","--rules","/home/karolans/Documents/Github/Laboratoria/Bootcamp/Project_03/DEV010-social-network/firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/karolans/.cache/firebase/emulators/cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"social-network-karolans25\",\"--rules\",\"/home/karolans/Documents/Github/Laboratoria/Bootcamp/Project_03/DEV010-social-network/firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2023-08-17T00:51:16.166Z] Aug 16, 2023 7:51:16 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 16, 2023 7:51:16 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2023-08-17T00:51:16.236Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2023-08-17T00:51:16.236Z] 127.0.0.1:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080\n\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2023-08-17T00:51:28.259Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-17T00:51:34.368Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2023-08-17T00:51:34.396Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites 
+[debug] [2023-08-17T00:51:36.990Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites 200
+[debug] [2023-08-17T00:51:36.991Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites {"sites":[{"name":"projects/social-network-karolans25/sites/social-network-karolans25","defaultUrl":"https://social-network-karolans25.web.app","appId":"1:236349133039:web:0c71132ba72b7d473d8b1a","type":"DEFAULT_SITE"}]}
+[debug] [2023-08-17T00:51:36.991Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config [none]
+[debug] [2023-08-17T00:51:37.850Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config 200
+[debug] [2023-08-17T00:51:37.851Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config {"projectId":"social-network-karolans25","appId":"1:236349133039:web:0c71132ba72b7d473d8b1a","storageBucket":"social-network-karolans25.appspot.com","locationId":"us-central","apiKey":"AIzaSyD1k1NAyCqN-At-Um6MrejqTyHvMMA83fI","authDomain":"social-network-karolans25.firebaseapp.com","messagingSenderId":"236349133039"}
+[debug] [2023-08-17T00:51:37.981Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 [none]
+[debug] [2023-08-17T00:51:38.502Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 200
+[debug] [2023-08-17T00:51:38.502Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 {"projectId":"social-network-karolans25","projectNumber":"236349133039","displayName":"social-network-karolans25","name":"projects/social-network-karolans25","resources":{"hostingSite":"social-network-karolans25","storageBucket":"social-network-karolans25.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_bcec9801-7db2-4113-9e59-9254674485c7"}
+[info] i  hosting[social-network-karolans25]: Serving hosting files from: src {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1msrc\u001b[22m"}}
+[info] ✔  hosting[social-network-karolans25]: Local server: http://127.0.0.1:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5000\u001b[22m\u001b[24m"}}
+[debug] [2023-08-17T00:51:38.640Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-17T00:51:38.640Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-17T00:51:38.641Z] Starting Emulator UI with command {"binary":"node","args":["/home/karolans/.cache/firebase/emulators/ui-v1.11.7/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/home/karolans/.cache/firebase/emulators/ui-v1.11.7/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-08-17T00:51:38.803Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-08-17T00:51:38.804Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5000 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:22 +0000] "GET /signup HTTP/1.1" 200 473 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:22 +0000] \"GET /signup HTTP/1.1\" 200 473 \"-\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] "GET /style.css HTTP/1.1" 200 - "http://localhost:5000/signup" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] \"GET /style.css HTTP/1.1\" 200 - \"http://localhost:5000/signup\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] "GET /main.js HTTP/1.1" 200 - "http://localhost:5000/signup" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] \"GET /main.js HTTP/1.1\" 200 - \"http://localhost:5000/signup\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] "GET /components/init.js HTTP/1.1" 200 969 "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] \"GET /components/init.js HTTP/1.1\" 200 969 \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] "GET /components/error.js HTTP/1.1" 200 171 "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] \"GET /components/error.js HTTP/1.1\" 200 171 \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] "GET /components/signin.js HTTP/1.1" 200 - "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] \"GET /components/signin.js HTTP/1.1\" 200 - \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] "GET /components/signup.js HTTP/1.1" 200 - "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] \"GET /components/signup.js HTTP/1.1\" 200 - \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] "GET /components/password.js HTTP/1.1" 200 - "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] \"GET /components/password.js HTTP/1.1\" 200 - \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] "GET /components/feed.js HTTP/1.1" 200 380 "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:23 +0000] \"GET /components/feed.js HTTP/1.1\" 200 380 \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:24 +0000] "GET /lib/auth HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:24 +0000] \"GET /lib/auth HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:24 +0000] "GET /index HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:24 +0000] \"GET /index HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:24 +0000] "GET /assets/red-social.png HTTP/1.1" - - "http://localhost:5000/signup" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:24 +0000] \"GET /assets/red-social.png HTTP/1.1\" - - \"http://localhost:5000/signup\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:45 +0000] "GET / HTTP/1.1" 200 473 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:45 +0000] \"GET / HTTP/1.1\" 200 473 \"-\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:46 +0000] "GET /lib/auth HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:46 +0000] \"GET /lib/auth HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:53:46 +0000] "GET /index HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:53:46 +0000] \"GET /index HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:54:57 +0000] "GET / HTTP/1.1" 200 473 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:54:57 +0000] \"GET / HTTP/1.1\" 200 473 \"-\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:54:57 +0000] "GET /lib/auth HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:54:57 +0000] \"GET /lib/auth HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:00:54:57 +0000] "GET /index HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:00:54:57 +0000] \"GET /index HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:02:23 +0000] "GET / HTTP/1.1" 200 473 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:02:23 +0000] \"GET / HTTP/1.1\" 200 473 \"-\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:02:23 +0000] "GET /components/signup.js HTTP/1.1" 200 - "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:02:23 +0000] \"GET /components/signup.js HTTP/1.1\" 200 - \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:02:23 +0000] "GET /lib/auth HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:02:23 +0000] \"GET /lib/auth HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:02:23 +0000] "GET /index HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:02:23 +0000] \"GET /index HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[debug] [2023-08-17T01:04:11.737Z] Received signal SIGINT (Ctrl-C) 1
+[info]  
+[info] i  emulators: Received SIGINT (Ctrl-C) for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGINT (Ctrl-C) signal again to stop right now. 
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[warn] ⚠  Emulator UI has exited upon receiving signal: SIGINT 
+[info] i  hosting: Stopping Hosting Emulator {"metadata":{"emulator":{"name":"hosting"},"message":"Stopping Hosting Emulator"}}
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2023-08-17T01:04:11.754Z] *** shutting down gRPC server since JVM is shutting down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** shutting down gRPC server since JVM is shutting down\n"}}
+[debug] [2023-08-17T01:04:11.761Z] *** server shut down {"metadata":{"emulator":{"name":"firestore"},"message":"*** server shut down"}}
+[debug] [2023-08-17T01:04:11.762Z] 
+ {"metadata":{"emulator":{"name":"firestore"},"message":"\n"}}
+[info] i  auth: Stopping Authentication Emulator {"metadata":{"emulator":{"name":"auth"},"message":"Stopping Authentication Emulator"}}
+[info] i  storage: Stopping Storage Emulator {"metadata":{"emulator":{"name":"storage"},"message":"Stopping Storage Emulator"}}
+[debug] [2023-08-17T01:04:12.095Z] Stopping rules runtime. {"metadata":{"emulator":{"name":"storage"},"message":"Stopping rules runtime."}}
+[info] i  hub: Stopping emulator hub {"metadata":{"emulator":{"name":"hub"},"message":"Stopping emulator hub"}}
+[info] i  logging: Stopping Logging Emulator {"metadata":{"emulator":{"name":"logging"},"message":"Stopping Logging Emulator"}}
+[debug] [2023-08-17T01:04:17.920Z] Error: Timed out.
+    at Timeout.<anonymous> (/home/karolans/.nvm/versions/node/v18.16.1/lib/node_modules/firebase-tools/lib/utils.js:254:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-08-17T01:04:50.488Z] ----------------------------------------------------------------------
+[debug] [2023-08-17T01:04:50.490Z] Command:       /home/karolans/.nvm/versions/node/v18.16.1/bin/node /home/karolans/.nvm/versions/node/v18.16.1/bin/firebase emulators:start
+[debug] [2023-08-17T01:04:50.491Z] CLI Version:   12.4.7
+[debug] [2023-08-17T01:04:50.491Z] Platform:      linux
+[debug] [2023-08-17T01:04:50.492Z] Node Version:  v18.16.1
+[debug] [2023-08-17T01:04:50.492Z] Time:          Wed Aug 16 2023 20:04:50 GMT-0500 (Colombia Standard Time)
+[debug] [2023-08-17T01:04:50.492Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-17T01:04:50.676Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-17T01:04:50.677Z] > authorizing via signed-in user (priyacarito@gmail.com)
+[debug] [2023-08-17T01:04:51.023Z] openjdk version "11.0.18" 2023-01-17
+OpenJDK Runtime Environment (build 11.0.18+10-post-Debian-1deb11u1)
+OpenJDK 64-Bit Server VM (build 11.0.18+10-post-Debian-1deb11u1, mixed mode, sharing)
+
+[debug] [2023-08-17T01:04:51.027Z] Parsed Java major version: 11
+[info] i  emulators: Starting emulators: auth, firestore, hosting, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, hosting, storage"}}
+[debug] [2023-08-17T01:04:51.037Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T01:04:51.037Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T01:04:51.037Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T01:04:51.037Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T01:04:51.038Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T01:04:51.038Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-17T01:04:51.038Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5000}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-08-17T01:04:51.054Z] [hub] writing locator at /tmp/hub-social-network-karolans25.json
+[debug] [2023-08-17T01:04:51.068Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-17T01:04:51.069Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-08-17T01:04:51.069Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/karolans/.cache/firebase/emulators/cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","social-network-karolans25","--rules","/home/karolans/Documents/Github/Laboratoria/Bootcamp/Project_03/DEV010-social-network/firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/karolans/.cache/firebase/emulators/cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"social-network-karolans25\",\"--rules\",\"/home/karolans/Documents/Github/Laboratoria/Bootcamp/Project_03/DEV010-social-network/firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2023-08-17T01:04:52.324Z] Aug 16, 2023 8:04:52 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 16, 2023 8:04:52 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2023-08-17T01:04:52.380Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2023-08-17T01:04:52.380Z] 127.0.0.1:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080\n\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2023-08-17T01:05:03.718Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-17T01:05:04.811Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2023-08-17T01:05:04.821Z] > refreshing access token with scopes: []
+[debug] [2023-08-17T01:05:04.824Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-08-17T01:05:04.824Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-17T01:05:07.216Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-08-17T01:05:07.216Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-17T01:05:07.352Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites 
+[debug] [2023-08-17T01:05:08.635Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites 200
+[debug] [2023-08-17T01:05:08.636Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/social-network-karolans25/sites {"sites":[{"name":"projects/social-network-karolans25/sites/social-network-karolans25","defaultUrl":"https://social-network-karolans25.web.app","appId":"1:236349133039:web:0c71132ba72b7d473d8b1a","type":"DEFAULT_SITE"}]}
+[debug] [2023-08-17T01:05:08.637Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config [none]
+[debug] [2023-08-17T01:05:09.349Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config 200
+[debug] [2023-08-17T01:05:09.349Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/webApps/1:236349133039:web:0c71132ba72b7d473d8b1a/config {"projectId":"social-network-karolans25","appId":"1:236349133039:web:0c71132ba72b7d473d8b1a","storageBucket":"social-network-karolans25.appspot.com","locationId":"us-central","apiKey":"AIzaSyD1k1NAyCqN-At-Um6MrejqTyHvMMA83fI","authDomain":"social-network-karolans25.firebaseapp.com","messagingSenderId":"236349133039"}
+[debug] [2023-08-17T01:05:09.474Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 [none]
+[debug] [2023-08-17T01:05:09.958Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 200
+[debug] [2023-08-17T01:05:09.959Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25 {"projectId":"social-network-karolans25","projectNumber":"236349133039","displayName":"social-network-karolans25","name":"projects/social-network-karolans25","resources":{"hostingSite":"social-network-karolans25","storageBucket":"social-network-karolans25.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_bcec9801-7db2-4113-9e59-9254674485c7"}
+[info] i  hosting[social-network-karolans25]: Serving hosting files from: src {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1msrc\u001b[22m"}}
+[info] ✔  hosting[social-network-karolans25]: Local server: http://127.0.0.1:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5000\u001b[22m\u001b[24m"}}
+[debug] [2023-08-17T01:05:10.010Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-17T01:05:10.010Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-17T01:05:10.011Z] Starting Emulator UI with command {"binary":"node","args":["/home/karolans/.cache/firebase/emulators/ui-v1.11.7/server/server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/home/karolans/.cache/firebase/emulators/ui-v1.11.7/server/server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-08-17T01:05:10.253Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-08-17T01:05:10.254Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5000 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2023-08-17T01:05:53.141Z] Aug 16, 2023 8:05:53 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 16, 2023 8:05:53 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] "GET / HTTP/1.1" - - "-" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] \"GET / HTTP/1.1\" - - \"-\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] "GET /style.css HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] \"GET /style.css HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] "GET /main.js HTTP/1.1" 200 - "http://localhost:5000/" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] \"GET /main.js HTTP/1.1\" 200 - \"http://localhost:5000/\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] "GET /components/init.js HTTP/1.1" 200 969 "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] \"GET /components/init.js HTTP/1.1\" 200 969 \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] "GET /components/password.js HTTP/1.1" 200 - "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] \"GET /components/password.js HTTP/1.1\" 200 - \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] "GET /lib/auth HTTP/1.1" 200 473 "http://localhost:5000/components/password.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] \"GET /lib/auth HTTP/1.1\" 200 473 \"http://localhost:5000/components/password.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] "GET /components/signin.js HTTP/1.1" 200 - "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] \"GET /components/signin.js HTTP/1.1\" 200 - \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] "GET /components/feed.js HTTP/1.1" 200 380 "http://localhost:5000/main.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:10 +0000] \"GET /components/feed.js HTTP/1.1\" 200 380 \"http://localhost:5000/main.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:11 +0000] "GET /index HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:11 +0000] \"GET /index HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:46 +0000] "GET / HTTP/1.1" 200 473 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:46 +0000] \"GET / HTTP/1.1\" 200 473 \"-\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:46 +0000] "GET /index HTTP/1.1" 200 473 "http://localhost:5000/components/signup.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:46 +0000] \"GET /index HTTP/1.1\" 200 473 \"http://localhost:5000/components/signup.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[info] i  hosting: 127.0.0.1 - - [17/Aug/2023:01:06:46 +0000] "GET /lib/auth HTTP/1.1" 200 473 "http://localhost:5000/components/signin.js" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [17/Aug/2023:01:06:46 +0000] \"GET /lib/auth HTTP/1.1\" 200 473 \"http://localhost:5000/components/signin.js\" \"Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\""}}
+[debug] [2023-08-17T01:09:02.340Z] Aug 16, 2023 8:09:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 16, 2023 8:09:02 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2023-08-17T01:09:04.348Z] Aug 16, 2023 8:09:04 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Aug 16, 2023 8:09:04 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected HTTP/2 connection.\n"}}
+[debug] [2023-08-17T01:09:09.173Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/adminSdkConfig [none]
+[debug] [2023-08-17T01:09:10.718Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/adminSdkConfig 200
+[debug] [2023-08-17T01:09:10.719Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/social-network-karolans25/adminSdkConfig {"projectId":"social-network-karolans25","storageBucket":"social-network-karolans25.appspot.com","locationId":"us-central"}
+[debug] [2023-08-17T01:09:49.530Z] Received signal SIGINT (Ctrl-C) 1
+[info]  
+[info] i  emulators: Received SIGINT (Ctrl-C) for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGINT (Ctrl-C) signal again to stop right now. 
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[warn] ⚠  Emulator UI has exited upon receiving signal: SIGINT 
+[info] i  hosting: Stopping Hosting Emulator {"metadata":{"emulator":{"name":"hosting"},"message":"Stopping Hosting Emulator"}}
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2023-08-17T01:09:49.548Z] *** shutting down gRPC server since JVM is shutting down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** shutting down gRPC server since JVM is shutting down\n"}}
+[debug] [2023-08-17T01:09:49.833Z] *** server shut down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** server shut down\n"}}
+[info] i  auth: Stopping Authentication Emulator {"metadata":{"emulator":{"name":"auth"},"message":"Stopping Authentication Emulator"}}
+[info] i  storage: Stopping Storage Emulator {"metadata":{"emulator":{"name":"storage"},"message":"Stopping Storage Emulator"}}
+[debug] [2023-08-17T01:09:50.169Z] Stopping rules runtime. {"metadata":{"emulator":{"name":"storage"},"message":"Stopping rules runtime."}}
+[info] i  hub: Stopping emulator hub {"metadata":{"emulator":{"name":"hub"},"message":"Stopping emulator hub"}}
+[info] i  logging: Stopping Logging Emulator {"metadata":{"emulator":{"name":"logging"},"message":"Stopping Logging Emulator"}}
+[debug] [2023-08-17T01:09:56.111Z] Error: Timed out.
+    at Timeout._onTimeout (/home/karolans/.nvm/versions/node/v18.16.1/lib/node_modules/firebase-tools/lib/utils.js:254:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.

@@ -1,4 +1,5 @@
-import { signInAuth, signInAuthGoogle } from '../lib/auth';
+// import { signInAuth, signInAuthGoogle } from '../lib/auth';
+import { signInUser, signInGoogle } from '../lib/index';
 
 function signin(navigateTo) {
   const section = document.createElement('section');
@@ -51,38 +52,43 @@ function signin(navigateTo) {
   buttonSignIn.type = 'submit';
   recoverPass.innerHTML = 'Recover password';
   recoverPass.href = '/password';
+  recoverPass.className = 'link';
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
 
   form.addEventListener('submit', (e) => {
     try {
       e.preventDefault();
-      signInAuth(inputEmail.value, inputPass.value)
-        .then((credential) => {
-          alert(`User logged with email ${credential.user.email}.`);
-          setTimeout(navigateTo('/feed'), 1000);
+      signInUser(inputEmail.value, inputPass.value)
+        .then((response) => {
+          if (response === `The user has been logged with email ${inputEmail.value}`) {
+            form.reset();
+            navigateTo('/feed');
+          }
+          alert(response);
         })
-        .catch((err) => {
-          alert(err.message);
-        });
+        .catch((err) => console.log(err.message));
     } catch (err) {
-      console.error(err);
+      alert(err.message);
     }
   });
 
   // sign in with Google
   op1.className = 'google';
   buttonSignInGoogle.textContent = 'Sign In with Google';
-  buttonSignInGoogle.addEventListener('click', () => {
+  buttonSignInGoogle.addEventListener('click', (e) => {
     try {
-      signInAuthGoogle()
-        .then(() => {
-          navigateTo('/feed');
+      e.preventDefault();
+      signInGoogle()
+        .then((response) => {
+          if (response.startsWith('The user has been registered and logged with email')) {
+            form.reset();
+            navigateTo('/feed');
+          }
+          alert(response);
         })
-        .catch((err) => {
-          alert(err.message);
-        });
+        .catch((err) => console.log(err.message));
     } catch (err) {
-      console.error(err);
+      alert(err.message);
     }
   });
   op1.append(buttonSignInGoogle);
@@ -99,7 +105,7 @@ function signin(navigateTo) {
   // link sign up
   signUp.innerHTML = 'Sign Up';
   signUp.href = '/signup';
-
+  signUp.className = 'link';
   section.append(back, figure, title, form, op1, op2, signUp);
 
   return section;

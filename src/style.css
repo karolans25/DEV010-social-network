@@ -106,6 +106,7 @@ figure{
   max-width: 162px;
   max-height: 162px;
   margin: 15px 15px 15px 15px;
+  margin: 0px 8px 0px 10px;
   padding: 20px 20px 20px 20px;
   display: flex;
   justify-content: center;
@@ -120,6 +121,28 @@ form{
   height: fit-content;
   /* margin-bottom: 5px; */
   justify-content: center;
+}
+
+input[type='file']{
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: var(--accompanying-color);
+  line-height: 35px;
+  min-width: 110px;
+}
+
+input[type=file]::file-selector-button {
+  border-radius: 7px;
+  background: var(--main-color);
+  cursor: pointer;
+  color: var(--accompanying-color);
+  box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /*transition: background .2s ease-in-out;*/
+}
+
+img{
+  justify-self: center;
+  align-self: center;
 }
 
 /* Init */
@@ -314,6 +337,13 @@ form{
 	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
 }
 
+.signin .link{
+  justify-self: end;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 25px;
+  /* border: solid 1px var(--contrast-color); */
+}
 
 .google{
   margin-left: 15px;
@@ -333,22 +363,81 @@ form{
 
 /* sign Up */
 .signup{
+  margin: 15px 0 15px 0;
   padding: 10px 10px 10px 10px;
 	/* background-image: url(assets/signup.png); */
 	background-size: 100% 100%;
 	display: grid;
-	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
+	/* grid-template-rows: 1fr 4fr 1fr 3fr 1fr 1fr 1fr; */
   height: fit-content;
+  align-self: center;
+  justify-self:center;
   justify-content: center;
 }
 
+.signup .sec-figure{
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.signup .sec-figure button{
+  min-width: 27px;
+  max-width: 27px;
+  height: 30px;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  margin: 0;
+}
+
+.signup .sec-figure button[name='left']{
+  justify-self: end;
+}
+
+.signup .sec-figure button[name='right']{
+  justify-self: start;
+}
+
+/* .signup .sec-figure input[type='file']{ */
+  /* display: grid; */
+  /* position: absolute; */
+  /* bottom: 69%; */
+  /* right: 42.5%; */
+  /* align-self: flex-end; */
+/* } */
+
+.signup figure{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup caption{
+  background: transparent;
+  color: transparent;
+  height: 30px;
+  position: relative;
+  bottom: -55%;
+  right: 100%;
+}
+
+.signup #imgUrl::file-selector-button{
+  /* display: grid; */
+  border-radius: 7px 7px 7px 7px;
+  line-height: 20px;
+  background: var(--main-color);
+  position: relative;
+  bottom: 50%;
+  right: 10%;
+}
+  
 /* recover password */
 .pass{
   padding: 10px 10px 10px 10px;
 	/* background-image: url(assets/password.png); */
 	background-size: 100% 100%;
 	display: grid;
-	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
   height: fit-content;
   justify-content: center;
 }
@@ -356,8 +445,8 @@ form{
 /* mix */
 .signin img, .signup img, .pass img{
 	background: transparent;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   /* grid-template-rows: 3fr 1fr 1fr; */
 }
 

@@ -1,21 +1,27 @@
-import { signUpAuth, sendEmailVerificationAuth } from '../lib/auth';
-import { createUserStore } from '../lib/store';
-// import { dataJson } from '../lib/authui';
+import { signUpUser } from '../lib/index';
 
 function signup(navigateTo) {
   const section = document.createElement('section');
   const back = document.createElement('a');
+  const sectionFig = document.createElement('section');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
+  const buttonLeft = document.createElement('button');
+  const buttonRight = document.createElement('button');
+  const imgUrl = document.createElement('input');
   const title = document.createElement('h2');
   const form = document.createElement('form');
+  const inputName = document.createElement('input');
   const inputEmail = document.createElement('input');
   const inputPass = document.createElement('input');
   const inputPassConfirm = document.createElement('input');
+  const labelName = document.createElement('label');
   const labelEmail = document.createElement('label');
   const labelPass = document.createElement('label');
   const labelPassConfirm = document.createElement('label');
   const buttonSignUp = document.createElement('button');
+
+  let file;
 
   // section
   section.className = 'signup';
@@ -24,16 +30,65 @@ function signup(navigateTo) {
   back.innerHTML = 'back';
   back.href = '/signin';
 
+  // const urls = [];
+  // const storageRef = ref(storage, 'default');
+  // listAll(storageRef).then((result) => {
+  //   result.items.forEach((imageRef) => {
+  //     getDownloadURL(imageRef).then((res) => urls.push(res))
+  //       .catch((err) => console.log(err.message));
+  //   });
+  //   urls.forEach((item) => {
+  //     img.src = item;
+  //     img.alt = `icon ${urls.indexOf(item) + 1}`;
+  //   });
+  // }).catch((err) => err.message);
+
   // figure
   img.src = './assets/icons/nina.webp';
   img.alt = 'user icon';
-  figure.append(img);
+  const caption = document.createElement('caption');
+  caption.append(imgUrl);
+  figure.append(img, caption);
+
+  // button to update img
+  imgUrl.type = 'file';
+  imgUrl.id = 'imgUrl';
+  imgUrl.value = '';
+  imgUrl.setAttribute('accept', 'image/*');
+  imgUrl.addEventListener('change', (e) => {
+    file = e.target.files[0];
+    img.src = URL.createObjectURL(file);
+    img.style.width = '162px';
+    img.style.height = '162px';
+    img.style.borderRadius = '50%';
+    figure.style.padding = '0';
+    caption.style.position = 'relative';
+    caption.style.bottom = '-41.5%';
+    caption.style.right = '87%';
+    caption.style.height = '30px';
+    // img.style.alignSelf = 'center';
+  });
+  sectionFig.className = 'sec-figure';
+  buttonLeft.innerHTML = '<';
+  buttonLeft.name = 'left';
+  buttonRight.innerHTML = '>';
+  buttonRight.name = 'right';
+  sectionFig.append(buttonLeft, figure, buttonRight);
+
+  buttonRight.addEventListener('click', () => { console.log('Right'); });
+  buttonLeft.addEventListener('click', () => { console.log('Left'); });
 
   // title
   title.textContent = 'Sign Up';
   buttonSignUp.textContent = 'Sign Up';
 
   // form
+  labelName.innerHTML = 'Display Name:';
+  labelName.htmlFor = inputName.name;
+  inputName.name = 'name';
+  inputName.placeholder = 'Write display name';
+  inputName.type = 'text';
+  inputName.required = false;
   labelEmail.innerHTML = 'Email: ';
   labelEmail.htmlFor = inputEmail.name;
   inputEmail.name = 'email';
@@ -55,6 +110,8 @@ function signup(navigateTo) {
   buttonSignUp.type = 'submit';
 
   form.append(
+    labelName,
+    inputName,
     labelEmail,
     inputEmail,
     labelPass,
@@ -64,30 +121,30 @@ function signup(navigateTo) {
     buttonSignUp,
   );
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     try {
       e.preventDefault();
       if (inputPass.value === inputPassConfirm.value) {
-        signUpAuth(inputEmail.value, inputPass.value)
-          .then((credential) => {
-            alert(`User created with email ${credential.user.email}.\nAn email has been sent to confirm your account.`);
-            createUserStore();
-            sendEmailVerificationAuth();
-            form.reset();
-            setTimeout(navigateTo('/signin'), 1000);
-          })
-          .catch((err) => {
-            alert(err.message.split('Firebase: ')[1]);
-          });
+        fetch(img.src).then((res) => res.blob()).then((blob) => {
+          signUpUser(inputEmail.value, inputPass.value, inputName.value, blob)
+            .then((response) => {
+              if (response === `The user has been registered with email ${inputEmail.value}\nCheck your email to confirm the account.`) {
+                form.reset();
+                navigateTo('/signin');
+              }
+              alert(response);
+            })
+            .catch((err) => console.log(err));
+        });
       } else {
-        alert('Error (auth/passwords-does-not-match)');
+        throw new Error('The passwords don\'t match');
       }
     } catch (err) {
       alert(err.message);
     }
   });
 
-  section.append(back, figure, title, form);
+  section.append(back, sectionFig, title, form);
 
   return section;
 }

@@ -1,14 +1,11 @@
 // Este es el punto de entrada de tu aplicacion
 
-import { myFunction } from './lib/index.js';
 import init from './components/init.js';
 import error from './components/error.js';
 import signin from './components/signin.js';
 import signup from './components/signup.js';
 import password from './components/password.js';
 import feed from './components/feed.js';
-
-myFunction();
 
 const routes = [
   { path: '/', component: init },
