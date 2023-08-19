@@ -82,10 +82,10 @@ function signin(navigateTo) {
         .then((response) => {
           if (response.startsWith('The user has been registered and logged with email')) {
             form.reset();
-            navigateTo('/feed');
+            // navigateTo('/feed');
           }
           alert(response);
-        })
+        }).then(() => navigateTo('/feed'))
         .catch((err) => console.log(err.message));
     } catch (err) {
       alert(err.message);

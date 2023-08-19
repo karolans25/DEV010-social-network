@@ -120,18 +120,18 @@ export const signInGoogle = () => signInWithPopup(auth, new GoogleAuthProvider()
   .then((credential) => {
     let message = '';
     if (credential.user) {
-      if (credential.user.emailVerified) {
-        setDoc(doc(collection(db, 'user'), credential.user.uid), {
+      fetch(credential.user.photoURL).then((res) => res.blob()).then((blob) => {
+        const storageRef = ref(storage, `${credential.user.uid}/profile.${blob.type.split('/')[1]}`);
+        const metadata = { contentType: blob.type };
+        uploadBytes(storageRef, blob, metadata).then(() => getDownloadURL(storageRef).then((url) => setDoc(doc(collection(db, 'user'), credential.user.uid), {
           email: credential.user.email,
           name: credential.user.displayName,
-          photo: credential.user.photoURL,
+          photo: url,
           createdAt: serverTimestamp(),
           friends: [],
-        });
-        message = `The user has been registered and looged with email ${credential.user.email}`;
-      } else {
-        message = 'Needs verified?';
-      }
+        })));
+      });
+      message = `The user has been registered and looged with email ${credential.user.email}`;
     } else {
       message = 'The user hasn\'t been registered';
     }
