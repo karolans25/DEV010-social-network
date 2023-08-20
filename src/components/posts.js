@@ -5,6 +5,14 @@ function posts(navigateTo) {
   const subSection = document.createElement('section');
   const nav = navBar();
 
+  //   const list = document.getElementsByClassName('list');
+  //   for (let i = 0; i < list.length; i++) {
+  //     list[i].classList = 'list';
+  //     if (list[i].id === 'list-posts') {
+  //       list[i].classList = 'list active';
+  //     }
+  //   }
+
   section.classList.value = 'home';
   subSection.className = 'posts';
 

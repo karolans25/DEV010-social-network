@@ -29,9 +29,11 @@ export function navBar(navigateTo) {
     const span = document.createElement('span');
     const img = document.createElement('img');
     // const ionIcon = document.createElement('ion-icon');
-
+    li.id = `list-${icons[i].alt}`;
     li.classList.value = 'list';
-    if (i === 0) li.classList.value = 'list active';
+    if (i === 0) {
+      li.classList.value = 'list active';
+    }
     // li.style = icons[i].style;
     a.href = icons[i].path;
     span.className = 'icon';
@@ -53,12 +55,15 @@ export function navBar(navigateTo) {
 
   // console.clear();
   // const nav = document.querySelector('.navigation');
-  const list = document.querySelectorAll('.list');
-  list.forEach((item) => item.addEventListener('click', (e) => {
-    list.forEach((li) => li.classList.remove('active'));
-    e.preventDefault();
-    e.currentTarget.classList.add('active');
-  }));
+  // const list = document.querySelectorAll('.list');
+  // console.log(list);
+  // list.forEach((item) => item.addEventListener('click', (e) => {
+  //   console.log(item);
+  //   list.forEach((li) => li.classList.remove('active'));
+  //   e.preventDefault();
+  //   alert(e.currentTarget);
+  //   e.currentTarget.classList.add('active');
+  // }));
 
   return nav;
 }

@@ -5,6 +5,14 @@ function search(navigateTo) {
   const subSection = document.createElement('section');
   const nav = navBar();
 
+  const list = document.getElementsByClassName('list');
+  list.forEach((element) => {
+    element.classList.remove('active');
+    if (element.id === 'list-search') {
+      element.classList.add('active');
+    }
+  });
+
   section.classList.value = 'home';
   subSection.className = 'search';
 
