@@ -6,6 +6,7 @@ import signin from './components/signin.js';
 import signup from './components/signup.js';
 import password from './components/password.js';
 import feed from './components/feed.js';
+import popup from './components/popup.js';
 
 const routes = [
   { path: '/', component: init },
@@ -14,6 +15,7 @@ const routes = [
   { path: '/signup', component: signup },
   { path: '/password', component: password },
   { path: '/feed', component: feed },
+  { path: '/popup', component: popup },
 ];
 
 const defaultRoute = '/';

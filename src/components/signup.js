@@ -1,4 +1,5 @@
 import { signUpUser } from '../lib/index';
+import popup from './popup';
 
 function signup(navigateTo) {
   const section = document.createElement('section');
@@ -20,8 +21,6 @@ function signup(navigateTo) {
   const labelPass = document.createElement('label');
   const labelPassConfirm = document.createElement('label');
   const buttonSignUp = document.createElement('button');
-
-  let file;
 
   // section
   section.className = 'signup';
@@ -56,8 +55,8 @@ function signup(navigateTo) {
   imgUrl.value = '';
   imgUrl.setAttribute('accept', 'image/*');
   imgUrl.addEventListener('change', (e) => {
-    file = e.target.files[0];
-    img.src = URL.createObjectURL(file);
+    // file = e.target.files[0];
+    img.src = URL.createObjectURL(e.target.files[0]);
     img.style.width = '162px';
     img.style.height = '162px';
     img.style.borderRadius = '50%';
@@ -132,16 +131,16 @@ function signup(navigateTo) {
                 form.reset();
                 navigateTo('/signin');
               }
-              alert(response);
+              // section.style.display = 'none';
+              console.log(response);
+              popup(response);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => { popup(err.message); });
         });
       } else {
-        throw new Error('The passwords don\'t match');
+        throw new Error('Firebase: Error (auth/passwords-not-match).');
       }
-    } catch (err) {
-      alert(err.message);
-    }
+    } catch (err) { popup(err.message); }
   });
 
   section.append(back, sectionFig, title, form);

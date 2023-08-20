@@ -68,24 +68,6 @@ button{
   box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;
 }
 
-input{
-  background: var(--accompanying-color);
-  border: none;
-  color: var(--moving-things-color);
-  color: var(--secondary-letter-color);
-  font-weight: normal;
-  padding: 5px 5px 5px 5px;
-  margin: 5px 10px 15px 10px;
-  font-size: medium;
-  width: 85%;
-  height: 35px;
-  display: grid;
-  /*box-shadow: offset-x | offset-y | blur-radius | spread-radius | color ;*/
-  box-shadow: 0 0.2rem var(--moving-things-color) ;
-  min-width: 300px;
-  max-width: 500px;
-}
-
 label{
   font-size: small;
   font-weight: bold;
@@ -123,6 +105,32 @@ form{
   justify-content: center;
 }
 
+input{
+  background: var(--accompanying-color);
+  border: none;
+  color: var(--moving-things-color);
+  color: var(--secondary-letter-color);
+  font-weight: normal;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 10px 15px 10px;
+  font-size: medium;
+  width: 85%;
+  height: 35px;
+  display: grid;
+  /*box-shadow: offset-x | offset-y | blur-radius | spread-radius | color ;*/
+  box-shadow: 0 0.2rem var(--moving-things-color) ;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+input:focus{
+  background-color: var(--moving-things-color);
+  opacity: 0.8;
+  font-weight: bold;
+  color: var(--principal-letter-color);
+  /*outline: none;*/
+}
+
 input[type='file']{
   border: none;
   box-shadow: none;
@@ -144,6 +152,69 @@ img{
   justify-self: center;
   align-self: center;
 }
+
+/* Pop-up */
+.overlay{
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: var(--moving-things-color);
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  justify-content: center;
+}
+
+.overlay .popup{
+  align-self: center;
+  /* position: relative;
+  top: calc(25%); */
+  display: grid;
+  width: 320px;
+  max-height: 200px;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px var(--principal-letter-color);
+}
+
+.overlay .popup .card-header, .overlay .popup .card-body, .overlay .popup .card-footer{
+  line-height: 80px;
+  height: 50px;
+  /* border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px; */
+}
+
+/* .overlay .popup .card-header h3, .overlay .popup .card-footer{ */
+.overlay .popup .card-header{
+  background: red;
+  opacity: 0.4;
+}
+
+.overlay .popup .card-header h2{
+  line-height:50px;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  opacity: 1;
+  background: transparent;
+  color: var(--principal-letter-color);
+}
+
+.overlay .popup .card-footer .ok{
+  max-width: 70px;
+  color: var(--accompanying-color);
+  font-weight: bold;
+  background: green;
+  opacity: 0.7;
+  color: var(--principal-letter-color);
+}
+
 
 /* Init */
 .init{
@@ -431,7 +502,7 @@ img{
   bottom: 50%;
   right: 10%;
 }
-  
+
 /* recover password */
 .pass{
   padding: 10px 10px 10px 10px;
