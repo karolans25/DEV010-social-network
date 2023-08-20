@@ -39,6 +39,12 @@ export const sendPasswordResetEmailAuth = (theEmail) => sendPasswordResetEmail(a
   .then(() => 'The email to restore the password has been sent.')
   .catch((err) => err.message);
 
+const deleteUserAuth = () => {
+  deleteUser(auth.currentUser).then(() => {
+    // User deleted.
+  }).catch((err) => err.message);
+};
+
 // eslint-disable-next-line max-len
 export const signUpUser = (theEmail, thePassword, ...extra) => createUserWithEmailAndPassword(auth, theEmail, thePassword)
   .then((credential) => {
@@ -46,13 +52,26 @@ export const signUpUser = (theEmail, thePassword, ...extra) => createUserWithEma
     if (credential.user) {
       const storageRef = ref(storage, `${credential.user.uid}/profile.${extra[1].type.split('/')[1]}`);
       const metadata = { contentType: extra[1].type };
-      uploadBytes(storageRef, extra[1], metadata).then(() => displayImage(storageRef).then((url) => setDoc(doc(collection(db, 'user'), credential.user.uid), {
-        email: credential.user.email,
-        name: extra[0],
-        photo: url,
-        createdAt: serverTimestamp(),
-        friends: [],
-      })));
+      uploadBytes(storageRef, extra[1], metadata)
+        .then(() => displayImage(storageRef)
+          .then((url) => setDoc(doc(collection(db, 'user'), credential.user.uid), {
+            email: credential.user.email,
+            name: extra[0],
+            photo: url,
+            createdAt: serverTimestamp(),
+            friends: [],
+          }).catch((err) => console.log(err.message)))
+          .catch((err) => console.log(err.message)))
+        .catch((err) => console.log(err.message));
+      // first catch: setDoc
+      //  - must delete the directory in storage named with the user id
+      //  - must to delete the document in store
+      //  - must to delete the user in auth ?
+      // second catch: displayImage => downloadURL
+      //  - must delete the directory in storage named with the user id
+      //  - must to delete the user in auth ?
+      // thirth catch: uploadBytes
+      //  - must to delete the user in auth ?
       sendEmailVerificationAuth(credential.user);
       message = `The user has been registered with email ${credential.user.email}\nCheck your email to confirm the account.`;
     }
@@ -66,16 +85,7 @@ export const signUpUser = (theEmail, thePassword, ...extra) => createUserWithEma
     }
     return message;
   })
-  .catch((err) => {
-    deleteUser(auth.currentUser).then(() => {
-      // User deleted.
-    });// .catch((error) => {
-    // An error ocurred
-    // ...
-    // });
-
-    return err.message;
-  });
+  .catch((err) => err.message);
 
 /**
  * Sign In

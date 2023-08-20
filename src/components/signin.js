@@ -1,5 +1,6 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
 import { signInUser, signInGoogle } from '../lib/index';
+import popup from './popup';
 
 function signin(navigateTo) {
   const section = document.createElement('section');
@@ -60,15 +61,15 @@ function signin(navigateTo) {
       e.preventDefault();
       signInUser(inputEmail.value, inputPass.value)
         .then((response) => {
+          popup(response);
           if (response === `The user has been logged with email ${inputEmail.value}`) {
             form.reset();
             navigateTo('/feed');
           }
-          alert(response);
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => popup(err.message));
     } catch (err) {
-      alert(err.message);
+      popup(err.message);
     }
   });
 

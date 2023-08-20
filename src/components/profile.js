@@ -5,6 +5,7 @@ function profile(navigateTo) {
   const subSection = document.createElement('section');
   const nav = navBar();
 
+  /*
   const list = document.getElementsByClassName('list');
   list.forEach((element) => {
     element.classList.remove('active');
@@ -12,6 +13,7 @@ function profile(navigateTo) {
       element.classList.add('active');
     }
   });
+  */
 
   section.classList.value = 'home';
   subSection.className = 'profile';

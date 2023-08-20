@@ -9,6 +9,7 @@ import feed from './components/feed.js';
 import posts from './components/posts.js';
 import search from './components/search.js';
 import profile from './components/profile.js';
+import popup from './components/popup.js';
 
 const routes = [
   { path: '/', component: init },
@@ -20,6 +21,7 @@ const routes = [
   { path: '/posts', component: posts },
   { path: '/search', component: search },
   { path: '/profile', component: profile },
+  { path: '/popup', component: popup },
 ];
 
 const defaultRoute = '/';
