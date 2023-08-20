@@ -50,7 +50,7 @@ function signin(navigateTo) {
   inputPass.required = true;
   buttonSignIn.textContent = 'Sign In';
   buttonSignIn.type = 'submit';
-  recoverPass.innerHTML = 'Recover password';
+  recoverPass.innerHTML = 'Forgot password ?';
   recoverPass.href = '/password';
   recoverPass.className = 'link';
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);

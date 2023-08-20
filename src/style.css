@@ -27,7 +27,6 @@ body{
   flex-flow: column wrap;
   /*justify-content: center;
   align-items: center; */
-
 }
 
 h1{
@@ -145,16 +144,36 @@ img{
   align-self: center;
 }
 
+.init, .signin, .signup, .pass, .feed{
+  padding: 20px 20px 20px 20px;
+	/* background-image: url(assets/signup.png); */
+	background-size: 100% 100%;
+	display: grid;
+	/* grid-template-rows: 1fr 4fr 1fr 3fr 1fr 1fr 1fr; */
+  height: 100%;
+  align-self: center;
+  justify-self:center;
+  justify-content: center;
+}
+
 /* Init */
 .init{
   background: var(--main-color);
   /*background-image: url(assets/init.png);*/
-  background-size: contain;
-  display: grid;
   grid-template-rows: 3fr 1fr 1fr;
- /* align-content: center;
-  justify-content: center;*/
-  padding: 10px 10px 10px 10px;
+}
+
+.init img{
+  background: transparent;
+	width: 100%;
+	height: auto;
+  max-width: 400px;
+  max-height: 142px;
+	/* margin: 0; */
+	/* padding: 0 10% 0 10%; */
+  /* position: relative;
+  left: -15%;
+  bottom: -10%; */
 }
 
 .init button{
@@ -171,170 +190,9 @@ img{
   font-size: 50px;
 }
 
-.init figure{
-  background: var(--main-color);
-  background: transparent;
-	width: 100%;
-  max-width: 520px;
-  max-height: 520px;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-  align-items: center;
-}
-
-.init img{
-  background: transparent;
-	width: 100%;
-	height: auto;
-  max-width: 400px;
-  max-height: 142px;
-	/* margin: 0; */
-	/* padding: 0 10% 0 10%; */
-  position: relative;
-  left: -15%;
-  bottom: -10%;
-}
-
-.init .buble{
-  border-radius: 50%;
-  background-color: var(--accompanying-color);
-  position: relative;
-  opacity: 1.0;
-  /*animation: name duration timing-function delay iteration-count direction fill-mode*/
-  animation: bubles 8s ease infinite;
-}
-
-.init .buble:nth-child(1){
-  width: 25px;
-  height: 25px;  
-  /*width: var(--max-buble);
-  height: var(--max-buble);*/
-  left: 8%;
-  bottom: -45%;
-  /*background: green;*/
-  animation-delay: 0.2s;
-}
-.init .buble:nth-child(2){
-  width: var(--max-buble);
-  height: var(--max-buble);
-  left: 83%;
-  bottom: 30%;
-  /*background: green;*/
-  animation-delay: 0.4s;
-}
-
-.init .buble:nth-child(3){
-  width: var(--middle-buble);
-  height: var(--middle-buble);
-  left: -1%;
-  bottom: -25%;
-  /*background: blue;*/
-  animation-delay: 0.6s;
-}
-.init .buble:nth-child(4){
-  width: var(--middle-buble);
-  height: var(--middle-buble);
-  left: 29%;
-  bottom: -33%;
-  /*background: blue;*/
-  animation-delay: 0.8s;
-}
-.init .buble:nth-child(5){
-  width: var(--middle-buble);
-  height: var(--middle-buble);
-  left: 40%;
-  bottom: 18%;
-  /*background: blue;*/
-  animation-delay: 1s;
-}
-.init .buble:nth-child(6){
-  width: var(--middle-buble);
-  height: var(--middle-buble);
-  left: 70%;
-  bottom: 5%;
-  /*background: blue;*/
-  animation-delay: 1.2s;
-}
-
-.init .buble:nth-child(7){
-  width: var(--min-buble);
-  height: var(--min-buble);
-  left: -10%;
-  bottom: -35%;
-  /*background: yellow;*/
-  animation-delay: 1.4s;
-}
-.init .buble:nth-child(8){
-  width: var(--min-buble);
-  height: var(--min-buble);
-  left: 0%;
-  bottom: -31%;
-  /*background: yellow;*/
-  animation-delay: 1.6s;
-}
-.init .buble:nth-child(9){
-  width: var(--min-buble);
-  height: var(--min-buble);
-  left: 6%;
-  bottom: -38%;
-  /*background: yellow;*/
-  animation-delay: 1.8s;
-}
-
-.init .buble:nth-child(10){
-  width: var(--min-buble);
-  height: var(--min-buble);
-  left: 49%;
-  bottom: 15%;
-  /*background: yellow;*/
-  animation-delay: 2.0s;
-}
-.init .buble:nth-child(11){
-  width: var(--min-buble);
-  height: var(--min-buble);
-  left: 50%;
-  bottom: 23%;
-  /*background: yellow;*/
-  animation-delay: 2.2s;
-}
-.init .buble:nth-child(12){
-  width: var(--min-buble);
-  height: var(--min-buble);
-  left: 59%;
-  bottom: 16%;
-  /*background: yellow;*/
-  animation-delay: 2.4s;
-}
-
-@keyframes bubles {
-  0%{
-    transform: rotate(0deg); 
-    opacity: 1;
-  }
-  20%{
-    transform: rotate(120deg); 
-    opacity: 0.6;
-  }
-  80%{
-    transform: translateX(240deg); 
-    opacity: 0.6;
-  }
-  100%{
-    transform: translateX(360deg); 
-    opacity: 1;
-  }
-}
-
 /* sign In */
 .signin{
-  padding: 10px 10px 10px 10px;
-	/* background-image: url(assets/signin.png); */
-	background-size: 100% 100%;
-	display: grid;
-  height: fit-content;
-  justify-content: center;
-	/* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
+  	/* background-image: url(assets/signup.png); */
 }
 
 .signin .link{
@@ -363,16 +221,7 @@ img{
 
 /* sign Up */
 .signup{
-  margin: 15px 0 15px 0;
-  padding: 10px 10px 10px 10px;
-	/* background-image: url(assets/signup.png); */
-	background-size: 100% 100%;
-	display: grid;
-	/* grid-template-rows: 1fr 4fr 1fr 3fr 1fr 1fr 1fr; */
-  height: fit-content;
-  align-self: center;
-  justify-self:center;
-  justify-content: center;
+  /* background-image: url(assets/signup.png); */
 }
 
 .signup .sec-figure{
@@ -398,14 +247,6 @@ img{
   justify-self: start;
 }
 
-/* .signup .sec-figure input[type='file']{ */
-  /* display: grid; */
-  /* position: absolute; */
-  /* bottom: 69%; */
-  /* right: 42.5%; */
-  /* align-self: flex-end; */
-/* } */
-
 .signup figure{
   display: flex;
   flex-flow: column wrap;
@@ -423,24 +264,13 @@ img{
 }
 
 .signup #imgUrl::file-selector-button{
-  /* display: grid; */
   border-radius: 7px 7px 7px 7px;
   line-height: 20px;
   background: var(--main-color);
   position: relative;
   bottom: 50%;
   right: 10%;
-}
-  
-/* recover password */
-.pass{
-  padding: 10px 10px 10px 10px;
-	/* background-image: url(assets/password.png); */
-	background-size: 100% 100%;
-	display: grid;
-  height: fit-content;
-  justify-content: center;
-}
+}  
 
 /* mix */
 .signin img, .signup img, .pass img{
@@ -452,50 +282,80 @@ img{
 
 /* Feed */
 .feed{
-
+  background-image: url(assets/feed.png);
+  background-size: 100% 100%;
+  padding: 20px 20px 20px 20px;
+  width: 100%;
+  height: calc(100% - 70px);
 }
 
+/* Feed */
+.posts{
+  background-image: url(assets/posts.png);
+  background-size: 100% 100%;
+  padding: 20px 20px 20px 20px;
+  width: 100%;
+  height: calc(100% - 70px);
+}
+
+.search{
+  background-image: url(assets/search.png);
+  background-size: 100% 100%;
+  width: 100%;
+  height: calc(100% - 70px);
+}
+
+.profile{
+  background-image: url(assets/profile.png);
+  background-size: 100% 100%;
+  width: 100%;
+  height: calc(100% - 70px);
+}
 
 .navigation {
-	position: relative;
-	width: 400px;
-	height: 60px;
-	background: white;
-	display: flex;
+	position: fixed;
+  bottom: 0%;
+  display: grid;
+	width: 100%;
+	height: 70px;
+	background: var(--main-color);
+	/* display: flex; */
 	justify-content: center;
 	align-items: center;
-	border-radius: 10px;
+	/* border-radius: 7px; */
 }
 
 .navigation ul {
-	width: 350px;
+	background: var(--main-color);
+	width: 360px;
 	display: flex;
+	/* align-items: center; */
 }
 
 
 .navigation ul li {
-	list-style: none;
+  background: var(--main-color);
+  list-style: none;
 	position: relative;
-	width: 70px; /* ul: width 350 / 5 = 70 */
-	height: 60px;
+	width: 72px; /* ul: width 360 / 5 = 72 */
+	height: 70px;
 	z-index: 2;
+  /* align-content: center;
+  justify-content: center; */
 }
 
 .navigation ul li a {
 	text-decoration: none;
-	color:#555;
-	
+  background: var(--main-color);
 	position: relative;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	width: 100%;
 	height: 100%;
 }
 
 .navigation ul li a .icon {
 	position:relative;
-	background: #fff;
+	background: red;
 	display:block;
 	width: 55px;
 	height: 55px;
@@ -510,7 +370,8 @@ img{
 
 .navigation ul li.active a .icon {
 	background: var(--clr);
-	color: #fff;
+	background: blue;
+  color: #fff;
 	transform: translatey(-27px);
 	transition-delay: 0.25s;
 }
@@ -522,7 +383,7 @@ img{
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: var(--clr);
+	background: var(--contrast-color);
 	border-radius: 50%;
 	filter: blur(5px);
 	opacity:0;
@@ -533,6 +394,13 @@ img{
 .navigation ul li.active a .icon:before {
 	opacity: 0.5;
 	transition-delay: 0.25s;
+  /* background: green; */
+}
+
+.navigation ul li a .icon img{
+  /* background: var(--main-color); */
+  border: solid 4px var(--accompanying-color);
+  border-radius: 50%;
 }
 
 .indicator {
@@ -540,7 +408,7 @@ img{
 	top: -35px;
 	width: 70px;
 	height: 70px;
-	background: #fff;
+	background: var(--main-color);
 	border-radius: 50%;
 	z-index: 1;
 	transition: 0.5s;
@@ -588,7 +456,8 @@ img{
 	transform: translatex(calc(70px * 4));
 }
 
-/*<div class='navigation'>
+/*
+<div class='navigation'>
 	<ul>
 		<li class="list active" style="--clr:#f44336"><a href="#"><span class="icon">
 					<ion-icon name="home-outline"></ion-icon>

@@ -153,9 +153,10 @@ auth.onAuthStateChanged((user) => {
       console.log(snapshot.docs);
       // setupUsers(snapshot.docs);
       // setupUI(user);
-    }).catch((err) => {
-      console.log(err.message);
-    });
+    })
+      .catch((err) => {
+        console.log(err.message);
+      });
   } else {
     // setupUI();
     // setupUsers([]);

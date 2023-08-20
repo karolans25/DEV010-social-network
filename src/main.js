@@ -6,6 +6,9 @@ import signin from './components/signin.js';
 import signup from './components/signup.js';
 import password from './components/password.js';
 import feed from './components/feed.js';
+import posts from './components/posts.js';
+import search from './components/search.js';
+import profile from './components/profile.js';
 
 const routes = [
   { path: '/', component: init },
@@ -14,6 +17,9 @@ const routes = [
   { path: '/signup', component: signup },
   { path: '/password', component: password },
   { path: '/feed', component: feed },
+  { path: '/posts', component: posts },
+  { path: '/search', component: search },
+  { path: '/profile', component: profile },
 ];
 
 const defaultRoute = '/';

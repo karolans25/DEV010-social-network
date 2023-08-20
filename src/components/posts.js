@@ -1,16 +1,16 @@
 import { navBar } from './navBar';
 
-function feed(navigateTo) {
+function posts(navigateTo) {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
   const nav = navBar();
 
   section.classList.value = 'home';
-  subSection.className = 'feed';
+  subSection.className = 'posts';
 
   section.append(subSection, nav);
 
   return section;
 }
 
-export default feed;
+export default posts;
