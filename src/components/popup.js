@@ -1,5 +1,5 @@
 function popup(message) {
-  const body = document.getElementById('root');
+  const article = document.getElementById('root');
   const overlay = document.createElement('section');
   const card = document.createElement('section');
   const header = document.createElement('header');
@@ -23,6 +23,8 @@ function popup(message) {
   buttonOk.className = 'ok';
   buttonOk.addEventListener('click', () => {
     overlay.style.display = 'none';
+    console.log(article.children);
+    // article.remove(article.children[1]);
   });
 
   if (typeof message !== 'undefined') {
@@ -77,7 +79,7 @@ function popup(message) {
   card.appendChild(messageSection);
   card.appendChild(footer);
   overlay.append(card);
-  body.append(overlay);
+  article.append(overlay);
 
   return overlay;
 }

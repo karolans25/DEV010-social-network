@@ -9,7 +9,7 @@
 
 import signup from '../src/components/signup';
 
-describe('the function', () => {
+describe('sign up', () => {
   it('must to be a function', () => {
     expect(typeof signup).toBe('function');
   });

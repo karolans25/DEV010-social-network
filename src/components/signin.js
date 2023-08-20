@@ -1,5 +1,6 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
 import { signInUser, signInGoogle } from '../lib/index';
+import popup from './popup';
 
 function signin(navigateTo) {
   const section = document.createElement('section');
@@ -64,11 +65,11 @@ function signin(navigateTo) {
             form.reset();
             navigateTo('/feed');
           }
-          alert(response);
+          popup(response);
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => popup(err.message));
     } catch (err) {
-      alert(err.message);
+      popup(err.message);
     }
   });
 
