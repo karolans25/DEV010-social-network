@@ -5,12 +5,14 @@ function init(navigateTo) {
   const img = document.createElement('img');
   const title = document.createElement('h1');
   const buttonStart = document.createElement('button');
+  const figure = document.createElement('figure');
 
   section.className = 'init';
   figure.className = 'init-figure';
 
   img.src = './assets/1.png';
   img.alt = 'imagen init';
+  figure.append(img);
 
   buttonStart.textContent = 'Go';
   buttonStart.className = 'go';
