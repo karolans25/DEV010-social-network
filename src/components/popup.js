@@ -7,19 +7,20 @@ function popup(message) {
   const footer = document.createElement('footer');
   const title = document.createElement('h2');
   const p = document.createElement('p');
+  const ops = document.createElement('section');
+  const buttonOk = document.createElement('button');
 
   overlay.className = 'overlay';
   overlay.style.display = 'flex';
-  card.className = 'popup';
 
+  card.className = 'popup';
   header.className = 'card-header';
   messageSection.className = 'card-body';
   footer.className = 'card-footer';
 
   title.innerHTML = 'Error';
-  // card.style.display = 'grid';
-  const buttonOk = document.createElement('button');
-  buttonOk.value = 'Ok';
+  ops.className = 'ops';
+  buttonOk.textContent = 'Ok';
   buttonOk.className = 'ok';
   buttonOk.addEventListener('click', () => {
     overlay.style.display = 'none';
@@ -55,7 +56,11 @@ function popup(message) {
           // alert('Wrong password');
           p.innerHTML = 'Wrong password';
           break;
-        case 'Firebase:':
+        case 'Firebase: Error (auth/too-many-requests).':
+          // alert('Too many requests');
+          p.innerHTML = 'Too many requests';
+          break;
+        case 'Firebase: Error ':
           // There's an error about requiered an recent session
           // alert('Another error');
           p.innerHTML = 'Another error';
@@ -65,18 +70,27 @@ function popup(message) {
           p.innerHTML = message;
           break;
       }
+      ops.append(buttonOk);
     } else if (message.includes('?')) {
       card.className = 'confirm';
-    } else if (message.includes('TypeError')) {
-      title.innerHTML = 'TypeError';
+      const buttonCancel = document.createElement('button');
+      buttonCancel.textContent = 'Cancel';
+      buttonCancel.className = 'cancel';
+      buttonOk.addEventListener('click', () => {
+        overlay.style.display = 'none';
+      });
+      buttonCancel.addEventListener('click', () => {
+        overlay.style.display = 'none';
+      });
+      ops.append(buttonOk, buttonCancel);
     } else {
       p.innerHTML = message;
+      ops.append(buttonOk);
     }
   }
 
   header.append(title);
-  messageSection.append(p);
-  footer.append(buttonOk);
+  messageSection.append(p, buttonOk);
   card.appendChild(header);
   card.appendChild(messageSection);
   card.appendChild(footer);

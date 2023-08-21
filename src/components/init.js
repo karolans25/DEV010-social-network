@@ -7,19 +7,20 @@ function init(navigateTo) {
   const buttonStart = document.createElement('button');
 
   section.className = 'init';
+  figure.className = 'init-figure';
 
   img.src = './assets/1.png';
   img.alt = 'imagen init';
 
   buttonStart.textContent = 'Go';
-  buttonStart.classList = 'go';
+  buttonStart.className = 'go';
   buttonStart.addEventListener('click', () => {
     navigateTo('/signin');
   });
 
   title.textContent = 'Title';
 
-  section.append(img, buttonStart, title);
+  section.append(figure, buttonStart, title);
 
   return section;
 }
