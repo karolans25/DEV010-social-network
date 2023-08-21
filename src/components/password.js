@@ -32,6 +32,7 @@ function password(navigateTo) {
   labelEmail.htmlFor = inputEmail.name;
   inputEmail.placeholder = 'Write email';
   inputEmail.name = 'email';
+  inputEmail.type = 'email';
   inputEmail.required = true;
   buttonRecoverPassword.textContent = 'Recover Password';
   buttonRecoverPassword.type = 'submit';
