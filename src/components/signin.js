@@ -75,6 +75,7 @@ function signin(navigateTo) {
   // sign in with Google
   op1.className = 'google';
   buttonSignInGoogle.textContent = 'Sign In with Google';
+  buttonSignInGoogle.id = 'google-button';
   buttonSignInGoogle.addEventListener('click', (e) => {
     try {
       e.preventDefault();
@@ -96,6 +97,7 @@ function signin(navigateTo) {
   // sign in with Github
   op2.className = 'github';
   buttonSignInGithub.textContent = 'Sign In with Github';
+  buttonSignInGithub.id = 'github-button';
   buttonSignInGithub.addEventListener('click', () => {
     // signInAuthGoogle();
     // navigateTo('/home');
