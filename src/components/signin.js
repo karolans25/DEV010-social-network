@@ -1,5 +1,5 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
-import { signInUser, signInGoogle } from '../lib/index';
+import { signInUser, signInGoogle, sendEmailVerificationAuth } from '../lib/index';
 import popup from './popup';
 
 function signin(navigateTo) {
@@ -64,7 +64,10 @@ function signin(navigateTo) {
           popup(response);
           if (response === `The user has been logged with email ${inputEmail.value}`) {
             form.reset();
+            popup(response);
             navigateTo('/feed');
+          } else if (response.includes('Would you like to receive the email again?')) {
+            sendEmailVerificationAuth().then((result) => popup(result));
           }
         })
         .catch((err) => popup(err.message));
@@ -84,13 +87,15 @@ function signin(navigateTo) {
         .then((response) => {
           if (response.startsWith('The user has been registered and logged with email')) {
             form.reset();
-            // navigateTo('/feed');
+            navigateTo('/feed');
+            popup(response);
           }
-          alert(response);
-        }).then(() => navigateTo('/feed'))
-        .catch((err) => console.log(err.message));
+          // alert(response);
+          popup(response);
+        })// .then(() => navigateTo('/feed'))
+        .catch((err) => popup(err.message));
     } catch (err) {
-      alert(err.message);
+      popup(err.message);
     }
   });
   op1.append(buttonSignInGoogle);

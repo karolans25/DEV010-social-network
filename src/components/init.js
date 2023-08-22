@@ -6,6 +6,7 @@ function init(navigateTo) {
   const title = document.createElement('h1');
   const buttonStart = document.createElement('button');
   const figure = document.createElement('figure');
+  const p = document.createElement('p');
 
   section.className = 'init';
   figure.className = 'init-figure';
@@ -22,7 +23,10 @@ function init(navigateTo) {
 
   title.textContent = 'Title';
 
-  section.append(figure, buttonStart, title);
+  p.innerHTML = 'Create Technology to make things happen! 🌎💻👣';
+
+  // section.append(figure, p, buttonStart, title);
+  section.append(figure, buttonStart, title, p);
 
   return section;
 }
