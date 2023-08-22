@@ -1,6 +1,9 @@
 // module.exports = {
 //   testEnvironment: 'jsdom',
 // };
+// module.exports = {
+//   testEnvironment: 'node',
+// };
 module.exports = {
-  testEnvironment: 'node',
+  testEnvironment: 'jest-environment-jsdom-sixteen',
 };

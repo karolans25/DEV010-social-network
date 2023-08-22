@@ -182,12 +182,34 @@ img{
   box-shadow: 1rem 1rem var(--moving-things-color) ;
 }
 
+.overlay .correct{
+  align-self: center;
+  display: grid;
+  padding: 10px 10px 10px 10px;
+  width: 300px;
+  height: 270px;
+  justify-content: center;
+  align-items: center;
+  background: var(--main-color);
+  border: solid 2px var(--principal-letter-color);
+  box-shadow: 1rem 1rem var(--moving-things-color) ;
+}
+
 .overlay .popup .card-header, .overlay .popup .card-footer{
   height: 40px;
   width: 280px;
   color: var(--secondary-letter-color);
   font-weight: bold;
   background: lightcoral;
+  opacity: 1;
+}
+
+.overlay .correct .card-header, .overlay .correct .card-footer{
+  /* height: 40px; */
+  /* width: 280px; */
+  color: var(--secondary-letter-color);
+  font-weight: bold;
+  background: lightgreen;
   opacity: 1;
 }
 
@@ -224,8 +246,28 @@ img{
   justify-items: center;
 }
 
+.overlay .correct .card-body{
+  border-radius: 0;
+  padding: 10px 20px 10px 20px;
+  height: 160px;
+  width: 280px;
+  background: var(--accompanying-color);
+  color: var(--secondary-letter-color);
+  font-weight: bold;
+  display: grid;
+  justify-items: center;
+}
+
 .overlay .popup .card-body p{
   height: 45px;
+  width: 240px;
+  /* background: yellow; */
+  color: var(--secondary-letter-color);
+  font-weight: bold;
+}
+
+.overlay .correct .card-body p{
+  height: 93px;
   width: 240px;
   /* background: yellow; */
   color: var(--secondary-letter-color);
@@ -257,15 +299,15 @@ img{
   /*background-image: url(assets/init.png);*/
   background-size: contain;
   display: grid;
-  grid-template-rows: 3fr 1fr 1fr;
+  grid-template-rows: 3fr 1fr 1fr 1fr;
  /* align-content: center;
   justify-content: center;*/
   padding: 10px 10px 10px 10px;
 }
 
 .init button{
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 50px;
   background: var(--accompanying-color);
   color: var(--secondary-letter-color);
   box-shadow: 0.5rem 0.5rem var(--moving-things-color) ;
@@ -282,9 +324,9 @@ img{
 .init figure{
   background: var(--main-color);
   background: transparent;
-	width: 100%;
   max-width: 520px;
   max-height: 520px;
+	width: 85%;
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -297,9 +339,17 @@ img{
 	height: auto;
   max-width: 400px;
   max-height: 142px;
-  position: relative;
-  left: -15%;
-  bottom: -10%;
+}
+
+.init p{
+  background: transparent;
+  color: var(--principal-letter-color);
+  font-weight: bold;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  align-content: center;
+  width: 245px;
 }
 /*
 .init .buble{

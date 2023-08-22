@@ -1,4 +1,4 @@
-function popup(message) {
+const popup = (message) => {
   const body = document.getElementById('root');
   const overlay = document.createElement('section');
   const card = document.createElement('section');
@@ -23,7 +23,8 @@ function popup(message) {
   buttonOk.textContent = 'Ok';
   buttonOk.className = 'ok';
   buttonOk.addEventListener('click', () => {
-    overlay.style.display = 'none';
+    overlay.remove();
+    // overlay.style.display = 'none';
   });
 
   if (typeof message !== 'undefined') {
@@ -80,8 +81,12 @@ function popup(message) {
         overlay.style.display = 'none';
       });
       ops.append(buttonOk, buttonCancel);
+    } else if (message.startsWith('The user has been registered with email')) {
+      title.innerHTML = 'Well done!';
+      p.innerHTML = message;
+      card.classList.add('correct');
     } else {
-      card.className = 'error';
+      // card.className = 'error';
       p.innerHTML = message;
       ops.append(buttonOk);
     }
@@ -96,6 +101,6 @@ function popup(message) {
   body.append(overlay);
 
   return overlay;
-}
+};
 
 export default popup;
