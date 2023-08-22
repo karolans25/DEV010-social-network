@@ -1,7 +1,7 @@
 import { signUpUser } from '../lib/index';
 import popup from './popup';
 
-function signup(navigateTo) {
+const signup = (navigateTo) => {
   const section = document.createElement('section');
   const back = document.createElement('a');
   const sectionFig = document.createElement('section');
@@ -127,8 +127,10 @@ function signup(navigateTo) {
         fetch(img.src).then((res) => res.blob()).then((blob) => {
           signUpUser(inputEmail.value, inputPass.value, inputName.value, blob)
             .then((response) => {
-              if (response === `The user has been registered with email ${inputEmail.value}\nCheck your email to confirm the account.`) {
+              if (response === `The user has been registered with email ${inputEmail.value} \n Check your email to confirm the account.`) {
                 form.reset();
+                popup(response);
+                // document.querySelectorAll('.overlay').forEach((element) => element.remove());
                 navigateTo('/signin');
               }
               // section.style.display = 'none';
@@ -146,6 +148,6 @@ function signup(navigateTo) {
   section.append(back, sectionFig, title, form);
 
   return section;
-}
+};
 
 export default signup;

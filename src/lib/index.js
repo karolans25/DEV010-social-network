@@ -30,7 +30,8 @@ const actionCodeSettings = {
 // eslint-disable-next-line max-len
 const displayImage = (imageRef) => getDownloadURL(imageRef).catch((err) => err.message);
 
-const sendEmailVerificationAuth = (user) => sendEmailVerification(user, actionCodeSettings)
+// eslint-disable-next-line max-len
+export const sendEmailVerificationAuth = () => sendEmailVerification(auth.currentUser, actionCodeSettings)
   .then(() => 'The email to confirm your account has been sent.')
   .catch((err) => err.message);
 
@@ -108,12 +109,13 @@ export const signInUser = (theEmail, thePassword) => signInWithEmailAndPassword(
         });
         message = `The user has been logged with email ${credential.user.email}`;
       } else {
-        // eslint-disable-next-line no-restricted-globals
-        const send = confirm(`The email ${credential.user.email} hasn't been verified.\nWould you like to receive the email again?`);
-        if (send) {
-          sendEmailVerificationAuth(credential.user);
-          message = 'The email to confirm your account has been sent';
-        }
+        message = `The email ${credential.user.email} hasn't been verified.\nWould you like to receive the email again?`;
+        // eslint-disable-next-line no-restricted-globals, max-len
+        // const send = confirm(`The email ${credential.user.email} hasn't been verified.\nWould you like to receive the email again?`);
+        // if (send) {
+        //   sendEmailVerificationAuth(credential.user);
+        //   message = 'The email to confirm your account has been sent';
+        // }
       }
     } else {
       message = `The ${theEmail} has'nt been registered`;
@@ -147,9 +149,7 @@ export const signInGoogle = () => signInWithPopup(auth, new GoogleAuthProvider()
     }
     return message;
   })
-  .catch((error) => {
-    alert(error.message);
-  });
+  .catch((error) => error.message);
 
 auth.onAuthStateChanged((user) => {
   if (user) {
