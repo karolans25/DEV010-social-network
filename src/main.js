@@ -8,7 +8,7 @@ import signin from './components/signin.js';
 import signup from './components/signup.js';
 import password from './components/password.js';
 import feed from './components/feed.js';
-import posts from './components/posts.js';
+import myPosts from './components/myPosts';
 import search from './components/search.js';
 import profile from './components/profile.js';
 import popup from './components/popup.js';
@@ -20,7 +20,7 @@ const routes = [
   { path: '/signup', component: signup },
   { path: '/password', component: password },
   { path: '/feed', component: feed },
-  { path: '/posts', component: posts },
+  { path: '/myPosts', component: myPosts },
   { path: '/search', component: search },
   { path: '/profile', component: profile },
   { path: '/popup', component: popup },
@@ -53,23 +53,34 @@ window.onpopstate = () => {
 navigateTo(window.location.pathname || defaultRoute);
 
 onAuthStateChanged(auth, (user) => {
-  if (user && window.location.pathname === '/feed') {
-    const uid = user.uid;
-    const colRef = collection(db, 'user');
-    onSnapshot(colRef, (snapshot) => {
-      console.log('Línea 85 de index.js');
-      console.log(snapshot.docs);
-      // setupUsers(snapshot.docs);
-      // setupUI(user);
-    })
-      .catch((err) => {
-        console.log(err.message);
-      });
-
+  const path = window.location.pathname;
+  if (user && path === '/feed') {
+    user.getIdToken().then((token) => {
+      // Aquí obtienes el nuevo token válido
+      // Puedes almacenarlo en una variable o actualizarlo en tu base de datos
+      console.log(token);
+    }).catch((err) => {
+      popup(err.message);
+      // Manejo de errores
+    }); // const uid = user.uid;
+    // const colRef = collection(db, 'user');
+    // onSnapshot(colRef, (snapshot) => {
+    //   console.log('Línea 85 de index.js');
+    //   console.log(snapshot.docs);
+    // setupUsers(snapshot.docs);
+    // setupUI(user);
+    // })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
     navigateTo('/feed');
-  } else if (!user && window.location.pathname === '/feed') {
-    // setupUI();
-    // setupUsers([]);
+  } else if (user && path === '/myPosts') {
+    navigateTo('/myPosts');
+  } else if (user && path === '/search') {
+    navigateTo('/search');
+  } else if (user && path === '/profile') {
+    navigateTo('/profile');
+  } else if (!user) {
     popup('Please sign in or sign up to start!');
     navigateTo('/signin');
   }

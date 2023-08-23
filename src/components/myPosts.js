@@ -2,13 +2,14 @@ import {
   collection,
   query,
   orderBy,
+  where,
 } from 'firebase/firestore';
-import { db } from '../lib/firebaseConfig';
+import { auth, db } from '../lib/firebaseConfig';
 import { navBar } from './navBar';
 import formatCreatePost from './formatCreatePost';
 import formatGetAllPosts from './formatGetAllPosts';
 
-function feed(navigateTo) {
+function myPosts(navigateTo) {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
   const nav = navBar();
@@ -18,7 +19,9 @@ function feed(navigateTo) {
 
   const sectionFormatCreatePost = formatCreatePost();
   const title = document.createElement('h1');
-  const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
+  const user = auth.currentUser;
+  const q = query(collection(db, 'post'), where('idUser', '==', `${user.uid}`));
+  // const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
   const sectionFormatGetAllPost = formatGetAllPosts(q);
 
   /* See all the created Post */
@@ -85,4 +88,4 @@ function feed(navigateTo) {
   return section;
 }
 
-export default feed;
+export default myPosts;

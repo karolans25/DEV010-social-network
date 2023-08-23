@@ -16,6 +16,7 @@
   --accompanying-color: rgb(242, 242, 242, 1);
   --moving-things-color: rgb(88, 89, 79, 0.5);
   --contrast-color: rgb(235, 228, 43, 1);
+  --contrast-color: rgb(255, 232, 163, 1);
   /* --max-buble: 25px;
   --middle-buble: 12px;
   --min-buble: 8px; */
@@ -604,7 +605,7 @@ img{
 
 /* Feed */
 .feed{
-  background-image: url(assets/feed.png);
+  /* background-image: url(assets/feed.png); */
   background-size: 100% 100%;
   padding: 20px 20px 20px 20px;
   width: 100%;

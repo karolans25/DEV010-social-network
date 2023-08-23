@@ -90,8 +90,6 @@ function signin(navigateTo) {
             navigateTo('/feed');
             popup(response);
           }
-          // alert(response);
-          popup(response);
         })// .then(() => navigateTo('/feed'))
         .catch((err) => popup(err.message));
     } catch (err) {

@@ -10,7 +10,7 @@ export function navBar(navigateTo) {
       src: './assets/icons/home.png', alt: 'feed', path: '/feed', style: '--clr:#f44336', icon: 'home-outline',
     },
     {
-      src: './assets/icons/rss.png', alt: 'posts', path: '/posts', style: '--clr:#ffa117', icon: 'person-outline',
+      src: './assets/icons/rss.png', alt: 'posts', path: '/myPosts', style: '--clr:#ffa117', icon: 'person-outline',
     },
     {
       src: './assets/icons/mas.png', alt: 'plus', path: '/feed', style: '--clr:#0fc70f', icon: 'chatbubble-outline',
