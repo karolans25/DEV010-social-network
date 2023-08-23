@@ -1,5 +1,7 @@
 // Este es el punto de entrada de tu aplicacion
-
+import { onAuthStateChanged } from 'firebase/auth';
+import { onSnapshot, collection } from 'firebase/firestore';
+import { auth, db } from './lib/firebaseConfig';
 import init from './components/init.js';
 import error from './components/error.js';
 import signin from './components/signin.js';
@@ -49,3 +51,26 @@ window.onpopstate = () => {
 };
 
 navigateTo(window.location.pathname || defaultRoute);
+
+onAuthStateChanged(auth, (user) => {
+  if (user && window.location.pathname === '/feed') {
+    const uid = user.uid;
+    const colRef = collection(db, 'user');
+    onSnapshot(colRef, (snapshot) => {
+      console.log('Línea 85 de index.js');
+      console.log(snapshot.docs);
+      // setupUsers(snapshot.docs);
+      // setupUI(user);
+    })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    navigateTo('/feed');
+  } else if (!user && window.location.pathname === '/feed') {
+    // setupUI();
+    // setupUsers([]);
+    popup('Please sign in or sign up to start!');
+    navigateTo('/signin');
+  }
+});

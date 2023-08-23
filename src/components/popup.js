@@ -82,11 +82,7 @@ const popup = (message) => {
         overlay.style.display = 'none';
       });
       ops.append(buttonOk, buttonCancel);
-    } else if (message.startsWith('The user has been registered with email') || message.startsWith('The user has been logged with email')) {
-      title.innerHTML = 'Well done!';
-      p.innerHTML = message;
-      card.classList.add('correct');
-    } else if (message === 'The email to restore the password has been sent.') {
+    } else if (message.startsWith('The user has been registered with email') || message.startsWith('The user has been logged with email') || message.startsWith('The user has been registered and logged with') || message === 'The post has been created' || message === 'The email to restore the password has been sent.') {
       title.innerHTML = 'Well done!';
       p.innerHTML = message;
       card.classList.add('correct');

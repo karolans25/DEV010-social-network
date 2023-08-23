@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   deleteUser,
+  updateProfile,
 } from 'firebase/auth';
 import {
   serverTimestamp,
@@ -28,7 +29,7 @@ const actionCodeSettings = {
 };
 
 // eslint-disable-next-line max-len
-const displayImage = (imageRef) => getDownloadURL(imageRef).catch((err) => err.message);
+export const displayImage = (imageRef) => getDownloadURL(imageRef).catch((err) => err.message);
 
 // eslint-disable-next-line max-len
 export const sendEmailVerificationAuth = () => sendEmailVerification(auth.currentUser, actionCodeSettings)
@@ -51,19 +52,27 @@ export const signUpUser = (theEmail, thePassword, ...extra) => createUserWithEma
   .then((credential) => {
     let message = '';
     if (credential.user) {
-      const storageRef = ref(storage, `${credential.user.uid}/profile.${extra[1].type.split('/')[1]}`);
+      const user = credential.user;
+      const storageRef = ref(storage, `${user.uid}/profile.${extra[1].type.split('/')[1]}`);
       const metadata = { contentType: extra[1].type };
       uploadBytes(storageRef, extra[1], metadata)
         .then(() => displayImage(storageRef)
-          .then((url) => setDoc(doc(collection(db, 'user'), credential.user.uid), {
-            email: credential.user.email,
-            name: extra[0],
-            photo: url,
-            createdAt: serverTimestamp(),
-            friends: [],
-          }).catch((err) => console.log(err.message)))
-          .catch((err) => console.log(err.message)))
-        .catch((err) => console.log(err.message));
+          .then((url) => {
+            updateProfile(auth.currentUser, {
+              displayName: extra[0],
+              photoURL: url,
+            }).catch((err) => err.message);
+            console.log(credential.user.displayName);
+            return setDoc(doc(collection(db, 'user'), user.uid), {
+              email: user.email,
+              name: user.displayName,
+              photo: user.photoURL,
+              createdAt: serverTimestamp(),
+              friends: [],
+            }).catch((err) => err.message);
+          })
+          .catch((err) => err.message))
+        .catch((err) => err.message);
       // first catch: setDoc
       //  - must delete the directory in storage named with the user id
       //  - must to delete the document in store
@@ -73,8 +82,8 @@ export const signUpUser = (theEmail, thePassword, ...extra) => createUserWithEma
       //  - must to delete the user in auth ?
       // thirth catch: uploadBytes
       //  - must to delete the user in auth ?
-      sendEmailVerificationAuth(credential.user);
-      message = `The user has been registered with email ${credential.user.email}\nCheck your email to confirm the account.`;
+      sendEmailVerificationAuth(user);
+      message = `The user has been registered with email ${user.email}\nCheck your email to confirm the account.`;
     }
     if (message === '') {
       deleteUser(auth.currentUser).then(() => {
@@ -132,6 +141,7 @@ export const signInGoogle = () => signInWithPopup(auth, new GoogleAuthProvider()
   .then((credential) => {
     let message = '';
     if (credential.user) {
+      console.log(credential.user);
       fetch(credential.user.photoURL).then((res) => res.blob()).then((blob) => {
         const storageRef = ref(storage, `${credential.user.uid}/profile.${blob.type.split('/')[1]}`);
         const metadata = { contentType: blob.type };
@@ -143,7 +153,7 @@ export const signInGoogle = () => signInWithPopup(auth, new GoogleAuthProvider()
           friends: [],
         })));
       });
-      message = `The user has been registered and looged with email ${credential.user.email}`;
+      message = `The user has been registered and logged with email ${credential.user.email}`;
     } else {
       message = 'The user hasn\'t been registered';
     }
@@ -151,6 +161,7 @@ export const signInGoogle = () => signInWithPopup(auth, new GoogleAuthProvider()
   })
   .catch((error) => error.message);
 
+/*
 auth.onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
@@ -163,16 +174,13 @@ auth.onAuthStateChanged((user) => {
       console.log(snapshot.docs);
       // setupUsers(snapshot.docs);
       // setupUI(user);
-    })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    }).catch((err) => err.message);
   } else {
     // setupUI();
     // setupUsers([]);
   }
 });
-
+*/
 // Since you mentioned your images are in a folder,
 // we'll create a Reference to that folder:
 export const loadDefaultImages = () => {

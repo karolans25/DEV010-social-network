@@ -127,16 +127,15 @@ const signup = (navigateTo) => {
         fetch(img.src).then((res) => res.blob()).then((blob) => {
           signUpUser(inputEmail.value, inputPass.value, inputName.value, blob)
             .then((response) => {
-              if (response === `The user has been registered with email ${inputEmail.value} \n Check your email to confirm the account.`) {
+              if (response.includes('Check your email to confirm the account.')) {
                 form.reset();
                 popup(response);
-                // document.querySelectorAll('.overlay').forEach((element) => element.remove());
                 navigateTo('/signin');
               }
               // section.style.display = 'none';
-              console.log(response);
               popup(response);
             })
+            // }).then(() => navigateTo('/signin'))
             .catch((err) => { popup(err.message); });
         });
       } else {

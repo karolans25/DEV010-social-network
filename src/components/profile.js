@@ -5,6 +5,12 @@ function profile(navigateTo) {
   const subSection = document.createElement('section');
   const nav = navBar();
 
+  const buttonSignOut = document.createElement('button');
+  buttonSignOut.textContent = 'Sign Out';
+  buttonSignOut.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+  });
   /*
   const list = document.getElementsByClassName('list');
   list.forEach((element) => {
@@ -18,6 +24,7 @@ function profile(navigateTo) {
   section.classList.value = 'home';
   subSection.className = 'profile';
 
+  subSection.append(buttonSignOut);
   section.append(subSection, nav);
 
   return section;
