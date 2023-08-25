@@ -1,8 +1,8 @@
 import {
   collection,
   query,
-  orderBy,
   where,
+  orderBy,
 } from 'firebase/firestore';
 import { auth, db } from '../lib/firebaseConfig';
 import { navBar } from './navBar';
@@ -12,7 +12,7 @@ import formatGetAllPosts from './formatGetAllPosts';
 function myPosts(navigateTo) {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
-  const nav = navBar();
+  const nav = navBar(navigateTo);
 
   section.classList.value = 'home';
   subSection.className = 'feed';
@@ -20,12 +20,12 @@ function myPosts(navigateTo) {
   const sectionFormatCreatePost = formatCreatePost();
   const title = document.createElement('h1');
   const user = auth.currentUser;
-  const q = query(collection(db, 'post'), where('idUser', '==', `${user.uid}`));
+  const q = query(collection(db, 'post'), where('idUser', '==', `${user.uid}`), orderBy('createdAt', 'desc'));
   // const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
   const sectionFormatGetAllPost = formatGetAllPosts(q);
 
   /* See all the created Post */
-  title.innerHTML = 'TITLE';
+  title.innerHTML = 'My Publications';
   /*
       const sectionPostFound = document.createElement('section');
       const pPostText = document.createElement('p');

@@ -3,13 +3,12 @@ import { navBar } from './navBar';
 function profile(navigateTo) {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
-  const nav = navBar();
+  const nav = navBar(navigateTo);
 
   const buttonSignOut = document.createElement('button');
   buttonSignOut.textContent = 'Sign Out';
   buttonSignOut.addEventListener('click', (e) => {
     e.preventDefault();
-    
   });
   /*
   const list = document.getElementsByClassName('list');

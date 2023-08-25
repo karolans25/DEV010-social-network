@@ -57,14 +57,15 @@ const signup = (navigateTo) => {
   imgUrl.addEventListener('change', (e) => {
     // file = e.target.files[0];
     img.src = URL.createObjectURL(e.target.files[0]);
-    img.style.width = '162px';
-    img.style.height = '162px';
+    // img.style.width = '162px';
+    // img.style.height = '162px';
     img.style.borderRadius = '50%';
-    figure.style.padding = '0';
-    caption.style.position = 'relative';
-    caption.style.bottom = '-41.5%';
-    caption.style.right = '87%';
-    caption.style.height = '30px';
+    // figure.style.padding = '0';
+    // caption.style.position = 'relative';
+    // caption.style.bottom = '-41.5%';
+    // caption.style.right = '87%';
+    // caption.style.height = '30px';
+
     // img.style.alignSelf = 'center';
   });
   sectionFig.className = 'sec-figure';

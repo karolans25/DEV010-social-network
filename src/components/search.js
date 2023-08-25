@@ -3,7 +3,7 @@ import { navBar } from './navBar';
 function search(navigateTo) {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
-  const nav = navBar();
+  const nav = navBar(navigateTo);
 
   /*
   const list = document.getElementsByClassName('list');
