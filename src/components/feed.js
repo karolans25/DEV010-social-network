@@ -11,7 +11,7 @@ import formatGetAllPosts from './formatGetAllPosts';
 function feed(navigateTo) {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
-  const nav = navBar();
+  const nav = navBar(navigateTo);
 
   section.classList.value = 'home';
   subSection.className = 'feed';
@@ -21,7 +21,6 @@ function feed(navigateTo) {
   const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
   const sectionFormatGetAllPost = formatGetAllPosts(q);
 
-  /* See all the created Post */
   title.innerHTML = 'TITLE';
   /*
       const sectionPostFound = document.createElement('section');

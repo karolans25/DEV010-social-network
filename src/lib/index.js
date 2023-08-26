@@ -141,7 +141,6 @@ export const signInGoogle = () => signInWithPopup(auth, new GoogleAuthProvider()
   .then((credential) => {
     let message = '';
     if (credential.user) {
-      console.log(credential.user);
       fetch(credential.user.photoURL).then((res) => res.blob()).then((blob) => {
         const storageRef = ref(storage, `${credential.user.uid}/profile.${blob.type.split('/')[1]}`);
         const metadata = { contentType: blob.type };

@@ -1,7 +1,6 @@
 // Este es el punto de entrada de tu aplicacion
 import { onAuthStateChanged } from 'firebase/auth';
-import { onSnapshot, collection } from 'firebase/firestore';
-import { auth, db } from './lib/firebaseConfig';
+import { auth } from './lib/firebaseConfig';
 import init from './components/init.js';
 import error from './components/error.js';
 import signin from './components/signin.js';
@@ -54,33 +53,36 @@ navigateTo(window.location.pathname || defaultRoute);
 
 onAuthStateChanged(auth, (user) => {
   const path = window.location.pathname;
-  if (user && path === '/feed') {
-    user.getIdToken().then((token) => {
-      // Aquí obtienes el nuevo token válido
-      // Puedes almacenarlo en una variable o actualizarlo en tu base de datos
-      console.log(token);
-    }).catch((err) => {
-      popup(err.message);
-      // Manejo de errores
-    }); // const uid = user.uid;
-    // const colRef = collection(db, 'user');
-    // onSnapshot(colRef, (snapshot) => {
-    //   console.log('Línea 85 de index.js');
-    //   console.log(snapshot.docs);
-    // setupUsers(snapshot.docs);
-    // setupUI(user);
-    // })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
-    navigateTo('/feed');
-  } else if (user && path === '/myPosts') {
-    navigateTo('/myPosts');
-  } else if (user && path === '/search') {
-    navigateTo('/search');
-  } else if (user && path === '/profile') {
-    navigateTo('/profile');
-  } else if (!user) {
+  if (user) {
+    if (path === '/feed') {
+    //    user.getIdToken().then((token) => {
+    // Aquí obtienes el nuevo token válido
+    // Puedes almacenarlo en una variable o actualizarlo en tu base de datos
+    //      console.log(token);
+    //    }).catch((err) => {
+    //      popup(err.message);
+    // Manejo de errores
+    //    }); // const uid = user.uid;
+
+      // const colRef = collection(db, 'user');
+      // onSnapshot(colRef, (snapshot) => {
+      //   console.log('Línea 85 de index.js');
+      //   console.log(snapshot.docs);
+      // setupUsers(snapshot.docs);
+      // setupUI(user);
+      // })
+      //   .catch((err) => {
+      //     console.log(err.message);
+      //   });
+      navigateTo('/feed');
+    } else if (path === '/myPosts') {
+      navigateTo('/myPosts');
+    } else if (path === '/search') {
+      navigateTo('/search');
+    } else if (path === '/profile') {
+      navigateTo('/profile');
+    }
+  } else {
     popup('Please sign in or sign up to start!');
     navigateTo('/signin');
   }

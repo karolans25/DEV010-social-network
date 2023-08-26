@@ -1,20 +1,9 @@
 import {
-  serverTimestamp,
-  collection, doc, setDoc,
-  onSnapshot,
-  addDoc,
-  updateDoc,
-  query,
-  orderBy,
+  serverTimestamp, collection, onSnapshot, addDoc, query,
+  orderBy, updateDoc, doc,
   // getDocs, deleteDoc, query, where, orderBy, getDoc,
 } from 'firebase/firestore';
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  listAll,
-} from 'firebase/storage';
-import { displayImage } from './index';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { auth, db, storage } from './firebaseConfig';
 
 export const getAllPosts = () => {
@@ -27,27 +16,59 @@ export const getAllPosts = () => {
   });
 };
 
-export const createPost = (theText, ...extra) => addDoc(collection(db, 'post/'), {
+export const createPost = (formData) => addDoc(collection(db, 'post/'), {
   idUser: auth.currentUser.uid,
   createdAt: serverTimestamp(),
-  text: theText,
+  text: (formData.get('text')) ? formData.get('text') : '',
   URL: '',
-  idTypePost: 1,
-  idPostStatus: 2,
+  idTypePost: 1, // text
+  idPostStatus: 1, // 1: public, 2: private
 }).then((document) => {
-  if (extra[0]) {
-    const storageRef = ref(storage, `${auth.currentUser.uid}/posts/${document.id}.${extra[0].type.split('/')[1]}`);
-    const metadata = { contentType: extra[0].type };
-    uploadBytes(storageRef, extra[0], metadata)
-      .then(() => displayImage(storageRef)
-        .then((url) => {
-          const docRef = doc(db, 'post', document.id);
-          updateDoc(docRef, {
-            URL: url,
-          }).catch((err) => err.message);
-        }).catch((err) => err.message)).catch((err) => err.message);
-    return 'The post has been created with an image';
-  }
+  const urls = [];
+  formData.forEach((value, key) => {
+    if (value instanceof File) {
+      const storageRef = ref(storage, `${auth.currentUser.uid}/posts/${document.id}/${key}.${value.type.split('/')[1]}`);
+      const metadata = { contentType: value.type };
+      uploadBytes(storageRef, value, metadata)
+        .then(() => getDownloadURL(storageRef)
+          .then((url) => {
+            urls.push(url);
+            updateDoc(doc(db, 'post', document.id), {
+              URL: urls,
+              idTypePost: 2, // text and image
+              idPostStatus: 1, // 1: public, 2: private
+            }).catch((err) => err.message);
+          })
+          .catch((err) => err.message))
+        .catch((err) => err.message);
+    }
+  });
   return 'The post has been created';
-})
-  .catch((err) => err.message);
+});
+/*
+export const createPost = (formData) => {
+  const urls = [];
+  formData.forEach((value, key) => {
+    if (value instanceof File) {
+      const storageRef = ref(storage, `${auth.currentUser.uid}/posts/${key.split('_')[1]}/${key}.${value.type.split('/')[1]}`);
+      const metadata = { contentType: value.type };
+      uploadBytes(storageRef, value, metadata)
+        .then(() => getDownloadURL(storageRef)
+          .then((url) => {
+            urls.push(url);
+          })
+          .catch((err) => err.message))
+        .catch((err) => err.message);
+    }
+  });
+  addDoc(collection(db, 'post/'), {
+    idUser: auth.currentUser.uid,
+    createdAt: serverTimestamp(),
+    text: formData.text,
+    url: urls,
+    idTypePost: (urls.length === 0) ? 1 : 2, // 1: text, 2: text and image
+    idPostStatus: 1, // 1: public, 2: private
+  }).catch((err) => err.message);
+  return 'The post has been created';
+};
+*/

@@ -27,6 +27,12 @@ const popup = (message) => {
     // overlay.style.display = 'none';
   });
 
+  /*
+  const rigthResponses = ['The user has been registered with email', 'The user
+  has been logged with email', 'The user has been logged with', 'The post has
+  been created', 'The email to restore the password has been sent'];
+  */
+
   if (typeof message !== 'undefined') {
     if (message.includes('Firebase')) {
       title.innerHTML = 'Firebase Error';
