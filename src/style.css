@@ -1009,3 +1009,176 @@ list.forEach(item => item.addEventListener('click', function(e){
   left: 45%;
   background: transparent;
 }
+
+.get-posts{
+  /* display: grid; */
+  /* gap: 20px; */
+  min-width: 300px;
+  max-height: fit-content;
+  margin: 0px 0px 0px 0px;
+  padding: 20px;
+  background: var(--accompanying-color);
+  border: solid 1px var(--moving-things-color);
+  box-shadow: 0.5rem 0.5rem var(--moving-things-color) ;
+}
+
+.get-posts .container-found-post{
+  margin-bottom: 20px;
+  padding: 15px;
+  border: solid 1px var(--principal-letter-color);
+  display: grid;
+  grid-template-columns: 2fr 6fr;
+  height: fit-content;
+}
+
+.get-posts .container-found-post .data-user{
+  margin: 10px;
+  display: grid;
+  height: fit-content;
+  width: fit-content;
+  gap: 10px;
+  /* grid-template-rows: 1fr 2fr 1fr; */
+}
+
+.get-posts .container-found-post .data-user .user-figure{
+  width: 50px;
+  height: 50px;
+}
+
+.get-posts .container-found-post .data-user .user-figure .user-img{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.get-posts .container-found-post .data-user .user-name{
+  color: var(--secondary-letter-color);
+  font-weight: bold;
+  text-align: center;
+  font-size: 13px;
+}
+
+.get-posts .container-found-post .data-post{
+  /* width: 100%; */
+  min-height: 100px;
+  height: fit-content;
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.get-posts .container-found-post .data-post .created-timestamp{
+  color: var(--moving-things-color);
+  font-size: 11px;
+  font-weight: bold;
+  text-align: end;
+}
+
+.get-posts .container-found-post .data-post .post-text{
+  font-size: 17px;
+}
+
+.get-posts .container-found-post .data-post .post-figure{
+  /* width: 100%; */
+  min-width: 100%;
+  min-height: 10px;
+  max-height: fit-content;
+  margin: 0;
+  padding: 15px;
+  border-radius: 7px;
+  background-color: var(--moving-things-color);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));  
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+  gap: 10px;
+}
+
+.get-posts .container-found-post .data-post .post-figure .post-img{
+  width: 80px;
+  height: 80px; 
+}
+
+.post-buttons{
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));  
+}
+
+.post-react, .post-comment{
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(37px, 1fr));  
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+  /* border: solid 1px var(--main-color); */
+  max-width: 90%;
+  gap: 10px;
+}
+
+.comment{
+  justify-items: last baseline;
+  align-items: center;
+}
+
+.post-react .button{
+  min-width: 35px;
+  min-height: 35px;
+  max-width: 36px;
+  max-height: 36px;
+  width: fit-content;
+  height: fit-content;
+  /* background: transparent; */
+  padding: 0;
+  margin: 0;
+}
+
+.post-react .button .react-button{
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  z-index: 0;
+}
+
+.reaction-message{
+  font-size: 14px;
+}
+
+@media screen and (max-width: 540px) {
+  .post-buttons{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .post-react{
+    grid-template-columns: repeat(auto-fit, minmax(37px, 39px));
+    gap: 5px;
+    max-width: 100%;
+  }
+
+  .comment{
+    /* position: relative; */
+    justify-content: start;
+    /* margin-right: 10px; */
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 823px) {
+  .post-buttons{
+    grid-template-columns: 6fr 1fr;
+    gap: 10px;
+  }
+
+  .post-react{
+    grid-template-columns: repeat(auto-fit, minmax(37px, 39px));
+    gap: 5px;
+    max-width: 100%;
+  }
+
+  .comment{
+    position: relative;
+    justify-content: end;
+    margin-right: 10px;
+    max-width: 90%;
+  }
+}

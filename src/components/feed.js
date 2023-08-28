@@ -17,15 +17,13 @@ function feed(navigateTo) {
   subSection.className = 'feed';
 
   const sectionFormatCreatePost = formatCreatePost();
+  // const sectionFormatCreatePost = document.createElement('section');
   const title = document.createElement('h1');
   const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
   const sectionFormatGetAllPost = formatGetAllPosts(q);
 
   title.innerHTML = 'TITLE';
   /*
-      const sectionPostFound = document.createElement('section');
-      const pPostText = document.createElement('p');
-      const imgPost = document.createElement('img');
       const likeZone = document.createElement('section');
       const buttonLike = document.createElement('button');
       const buttonDislike = document.createElement('button');

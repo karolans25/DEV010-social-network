@@ -1,6 +1,6 @@
 import {
-  serverTimestamp, collection, onSnapshot, addDoc, query,
-  orderBy, updateDoc, doc,
+  serverTimestamp, collection, onSnapshot, addDoc, query, where, deleteDoc,
+  orderBy, updateDoc, doc, getDocs, getDoc,
   // getDocs, deleteDoc, query, where, orderBy, getDoc,
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -20,7 +20,7 @@ export const createPost = (formData) => addDoc(collection(db, 'post/'), {
   idUser: auth.currentUser.uid,
   createdAt: serverTimestamp(),
   text: (formData.get('text')) ? formData.get('text') : '',
-  URL: '',
+  URL: [],
   idTypePost: 1, // text
   idPostStatus: 1, // 1: public, 2: private
 }).then((document) => {
@@ -45,30 +45,82 @@ export const createPost = (formData) => addDoc(collection(db, 'post/'), {
   });
   return 'The post has been created';
 });
-/*
-export const createPost = (formData) => {
-  const urls = [];
-  formData.forEach((value, key) => {
-    if (value instanceof File) {
-      const storageRef = ref(storage, `${auth.currentUser.uid}/posts/${key.split('_')[1]}/${key}.${value.type.split('/')[1]}`);
-      const metadata = { contentType: value.type };
-      uploadBytes(storageRef, value, metadata)
-        .then(() => getDownloadURL(storageRef)
-          .then((url) => {
-            urls.push(url);
-          })
-          .catch((err) => err.message))
-        .catch((err) => err.message);
-    }
-  });
-  addDoc(collection(db, 'post/'), {
-    idUser: auth.currentUser.uid,
-    createdAt: serverTimestamp(),
-    text: formData.text,
-    url: urls,
-    idTypePost: (urls.length === 0) ? 1 : 2, // 1: text, 2: text and image
-    idPostStatus: 1, // 1: public, 2: private
-  }).catch((err) => err.message);
-  return 'The post has been created';
+
+// Update
+
+// Delete
+
+export const reactPost = (idPub, idType) => addDoc(collection(db, 'like'), {
+  idUser: auth.currentUser.uid,
+  idPost: idPub,
+  likedAt: serverTimestamp(),
+  idTypeLike: idType,
+})
+  .then((document) => document.id);
+
+export const hasReactedPost = (idPub) => {
+  const q = query(collection(db, 'like'), where('idPost', '==', `${idPub}`), where('idUser', '==', `${auth.currentUser.uid}`));
+  return getDocs(q);
 };
-*/
+
+export const unreactPost = (idLike) => deleteDoc(doc(db, 'like', idLike))
+  .then(() => {
+    console.log('Deleted');
+  });
+
+export const updateReactPost = (idType, idLike) => updateDoc(doc(db, 'like', idLike), {
+  idTypeLike: idType,
+  likedAt: serverTimestamp(),
+});
+
+export const getMyReactionPost = (idPub) => {
+  const q = query(collection(db, 'like'), where('idPost', '==', `${idPub}`, where('idUser', '==', auth.currentUser.uid)));
+  onSnapshot(q, (snapshot) => {
+    const likes = [];
+    snapshot.docs.forEach((document) => {
+      likes.push({ ...document.data(), id: document.id });
+    });
+    return likes;
+  });
+};
+
+export const getReactionsPost = (idPub) => {
+  const q = query(collection(db, 'like'), where('idPost', '==', `${idPub}`));
+  onSnapshot(q, (snapshot) => {
+    const likes = [];
+    snapshot.docs.forEach((document) => {
+      likes.push({ ...document.data(), id: document.id });
+    });
+    return likes;
+  });
+};
+
+export const getUserReactions = () => {
+  const q = query(collection(db, 'like'), where('idUser', '==', `${auth.currentUser.uid}`));
+  onSnapshot(q, (snapshot) => {
+    const likes = [];
+    snapshot.docs.forEach((document) => {
+      likes.push({ ...document.data(), id: document.id });
+    });
+    return likes;
+  });
+};
+
+export const getReactionMessage = (idTypeReaction) => getDoc(doc(db, 'typeLike', idTypeReaction)).then((document) => document.data());
+
+// } else if (likes[0].idTypeLike === idType) {
+//   unreactPost(likes[0].id);
+// } else if (likes[0].idTypeLike !== idType) {
+//   unreactPost(likes[0].id);
+//   addDoc(collection(db, 'like/'), {
+//     idUser: auth.currentUser.uid,
+//     idPost: idPub,
+//     likedAt: serverTimestamp(),
+//     idTypeLike: Number(idType),
+//   }).then((document) => {
+//     console.log(document);
+//   });
+// updateReactPost(idType, likes[0].id);
+
+// return 'The post has been created';
+// });

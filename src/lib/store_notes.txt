@@ -103,7 +103,7 @@ export function createUserStore() {
 
 /*
   // get one doc by its id and subscribe to its change
-  const docRef = doc(db, 'post', 'HwZlpQabPH3XodOY9Z7W');
+  oncst docRef = doc(db, 'post', 'HwZlpQabPH3XodOY9Z7W');
 
   getDoc(docRef)
     .then((document) => {
