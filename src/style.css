@@ -183,27 +183,26 @@ img{
 .overlay .popup{
   align-self: center;
   display: grid;
-  padding: 10px 10px 10px 10px;
-  width: 300px;
+  /* padding: 10px 10px 10px 10px; */
+  padding: 0;
+  width: fit-content;
   height: 225px;
   justify-content: center;
   align-items: center;
-  background: var(--main-color);
-  border: solid 2px var(--principal-letter-color);
-  box-shadow: 1rem 1rem var(--moving-things-color) ;
+  /* background: var(--main-color); */
+  /* border: solid 2px var(--principal-letter-color); */
+  /* box-shadow: 1rem 1rem var(--moving-things-color) ; */
 }
 
 .overlay .correct{
   align-self: center;
   display: grid;
   padding: 10px 10px 10px 10px;
-  width: 300px;
+  max-width: 300px;
   height: 270px;
+  height: fit-content;
   justify-content: center;
   align-items: center;
-  background: var(--main-color);
-  border: solid 2px var(--principal-letter-color);
-  box-shadow: 1rem 1rem var(--moving-things-color) ;
 }
 
 .overlay .popup .card-header, .overlay .popup .card-footer{
@@ -213,6 +212,7 @@ img{
   font-weight: bold;
   background: lightcoral;
   opacity: 1;
+  border: solid 1px var(--principal-letter-color);
 }
 
 .overlay .correct .card-header, .overlay .correct .card-footer{
@@ -222,6 +222,7 @@ img{
   font-weight: bold;
   background: lightgreen;
   opacity: 1;
+  border: solid 1px var(--principal-letter-color);
 }
 
 .overlay .popup .card-header{
@@ -248,19 +249,22 @@ img{
 .overlay .popup .card-body{
   border-radius: 0;
   padding: 10px 20px 10px 20px;
-  height: 120px;
+  /* height: 120px; */
+  height: fit-content;
   width: 280px;
   background: var(--accompanying-color);
   color: var(--secondary-letter-color);
   font-weight: bold;
   display: grid;
   justify-items: center;
+  border: solid 1px var(--principal-letter-color);
 }
 
 .overlay .correct .card-body{
   border-radius: 0;
   padding: 10px 20px 10px 20px;
-  height: 160px;
+  /* height: 160px; */
+  height: fit-content;
   width: 280px;
   background: var(--accompanying-color);
   color: var(--secondary-letter-color);
@@ -270,7 +274,8 @@ img{
 }
 
 .overlay .popup .card-body p{
-  height: 45px;
+  /* height: 45px; */
+  height: fit-content;
   width: 240px;
   /* background: yellow; */
   color: var(--secondary-letter-color);
@@ -278,7 +283,8 @@ img{
 }
 
 .overlay .correct .card-body p{
-  height: 93px;
+  /* height: 93px; */
+  height: fit-content;
   width: 240px;
   /* background: yellow; */
   color: var(--secondary-letter-color);
@@ -611,6 +617,10 @@ img{
   width: 100%;
   height: 100%;
   /* grid-template-rows: 3fr 1fr 1fr; */
+}
+
+.home{
+  height: fit-content;
 }
 
 /* Feed */
@@ -1030,6 +1040,8 @@ list.forEach(item => item.addEventListener('click', function(e){
   background: var(--accompanying-color);
   border: solid 1px var(--moving-things-color);
   box-shadow: 0.5rem 0.5rem var(--moving-things-color) ;
+  /* padding-bottom: 70px; */
+  /* margin-bottom: 70px; */
 }
 
 .get-posts .container-found-post{

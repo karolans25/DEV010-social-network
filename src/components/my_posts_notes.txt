@@ -1,0 +1,24 @@
+const ps = document.querySelectorAll('.created-timestamp');
+
+let sectionInitButtons;
+ps.forEach((item) => {
+  const [, idPub] = item.classList;
+  sectionInitButtons = document.createElement('section');
+  const editButton = document.createElement('button');
+  const deleteButton = document.createElement('button');
+  editButton.classList.add('edit-post-button', idPub);
+  deleteButton.classList.add('delete-post-button', idPub);
+  editButton.textContent = 'Edit';
+  deleteButton.textContent = 'Delete';
+  sectionInitButtons.appendChild(editButton);
+  sectionInitButtons.appendChild(deleteButton);
+  console.log('item');
+  // item.before(editButton);
+  // item.before(deleteButton);
+  item.before(sectionInitButtons);
+  // item.style.display = 'block';
+});
+
+sectionInitButtons.addEventListener('click', (e) => {
+  console.log(e.target);
+});

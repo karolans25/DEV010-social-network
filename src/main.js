@@ -55,6 +55,12 @@ onAuthStateChanged(auth, (user) => {
   const path = window.location.pathname;
   if (user) {
     if (path === '/feed') {
+    // Local storage
+    // sticky
+    // overflow: scroll
+    // VJmG5ie5uMNH8wps23zG2xjk31o1
+    // X8eFLpeVU9yMP3CuvV3u
+
     //    user.getIdToken().then((token) => {
     // Aquí obtienes el nuevo token válido
     // Puedes almacenarlo en una variable o actualizarlo en tu base de datos

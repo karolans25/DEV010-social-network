@@ -4,7 +4,9 @@ import {
   // getDocs, deleteDoc, query, where, orderBy, getDoc,
 } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {
+  ref, uploadBytes, getDownloadURL, deleteObject,
+} from 'firebase/storage';
 import { auth, db, storage } from './firebaseConfig';
 
 export const getAllPosts = () => {
@@ -48,9 +50,9 @@ export const createPost = (formData) => addDoc(collection(db, 'post/'), {
 });
 
 // Update
-export const updatePost = (formData) => {
+export const updatePost = (formData, idPub) => {
   console.log(formData);
-  return updateDoc(doc(db, 'post', formData.get('id')), {
+  return updateDoc(doc(db, 'post', idPub), {
     createdAt: serverTimestamp(),
     text: (formData.get('text')) ? formData.get('text') : '',
     URL: [],
@@ -86,8 +88,9 @@ export const updatePost = (formData) => {
 // Delete
 export const deletePost = (idPub) => {
   deleteDoc(doc(db, 'post', idPub)).then(() => {
-    alert('Deleted');
-  });
+    const q = query(collection(db, 'like'), where('idPost', '==', `${idPub}`));
+    getDocs(q).then((documents) => documents.forEach((item) => deleteDoc(item.red)));
+  }).then(() => deleteObject(ref(storage, `${auth.currentUser.uid}/posts/${document.id}`)));
 };
 
 export const reactPost = (idPub, idType) => addDoc(collection(db, 'like'), {
