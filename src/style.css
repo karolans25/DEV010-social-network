@@ -867,14 +867,16 @@ list.forEach(item => item.addEventListener('click', function(e){
   position: relative; 
 }
 
-.header-post .user-figure{
+/*.header-post .user-figure{*/
+.user-figure{
   width: 50px;
   height: 50px;
   border-radius: 50%;
   padding: 0;
 }
 
-.header-post .user-figure .user-img{
+/*.header-post .user-figure .user-img{*/
+.user-img{
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -882,7 +884,8 @@ list.forEach(item => item.addEventListener('click', function(e){
   border: solid 4px var(--principal-letter-color);
 }
 
-.header-post .label-add-file{
+/*.header-post .label-add-file{*/
+.label-add-file{
   background-color: var(--main-color);
   display: inline-block;
   padding: 0;
@@ -893,7 +896,8 @@ list.forEach(item => item.addEventListener('click', function(e){
   box-shadow: 0.3rem 0.3rem var(--moving-things-color) ;
 }
 
-.header-post .label-add-file .icon-add-file{
+/*.header-post .label-add-file .icon-add-file{*/
+.icon-add-file{
   background-image: url('./assets/icons/file.png');background-color: transparent;
   background-size: 50px 50px;
   width: 50px;
@@ -903,7 +907,8 @@ list.forEach(item => item.addEventListener('click', function(e){
   /* border: 1px solid black; */
 }
 
-.header-post .file{
+/*.header-post .file{*/
+.file{
   width: 50px;
   height: 50px;
   position: relative;
@@ -913,7 +918,8 @@ list.forEach(item => item.addEventListener('click', function(e){
   opacity: 0;
 }
 
-.header-post .file::file-selector{
+/*.header-post .file::file-selector{*/
+.file::file-selector{
   font-size: 40px;
   max-width: 40px;
   max-height: 40px;
@@ -932,14 +938,16 @@ list.forEach(item => item.addEventListener('click', function(e){
   gap: 15px;
 }
 
-.body-post .post-text{
+/*.body-post .post-text{*/
+.post-text{
   background-color: var(--accompanying-color);
   max-height: fit-content;
   padding: 15px;
   margin: 0;
 }
 
-.body-post .post-figure{
+/*.body-post .post-figure{*/
+.post-figure{
   /* width: 100%; */
   min-width: 100%;
   min-height: 110px;
@@ -954,7 +962,8 @@ list.forEach(item => item.addEventListener('click', function(e){
   gap: 10px;
 }
 
-.body-post .post-figure .thumbnail{
+/*.body-post .post-figure .thumbnail{*/
+.thumbnail{
   background: transparent;
   background: var(--accompanying-color);
   background-size: cover;
@@ -966,7 +975,8 @@ list.forEach(item => item.addEventListener('click', function(e){
   border-radius: 7px;
 }
 
-.body-post .post-figure .thumbnail .close-button{
+/*.body-post .post-figure .thumbnail .close-button{*/
+.thumbnail .close-button{
   width: 25px;
   height: 25px;
   background: transparent;
@@ -1141,6 +1151,19 @@ list.forEach(item => item.addEventListener('click', function(e){
 
 .reaction-message{
   font-size: 14px;
+}
+
+.section-edit-post{
+  height: fit-content;
+  padding: 10px;
+  border: solid 2px var(--moving-things-color);
+  margin-bottom: 10px;
+}
+
+.edit-file-post{
+  position: relative;
+  top: -56px;
+  left: -11px;
 }
 
 @media screen and (max-width: 540px) {

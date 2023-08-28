@@ -1,3 +1,4 @@
+import { signOutAuth } from '../lib/user';
 import { navBar } from './navBar';
 
 function profile(navigateTo) {
@@ -9,6 +10,7 @@ function profile(navigateTo) {
   buttonSignOut.textContent = 'Sign Out';
   buttonSignOut.addEventListener('click', (e) => {
     e.preventDefault();
+    signOutAuth();
   });
   /*
   const list = document.getElementsByClassName('list');

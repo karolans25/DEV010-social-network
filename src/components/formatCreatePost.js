@@ -37,7 +37,6 @@ function formatCreatePost() {
   const buttonPublish = document.createElement('button');
   const sectionPreload = document.createElement('section'); // preload
   const preloadGif = document.createElement('img');
-  const successMessage = document.createElement('h2'); // #success
 
   const user = auth.currentUser;
   const formData = new FormData();
@@ -72,7 +71,7 @@ function formatCreatePost() {
     for (let iterator = 0; iterator < e.target.files.length; iterator++) {
       const thumbnailId = `${Math.floor(Math.random() * 10000)}_${Date.now()}`;
       createThumbnail(e.target, iterator, thumbnailId);
-      formData.append(thumbnailId, e.target.files[iterator]); // key: thumbnailId, value: file
+     formData .append(thumbnailId, e.target.files[iterator]); // key: thumbnailId, value: file
     }
     e.target.value = ''; // The data is saved in form Data and clear the input file value
   });

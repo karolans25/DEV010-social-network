@@ -1,16 +1,16 @@
 // Este es el punto de entrada de tu aplicacion
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './lib/firebaseConfig';
-import init from './components/init.js';
-import error from './components/error.js';
-import signin from './components/signin.js';
-import signup from './components/signup.js';
-import password from './components/password.js';
-import feed from './components/feed.js';
+import init from './components/init';
+import error from './components/error';
+import signin from './components/signin';
+import signup from './components/signup';
+import password from './components/password';
+import feed from './components/feed';
 import myPosts from './components/myPosts';
-import search from './components/search.js';
-import profile from './components/profile.js';
-import popup from './components/popup.js';
+import search from './components/search';
+import profile from './components/profile';
+import popup from './components/popup';
 
 const routes = [
   { path: '/', component: init },
