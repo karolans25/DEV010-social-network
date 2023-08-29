@@ -5,9 +5,31 @@ import {
 } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import {
-  ref, uploadBytes, getDownloadURL, deleteObject,
+  ref, uploadBytes, getDownloadURL, deleteObject, listAll,
 } from 'firebase/storage';
 import { auth, db, storage } from './firebaseConfig';
+
+const deleteDirectory = (directoryPath) => {
+  // Get a reference to the directory
+  const directoryRef = ref(storage, directoryPath);
+
+  // Delete the directory
+  listAll(directoryRef)
+    .then((listResult) => {
+      listResult.items.forEach((itemRef) => {
+        deleteObject(itemRef)
+          .then(() => {
+            console.log('File deleted successfully');
+          })
+          .catch((error) => {
+            console.error('Error deleting file:', error);
+          });
+      });
+    })
+    .catch((error) => {
+      console.error('Error listing files in directory:', error);
+    });
+};
 
 export const getAllPosts = () => {
   const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
@@ -88,9 +110,12 @@ export const updatePost = (formData, idPub) => {
 // Delete
 export const deletePost = (idPub) => {
   deleteDoc(doc(db, 'post', idPub)).then(() => {
-    const q = query(collection(db, 'like'), where('idPost', '==', `${idPub}`));
-    getDocs(q).then((documents) => documents.forEach((item) => deleteDoc(item.red)));
-  }).then(() => deleteObject(ref(storage, `${auth.currentUser.uid}/posts/${document.id}`)));
+    const q = query(collection(db, 'like'), where('idPost', '==', idPub));
+    getDocs(q).then((documents) => documents.forEach((item) => deleteDoc(doc(db, 'like', item.id))));
+  }).then(() => {
+    console.log(`${auth.currentUser.uid}/posts/${idPub}`);
+    deleteDirectory(`${auth.currentUser.uid}/posts/${idPub}/`);
+  });
 };
 
 export const reactPost = (idPub, idType) => addDoc(collection(db, 'like'), {

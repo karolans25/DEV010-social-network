@@ -630,6 +630,8 @@ img{
   /* padding: 20px 20px 20px 20px; */
   width: 100%;
   height: calc(100% - 70px);
+  padding-bottom: 100px;
+  /*overflow: scroll;*/
 }
 
 /* Feed */
@@ -1036,7 +1038,7 @@ list.forEach(item => item.addEventListener('click', function(e){
   min-width: 300px;
   max-height: fit-content;
   margin: 0px 0px 0px 0px;
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
   background: var(--accompanying-color);
   border: solid 1px var(--moving-things-color);
   box-shadow: 0.5rem 0.5rem var(--moving-things-color) ;
@@ -1174,8 +1176,27 @@ list.forEach(item => item.addEventListener('click', function(e){
 
 .edit-file-post{
   position: relative;
-  top: -56px;
-  left: -11px;
+  bottom: 0px;
+  left: 0px;
+  border: solid 1px green;
+  opacity: 0;
+}
+
+.init-buttons .icon-add-file{
+  position: relative;
+  top: 62px;
+  right: 223px;
+  z-index: 0;
+  background-color: var(--main-color);
+}
+
+.edit-button, .delete-button{
+  width: 70px;
+}
+
+.init-buttons{
+  height: fit-content;
+  justify-items: center;
 }
 
 @media screen and (max-width: 540px) {
