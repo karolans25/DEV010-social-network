@@ -1,3 +1,5 @@
+import { sendPasswordResetEmailAuth } from '../lib/index';
+
 function password(navigateTo) {
   const section = document.createElement('section');
   const back = document.createElement('a');
@@ -29,18 +31,29 @@ function password(navigateTo) {
   labelEmail.htmlFor = inputEmail.name;
   inputEmail.placeholder = 'Write email';
   inputEmail.name = 'email';
+  inputEmail.type = 'email';
   inputEmail.required = true;
   buttonRecoverPassword.textContent = 'Recover Password';
   buttonRecoverPassword.type = 'submit';
 
   form.append(labelEmail, inputEmail, buttonRecoverPassword);
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // console.log(inputEmail.value);
-    // alert(inputEmail.value);
-    // // navigateTo('/signIn');
-    // navigateTo('/home');
+  form.addEventListener('submit', async (e) => {
+    try {
+      e.preventDefault();
+      // Check if the user has the email verified before to send the email
+      sendPasswordResetEmailAuth(inputEmail.value)
+        .then((response) => {
+          if (response === 'The email to restore the password has been sent.') {
+            form.reset();
+            navigateTo('/signin');
+          }
+          alert(response);
+        })
+        .catch((err) => console.log(err.message));
+    } catch (err) {
+      alert(err.message);
+    }
   });
 
   section.append(back, figure, title, form);

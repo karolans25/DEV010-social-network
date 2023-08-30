@@ -1,4 +1,5 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
+import { signInUser, signInGoogle } from '../lib/index';
 
 function signin(navigateTo) {
   const section = document.createElement('section');
@@ -51,31 +52,52 @@ function signin(navigateTo) {
   buttonSignIn.type = 'submit';
   recoverPass.innerHTML = 'Recover password';
   recoverPass.href = '/password';
+  recoverPass.className = 'link';
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    // try {
-    //   const credential = await signInAuth(inputEmail.value, inputPass.value);
-    //   console.log(credential);
-    // } catch (err) {
-    //   console.error(err);
-    // }
-    navigateTo('/');
+  form.addEventListener('submit', (e) => {
+    try {
+      e.preventDefault();
+      signInUser(inputEmail.value, inputPass.value)
+        .then((response) => {
+          if (response === `The user has been logged with email ${inputEmail.value}`) {
+            form.reset();
+            navigateTo('/feed');
+          }
+          alert(response);
+        })
+        .catch((err) => console.log(err.message));
+    } catch (err) {
+      alert(err.message);
+    }
   });
 
   // sign in with Google
   op1.className = 'google';
   buttonSignInGoogle.textContent = 'Sign In with Google';
-  buttonSignInGoogle.addEventListener('click', () => {
-    // signInAuthGoogle();
-    // navigateTo('/home');
+  buttonSignInGoogle.id = 'google-button';
+  buttonSignInGoogle.addEventListener('click', (e) => {
+    try {
+      e.preventDefault();
+      signInGoogle()
+        .then((response) => {
+          if (response.startsWith('The user has been registered and logged with email')) {
+            form.reset();
+            // navigateTo('/feed');
+          }
+          alert(response);
+        }).then(() => navigateTo('/feed'))
+        .catch((err) => console.log(err.message));
+    } catch (err) {
+      alert(err.message);
+    }
   });
   op1.append(buttonSignInGoogle);
 
   // sign in with Github
   op2.className = 'github';
   buttonSignInGithub.textContent = 'Sign In with Github';
+  buttonSignInGithub.id = 'github-button';
   buttonSignInGithub.addEventListener('click', () => {
     // signInAuthGoogle();
     // navigateTo('/home');
@@ -85,7 +107,7 @@ function signin(navigateTo) {
   // link sign up
   signUp.innerHTML = 'Sign Up';
   signUp.href = '/signup';
-
+  signUp.className = 'link';
   section.append(back, figure, title, form, op1, op2, signUp);
 
   return section;
