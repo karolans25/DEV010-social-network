@@ -185,8 +185,8 @@ img{
   display: grid;
   /* padding: 10px 10px 10px 10px; */
   padding: 0;
-  width: fit-content;
-  height: 225px;
+  max-width: fit-content;
+  height: fit-content;
   justify-content: center;
   align-items: center;
   /* background: var(--main-color); */
@@ -194,13 +194,13 @@ img{
   /* box-shadow: 1rem 1rem var(--moving-things-color) ; */
 }
 
-.overlay .correct{
+.overlay .correct, .overlay .error{
   align-self: center;
   display: grid;
-  padding: 10px 10px 10px 10px;
-  max-width: 300px;
-  height: 270px;
-  height: fit-content;
+  /* padding: 10px 10px 10px 10px; */
+  /* max-width: 300px; */
+  /* height: 270px; */
+  /* height: fit-content; */
   justify-content: center;
   align-items: center;
 }
@@ -260,10 +260,9 @@ img{
   border: solid 1px var(--principal-letter-color);
 }
 
-.overlay .correct .card-body{
+/* .overlay .correct .card-body{
   border-radius: 0;
   padding: 10px 20px 10px 20px;
-  /* height: 160px; */
   height: fit-content;
   width: 280px;
   background: var(--accompanying-color);
@@ -271,33 +270,19 @@ img{
   font-weight: bold;
   display: grid;
   justify-items: center;
-}
+} */
 
 .overlay .popup .card-body p{
-  /* height: 45px; */
   height: fit-content;
   width: 240px;
-  /* background: yellow; */
   color: var(--secondary-letter-color);
   font-weight: bold;
-}
-
-.overlay .correct .card-body p{
-  /* height: 93px; */
-  height: fit-content;
-  width: 240px;
-  /* background: yellow; */
-  color: var(--secondary-letter-color);
-  font-weight: bold;
-}
-
-.overlay .popup .card-body .ops{
-  
+  margin-bottom: 10px;
 }
 
 .overlay .popup .card-body button{
   opacity: 0.9;
-  margin: 0;
+  margin-bottom: 5px;
   height: 40px;
   width: 100px;
   color: var(--secondary-letter-color);
@@ -916,7 +901,7 @@ list.forEach(item => item.addEventListener('click', function(e){
   height: 50px;
   vertical-align: middle;
   margin-right: 5px;
-  /* border: 1px solid black; */
+  box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /* border: 1px solid black; */
 }
 
 /*.header-post .file{*/
@@ -924,10 +909,10 @@ list.forEach(item => item.addEventListener('click', function(e){
   width: 50px;
   height: 50px;
   position: relative;
-  top: 1px;
-  left: -80px;
+  top: 0px;
+  left: 0px;
   font-size: 100px;
-  opacity: 0;
+  opacity: 1;
 }
 
 /*.header-post .file::file-selector{*/
@@ -1174,20 +1159,49 @@ list.forEach(item => item.addEventListener('click', function(e){
   margin-bottom: 10px;
 }
 
+.icon-add-file{
+  background-color: var(--main-color);
+}
+
+/*upload file edit post*/
+.icon-edit-file-post{
+  position: relative;
+  top: 0px;
+  left: -59px;
+}
+
+/*upload file create post*/
+.icon-edit-file-post{
+  position: relative;
+  top: 0px;
+  left: -59px;
+}
+
+.file-upload{
+  position: relative;
+  top: 0px;
+  left: -74px;
+  opacity: 0;
+}
+
 .edit-file-post{
   position: relative;
-  bottom: 0px;
-  left: 0px;
-  border: solid 1px green;
+  top: -5px;
+  left: 25px;
   opacity: 0;
+}
+
+.user-figure .file{
+  position: relative;
+  top: 0px;
+  right: 10px;
 }
 
 .init-buttons .icon-add-file{
   position: relative;
-  top: 62px;
-  right: 223px;
+  top: 0px;
+  right: 0px;
   z-index: 0;
-  background-color: var(--main-color);
 }
 
 .edit-button, .delete-button{
@@ -1197,6 +1211,12 @@ list.forEach(item => item.addEventListener('click', function(e){
 .init-buttons{
   height: fit-content;
   justify-items: center;
+}
+
+.edit-ops{
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  max-height: 1px;
 }
 
 @media screen and (max-width: 540px) {
