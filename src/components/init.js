@@ -1,9 +1,11 @@
+// import { loadDefaultImages } from '../lib/index';
+
 function init(navigateTo) {
   const section = document.createElement('section');
-  const figure = document.createElement('figure');
   const img = document.createElement('img');
   const title = document.createElement('h1');
   const buttonStart = document.createElement('button');
+  const figure = document.createElement('figure');
   const p = document.createElement('p');
 
   section.className = 'init';

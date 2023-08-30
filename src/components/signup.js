@@ -57,14 +57,15 @@ const signup = (navigateTo) => {
   imgUrl.addEventListener('change', (e) => {
     // file = e.target.files[0];
     img.src = URL.createObjectURL(e.target.files[0]);
-    img.style.width = '162px';
-    img.style.height = '162px';
+    // img.style.width = '162px';
+    // img.style.height = '162px';
     img.style.borderRadius = '50%';
-    figure.style.padding = '0';
-    caption.style.position = 'relative';
-    caption.style.bottom = '-41.5%';
-    caption.style.right = '87%';
-    caption.style.height = '30px';
+    // figure.style.padding = '0';
+    // caption.style.position = 'relative';
+    // caption.style.bottom = '-41.5%';
+    // caption.style.right = '87%';
+    // caption.style.height = '30px';
+
     // img.style.alignSelf = 'center';
   });
   sectionFig.className = 'sec-figure';
@@ -127,16 +128,15 @@ const signup = (navigateTo) => {
         fetch(img.src).then((res) => res.blob()).then((blob) => {
           signUpUser(inputEmail.value, inputPass.value, inputName.value, blob)
             .then((response) => {
-              if (response === `The user has been registered with email ${inputEmail.value} \n Check your email to confirm the account.`) {
+              if (response.includes('Check your email to confirm the account.')) {
                 form.reset();
                 popup(response);
-                // document.querySelectorAll('.overlay').forEach((element) => element.remove());
                 navigateTo('/signin');
               }
               // section.style.display = 'none';
-              console.log(response);
               popup(response);
             })
+            // }).then(() => navigateTo('/signin'))
             .catch((err) => { popup(err.message); });
         });
       } else {

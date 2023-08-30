@@ -103,7 +103,7 @@ export function createUserStore() {
 
 /*
   // get one doc by its id and subscribe to its change
-  const docRef = doc(db, 'post', 'HwZlpQabPH3XodOY9Z7W');
+  oncst docRef = doc(db, 'post', 'HwZlpQabPH3XodOY9Z7W');
 
   getDoc(docRef)
     .then((document) => {
@@ -137,3 +137,35 @@ export function createUserStore() {
     console.log(document.data(), document.id);
   });
   */
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const querySnapshot = await getDocs(collection(db, 'Post'));
+      const posts = setUpPosts(querySnapshot.docs);
+      section.append(posts);
+    } else {
+      setUpPosts([]);
+      const p = document.createElement('p');
+      p.textContent = 'Sign in to see posts.';
+      section.append(p);
+    }
+  });
+
+const q = query(collection(db, 'Post'), orderBy('Date', 'desc'));
+  const sectionPosts = document.createElement('section');
+  const posts = document.createElement('section');
+  onSnapshot(q, (querySnapshot) => {
+    posts.textContent = ''; // para evitar que se dupliquen las publicaciones con el submit
+    querySnapshot.forEach((doc) => {
+      const pPosts = document.createElement('p');
+      const userName = document.createElement('p');
+      userName.textContent = doc.data().User;
+      pPosts.textContent = doc.data().Content;
+      posts.appendChild(pPosts);
+    });
+    // console.log(posts);
+    sectionPosts.appendChild(posts);
+    section.appendChild(sectionPosts);
+    return section;
+  });
+  

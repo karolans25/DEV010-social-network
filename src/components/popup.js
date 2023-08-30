@@ -1,5 +1,5 @@
 const popup = (message) => {
-  const body = document.getElementById('root');
+  const article = document.getElementById('root');
   const overlay = document.createElement('section');
   const card = document.createElement('section');
   const header = document.createElement('header');
@@ -27,50 +27,57 @@ const popup = (message) => {
     // overlay.style.display = 'none';
   });
 
+  /*
+  const rigthResponses = ['The user has been registered with email', 'The user
+  has been logged with email', 'The user has been logged with', 'The post has
+  been created', 'The email to restore the password has been sent'];
+  */
+
   if (typeof message !== 'undefined') {
     if (message.includes('Firebase')) {
+      title.innerHTML = 'Firebase Error';
       switch (message) {
         case 'Firebase: Error (auth/email-already-in-use).':
-          // alert('Email already in use');
           p.innerHTML = 'Email already in use';
           break;
         case 'Firebase: Error (auth/passwords-not-match).':
-          // alert('The passwords don\'t match');
           p.innerHTML = 'The passwords don\'t match';
           break;
         case 'Firebase: Password should be at least 6 characters (auth/weak-password).':
-          // alert('Password should be at least 6 characters');
           p.innerHTML = 'Password should be at least 6 characters';
           break;
         case 'Firebase: Error (auth/invalid-email).':
-          // alert('Invalid email');
           p.innerHTML = 'Invalid email';
           break;
         case 'Firebase: Error (auth/user-not-found).':
-          // alert('User not found');
           p.innerHTML = 'User not found';
           break;
         case 'Firebase: Error (auth/wrong-password).':
-          // alert('Wrong password');
           p.innerHTML = 'Wrong password';
           break;
         case 'Firebase: Error (auth/too-many-requests).':
-          // alert('Too many requests');
-          p.innerHTML = 'Too many requests';
+          p.innerHTML = 'Too many requests. Try again later';
+          break;
+        case 'Firebase: Error (auth/cancelled-popup-request).':
+          p.innerHTML = 'The request was canceled';
+          break;
+        case 'Firebase: Error (auth/popup-blocked).':
+          p.innerHTML = 'The popup was blocked';
+          break;
+        case 'Firebase: Error (auth/popup-closed-by-user).':
+          p.innerHTML = 'The user has closed the popup';
           break;
         case 'Firebase: Error ':
           // There's an error about requiered an recent session
-          // alert('Another error');
           p.innerHTML = 'Another error';
           break;
         default:
-          // alert(message);
           p.innerHTML = message;
           break;
       }
       ops.append(buttonOk);
-    } else if (message.includes('?')) {
-      card.className = 'confirm';
+    } else if (message.includes('Would you like to receive the email again?')) {
+      card.classList.add('confirm');
       const buttonCancel = document.createElement('button');
       buttonCancel.textContent = 'Cancel';
       buttonCancel.className = 'cancel';
@@ -81,12 +88,11 @@ const popup = (message) => {
         overlay.style.display = 'none';
       });
       ops.append(buttonOk, buttonCancel);
-    } else if (message.startsWith('The user has been registered with email')) {
+    } else if (message.startsWith('The user has been registered with email') || message.startsWith('The user has been logged with email') || message.startsWith('The user has been registered and logged with') || message === 'The post has been created' || message === 'The email to restore the password has been sent.') {
       title.innerHTML = 'Well done!';
       p.innerHTML = message;
       card.classList.add('correct');
     } else {
-      // card.className = 'error';
       p.innerHTML = message;
       ops.append(buttonOk);
     }
@@ -98,7 +104,7 @@ const popup = (message) => {
   card.appendChild(messageSection);
   card.appendChild(footer);
   overlay.append(card);
-  body.append(overlay);
+  article.append(overlay);
 
   return overlay;
 };
