@@ -1,12 +1,16 @@
 // Este es el punto de entrada de tu aplicacion
-
-import init from './components/init.js';
-import error from './components/error.js';
-import signin from './components/signin.js';
-import signup from './components/signup.js';
-import password from './components/password.js';
-import feed from './components/feed.js';
-import popup from './components/popup.js';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './lib/firebaseConfig';
+import init from './components/init';
+import error from './components/error';
+import signin from './components/signin';
+import signup from './components/signup';
+import password from './components/password';
+import feed from './components/feed';
+import myPosts from './components/myPosts';
+import search from './components/search';
+import profile from './components/profile';
+import popup from './components/popup';
 
 const routes = [
   { path: '/', component: init },
@@ -15,6 +19,9 @@ const routes = [
   { path: '/signup', component: signup },
   { path: '/password', component: password },
   { path: '/feed', component: feed },
+  { path: '/myPosts', component: myPosts },
+  { path: '/search', component: search },
+  { path: '/profile', component: profile },
   { path: '/popup', component: popup },
 ];
 
@@ -43,3 +50,46 @@ window.onpopstate = () => {
 };
 
 navigateTo(window.location.pathname || defaultRoute);
+
+onAuthStateChanged(auth, (user) => {
+  const path = window.location.pathname;
+  if (user) {
+    if (path === '/feed') {
+    // Local storage
+    // sticky
+    // overflow: scroll
+    // VJmG5ie5uMNH8wps23zG2xjk31o1
+    // X8eFLpeVU9yMP3CuvV3u
+
+    //    user.getIdToken().then((token) => {
+    // Aquí obtienes el nuevo token válido
+    // Puedes almacenarlo en una variable o actualizarlo en tu base de datos
+    //      console.log(token);
+    //    }).catch((err) => {
+    //      popup(err.message);
+    // Manejo de errores
+    //    }); // const uid = user.uid;
+
+      // const colRef = collection(db, 'user');
+      // onSnapshot(colRef, (snapshot) => {
+      //   console.log('Línea 85 de index.js');
+      //   console.log(snapshot.docs);
+      // setupUsers(snapshot.docs);
+      // setupUI(user);
+      // })
+      //   .catch((err) => {
+      //     console.log(err.message);
+      //   });
+      navigateTo('/feed');
+    } else if (path === '/myPosts') {
+      navigateTo('/myPosts');
+    } else if (path === '/search') {
+      navigateTo('/search');
+    } else if (path === '/profile') {
+      navigateTo('/profile');
+    }
+  } else {
+    popup('Please sign in or sign up to start!');
+    navigateTo('/signin');
+  }
+});

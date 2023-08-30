@@ -59,22 +59,22 @@ export function signUpAuth(theEmail, thePassword) {
  * @param {string} thePassword :sign in the account by email and password
  */
 export function signInAuth(theEmail, thePassword) {
-  const user = auth.currentUser;
-  if (user) {
-    if (user.emailVerified) {
-    // Falta crear el usuario en la collection
-      return signInWithEmailAndPassword(auth, theEmail, thePassword);
-    }
-    const send = confirm('Your email hasn\'t been verified. Do you want to receive the confirm email again?', false);
-    if (send) {
-      sendEmailVerificationAuth();
-    }
-  } else {
-    alert('User doesn\'t have an active session or not exist');
-    throw new Error('User with no active session');
-  }
-  // Debo agregar un pop up para preguntar si quiere que se le envíe el correo de nuevo
+  return signInWithEmailAndPassword(auth, theEmail, thePassword)
+    .then((credential) => {
+      const user = auth.currentUser;
+      console.log(credential);
+      if (user) {
+        if (user.emailVerified) {
+          console.log('loggeado');
+        } else {
+          console.log('no verificado');
+        }
+      } else {
+        console.log('no existe usuario');
+      }
+    });
 }
+// Debo agregar un pop up para preguntar si quiere que se le envíe el correo de nuevo
 
 export function signInAuthGoogle() {
   const provider = new GoogleAuthProvider();

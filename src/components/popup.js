@@ -27,8 +27,15 @@ const popup = (message) => {
     // overlay.style.display = 'none';
   });
 
+  /*
+  const rigthResponses = ['The user has been registered with email', 'The user
+  has been logged with email', 'The user has been logged with', 'The post has
+  been created', 'The email to restore the password has been sent'];
+  */
+
   if (typeof message !== 'undefined') {
     if (message.includes('Firebase')) {
+      title.innerHTML = 'Firebase Error';
       switch (message) {
         case 'Firebase: Error (auth/email-already-in-use).':
           p.innerHTML = 'Email already in use';
@@ -81,16 +88,11 @@ const popup = (message) => {
         overlay.style.display = 'none';
       });
       ops.append(buttonOk, buttonCancel);
-    } else if (message.startsWith('The user has been registered with email') || message.startsWith('The user has been logged with email')) {
-      title.innerHTML = 'Well done!';
-      p.innerHTML = message;
-      card.classList.add('correct');
-    } else if (message === 'The email to restore the password has been sent.') {
+    } else if (message.startsWith('The user has been registered with email') || message.startsWith('The user has been logged with email') || message.startsWith('The user has been registered and logged with') || message === 'The post has been created' || message === 'The email to restore the password has been sent.') {
       title.innerHTML = 'Well done!';
       p.innerHTML = message;
       card.classList.add('correct');
     } else {
-      // card.className = 'error';
       p.innerHTML = message;
       ops.append(buttonOk);
     }

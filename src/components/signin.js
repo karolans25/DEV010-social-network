@@ -61,6 +61,7 @@ function signin(navigateTo) {
       e.preventDefault();
       signInUser(inputEmail.value, inputPass.value)
         .then((response) => {
+          popup(response);
           if (response === `The user has been logged with email ${inputEmail.value}`) {
             form.reset();
             popup(response);
@@ -89,8 +90,6 @@ function signin(navigateTo) {
             navigateTo('/feed');
             popup(response);
           }
-          // alert(response);
-          popup(response);
         })// .then(() => navigateTo('/feed'))
         .catch((err) => popup(err.message));
     } catch (err) {
