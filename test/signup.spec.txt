@@ -1,0 +1,17 @@
+import signup from '../src/components/signup';
+
+describe('the function', () => {
+  it('must to be a function', () => {
+    expect(typeof signup).toBe('function');
+  });
+});
+
+describe('Error', () => {
+  it('firebase error', () => {
+    console.log(document.body);
+    document.body.append(signup());
+    document.getElementById('form').click();
+
+    expect(document.getElementsByClassName('popup').innerHTML).toBe();
+  });
+});

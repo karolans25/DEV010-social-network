@@ -1,13 +1,12 @@
 // Este es el punto de entrada de tu aplicacion
 
-import { myFunction } from './lib/index.js';
 import init from './components/init.js';
 import error from './components/error.js';
 import signin from './components/signin.js';
 import signup from './components/signup.js';
 import password from './components/password.js';
-
-myFunction();
+import feed from './components/feed.js';
+import popup from './components/popup.js';
 
 const routes = [
   { path: '/', component: init },
@@ -15,6 +14,8 @@ const routes = [
   { path: '/signin', component: signin },
   { path: '/signup', component: signup },
   { path: '/password', component: password },
+  { path: '/feed', component: feed },
+  { path: '/popup', component: popup },
 ];
 
 const defaultRoute = '/';
