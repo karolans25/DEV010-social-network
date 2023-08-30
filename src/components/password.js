@@ -1,4 +1,5 @@
 import { sendPasswordResetEmailAuth } from '../lib/index';
+import popup from './popup';
 
 function password(navigateTo) {
   const section = document.createElement('section');
@@ -48,11 +49,11 @@ function password(navigateTo) {
             form.reset();
             navigateTo('/signin');
           }
-          alert(response);
+          popup(response);
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => popup(err.message));
     } catch (err) {
-      alert(err.message);
+      popup(err.message);
     }
   });
 
