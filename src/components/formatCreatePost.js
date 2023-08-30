@@ -29,7 +29,7 @@ function formatCreatePost() {
   const userFigure = document.createElement('figure');
   const userImg = document.createElement('img');
   const userName = document.createElement('h2');
-  const labelAddFile = document.createElement('label');
+  // const labelAddFile = document.createElement('label');
   const iconAddFile = document.createElement('img');
   const file = document.createElement('input');
   const postText = document.createElement('textarea');
@@ -51,27 +51,26 @@ function formatCreatePost() {
   userFigure.className = 'user-figure';
   userImg.className = 'user-img';
 
-  labelAddFile.className = 'label-add-file';
+  // labelAddFile.className = 'label-add-file';
   iconAddFile.className = 'icon-add-file';
-  file.className = 'file-upload';
+  file.classList.add('file', 'file-upload');
 
   file.type = 'file';
   file.setAttribute('accept', 'image/*,video/*');
   file.setAttribute('multiple', 'true');
   file.name = 'file[]';
-  labelAddFile.htmlFor = 'file-upload';
+  // labelAddFile.htmlFor = 'file-upload';
 
   postImgContainer.className = 'post-figure';
   postText.placeholder = 'What do you want to say?';
   postText.className = 'post-text';
-  file.className = 'file';
   file.type = 'file';
   file.setAttribute('accept', 'image/*');
   file.addEventListener('change', (e) => {
     for (let iterator = 0; iterator < e.target.files.length; iterator++) {
       const thumbnailId = `${Math.floor(Math.random() * 10000)}_${Date.now()}`;
       createThumbnail(e.target, iterator, thumbnailId);
-     formData .append(thumbnailId, e.target.files[iterator]); // key: thumbnailId, value: file
+      formData.append(thumbnailId, e.target.files[iterator]); // key: thumbnailId, value: file
     }
     e.target.value = ''; // The data is saved in form Data and clear the input file value
   });
@@ -113,8 +112,8 @@ function formatCreatePost() {
   preloadGif.alt = 'preload';
 
   sectionPreload.appendChild(preloadGif);
-  labelAddFile.appendChild(iconAddFile);
-  sectionTitle.append(userFigure, userName, labelAddFile, file);
+  // labelAddFile.appendChild(iconAddFile);
+  sectionTitle.append(userFigure, userName, iconAddFile, file);
   userFigure.append(userImg);
   sectionPost.appendChild(postText);
   sectionPost.appendChild(postImgContainer);
