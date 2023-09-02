@@ -1,5 +1,5 @@
 import {
-  addDoc, getDocs, onSnapshot, doc, collection, setDoc,
+  addDoc, getDocs, onSnapshot, doc, collection, setDoc, query, where,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 
@@ -64,7 +64,7 @@ const StoreService = {
 
   getDocumentById: async (collectionStore, id) => {
     try {
-      const docRef = await db.collection(collectionStore).doc(id).get();
+      const docRef = await doc(collection(db, collectionStore), id).get();
       if (docRef.exists) {
         return {
           id: docRef.id,
@@ -76,6 +76,13 @@ const StoreService = {
       console.error(`Error getting document: ${error}`);
       throw new Error('Failed to get document');
     }
+  },
+
+  getDocumentByFilter: async (collectionStore, camp) => {
+    const q = query(doc(db, collectionStore), camp);
+    // where("campo", "==", "valor")
+    const qSnapshot = await getDocs(q, where(camp[0], camp[1], camp[2]));
+    qSnapshot.forEach((element) => element.uid || element.id);
   },
 
   updateDocument: async (collectionStore, id, data) => {

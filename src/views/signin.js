@@ -1,4 +1,5 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
+import { signinHandler } from '../handlers/signinHandler';
 import popup from './popup';
 
 function signin(navigateTo) {
@@ -20,6 +21,8 @@ function signin(navigateTo) {
   const imgGithub = document.createElement('img');
   const recoverPass = document.createElement('a');
   const signUp = document.createElement('a');
+  const loadingContainer = document.createElement('aside');
+  const loadingGif = document.createElement('img');
 
   // section
   section.className = 'signin';
@@ -49,6 +52,10 @@ function signin(navigateTo) {
   // title
   title.textContent = 'Sign In';
 
+  loadingContainer.id = 'loading-container';
+  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.alt = 'loading';
+
   // form
   labelEmail.innerHTML = 'Email: ';
   labelEmail.htmlFor = inputEmail.name;
@@ -74,25 +81,20 @@ function signin(navigateTo) {
 
   form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     try {
+      loadingContainer.style.display = 'block';
       e.preventDefault();
-      navigateTo('/feed');
-      /*
-      signInUser(inputEmail.value, inputPass.value)
-        .then((response) => {
-          popup(response);
-          if (response === `The user has been logged with email ${inputEmail.value}`) {
-            form.reset();
-            popup(response);
-            navigateTo('/feed');
-          } else if (response.includes('Would you like to receive the email again?')) {
-            sendEmailVerificationAuth().then((result) => popup(result));
-          }
-        })
-        .catch((err) => popup(err.message));
-        */
+      const res = await signinHandler.signin(inputEmail.value, inputPass.value);
+      loadingContainer.style.display = 'none';
+      popup(res);
+      if (res.includes('The user has been logged with email')) {
+        form.reset();
+        navigateTo('/feed');
+        popup(res);
+      }
     } catch (err) {
+      loadingContainer.style.display = 'none';
       popup(err.message);
     }
   });
@@ -104,6 +106,7 @@ function signin(navigateTo) {
   buttonSignInGoogle.appendChild(imgGoogle);
   buttonSignInGoogle.addEventListener('click', (e) => {
     try {
+      loadingContainer.style.display = 'block';
       e.preventDefault();
       /*
       signInGoogle()
@@ -117,6 +120,7 @@ function signin(navigateTo) {
         .catch((err) => popup(err.message));
         */
     } catch (err) {
+      loadingContainer.style.display = 'none';
       popup(err.message);
     }
   });
@@ -132,6 +136,8 @@ function signin(navigateTo) {
 
   ops.append(buttonSignInGoogle, buttonSignInGithub);
   section.append(back, figure, title, form, ops, signUp);
+  loadingContainer.append(loadingGif);
+  section.append(loadingContainer);
 
   return section;
 }

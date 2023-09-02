@@ -4,18 +4,18 @@ import init from './views/init';
 import error from './views/error.js';
 import signin from './views/signin';
 import signup from './views/signup';
-// import password from './components/password.js';
-// import feed from './components/feed.js';
+import password from './views/password';
 import popup from './views/popup';
+import feed from './views/feed';
 
 const routes = [
   { path: '/', component: init },
   { path: '/error', component: error },
   { path: '/signin', component: signin },
   { path: '/signup', component: signup },
-  // { path: '/password', component: password },
-  // { path: '/feed', component: feed },
+  { path: '/password', component: password },
   { path: '/popup', component: popup },
+  { path: '/feed', component: feed },
 ];
 
 const defaultRoute = '/';

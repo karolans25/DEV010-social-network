@@ -101,6 +101,7 @@ const signup = (navigateTo) => {
         loadingContainer.style.display = 'none';
         popup(res);
         if (res.includes('The user has been registered with email')) {
+          form.reset();
           navigateTo('/signin');
           popup(res);
         }

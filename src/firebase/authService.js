@@ -3,6 +3,7 @@ import {
   sendEmailVerification, sendPasswordResetEmail,
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
   signInWithPopup, GoogleAuthProvider, signOut, updateProfile,
+  fetchSignInMethodsForEmail,
 } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 
@@ -13,12 +14,12 @@ const actionCodeSettings = {
 
 // Export the AuthService object with authentication-related functions
 const AuthService = {
-  sendEmailVerify: () => sendEmailVerification(auth.currentUser, actionCodeSettings)
-    .then(() => 'The email to confirm your account has been sent.')
+  sendEmailVerify: (user) => sendEmailVerification(user, actionCodeSettings)
+    .then(() => 'The email to confirm your account has been sent')
     .catch((err) => err.message),
 
-  sendPassResetEmail: (theEmail) => sendPasswordResetEmail(auth, theEmail, actionCodeSettings)
-    .then(() => 'The email to restore the password has been sent.')
+  sendPassResetEmail: (email) => sendPasswordResetEmail(auth, email, actionCodeSettings)
+    .then(() => 'The email to restore the password has been sent')
     .catch((err) => err.message),
 
   // Function to sign up a user
@@ -76,6 +77,10 @@ const AuthService = {
   },
 
   updateImgAndName: (data) => updateProfile(auth.currentUser, data)
+    .catch((err) => err.message),
+
+  checkEmailRegistered: (email) => fetchSignInMethodsForEmail(auth, email)
+    .then((found) => (found.length !== 0))
     .catch((err) => err.message),
 
 };

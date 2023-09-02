@@ -1,4 +1,3 @@
-// Import the necessary services
 import { serverTimestamp } from 'firebase/firestore';
 import AuthService from '../firebase/authService';
 import StoreService from '../firebase/storeService';
@@ -28,6 +27,41 @@ const UserController = {
       return 'User not created';
     } catch (err) { return err.message; }
   },
+
+  signin: async (email, password) => {
+    try {
+      const user = await AuthService.login(email, password);
+      if (user) {
+        if (user.emailVerified) {
+          return `The user has been logged with email ${email}`;
+        }
+        return `The email ${email} hasn't been verified.\nWould you like to receive the email again?`;
+      }
+      return `The ${email} has'nt been registered`;
+    } catch (err) { return err.message; }
+  },
+
+  signinGoogle: async () => {
+
+  },
+
+  signinGithub: async () => {
+
+  },
+
+  signout: async () => {
+
+  },
+
+  resetPassword: (email) => AuthService.sendPassResetEmail(email),
+  // {
+  // const signInMethods = await AuthService.checkEmailRegistered(email);
+  // if (signInMethods.length === 0) {
+  //   await AuthService.sendPassResetEmail(email);
+  //   return 'The email to reset password has been sent';
+  // }
+  // return 'The email hasn\'t been registered yet';
+  // },
 };
 
 // Export the UserController object as the default export
