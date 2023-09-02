@@ -1,20 +1,20 @@
 // Este es el punto de entrada de tu aplicacion
 
-import init from './components/init.js';
-import error from './components/error.js';
-import signin from './components/signin.js';
-import signup from './components/signup.js';
-import password from './components/password.js';
-import feed from './components/feed.js';
-import popup from './components/popup.js';
+import init from './views/init';
+import error from './views/error.js';
+import signin from './views/signin';
+import signup from './views/signup';
+// import password from './components/password.js';
+// import feed from './components/feed.js';
+import popup from './views/popup';
 
 const routes = [
   { path: '/', component: init },
   { path: '/error', component: error },
   { path: '/signin', component: signin },
   { path: '/signup', component: signup },
-  { path: '/password', component: password },
-  { path: '/feed', component: feed },
+  // { path: '/password', component: password },
+  // { path: '/feed', component: feed },
   { path: '/popup', component: popup },
 ];
 
