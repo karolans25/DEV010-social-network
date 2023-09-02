@@ -22,6 +22,8 @@ const signup = (navigateTo) => {
   const labelPass = document.createElement('label');
   const labelPassConfirm = document.createElement('label');
   const buttonSignUp = document.createElement('button');
+  const loadingContainer = document.createElement('aside');
+  const loadingGif = document.createElement('img');
 
   // section
   section.className = 'signup';
@@ -30,24 +32,16 @@ const signup = (navigateTo) => {
   back.innerHTML = '👈 back';
   iconAddFile.className = 'icon-add-file';
   file.classList.add('file', 'file-upload', 'file-signup');
-
+  back.href = '/signin';
+  back.name = 'back';
+  figure.style.display = 'grid';
   file.type = 'file';
   file.setAttribute('accept', 'image/*');
   file.name = 'file';
-
   file.type = 'file';
   file.setAttribute('accept', 'image/*');
-  file.addEventListener('change', (e) => {
-    img.src = URL.createObjectURL(e.target.files[0]);
-    e.target.value = '';
-  });
-
-  // figure
   img.src = './assets/icons/nina.png';
   img.alt = 'user icon';
-  // const caption = document.createElement('caption');
-  // caption.append(imgUrl);
-
   sectionFig.className = 'sec-figure';
   buttonLeft.innerHTML = '◀️';
   buttonLeft.name = 'left';
@@ -55,13 +49,11 @@ const signup = (navigateTo) => {
   buttonRight.innerHTML = '▶️';
   buttonRight.name = 'right';
   buttonRight.style.padding = '0';
-
-  buttonRight.addEventListener('click', () => { console.log('Right'); });
-  buttonLeft.addEventListener('click', () => { console.log('Left'); });
-
-  // title
   title.textContent = 'Sign Up';
   buttonSignUp.textContent = '👉 Sign Up';
+  loadingContainer.id = 'loading-container';
+  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.alt = 'loading';
 
   // form
   labelName.innerHTML = 'Display Name:';
@@ -84,37 +76,43 @@ const signup = (navigateTo) => {
   inputPass.required = true;
   labelPassConfirm.innerHTML = 'Confirm Password: ';
   labelPassConfirm.htmlFor = inputPassConfirm.name;
-  inputPassConfirm.name = 'passCheck';
+  inputPassConfirm.name = 'pass-check';
   inputPassConfirm.placeholder = 'Write password again';
   inputPassConfirm.type = 'password';
   inputPassConfirm.required = true;
   buttonSignUp.type = 'submit';
 
-  form.addEventListener('submit', (e) => {
-    try {
-      e.preventDefault();
-      if (inputPass.value === inputPassConfirm.value) {
-        signupHandler.createUser(inputEmail.value, inputPass.value);
-      } else {
-        throw new Error('Firebase: Error (auth/passwords-not-match).');
-      }
-    } catch (err) { popup(err.message); }
+  buttonRight.addEventListener('click', () => { console.log('Right'); });
+
+  buttonLeft.addEventListener('click', () => { console.log('Left'); });
+
+  file.addEventListener('change', (e) => {
+    img.src = URL.createObjectURL(e.target.files[0]);
+    e.target.value = '';
   });
 
-  // fetch(img.src).then((res) => res.blob()).then((blob) => {
-  //   signUpUser(inputEmail.value, inputPass.value, inputName.value, blob)
-  //     .then((response) => {
-  //       if (response.includes('Check your email to confirm the account.')) {
-  //         form.reset();
-  //         popup(response);
-  //         navigateTo('/signin');
-  //       }
-  //       // section.style.display = 'none';
-  //       popup(response);
-  //     })
-  //     // }).then(() => navigateTo('/signin'))
-  //     .catch((err) => { popup(err.message); });
-  // });
+  form.addEventListener('submit', async (e) => {
+    try {
+      loadingContainer.style.display = 'block';
+      e.preventDefault();
+      if (inputPass.value === inputPassConfirm.value) {
+        // eslint-disable-next-line max-len
+        const res = await signupHandler.createUser(inputEmail.value, inputPass.value, img.src, inputName.value);
+        loadingContainer.style.display = 'none';
+        popup(res);
+        if (res.includes('The user has been registered with email')) {
+          navigateTo('/signin');
+          popup(res);
+        }
+      } else {
+        loadingContainer.style.display = 'none';
+        throw new Error('Firebase: Error (auth/passwords-not-match).');
+      }
+    } catch (err) {
+      loadingContainer.style.display = 'none';
+      popup(err.message);
+    }
+  });
 
   form.append(
     labelName,
@@ -127,13 +125,11 @@ const signup = (navigateTo) => {
     inputPassConfirm,
     buttonSignUp,
   );
-  // img.appendChild(iconAddFile);
-  // img.appendChild(file);
-  back.href = '/signin';
-  figure.style.display = 'grid';
   figure.append(img, iconAddFile, file);
   sectionFig.append(buttonLeft, figure, buttonRight);
   section.append(back, sectionFig, title, form);
+  loadingContainer.append(loadingGif);
+  section.append(loadingContainer);
 
   return section;
 };

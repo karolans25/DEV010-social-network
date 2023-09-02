@@ -1,14 +1,14 @@
 import {
-  addDoc, getDocs, onSnapshot, doc,
+  addDoc, getDocs, onSnapshot, doc, collection, setDoc,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 
 // Export the StoreService object with store-related functions
 const StoreService = {
   // Function to create a document in a collection
-  addDocument: async (collection, data) => {
+  addDocument: async (collectionStore, data) => {
     try {
-      const docRef = await addDoc(collection(db, collection), data); // addDoc
+      const docRef = await addDoc(collection(db, collectionStore), data); // addDoc
       console.log(`Document added with ID: ${docRef.id}`);
       return docRef.id;
     } catch (error) {
@@ -18,9 +18,9 @@ const StoreService = {
   },
 
   // Get the static database
-  getAllDocuments: async (collection) => {
+  getAllDocuments: async (collectionStore) => {
     try {
-      const snapshot = await getDocs(collection(db, collection)); // getDocs
+      const snapshot = await getDocs(collection(db, collectionStore)); // getDocs
       const documents = snapshot.docs.map((theDoc) => ({
         id: theDoc.id,
         ...theDoc.data(),
@@ -33,9 +33,9 @@ const StoreService = {
   },
 
   // Get the real time database
-  getAllDocumentsRealTime: async (collection) => {
+  getAllDocumentsRealTime: async (collectionStore) => {
     try {
-      const snapshot = await getDocs(collection(db, collection));
+      const snapshot = await getDocs(collection(db, collectionStore));
       const documents = snapshot.docs.map((theDoc) => ({
         id: theDoc.id,
         ...theDoc.data(),
@@ -62,9 +62,9 @@ const StoreService = {
     }
   },
 
-  getDocumentById: async (collection, id) => {
+  getDocumentById: async (collectionStore, id) => {
     try {
-      const docRef = await db.collection(collection).doc(id).get();
+      const docRef = await db.collection(collectionStore).doc(id).get();
       if (docRef.exists) {
         return {
           id: docRef.id,
@@ -78,9 +78,12 @@ const StoreService = {
     }
   },
 
-  updateDocument: async (collection, id, data) => {
+  updateDocument: async (collectionStore, id, data) => {
     try {
-      await doc(collection(db, collection), id).update(data);
+      console.log(collectionStore);
+      console.log(id);
+      console.log(data);
+      await setDoc(doc(collection(db, collectionStore), id), data);
       console.log(`Document updated with ID: ${id}`);
     } catch (error) {
       console.error(`Error updating document: ${error}`);
@@ -88,9 +91,9 @@ const StoreService = {
     }
   },
 
-  deleteDocument: async (collection, id) => {
+  deleteDocument: async (collectionStore, id) => {
     try {
-      await db.collection(collection).doc(id).delete();
+      await db.collection(collectionStore).doc(id).delete();
       console.log(`Document deleted with ID: ${id}`);
     } catch (error) {
       console.error(`Error deleting document: ${error}`);

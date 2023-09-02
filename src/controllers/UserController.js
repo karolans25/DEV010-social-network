@@ -6,31 +6,26 @@ import StorageService from '../firebase/storageService';
 
 // Create a UserController object
 const UserController = {
-  createUser: async (email, password, ...extra) => {
+  createUser: async (email, password, image, name) => {
     try {
-    // Sign up the user using the AuthService
-      const credential = await AuthService.signUp(email, password);
-      const user = credential.user;
-      console.log(user);
-      if (user && extra) {
-        const urlProfileImage = await StorageService.uploadFile(extra[1], `${user.uid}/profile.${extra[1].type.split('/')[1]}`);
-        // update profile with name and url photo in auth
-        await AuthService.updateImgAndName({ displayName: extra[0], photoURL: urlProfileImage });
-      }
+      // Sign up the user using the AuthService
+      const user = await AuthService.signUp(email, password);
       if (user) {
+        const urlProfileImage = await StorageService.uploadFile(image, `${user.uid}/profile.${image.type.split('/')[1]}`);
+        await AuthService.updateImgAndName({ displayName: name, photoURL: urlProfileImage });
         // create the user document in store
         const data = {
-          email: user.email,
+          email: user.email || email,
           createdAt: serverTimestamp(),
           friends: [],
-          displayName: user.displayImage || '',
+          displayName: user.displayName || '',
           photoURL: user.photoURL || '',
         };
         await StoreService.updateDocument('user', user.uid, data);
+        await AuthService.sendEmailVerify(user);
+        return `The user has been registered with email ${user.email}\nCheck your email to confirm the account.`;
       }
-      await AuthService.sendEmailVerify(user);
-      console.log(`The user has been registered with email ${user.email}\nCheck your email to confirm the account.`);
-      return user;
+      return 'User not created';
     } catch (err) { return err.message; }
   },
 };

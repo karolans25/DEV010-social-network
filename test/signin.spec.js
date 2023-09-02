@@ -43,6 +43,7 @@ describe('Signin Component', () => {
   it('It should redirect to "Init" screen on click on "back" link ', () => {
     const linkBack = signinComponent.querySelector('[name="back"]');
 
+    expect(linkBack).toBeDefined();
     expect(linkBack.href).toBe('http://localhost/');
     expect(linkBack.textContent).toBe('👈 back');
     // const mockOnClick = jest.fn();
@@ -54,6 +55,7 @@ describe('Signin Component', () => {
   it('It should redirect to "Recover Password" screen on click on "forgot password?" link ', () => {
     const linkRecoverPass = signinComponent.querySelector('[name="recover-pass"]');
 
+    expect(linkRecoverPass).toBeDefined();
     expect(linkRecoverPass.href).toBe('http://localhost/password');
     expect(linkRecoverPass.textContent).toBe('Forgot password ?');
     // const mockOnClick = jest.fn();
@@ -65,6 +67,7 @@ describe('Signin Component', () => {
   it('It should redirect to "Sign Up" screen on click on "sign up" link ', () => {
     const linkSignUp = signinComponent.querySelector('[name="signup"]');
 
+    expect(linkSignUp).toBeDefined();
     expect(linkSignUp.href).toBe('http://localhost/signup');
     expect(linkSignUp.textContent).toBe('👉 Sign Up');
     // const mockOnClick = jest.fn();
@@ -76,6 +79,7 @@ describe('Signin Component', () => {
   it('It should handle the sign in with ', () => {
     const linkSignUp = signinComponent.querySelector('[name="signup"]');
 
+    expect(linkSignUp).toBeDefined();
     expect(linkSignUp.href).toBe('http://localhost/signup');
     expect(linkSignUp.textContent).toBe('👉 Sign Up');
     // const mockOnClick = jest.fn();
@@ -94,6 +98,9 @@ describe('Signin Component', () => {
     buttonSignin.click();
     // expect(signin.getByTestId('success-message')).toBeInTheDocument();
 
+    expect(inputEmail).toBeDefined();
+    expect(inputPassword).toBeDefined();
+    expect(buttonSignin).toBeDefined();
     const handleSubmit = jest.fn();
     const formSignin = signinComponent.querySelector('form');
     formSignin.addEventListener('submit', handleSubmit);
@@ -107,6 +114,7 @@ describe('Signin Component', () => {
     const buttonSigninGoogle = signinComponent.querySelector('#google');
     buttonSigninGoogle.click();
     // Missing an addecuatte test
+    expect(buttonSigninGoogle).toBeDefined();
     expect(navigateToMock).toHaveBeenCalled();
   });
 
@@ -114,6 +122,7 @@ describe('Signin Component', () => {
     const buttonSigninGithub = signinComponent.querySelector('#github');
     buttonSigninGithub.click();
     // Missing an addecuatte test
+    expect(buttonSigninGithub).toBeDefined();
     expect(navigateToMock).toHaveBeenCalled();
   });
 });

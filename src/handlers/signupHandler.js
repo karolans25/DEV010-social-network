@@ -1,7 +1,8 @@
 import UserController from '../controllers/UserController';
 
 export const signupHandler = {
-  createUser: async (email, password, ...extra) => {
-    UserController.createUser(email, password, extra[0], extra[1]);
-  },
+  createUser: (email, password, image, name) => fetch(image)
+    .then((res) => res.blob())
+    .then((blob) => UserController.createUser(email, password, blob, name))
+    .catch((err) => err.message),
 };
