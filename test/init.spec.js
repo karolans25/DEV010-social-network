@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { JSDOM } from 'jsdom';
-
-import init from '../src/components/init';
+// import { JSDOM } from 'jsdom';
+import init from '../src/views/init';
 
 /**  * @jest-environment jsdom  */
 // test('use jsdom in this test file', () => {
@@ -9,8 +8,9 @@ import init from '../src/components/init';
 //   expect(element).not.toBeNull();
 // });
 
-const { window } = new JSDOM();
-global.document = window.document;
+// const { window } = new JSDOM();
+// global.document = window.document;
+const DOM = document.createElement('article');
 
 // Mock for navigateTo
 const navigateToMock = jest.fn();
@@ -21,7 +21,7 @@ describe('Init Component', () => {
   // Configure the Init Component before each test
   beforeEach(() => {
     initComponent = init(navigateToMock);
-    document.body.appendChild(initComponent);
+    DOM.appendChild(initComponent);
   });
 
   // Clean after each test
