@@ -6,7 +6,7 @@ import signin from './views/signin';
 import signup from './views/signup';
 import password from './views/password';
 import popup from './views/popup';
-import feed from './views/feed';
+import { feed } from './views/feed';
 
 const routes = [
   { path: '/', component: init },

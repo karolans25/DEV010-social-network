@@ -1,5 +1,5 @@
 // export function navBar(navigateTo) {
-export function navBar(navigateTo) {
+export const navbar = (navigateTo) => {
   const nav = document.createElement('section');
   const ul = document.createElement('ul');
   const div = document.createElement('div');
@@ -61,6 +61,6 @@ export function navBar(navigateTo) {
   // }));
 
   return nav;
-}
+};
 
 // export default navBar;

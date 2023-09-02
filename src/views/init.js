@@ -6,7 +6,7 @@ const init = (navigateTo) => {
   const title = document.createElement('h1');
   const buttonStart = document.createElement('button');
   const figure = document.createElement('figure');
-  const p = document.createElement('p');
+  const paragraph = document.createElement('paragraph');
 
   section.className = 'init';
   figure.className = 'init-figure';
@@ -21,12 +21,12 @@ const init = (navigateTo) => {
     navigateTo('/signin');
   });
 
-  title.textContent = 'Title';
+  title.textContent = 'Caro PG';
 
-  p.innerHTML = 'Create Technology to make things happen! 🌎💻👣';
+  paragraph.innerHTML = 'Create Technology to make things happen! 🌎💻👣';
 
   // section.append(figure, p, buttonStart, title);
-  section.append(figure, buttonStart, title, p);
+  section.append(figure, title, paragraph, buttonStart);
 
   return section;
 };
