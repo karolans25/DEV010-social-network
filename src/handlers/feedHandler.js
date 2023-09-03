@@ -28,4 +28,7 @@ export const feedHandler = {
   // });
   // },
   // const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
+
+  getAllMyPost: () => PostController.getMyRealTimeData('post'),
+
 };

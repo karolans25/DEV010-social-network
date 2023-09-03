@@ -3,6 +3,7 @@ import {
   deleteDoc, orderBy,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig';
+// import AuthService from './authService';
 
 // Export the StoreService object with store-related functions
 const StoreService = {
@@ -103,12 +104,17 @@ const StoreService = {
     });
   },
 
-  getDocumentByComposeFilter: async (collectionStore, camp) => {
-    const q = query(collection(db, 'post'), where('idUser', '==', `${user.uid}`), orderBy('createdAt', 'desc'));
-    // const q = query(doc(db, collectionStore), camp);
-    // where("campo", "==", "valor")
-    const qSnapshot = await getDocs(q, where(camp[0], camp[1], camp[2]));
-    qSnapshot.forEach((element) => element.uid || element.id);
+  getDocumentByComposeFilter: async (collectionStore, userId) => {
+    const q = query(collection(db, collectionStore), where('idUser', '==', `${userId}`), orderBy('createdAt', 'desc'));
+    return new Promise((resolve, reject) => {
+      onSnapshot(q, (snapshot) => {
+        const docs = [];
+        snapshot.docs.forEach((element) => docs.push({ ...element.data(), id: element.id }));
+        resolve(docs);
+      }, (err) => {
+        reject(err);
+      });
+    });
   },
 
   updateDocument: async (collectionStore, id, data) => {

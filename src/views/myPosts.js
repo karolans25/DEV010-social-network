@@ -1,7 +1,7 @@
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
-// import formatGetAllPosts from './formatGetAllPosts';
-import { popup } from './popup';
+import { formatPost } from './formatPost';
+import { feedHandler } from '../handlers/feedHandler';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
@@ -11,47 +11,57 @@ const createCloseButton = (thumbnailId) => {
   document.getElementsByClassName(`${thumbnailId}`)[0].appendChild(closeButton);
 };
 
-const createThumbnail = (url, id) => {
+// const createThumbnail = (url, id) => {
+//   const thumbnail = document.createElement('figure');
+//   console.log(thumbnail);
+//   thumbnail.classList.add('thumbnail', id);
+//   thumbnail.dataset.id = id;
+
+//   thumbnail.setAttribute('style', `background-image: url(${url})`);
+//   const subContainer = document.querySelector('.section-edit-post');
+//   const container = subContainer.querySelector('.post-figure'); // postImgContainer
+//   container.appendChild(thumbnail);
+//   container.style.display = 'grid';
+//   createCloseButton(id);
+// };
+const createThumbnail = (file, id, container) => {
   const thumbnail = document.createElement('figure');
-  console.log(thumbnail);
   thumbnail.classList.add('thumbnail', id);
   thumbnail.dataset.id = id;
 
-  thumbnail.setAttribute('style', `background-image: url(${url})`);
-  const subContainer = document.querySelector('.section-edit-post');
-  const container = subContainer.querySelector('.post-figure'); // postImgContainer
+  thumbnail.setAttribute('style', `background-image: url(${URL.createObjectURL(file)})`);
+  // const container = document.querySelector('.edit-post-figure'); // postImgContainer
   container.appendChild(thumbnail);
   container.style.display = 'grid';
   createCloseButton(id);
 };
 
-const createThumbnailFile = (file, iterator, id) => {
-  const thumbnail = document.createElement('figure');
-  thumbnail.classList.add('thumbnail', id);
-  thumbnail.dataset.id = id;
-
-  thumbnail.setAttribute('style', `background-image: url(${URL.createObjectURL(file.files[iterator])})`);
-  const container = document.querySelector('.edit-post-figure'); // postImgContainer
-  container.appendChild(thumbnail);
-  container.style.display = 'grid';
-  createCloseButton(id);
-};
-
-export const myPosts = (navigateTo) => {
+export const myPosts = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
-  const sectionFormatCreatePost = formatCreatePost();
-  const title = document.createElement('h2');
   const nav = navbar(navigateTo);
-
-  //   const user = auth.currentUser;
-  //   const q = query(collection(db, 'post'), where('idUser', '==', `${user.uid}`), orderBy('createdAt', 'desc'));
-  //   const sectionFormatGetAllPost = formatGetAllPosts(q);
+  const title = document.createElement('h2');
+  const sectionFormatCreatePost = formatCreatePost();
+  const sectionFormatGetAllPost = document.createElement('section');
+  const sectionGetAllPosts = document.createElement('section');
 
   section.classList.value = 'home';
+  subSection.className = 'myPosts';
   subSection.className = 'feed';
+  sectionGetAllPosts.className = 'get-posts';
+  sectionGetAllPosts.innerHTML = '';
+  title.innerHTML = 'Caro PG - My Posts';
 
-  title.innerHTML = 'My Publications';
+  const posts = await feedHandler.getAllMyPost();
+  posts.forEach(async (item) => {
+    const formatForEachPost = await formatPost(item);
+    formatForEachPost.classList.add('container-found-post', item.id);
+    sectionGetAllPosts.append(formatForEachPost);
+  });
+
+  sectionFormatGetAllPost.append(sectionGetAllPosts);
+  subSection.append(sectionFormatCreatePost, title, sectionFormatGetAllPost);
+  section.append(subSection, nav);
 
   // Init
   //   const sectionInitButtons = document.createElement('section');
@@ -145,10 +155,6 @@ export const myPosts = (navigateTo) => {
   //     // });
   //   });
   //   // End
-
-  //   subSection.append(sectionFormatCreatePost, title, sectionFormatGetAllPost);
-  subSection.append(sectionFormatCreatePost, title); // , sectionFormatGetAllPost);
-  section.append(subSection, nav);
 
   // const list = document.getElementsByClassName('list');
   // for (let i = 0; i < list.length; i++) {

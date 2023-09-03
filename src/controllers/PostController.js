@@ -98,6 +98,11 @@ const PostController = {
   deletePostData: (idPost) => StoreService.deleteDocument('post', idPost),
 
   getRealTimeData: (collectionStore) => StoreService.getDocumentByFilter(collectionStore),
+
+  getMyRealTimeData: async (collectionStore) => {
+    const user = await AuthService.getCurrentUser();
+    return StoreService.getDocumentByComposeFilter(collectionStore, user.uid);
+  },
 };
 
 // Export the PostController object as the default export
