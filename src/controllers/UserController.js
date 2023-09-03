@@ -65,7 +65,12 @@ const UserController = {
 
   getUserData: async () => {
     const user = await AuthService.getCurrentUser();
-    return [user.displayName, user.photoURL];
+    return user;
+  },
+
+  getUserDataById: async (idUser) => {
+    const user = await StoreService.getDocumentById('user', idUser);
+    return [user.name, user.photo];
   },
 };
 

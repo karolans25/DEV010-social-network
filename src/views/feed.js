@@ -3,24 +3,34 @@
 // } from 'firebase/firestore';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
+import { formatGetAllPosts } from './formatGetAllPosts';
 // import formatGetAllPosts from './formatGetAllPosts';
 
-export const feed = (navigateTo) => {
+export const feed = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
   const nav = navbar(navigateTo);
   const sectionFormatCreatePost = formatCreatePost();
   const title = document.createElement('h2');
-  // const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
-  // const sectionFormatGetAllPost = formatGetAllPosts(q);
-  // const createdAt = document.querySelector('.created-at');
+  const sectionFormatGetAllPosts = await formatGetAllPosts();
 
   section.classList.value = 'home';
   subSection.className = 'feed';
   title.innerHTML = 'Caro PG';
-  // subSection.append(sectionFormatCreatePost, title, sectionFormatGetAllPost);
-  subSection.append(sectionFormatCreatePost, title); // , sectionFormatGetAllPost);
+  // const posts = await feedHandler.getAllPost();
+  // sectionGetAllPosts.className = 'get-posts';
+  // sectionGetAllPosts.innerHTML = '';
+  // posts.forEach((item) => {
+  //   const formatForEachPost = formatPost(item);
+  //   formatForEachPost.classList.add('container-found-post', item.id);
+  //   sectionGetAllPosts.append(formatForEachPost);
+  // });
+
+  subSection.append(sectionFormatCreatePost, title, sectionFormatGetAllPosts);
+  // subSection.append(sectionFormatCreatePost, title); // , sectionFormatGetAllPost);
+  // subSection.append(title);
   section.append(subSection, nav);
+  // subSection.appendChild(title);
 
   // const list = document.getElementsByClassName('list');
   // for (let i = 0; i < list.length; i++) {

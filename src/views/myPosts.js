@@ -1,7 +1,7 @@
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 // import formatGetAllPosts from './formatGetAllPosts';
-import popup from './popup';
+import { popup } from './popup';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');

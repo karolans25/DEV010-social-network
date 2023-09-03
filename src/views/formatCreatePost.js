@@ -1,12 +1,12 @@
 // import { auth } from '../firebase/firebaseConfig';
 import { feedHandler } from '../handlers/feedHandler';
-import popup from './popup';
+import { popup } from './popup';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
   closeButton.classList.add('close-button');
   closeButton.innerText = 'x';
-  // document.querySelector(`.${thumbnailId}`).appendChild(closeButton);
+  // document.querySelector(`.${thumbnailId}`).appendChild(closeButton); => NO
   document.getElementsByClassName(`${thumbnailId}`)[0].appendChild(closeButton);
 };
 
@@ -40,9 +40,9 @@ export const formatCreatePost = () => {
 
   let formData = new FormData();
 
-  feedHandler.getUserData().then((res) => {
-    userName.innerHTML = res[0];
-    userImg.src = res[1];
+  feedHandler.getUserData().then((data) => {
+    userName.innerHTML = data[1];
+    userImg.src = data[2];
   });
 
   sectionCreatePost.className = 'create-post';

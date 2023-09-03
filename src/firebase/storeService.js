@@ -1,5 +1,6 @@
 import {
-  addDoc, getDocs, onSnapshot, doc, collection, setDoc, query, where,
+  addDoc, getDocs, onSnapshot, doc, collection, setDoc, query, where, getDoc,
+  deleteDoc, orderBy,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 
@@ -64,7 +65,8 @@ const StoreService = {
 
   getDocumentById: async (collectionStore, id) => {
     try {
-      const docRef = await doc(collection(db, collectionStore), id).get();
+      // const docRef = await getDoc(doc(db, collectionStore, id));
+      const docRef = await getDoc(doc(collection(db, collectionStore), id));
       if (docRef.exists) {
         return {
           id: docRef.id,
@@ -78,8 +80,32 @@ const StoreService = {
     }
   },
 
-  getDocumentByFilter: async (collectionStore, camp) => {
-    const q = query(doc(db, collectionStore), camp);
+  // getDocumentByFilter: (collectionStore) => {
+  //   const q = query(collection(db, collectionStore), orderBy('createdAt', 'desc'));
+  //   // return onSnapshot(q);
+  //   // onSnapshot(q).then((snapshot) => console.log(snapshot.docs.length));
+  //   onSnapshot(q, (snapshot) => {
+  //     const docs = [];
+  //     snapshot.docs.forEach((element) => docs.push({ ...element.data(), id: element.id }));
+  //   });
+  // },
+
+  getDocumentByFilter: (collectionStore) => {
+    const q = query(collection(db, collectionStore), orderBy('createdAt', 'desc'));
+    return new Promise((resolve, reject) => {
+      onSnapshot(q, (snapshot) => {
+        const docs = [];
+        snapshot.docs.forEach((element) => docs.push({ ...element.data(), id: element.id }));
+        resolve(docs);
+      }, (err) => {
+        reject(err);
+      });
+    });
+  },
+
+  getDocumentByComposeFilter: async (collectionStore, camp) => {
+    const q = query(collection(db, 'post'), where('idUser', '==', `${user.uid}`), orderBy('createdAt', 'desc'));
+    // const q = query(doc(db, collectionStore), camp);
     // where("campo", "==", "valor")
     const qSnapshot = await getDocs(q, where(camp[0], camp[1], camp[2]));
     qSnapshot.forEach((element) => element.uid || element.id);
@@ -97,7 +123,7 @@ const StoreService = {
 
   deleteDocument: async (collectionStore, id) => {
     try {
-      await db.collection(collectionStore).doc(id).delete();
+      await deleteDoc(doc(db, collectionStore, id));
       // console.log(`Document deleted with ID: ${id}`);
     } catch (error) {
       // console.error(`Error deleting document: ${error}`);

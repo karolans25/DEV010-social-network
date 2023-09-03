@@ -1,7 +1,7 @@
 import { signinHandler } from '../handlers/signinHandler';
-import popup from './popup';
+import { popup } from './popup';
 
-function password(navigateTo) {
+export const password = (navigateTo) => {
   const section = document.createElement('section');
   const back = document.createElement('a');
   const figure = document.createElement('figure');
@@ -66,6 +66,6 @@ function password(navigateTo) {
   section.append(loadingContainer);
 
   return section;
-}
+};
 
-export default password;
+// export default password;

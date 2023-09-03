@@ -1,4 +1,4 @@
-const popup = (message) => {
+export const popup = (message) => {
   const article = document.getElementById('root');
   const overlay = document.createElement('section');
   const card = document.createElement('section');
@@ -43,6 +43,7 @@ const popup = (message) => {
     'The post has been created',
     'The email to confirm your account has been sent',
     'The email to restore the password has been sent',
+    'The post has been updated',
   ];
   if (typeof message !== 'undefined' && typeof message === 'string') {
     console.log('Linea 40');
@@ -53,43 +54,54 @@ const popup = (message) => {
       card.classList.add('correct');
     } else {
       console.log('Línea 46');
-      title.innerHTML = 'Firebase Error';
       switch (message) {
         case 'Firebase: Error (auth/email-already-in-use).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'Email already in use';
           break;
         case 'Firebase: Error (auth/passwords-not-match).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'The passwords don\'t match';
           break;
         case 'Firebase: Password should be at least 6 characters (auth/weak-password).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'Password should be at least 6 characters';
           break;
         case 'Firebase: Error (auth/invalid-email).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'Invalid email';
           break;
         case 'Firebase: Error (auth/user-not-found).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'User not found';
           break;
         case 'Firebase: Error (auth/wrong-password).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'Wrong password';
           break;
         case 'Firebase: Error (auth/too-many-requests).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'Too many requests. Try again later';
           break;
         case 'Firebase: Error (auth/cancelled-popup-request).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'The request was canceled';
           break;
         case 'Firebase: Error (auth/popup-blocked).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'The popup was blocked';
           break;
         case 'Firebase: Error (auth/popup-closed-by-user).':
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'The user has closed the popup';
           break;
         case 'Firebase: Error ':
           // There's an error about requiered an recent session
+          title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'Another error';
           break;
         default:
+          title.innerHTML = 'Error';
           paragraph.innerHTML = message;
           break;
       }
@@ -107,4 +119,4 @@ const popup = (message) => {
   return overlay;
 };
 
-export default popup;
+// export default popup;

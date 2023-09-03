@@ -1,7 +1,7 @@
 import { signupHandler } from '../handlers/signupHandler';
-import popup from './popup';
+import { popup } from './popup';
 
-const signup = (navigateTo) => {
+export const signup = (navigateTo) => {
   const section = document.createElement('section');
   const back = document.createElement('a');
   const sectionFig = document.createElement('section');
@@ -135,4 +135,4 @@ const signup = (navigateTo) => {
   return section;
 };
 
-export default signup;
+// export default signup;

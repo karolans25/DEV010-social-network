@@ -69,6 +69,13 @@ const AuthService = {
   },
 
   // Function to get the currently logged in user
+  // getCurrentUserU: () => {
+  //   return new Promise((resolve, reject) => {
+  //       resolve(auth.currentUser);
+  //     }, (err) => {
+  //       reject(err);
+  //     });
+  // },
   getCurrentUser: () => auth.currentUser,
 
   // Function to listen for changes in the authentication state

@@ -905,6 +905,7 @@ list.forEach(item => item.addEventListener('click', function(e){
   margin: 10px;
   display: grid;
   height: fit-content;
+  min-width: 100%;
   width: fit-content;
   gap: 10px;
   /* grid-template-rows: 1fr 2fr 1fr; */
@@ -926,6 +927,8 @@ list.forEach(item => item.addEventListener('click', function(e){
   font-weight: bold;
   text-align: center;
   font-size: 13px;
+  width: 90%;
+  min-width: 100px;
 }
 
 .get-posts .container-found-post .data-post{
@@ -966,6 +969,7 @@ list.forEach(item => item.addEventListener('click', function(e){
 .get-posts .container-found-post .data-post .post-figure .post-img{
   width: 80px;
   height: 80px; 
+  background-color: var(--contrast-color);
 }
 
 .post-buttons{

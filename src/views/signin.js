@@ -1,8 +1,8 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
 import { signinHandler } from '../handlers/signinHandler';
-import popup from './popup';
+import { popup } from './popup';
 
-function signin(navigateTo) {
+export const signin = (navigateTo) => {
   const section = document.createElement('section');
   const back = document.createElement('a');
   const figure = document.createElement('figure');
@@ -88,10 +88,9 @@ function signin(navigateTo) {
       const res = await signinHandler.signin(inputEmail.value, inputPass.value);
       loadingContainer.style.display = 'none';
       popup(res);
-      if (res.includes('The user has been logged with email')) {
+      if (res === 'The user has been logged') {
         form.reset();
         navigateTo('/feed');
-        popup(res);
       }
     } catch (err) {
       loadingContainer.style.display = 'none';
@@ -140,6 +139,6 @@ function signin(navigateTo) {
   section.append(loadingContainer);
 
   return section;
-}
+};
 
-export default signin;
+// export default signin;
