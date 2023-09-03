@@ -36,9 +36,23 @@ const popup = (message) => {
   has been logged with email', 'The user has been logged with', 'The post has
   been created', 'The email to restore the password has been sent'];
   */
-
-  if (typeof message !== 'undefined') {
-    if (message.includes('Firebase')) {
+  const posibilities = [
+    'The user has been registered. \nCheck your email to confirm the account',
+    'The user has been logged',
+    'The user has been registered and logged with',
+    'The post has been created',
+    'The email to confirm your account has been sent',
+    'The email to restore the password has been sent',
+  ];
+  if (typeof message !== 'undefined' && typeof message === 'string') {
+    console.log('Linea 40');
+    if (posibilities.includes(message)) {
+      console.log('Línea 42');
+      title.innerHTML = 'Well done!';
+      paragraph.innerHTML = message;
+      card.classList.add('correct');
+    } else {
+      console.log('Línea 46');
       title.innerHTML = 'Firebase Error';
       switch (message) {
         case 'Firebase: Error (auth/email-already-in-use).':
@@ -79,14 +93,6 @@ const popup = (message) => {
           paragraph.innerHTML = message;
           break;
       }
-    } else if (message.includes('Would you like to receive the email again?')) {
-      card.classList.add('confirm');
-    } else if (message.startsWith('The user has been registered with email') || message.startsWith('The user has been logged with email') || message.startsWith('The user has been registered and logged with') || message === 'The post has been created' || message === 'The email to restore the password has been sent.') {
-      title.innerHTML = 'Well done!';
-      paragraph.innerHTML = message;
-      card.classList.add('correct');
-    } else {
-      paragraph.innerHTML = message;
     }
   }
 

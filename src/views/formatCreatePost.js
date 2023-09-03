@@ -1,4 +1,5 @@
-import { auth } from '../firebase/firebaseConfig';
+// import { auth } from '../firebase/firebaseConfig';
+import { feedHandler } from '../handlers/feedHandler';
 import popup from './popup';
 
 const createCloseButton = (thumbnailId) => {
@@ -37,17 +38,16 @@ export const formatCreatePost = () => {
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
 
-  const user = auth.currentUser;
-  console.log(user);
-  // console.log(user.data());
-  // let formData = new FormData();
+  let formData = new FormData();
+
+  feedHandler.getUserData().then((res) => {
+    userName.innerHTML = res[0];
+    userImg.src = res[1];
+  });
 
   sectionCreatePost.className = 'create-post';
   sectionTitle.className = 'header-post';
   sectionPost.className = 'body-post';
-
-  userName.innerHTML = user.displayName;
-  userImg.src = user.photoURL;
 
   userFigure.className = 'user-figure';
   userImg.className = 'user-img';
@@ -77,7 +77,7 @@ export const formatCreatePost = () => {
     for (let iterator = 0; iterator < e.target.files.length; iterator++) {
       const thumbnailId = `${Math.floor(Math.random() * 10000)}_${Date.now()}`;
       createThumbnail(e.target.files[iterator], thumbnailId);
-      // formData.append(thumbnailId, e.target.files[iterator]); // key: thumbnailId, value: file
+      formData.append(thumbnailId, e.target.files[iterator]); // key: thumbnailId, value: file
     }
     e.target.value = ''; // The data is saved in form Data and clear the input file value
   });
@@ -85,33 +85,30 @@ export const formatCreatePost = () => {
   postImgContainer.addEventListener('click', (e) => {
     if (e.target.classList.contains('close-button')) {
       e.target.parentNode.remove(); // Better than a loop through the thumbnails
-      // formData.delete(e.target.parentNode.dataset.id);
+      formData.delete(e.target.parentNode.dataset.id);
       if (postImgContainer.children.length === 0) {
         postImgContainer.style.display = 'none';
       }
     }
   });
 
-  buttonPublish.addEventListener('click', () => {
+  buttonPublish.addEventListener('click', async () => {
     try {
       loadingContainer.style.display = 'block';
       if (postText.value !== '') {
-        // formData.append('text', postText.value);
-        // formData.forEach((value, key) => {
-        //   console.log(key);
-        //   console.log(value);
-        // });
-        // createPost(formData).then((res) => {
-        //   if (res.includes('The post has been created')) {
-        //     popup(res);
-        //     postText.value = '';
-        //     postImgContainer.innerHTML = '';
-        //     postImgContainer.style.display = 'none';
-        //     // formData.forEach((value, key) => formData.delete(key));
-        //     formData = new FormData();
-        //   }
-        // }).catch((err) => popup(err.message));
+        formData.append('text', postText.value);
+        const res = await feedHandler.createPost(formData);
+        if (res === 'The post has been created') {
+          loadingContainer.style.display = 'none';
+          popup(res);
+          postText.value = '';
+          postImgContainer.innerHTML = '';
+          postImgContainer.style.display = 'none';
+          // formData.forEach((value, key) => formData.delete(key));
+          formData = new FormData();
+        }
       } else {
+        loadingContainer.style.display = 'none';
         popup('You haven\'t writen anything. Please write something for your post');
       }
     } catch (err) {

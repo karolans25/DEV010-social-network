@@ -22,7 +22,7 @@ const UserController = {
         };
         await StoreService.updateDocument('user', user.uid, data);
         await AuthService.sendEmailVerify(user);
-        return `The user has been registered with email ${user.email}\nCheck your email to confirm the account.`;
+        return 'The user has been registered. \nCheck your email to confirm the account';
       }
       return 'User not created';
     } catch (err) { return err.message; }
@@ -33,7 +33,7 @@ const UserController = {
       const user = await AuthService.login(email, password);
       if (user) {
         if (user.emailVerified) {
-          return `The user has been logged with email ${email}`;
+          return 'The user has been logged';
         }
         return `The email ${email} hasn't been verified.\nWould you like to receive the email again?`;
       }
@@ -62,6 +62,11 @@ const UserController = {
   // }
   // return 'The email hasn\'t been registered yet';
   // },
+
+  getUserData: async () => {
+    const user = await AuthService.getCurrentUser();
+    return [user.displayName, user.photoURL];
+  },
 };
 
 // Export the UserController object as the default export
