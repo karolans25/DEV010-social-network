@@ -35,8 +35,6 @@ export const signup = (navigateTo) => {
   back.href = '/signin';
   back.name = 'back';
   figure.style.display = 'grid';
-  file.type = 'file';
-  file.setAttribute('accept', 'image/*');
   file.name = 'file';
   file.type = 'file';
   file.setAttribute('accept', 'image/*');

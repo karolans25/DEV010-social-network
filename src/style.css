@@ -258,7 +258,7 @@
     font-size: 20px;
   }
   
-  .signin figure, .pass figure, .signup figure{
+  .signin figure, .pass figure, .signup figure, .profile figure{
     border: solid 5px var(--main-color);
     border-radius: 50%;
     max-width: 162px;
@@ -271,9 +271,9 @@
     /* height: 100%; */
     height: fit-content;
     padding: 10px 10px 10px 10px;
-      /* background-image: url(assets/signin.png); */
-      background-size: 100% 100%;
-      display: grid;
+    /* background-image: url(assets/signin.png); */
+    background-size: 100% 100%;
+    display: grid;
     justify-content: center;
       /* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
   }
@@ -346,7 +346,7 @@
     /* box-shadow: 0.3rem 0.3rem 2px var(--moving-things-color); */
   }
   
-  .signin img, .signup img, .pass img{
+  .signin img, .signup img, .pass img, .pass img, .profile img{
     background: transparent;
     width: 100%;
     height: 100%;
@@ -395,7 +395,7 @@
     padding: 0;
   }
   
-  .signup figure img{
+  .signup figure img, .profile figure img{
     width: 162px;
     height: 162px;
     border-radius: 50%;
@@ -414,7 +414,30 @@
     margin-right: 5px;
     box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /* border: 1px solid black; */
   }
-  
+
+  .profile img.icon-add-file{
+    background-image: url('./assets/icons/file.png');
+    background-color: var(--main-color);
+    background-size: 50px 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 7px;
+    vertical-align: middle;
+    margin-right: 5px;
+    box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /* border: 1px solid black; */
+  }
+
+  .profile img.icon-add-file input{
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  .profile .profile-data img{
+    width: 40px;
+    height: 40px;
+  }
+
   .init-buttons .icon-add-file{
     position: relative;
     top: 0px;
@@ -437,7 +460,7 @@
     left: 0px;
   } */
 
-  .signup .icon-add-file:hover, .signup .file-upload-button:hover, .signup .file-upload:hover{
+  .signup .icon-add-file:hover, .signup .file-upload-button:hover, .profile .icon-add-file:hover, .profile .file-upload-button:hover{
     background: var(--accompanying-color);
     background-color: var(--accompanying-color);
     color: var(--main-color);
@@ -483,7 +506,7 @@
   }
   
   /* Feed */
-  .feed{
+  .feed, .myPosts, .profile, .search{
     /* background-image: url(assets/feed.png); */
     background-size: 100% 100%;
     /* padding: 20px 20px 20px 20px; */
@@ -492,28 +515,10 @@
     padding-bottom: 100px;
     /*overflow: scroll;*/
   }
-  
-  /* My Posts */
-  .myPosts{
-    /* background-image: url(assets/posts.png); */
-    background-size: 100% 100%;
-    width: 100%;
-    height: calc(100% - 70px);
-    padding-bottom: 100px;
-  }
-  
-  .search{
-    background-image: url(assets/search.png);
-    background-size: 100% 100%;
-    width: 100%;
-    height: calc(100% - 70px);
-  }
-  
+
   .profile{
     background-image: url(assets/profile.png);
-    background-size: 100% 100%;
-    width: 100%;
-    height: calc(100% - 70px);
+    grid-template-rows: 1fr;
   }
   
   .navigation {
@@ -1065,7 +1070,7 @@
     right: 10px;
   }
   
-  .edit-button, .delete-button, .save-button, .cancel-button{
+  .edit-button, .delete-button, .save-button, .cancel-button, .signout-button{
     min-width: 40px;
     min-height: 40px;
     width: fit-content;
@@ -1073,7 +1078,7 @@
     padding: 0;
   }
 
-  .edit-button img, .delete-button img, .save-button img, .cancel-button img{
+  .edit-button img, .delete-button img, .save-button img, .cancel-button img, .signout-button img{
     width: 30px;
     height: 30px;
     background-color: transparent;
