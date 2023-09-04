@@ -13,28 +13,15 @@ export const profile = (navigateTo) => {
   const file = document.createElement('input');
   const title = document.createElement('h2');
   const sectionData = document.createElement('section');
-  const imgEmail = document.createElement('img');
-  const labelEmail = document.createElement('label');
-  const paragraphEmail = document.createElement('paragraph');
-  const imgPost = document.createElement('img');
-  const labelPost = document.createElement('label');
-  const paragraphPost = document.createElement('paragraph');
-  const imgReactions = document.createElement('img');
-  const labelReactions = document.createElement('label');
   const sectionReactions = document.createElement('section');
-  const imgFriends = document.createElement('img');
-  const labelFriends = document.createElement('label');
-  const paragraphFriends = document.createElement('paragraph');
-  const imgLastPost = document.createElement('img');
-  const labelLastPost = document.createElement('label');
-  const paragraphLastPost = document.createElement('paragraph');
 
   // const user = profileHandler.getUserData();
 
-  // section
-  section.className = 'profile';
+  section.className = 'home';
+  subSection.classList.add('profile');
   sectionData.style.display = 'grid';
   sectionData.classList.add('profile-data');
+  sectionReactions.classList.add('section-reaction');
 
   iconAddFile.classList.add('icon-add-file');
   file.classList.add('file', 'file-upload', 'file-profile');
@@ -49,26 +36,6 @@ export const profile = (navigateTo) => {
   img.alt = 'user icon';
   title.textContent = 'Carolina';
 
-  imgEmail.src = '../assets/icons/personas.png';
-  imgEmail.alt = 'email';
-  labelEmail.textContent = 'Email';
-  paragraphEmail.textContent = 'priyacarito@gmail.com';
-
-  imgPost.src = '../assets/icons/personas.png';
-  imgPost.alt = 'posts';
-  labelPost.textContent = 'Posts';
-  paragraphPost.textContent = `${1} posts created`;
-
-  imgFriends.src = '../assets/icons/personas.png';
-  imgFriends.alt = 'friends';
-  labelFriends.textContent = 'Friends';
-  paragraphFriends.textContent = `${5} friends`;
-
-  imgLastPost.src = '../assets/icons/personas.png';
-  imgLastPost.alt = 'last-post';
-  labelLastPost.textContent = 'Last Post';
-  paragraphLastPost.textContent = `${1} today`;
-
   const reactIcons = [
     ['../assets/icons/voto-positivo.png', 'Like'],
     ['../assets/icons/voto-negativo.png', 'Dislike'],
@@ -78,17 +45,45 @@ export const profile = (navigateTo) => {
     ['../assets/icons/comentario.png', 'Comment'],
   ];
 
-  imgReactions.src = '../assets/icons/personas.png';
-  imgReactions.alt = 'reactions';
-  labelReactions.innerHTML = 'Reactions';
-  for (let i = 0; i < reactIcons.length; i++) {
-    const imgReaction = document.createElement('img');
-    const labelReaction = document.createElement('label');
-    imgReaction.src = reactIcons[i][0];
-    imgReaction.alt = reactIcons[i][1];
-    imgReaction.classList.add('react-image');
-    labelReaction.textContent = 1;
-    sectionReactions.append(imgReaction, labelReaction);
+  const profileParts = [
+    ['../assets/icons/email.png', 'Email'],
+    ['../assets/icons/posts.png', 'Posts'],
+    ['../assets/icons/reactions.png', 'Reactions'],
+    ['../assets/icons/friends.png', 'Friends'],
+    ['../assets/icons/last.png', 'Last post'],
+  ];
+
+  for (let i = 0; i < profileParts.length; i++) {
+    const imgPart = document.createElement('img');
+    const labelPart = document.createElement('label');
+    const paragraphPart = document.createElement('paragraph');
+    imgPart.src = profileParts[i][0];
+    imgPart.alt = profileParts[i][1];
+    labelPart.textContent = profileParts[i][1];
+    if (i === 0) paragraphPart.textContent = 'priyacarito@gmail.com';
+    if (i === 1) paragraphPart.textContent = `${1} posts created`;
+    if (i === 2) {
+      for (let j = 0; j < reactIcons.length; j++) {
+        const reaction = document.createElement('aside');
+        const imgReaction = document.createElement('img');
+        const labelReaction = document.createElement('label');
+        reaction.classList.add('reaction');
+        imgReaction.src = reactIcons[j][0];
+        imgReaction.alt = reactIcons[j][1];
+        imgReaction.classList.add('react-image');
+        labelReaction.textContent = 1;
+        reaction.append(imgReaction, labelReaction);
+        sectionReactions.append(reaction);
+      }
+    }
+    if (i === 3) paragraphPart.textContent = `${5} friends`;
+    if (i === 4) paragraphPart.textContent = 'today';
+
+    if (i === 2) {
+      sectionData.append(imgPart, labelPart, sectionReactions);
+    } else {
+      sectionData.append(imgPart, labelPart, paragraphPart);
+    }
   }
 
   file.addEventListener('change', (e) => {
@@ -96,11 +91,11 @@ export const profile = (navigateTo) => {
     e.target.value = '';
   });
 
-  sectionData.append(imgEmail, labelEmail, paragraphEmail);
-  sectionData.append(imgPost, labelPost, paragraphPost);
-  sectionData.append(imgReactions, labelReactions, sectionReactions);
-  sectionData.append(imgFriends, labelFriends, paragraphFriends);
-  sectionData.append(imgLastPost, labelLastPost, paragraphLastPost);
+  //   sectionData.append(imgEmail, labelEmail, paragraphEmail);
+  //   sectionData.append(imgPost, labelPost, paragraphPost);
+  //   sectionData.append(imgReactions, labelReactions, sectionReactions);
+  //   sectionData.append(imgFriends, labelFriends, paragraphFriends);
+  //   sectionData.append(imgLastPost, labelLastPost, paragraphLastPost);
   buttonSignOut.appendChild(imgSignOut);
   figure.append(img, iconAddFile, file);
   subSection.appendChild(buttonSignOut);

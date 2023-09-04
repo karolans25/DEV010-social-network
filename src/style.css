@@ -191,7 +191,7 @@
     align-self: center;
   }
   
-  .init, .signin, .signup, .pass, .feed, .myPosts, .mybuttons, .search, .profile{
+  .init, .signin, .signup, .pass, .feed, .myPosts, .mybuttons, .search{
     padding: 30px 30px 30px 30px;
       /* background-image: url(assets/signup.png); */
       background-size: 100% auto;
@@ -415,6 +415,20 @@
     box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /* border: 1px solid black; */
   }
 
+  .profile{
+    padding: 10px 10px 10px 10px;
+    background-size: 100% 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 2fr 1fr 6fr;
+    /* grid-template-rows: 1fr 4fr 1fr 3fr 1fr 1fr 1fr; */
+    width: 100%;
+    height: fit-content;
+    align-self: center;
+    justify-self:center;
+    justify-content: center;
+  }
+  
   .profile img.icon-add-file{
     background-image: url('./assets/icons/file.png');
     background-color: var(--main-color);
@@ -425,19 +439,73 @@
     vertical-align: middle;
     margin-right: 5px;
     box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /* border: 1px solid black; */
-  }
-
-  .profile img.icon-add-file input{
     position: relative;
-    top: 0;
+    top: -212px;
     left: 0;
   }
 
   .profile .profile-data img{
     width: 40px;
     height: 40px;
+    /* margin: 5px; */
   }
 
+  .profile h2{
+    justify-self: center;
+  }
+
+  .profile-data{
+    /* margin-top: 20px; */
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 5fr;
+    grid-template-rows: 1fr 1fr 2fr 1fr 1fr;
+    width: fit-content;
+  }
+
+  .profile-data .section-reaction{
+    display: grid;
+    min-width: fit-content;
+    max-height: 65px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: var(--main-color);
+    padding: 10px 25px 5px 0px;
+    padding: 0;
+    position: relative;
+    bottom: 0px;
+    left: -5px;
+  }
+
+  /* .profile-data .section-reaction .reaction{
+    margin-left: 15px;
+  } */
+
+  .profile-data .section-reaction .reaction, .reaction label{
+    height: fit-content;
+    background-color: transparent;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    justify-content: center;
+    color: var(--contrast-color);
+  }
+
+  .profile-data .section-reaction .reaction img{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+  }
+  
+  .profile .file{
+    position: relative;
+    top: -271px;
+    left: 41px;
+    opacity: 0;
+  }
+
+  .signout-button{
+    justify-self: end;
+  }
+  
   .init-buttons .icon-add-file{
     position: relative;
     top: 0px;
