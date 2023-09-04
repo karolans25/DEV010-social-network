@@ -1,5 +1,5 @@
 import {
-  uploadBytes, ref, getDownloadURL,
+  uploadBytes, ref, getDownloadURL, deleteObject, listAll,
 } from 'firebase/storage';
 import { storage } from './firebaseConfig';
 
@@ -20,10 +20,13 @@ const StorageService = {
   },
 
   // Function to delete a file from Firebase storage
-  deleteFile: async (filePath) => {
+  deleteFile: async (path) => {
     try {
-      const storageRef = ref(storage, filePath);
-      await storageRef.delete();
+      const directoryRef = ref(storage, path);
+      const listResult = await listAll(directoryRef);
+      listResult.items.forEach(async (itemRef) => {
+        await deleteObject(itemRef);
+      });
     } catch (error) {
       throw new Error(`Failed to delete file: ${error}`);
     }

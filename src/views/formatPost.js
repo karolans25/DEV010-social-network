@@ -57,7 +57,7 @@ export const formatPost = (item) => {
   const sectionPostData = document.createElement('section');
   const createdAt = document.createElement('p');
   const postText = document.createElement('p');
-  const postFigureContainer = document.createElement('section');
+  const postFigureContainer = document.createElement('figure');
   const sectionReact = document.createElement('section');
   const sectionComment = document.createElement('section');
   const sectionButtons = document.createElement('section');
@@ -90,7 +90,7 @@ export const formatPost = (item) => {
   sectionPostData.className = 'data-post';
   createdAt.classList.add('created-timestamp', item.id);
   postText.className = 'post-text';
-  postFigureContainer.className = 'post-figure';
+  postFigureContainer.classList.add('post-figure', item.id);
   sectionReact.className = 'post-react';
   sectionComment.classList.add('post-react', 'comment');
   sectionButtons.className = 'post-buttons';

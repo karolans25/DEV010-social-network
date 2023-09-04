@@ -95,7 +95,11 @@ const PostController = {
     } catch (err) { return err.message; }
   },
 
-  deletePostData: (idPost) => StoreService.deleteDocument('post', idPost),
+  deletePostData: async (idPost) => {
+    const user = await AuthService.getCurrentUser();
+    await StorageService.deleteFile(`${user.uid}/posts/${idPost}`);
+    await StoreService.deleteDocument('post', idPost);
+  },
 
   getRealTimeData: (collectionStore) => StoreService.getDocumentByFilter(collectionStore),
 

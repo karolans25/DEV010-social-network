@@ -6,7 +6,6 @@ export const feedHandler = {
 
   getUserData: async () => {
     const user = await UserController.getUserData();
-    console.log(user);
     return [user.uid, user.displayName, user.photoURL];
   },
 
@@ -30,5 +29,4 @@ export const feedHandler = {
   // const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
 
   getAllMyPost: () => PostController.getMyRealTimeData('post'),
-
 };

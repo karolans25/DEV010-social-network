@@ -1,6 +1,5 @@
 // export function navBar(navigateTo) {
 export const navbar = (navigateTo) => {
-  console.log(navigateTo);
   const nav = document.createElement('section');
   const ul = document.createElement('ul');
   const div = document.createElement('div');

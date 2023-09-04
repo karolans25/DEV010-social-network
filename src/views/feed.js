@@ -15,10 +15,10 @@ export const feed = async (navigateTo) => {
   section.classList.value = 'home';
   subSection.className = 'feed';
   sectionGetAllPosts.className = 'get-posts';
-  sectionGetAllPosts.innerHTML = '';
   title.innerHTML = 'Caro PG';
 
   const posts = await feedHandler.getAllPost();
+  sectionGetAllPosts.innerHTML = '';
   posts.forEach(async (item) => {
     const formatForEachPost = await formatPost(item);
     formatForEachPost.classList.add('container-found-post', item.id);
