@@ -6,6 +6,19 @@ import StoreService from '../firebase/storeService';
 const PostController = {
   getReactionMessage: (idTypeReaction) => StoreService.getDocumentById('typeLike', idTypeReaction),
 
+  getMyReactions: async (collectionStore) => {
+    const user = await AuthService.getCurrentUser();
+    const likes = await StoreService.getAllDocumentsRealTime(collectionStore);
+    const myLikes = [];
+    for (let i = 0; i < likes.length; i++) {
+      if (likes[i].idUser === user.uid) {
+        myLikes.push(likes[i]);
+      }
+    }
+    console.log(myLikes);
+    return myLikes;
+  },
+
   hasReactedPost: (idPost) => StoreService.hasReactedPost(idPost),
 
   reactPost: (idPub, idType) => {

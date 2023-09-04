@@ -64,9 +64,7 @@ const UserController = {
 
   },
 
-  signout: async () => {
-
-  },
+  signout: () => AuthService.logout(),
 
   resetPassword: (email) => AuthService.sendPassResetEmail(email),
   // {

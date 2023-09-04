@@ -8,7 +8,7 @@ export const feedHandler = {
   getUserData: async () => {
     const user = await UserController.getUserData();
     try {
-      return [user.uid, user.displayName, user.photoURL];
+      return [user.uid, user.displayName, user.photoURL, user.email];
     } catch (err) {
       return err.message;
     }
@@ -34,6 +34,8 @@ export const feedHandler = {
   // const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
 
   getAllMyPost: () => PostController.getMyRealTimeData('post'),
+
+  getAllMyReactions: () => LikeController.getMyReactions('like'),
 
   getReactionMessage: (idTypeReaction) => LikeController.getReactionMessage(idTypeReaction),
 

@@ -1,7 +1,12 @@
-import { profileHandler } from '../handlers/profileHandler';
+import {
+  collection, query, orderBy, onSnapshot, where,
+} from 'firebase/firestore';
+import { db } from '../firebase/firebaseConfig';
+import { feedHandler } from '../handlers/feedHandler';
 import { navbar } from './navbar';
+import { profileHandler } from '../handlers/profileHandler';
 
-export const profile = (navigateTo) => {
+export const profile = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
   const nav = navbar(navigateTo);
@@ -15,7 +20,7 @@ export const profile = (navigateTo) => {
   const sectionData = document.createElement('section');
   const sectionReactions = document.createElement('section');
 
-  // const user = profileHandler.getUserData();
+  const data = await feedHandler.getUserData();
 
   section.className = 'home';
   subSection.classList.add('profile');
@@ -32,9 +37,11 @@ export const profile = (navigateTo) => {
   file.name = 'file';
   file.type = 'file';
   file.setAttribute('accept', 'image/*');
-  img.src = '../assets/icons/nina.png';
+  img.src = data[2];
   img.alt = 'user icon';
-  title.textContent = 'Carolina';
+  title.textContent = data[1];
+  title.style.textAlign = 'center';
+  title.style.fontSize = '30px';
 
   const reactIcons = [
     ['../assets/icons/voto-positivo.png', 'Like'],
@@ -53,6 +60,28 @@ export const profile = (navigateTo) => {
     ['../assets/icons/last.png', 'Last post'],
   ];
 
+  const posts = await feedHandler.getAllMyPost();
+
+  const likes = await feedHandler.getAllMyReactions();
+
+  const typeLikes = [0, 0, 0, 0, 0, 0];
+  for (let i = 0; i < likes.length; i++) {
+    const pos = parseInt(likes[i].idTypeLike, 10) - 1;
+    typeLikes[pos] += 1;
+  }
+
+  const date = posts[0].createdAt.toDate();
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true,
+  };
+  const stringDate = date.toLocaleString('en-US', options);
+
   for (let i = 0; i < profileParts.length; i++) {
     const imgPart = document.createElement('img');
     const labelPart = document.createElement('label');
@@ -60,8 +89,8 @@ export const profile = (navigateTo) => {
     imgPart.src = profileParts[i][0];
     imgPart.alt = profileParts[i][1];
     labelPart.textContent = profileParts[i][1];
-    if (i === 0) paragraphPart.textContent = 'priyacarito@gmail.com';
-    if (i === 1) paragraphPart.textContent = `${1} posts created`;
+    if (i === 0) paragraphPart.textContent = data[3];
+    if (i === 1) paragraphPart.textContent = (posts.length === 1) ? '1 post created' : `${posts.length} posts created`;
     if (i === 2) {
       for (let j = 0; j < reactIcons.length; j++) {
         const reaction = document.createElement('aside');
@@ -71,13 +100,13 @@ export const profile = (navigateTo) => {
         imgReaction.src = reactIcons[j][0];
         imgReaction.alt = reactIcons[j][1];
         imgReaction.classList.add('react-image');
-        labelReaction.textContent = 1;
+        labelReaction.textContent = typeLikes[j];
         reaction.append(imgReaction, labelReaction);
         sectionReactions.append(reaction);
       }
     }
     if (i === 3) paragraphPart.textContent = `${5} friends`;
-    if (i === 4) paragraphPart.textContent = 'today';
+    if (i === 4) paragraphPart.textContent = stringDate;
 
     if (i === 2) {
       sectionData.append(imgPart, labelPart, sectionReactions);
@@ -91,6 +120,10 @@ export const profile = (navigateTo) => {
     e.target.value = '';
   });
 
+  buttonSignOut.addEventListener('click', () => {
+    profileHandler.signout();
+    navigateTo('/signin');
+  });
   //   sectionData.append(imgEmail, labelEmail, paragraphEmail);
   //   sectionData.append(imgPost, labelPost, paragraphPost);
   //   sectionData.append(imgReactions, labelReactions, sectionReactions);
