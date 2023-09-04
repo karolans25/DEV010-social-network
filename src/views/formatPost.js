@@ -9,6 +9,7 @@ import { popup } from './popup';
 // } from '../lib/user';
 
 import { feedHandler } from '../handlers/feedHandler';
+import AuthService from '../firebase/authService';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
@@ -267,7 +268,8 @@ export const formatPost = (item) => {
   }
 
   /** Add messages for existent reactions */
-  const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
+  const id = AuthService.getCurrentUser().uid;
+  const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`), where('idUser', '==', `${id}`));
   onSnapshot(que2, (reactionSnapshot) => {
     const likes = [];
     reactionSnapshot.docs.forEach((document) => {
