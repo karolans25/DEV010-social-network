@@ -1,7 +1,7 @@
-// import {
-//   onSnapshot, getDoc, doc, query, collection, where,
-// } from 'firebase/firestore';
-// import { db, auth } from '../firebase/firebaseConfig';
+import {
+  onSnapshot, query, collection, where,
+} from 'firebase/firestore';
+import { db } from '../firebase/firebaseConfig';
 import { popup } from './popup';
 // import {
 //   reactPost, unreactPost, updateReactPost, hasReactedPost, deletePost,
@@ -62,6 +62,8 @@ export const formatPost = (item) => {
   const sectionComment = document.createElement('section');
   const sectionButtons = document.createElement('section');
   const reactionMessage = document.createElement('p');
+  const loadingContainer = document.createElement('aside');
+  const loadingGif = document.createElement('img');
 
   const reactIcons = [
     ['../assets/icons/voto-positivo.png', 'Like'],
@@ -102,6 +104,10 @@ export const formatPost = (item) => {
   reactionMessage.style.display = 'none';
   postText.textContent = item.text;
   userImg.alt = 'user img';
+
+  loadingContainer.id = 'loading-container';
+  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.alt = 'loading';
 
   feedHandler.getUserDataById(item.idUser)
     .then((data) => {
@@ -232,7 +238,6 @@ export const formatPost = (item) => {
 
       saveButton.addEventListener('click', async () => {
         if (textarea.value !== '') {
-          console.log('Save************');
           formData.append('text', textarea.value);
           const res = await feedHandler.updatePost(item.id, formData);
           // const res = updatePost(formData, item.id);
@@ -260,6 +265,60 @@ export const formatPost = (item) => {
     initButtons.appendChild(threePoint);
     sectionPostData.append(initButtons);
   }
+
+  /** Add messages for existent reactions */
+  const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
+  onSnapshot(que2, (reactionSnapshot) => {
+    const likes = [];
+    reactionSnapshot.docs.forEach((document) => {
+      likes.push({ ...document.data(), id: document.id });
+    });
+    likes.forEach((like) => {
+      if (like.idUser === item.idUser) {
+        feedHandler.getReactionMessage(like.idTypeLike).then((reaction) => {
+          if (reaction) reactionMessage.style.display = 'block';
+          reactionMessage.textContent = reaction.message;
+        });
+      }
+    });
+  });
+
+  /** Event listener for reaction buttons */
+  sectionReact.addEventListener('click', (e) => {
+    try {
+      loadingContainer.style.display = 'block';
+      const [, type, idPost] = e.target.classList;
+      feedHandler.hasReactedPost(idPost)
+        .then((reactedSnapshot) => {
+          if (reactedSnapshot.size > 0) {
+            if (type === reactedSnapshot.docs[0].data().idTypeLike) {
+              feedHandler.unreactPost(reactedSnapshot.docs[0].id);
+              reactionMessage.style.display = 'none';
+            } else {
+              feedHandler.updateReactPost(reactedSnapshot.docs[0].id, type);
+              feedHandler.getReactionMessage(type).then((reaction) => {
+                reactionMessage.textContent = reaction.message;
+              });
+            }
+          } else {
+            feedHandler.reactPost(idPost, type);
+            reactionMessage.style.display = 'block';
+            feedHandler.getReactionMessage(type).then((reaction) => {
+              reactionMessage.textContent = reaction.message;
+            });
+          }
+        });
+      loadingContainer.style.display = 'none';
+    } catch (err) {
+      loadingContainer.style.display = 'none';
+      popup(err.message);
+    }
+  });
+
+  /** Event listener for comments */
+  sectionComment.addEventListener('click', (e) => {
+    console.log(e.target.classList);
+  });
 
   /** Add messages for existent reactions */
   //   const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
@@ -317,6 +376,8 @@ export const formatPost = (item) => {
   sectionPostData.append(createdAt, postText, postFigureContainer);
   sectionPostData.append(sectionButtons, reactionMessage);
   sectionFormatPost.append(sectionUserData, sectionPostData);
+  loadingContainer.append(loadingGif);
+  sectionFormatPost.append(loadingContainer);
 
   return sectionFormatPost;
 };

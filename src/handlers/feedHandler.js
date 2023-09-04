@@ -1,12 +1,17 @@
 import UserController from '../controllers/UserController';
 import PostController from '../controllers/PostController';
+import LikeController from '../controllers/LikeController';
 
 export const feedHandler = {
   createPost: (formData) => PostController.createPostData(formData),
 
   getUserData: async () => {
     const user = await UserController.getUserData();
-    return [user.uid, user.displayName, user.photoURL];
+    try {
+      return [user.uid, user.displayName, user.photoURL];
+    } catch (err) {
+      return err.message;
+    }
   },
 
   getUserDataById: (idUser) => UserController.getUserDataById(idUser),
@@ -29,4 +34,14 @@ export const feedHandler = {
   // const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
 
   getAllMyPost: () => PostController.getMyRealTimeData('post'),
+
+  getReactionMessage: (idTypeReaction) => LikeController.getReactionMessage(idTypeReaction),
+
+  hasReactedPost: (idPost) => LikeController.hasReactedPost(idPost),
+
+  reactPost: (idPost, idTypeLike) => LikeController.reactPost(idPost, idTypeLike),
+
+  unreactPost: (idLike) => LikeController.unreactPost(idLike),
+
+  updateReactPost: (idLike, idTypeLike) => LikeController.updateReactPost(idLike, idTypeLike),
 };

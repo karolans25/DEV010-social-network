@@ -92,6 +92,10 @@ export const popup = (message) => {
           title.innerHTML = 'Firebase Error';
           paragraph.innerHTML = 'The user has closed the popup';
           break;
+        case 'Firebase: Error (auth/network-request-failed).':
+          title.innerHTML = 'Firebase Error';
+          paragraph.innerHTML = 'Check your network connection';
+          break;
         case 'Firebase: Error ':
           // There's an error about requiered an recent session
           title.innerHTML = 'Firebase Error';

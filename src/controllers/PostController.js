@@ -60,6 +60,8 @@ const PostController = {
         if (key !== 'text') {
           urls.push(value);
         }
+        await StorageService.updateDirectory(urls, `${currentUser.uid}/posts/${idPost}`);
+
         await StoreService.updateDocument('post', idPost, {
           idUser: currentUser.uid,
           createdAt: serverTimestamp(),
@@ -68,7 +70,6 @@ const PostController = {
           idTypePost: (urls.length === 0) ? 1 : 2, // 1:text, 2:text and image
           idPostStatus: 1, // 1: public, 2: private
         });
-        await StorageService.updateDirectory(urls, `${currentUser.uid}/posts/${idPost}`);
       });
       return 'The post has been updated';
     } catch (err) { return err.message; }
@@ -78,6 +79,7 @@ const PostController = {
     const user = await AuthService.getCurrentUser();
     await StorageService.deleteFile(`${user.uid}/posts/${idPost}`);
     await StoreService.deleteDocument('post', idPost);
+    await StoreService.deleteLikesPost(idPost);
   },
 
   getRealTimeData: (collectionStore) => StoreService.getDocumentByFilter(collectionStore),

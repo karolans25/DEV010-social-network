@@ -60,12 +60,18 @@ export const myPosts = async (navigateTo) => {
   const sectionGetAllPosts = document.createElement('section');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
+  const imgEdit = document.createElement('img');
+  const imgDelete = document.createElement('img');
 
   section.classList.value = 'home';
   subSection.className = 'myPosts';
   sectionGetAllPosts.className = 'get-posts';
   sectionGetAllPosts.innerHTML = '';
   title.innerHTML = 'Caro PG - My Posts';
+  imgEdit.src = '../assets/icons/edit.png';
+  imgEdit.alt = 'edit';
+  imgDelete.src = '../assets/icons/delete.png';
+  imgDelete.alt = 'delete';
 
   loadingContainer.id = 'loading-container';
   loadingGif.src = '../assets/icons/playground.gif';
@@ -84,11 +90,13 @@ export const myPosts = async (navigateTo) => {
       posts.push({ ...documentPost.data(), id: documentPost.id });
     });
     sectionGetAllPosts.innerHTML = '';
+    if (posts.length === 0) {
+      popup('You don\'t have any post yet');
+    }
     posts.forEach(async (item) => {
       const formatForEachPost = await formatPost(item);
 
       const initButtons = document.createElement('section');
-      const threePoint = document.createElement('paragraph');
       const editButton = document.createElement('button');
       const deleteButton = document.createElement('button');
       const updateButtons = document.createElement('section');
@@ -101,11 +109,6 @@ export const myPosts = async (navigateTo) => {
       let formData = new FormData();
 
       initButtons.classList.add('init-buttons', item.id);
-      editButton.textContent = 'Edit';
-      editButton.classList.add('edit-button', item.id);
-      deleteButton.textContent = 'Delete';
-      deleteButton.classList.add('delete-button', item.id);
-      threePoint.textContent = '...';
       updateButtons.classList.add('edit-file-update');
 
       updateButtons.appendChild(iconAddFile);
@@ -119,8 +122,22 @@ export const myPosts = async (navigateTo) => {
       const createdAt = formatForEachPost.querySelector('.created-timestamp');
       const postText = formatForEachPost.querySelector('p.post-text');
       const postFigureContainer = formatForEachPost.querySelector('.post-figure');
-
+      editButton.classList.add('edit-button', item.id);
+      editButton.appendChild(imgEdit);
+      deleteButton.appendChild(imgDelete);
+      deleteButton.classList.add('delete-button', item.id);
       createdAt.before(initButtons);
+      saveButton.classList.add('save-button', item.id);
+      const imgSave = document.createElement('img');
+      imgSave.alt = 'save';
+      // cancelButton.textContent = 'Cancel';
+      cancelButton.classList.add('cancel-button', item.id);
+      const imgCancel = document.createElement('img');
+      imgCancel.alt = 'cancel';
+      imgSave.src = '../assets/icons/save.png';
+      imgCancel.src = '../assets/icons/cruzar.png';
+      saveButton.appendChild(imgSave);
+      cancelButton.appendChild(imgCancel);
 
       editButton.addEventListener('click', async () => {
         createdAt.style.display = 'none';
@@ -133,11 +150,9 @@ export const myPosts = async (navigateTo) => {
 
         textarea.classList.add('post-text');
         textarea.innerHTML = postText.textContent;
-        saveButton.textContent = 'Save';
-        cancelButton.textContent = 'Cancel';
+        // saveButton.textContent = 'Save';
         iconAddFile.className = 'icon-add-file';
         file.className = 'file-upload';
-        saveButton.classList.add('save-button', item.id);
 
         file.type = 'file';
         file.setAttribute('accept', 'image/*,video/*');

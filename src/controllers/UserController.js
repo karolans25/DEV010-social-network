@@ -42,7 +42,22 @@ const UserController = {
   },
 
   signinGoogle: async () => {
-
+    try {
+      const user = await AuthService.loginGoogle();
+      if (user) {
+        const urlProfileImage = await StorageService.uploadFile(user.photoURL, `${user.uid}/profile`);
+        const data = {
+          email: user.email,
+          createdAt: serverTimestamp(),
+          friends: [],
+          displayName: user.displayName || '',
+          photoURL: urlProfileImage || '',
+        };
+        await StoreService.addDocument('user', data);
+        return 'The user has been logged';
+      }
+      return 'User not logged';
+    } catch (err) { return err.message; }
   },
 
   signinGithub: async () => {

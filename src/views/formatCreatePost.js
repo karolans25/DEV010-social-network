@@ -43,7 +43,7 @@ export const formatCreatePost = () => {
   feedHandler.getUserData().then((data) => {
     userName.innerHTML = data[1];
     userImg.src = data[2];
-  });
+  }).catch((err) => popup(err.message));
 
   sectionCreatePost.className = 'create-post';
   sectionTitle.className = 'header-post';

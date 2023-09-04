@@ -103,10 +103,15 @@ export const signin = (navigateTo) => {
   buttonSignInGoogle.textContent = '';
   buttonSignInGoogle.id = 'google';
   buttonSignInGoogle.appendChild(imgGoogle);
-  buttonSignInGoogle.addEventListener('click', (e) => {
+  buttonSignInGoogle.addEventListener('click', async (e) => {
     try {
       loadingContainer.style.display = 'block';
       e.preventDefault();
+      const res = await signinHandler.signinGoogle();
+      popup(res);
+      if (res === 'The user has been logged') {
+        navigateTo('/feed');
+      }
       /*
       signInGoogle()
         .then((response) => {

@@ -1,8 +1,9 @@
 import {
-  addDoc, getDocs, onSnapshot, doc, collection, setDoc, query, where, getDoc,
+  addDoc, getDocs, onSnapshot, doc, collection, updateDoc, query, where, getDoc,
   deleteDoc, orderBy,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig';
+import AuthService from './authService';
 // import AuthService from './authService';
 
 // Export the StoreService object with store-related functions
@@ -119,22 +120,34 @@ const StoreService = {
 
   updateDocument: async (collectionStore, id, data) => {
     try {
-      await setDoc(doc(collection(db, collectionStore), id), data);
+      return updateDoc(doc(collection(db, collectionStore), id), data);
       // console.log(`Document updated with ID: ${id}`);
-    } catch (error) {
+    } catch (err) {
       // console.error(`Error updating document: ${error}`);
-      throw new Error('Failed to update document');
+      // throw new Error('Failed to update document');
+      return err.message;
     }
   },
 
   deleteDocument: async (collectionStore, id) => {
     try {
-      await deleteDoc(doc(db, collectionStore, id));
+      return deleteDoc(doc(db, collectionStore, id));
       // console.log(`Document deleted with ID: ${id}`);
-    } catch (error) {
+    } catch (err) {
       // console.error(`Error deleting document: ${error}`);
-      throw new Error('Failed to delete document');
+      // throw new Error('Failed to delete document');
+      return err.message;
     }
+  },
+
+  hasReactedPost: (idPost) => {
+    const q = query(collection(db, 'like'), where('idPost', '==', `${idPost}`), where('idUser', '==', `${AuthService.getCurrentUser().uid}`));
+    return getDocs(q);
+  },
+
+  deleteLikesPost: async (idPost) => {
+    const q = query(collection(db, 'like'), where('idPost', '==', idPost));
+    await getDocs(q).then((documents) => documents.forEach((item) => deleteDoc(doc(db, 'like', item.id))));
   },
 };
 
