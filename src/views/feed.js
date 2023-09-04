@@ -1,7 +1,10 @@
+import {
+  onSnapshot, query, collection, orderBy,
+} from 'firebase/firestore';
+import { db } from '../firebase/firebaseConfig';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';
-import { feedHandler } from '../handlers/feedHandler';
 
 export const feed = async (navigateTo) => {
   const section = document.createElement('section');
@@ -17,13 +20,26 @@ export const feed = async (navigateTo) => {
   sectionGetAllPosts.className = 'get-posts';
   title.innerHTML = 'Caro PG';
 
-  const posts = await feedHandler.getAllPost();
-  sectionGetAllPosts.innerHTML = '';
-  posts.forEach(async (item) => {
-    const formatForEachPost = await formatPost(item);
-    formatForEachPost.classList.add('container-found-post', item.id);
-    sectionGetAllPosts.append(formatForEachPost);
+  const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
+  onSnapshot(q, (snapshot) => {
+    const posts = [];
+    snapshot.docs.forEach((documentPost) => {
+      posts.push({ ...documentPost.data(), id: documentPost.id });
+    });
+    sectionGetAllPosts.innerHTML = '';
+    posts.forEach((item) => {
+      const formatForEachPost = formatPost(item);
+      formatForEachPost.classList.add('container-found-post', item.id);
+      sectionGetAllPosts.append(formatForEachPost);
+    });
   });
+  // const posts = await feedHandler.getAllPost();
+  // sectionGetAllPosts.innerHTML = '';
+  // posts.forEach(async (item) => {
+  //   const formatForEachPost = await formatPost(item);
+  //   formatForEachPost.classList.add('container-found-post', item.id);
+  //   sectionGetAllPosts.append(formatForEachPost);
+  // });
 
   sectionFormatGetAllPost.append(sectionGetAllPosts);
   subSection.append(sectionFormatCreatePost, title, sectionFormatGetAllPost);

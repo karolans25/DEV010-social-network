@@ -71,17 +71,20 @@ export const formatPost = (item) => {
     ['../assets/icons/investigar.png', 'Make me doubt'],
     ['../assets/icons/comentario.png', 'Comment'],
   ];
-  const date = item.createdAt.toDate();
-  const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-    hour12: true,
-  };
-  const stringDate = date.toLocaleString('en-US', options);
+  if (item.createdAt) {
+    const date = item.createdAt.toDate();
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true,
+    };
+    const stringDate = date.toLocaleString('en-US', options);
+    createdAt.textContent = stringDate;
+  }
 
   sectionUserData.className = 'data-user';
   userName.className = 'user-name';
@@ -98,7 +101,6 @@ export const formatPost = (item) => {
 
   reactionMessage.style.display = 'none';
   postText.textContent = item.text;
-  createdAt.textContent = stringDate;
   userImg.alt = 'user img';
 
   feedHandler.getUserDataById(item.idUser)

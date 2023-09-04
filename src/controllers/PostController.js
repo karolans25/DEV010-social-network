@@ -56,21 +56,6 @@ const PostController = {
             idTypePost: (urls.length === 0) ? 1 : 2, // 1:text, 2:text and image
             idPostStatus: 1, // 1: public, 2: private
           });
-          // uploadBytes(storageRef, value, metadata)
-          //   .then(() => getDownloadURL(storageRef)
-          //     .then((url) => {
-          //       urls.push(url);
-          //       /** Question: Why it doesn't work without doing here */
-          //       updateDoc(doc(db, 'post', idPub), {
-          //         createdAt: serverTimestamp(),
-          //         text: (formData.get('text') ? formData.get('text') : ''),
-          //         URL: [...urls],
-          //         idTypePost: (urls.length === 0) ? 1 : 2, // text and image
-          //         idPostStatus: 1, // 1: public, 2: private
-          //       }).catch((err) => err.message);
-          //     })
-          //     .catch((err) => err.message))
-          //   .catch((err) => err.message);
         }
         if (key !== 'text') {
           urls.push(value);
@@ -83,13 +68,7 @@ const PostController = {
           idTypePost: (urls.length === 0) ? 1 : 2, // 1:text, 2:text and image
           idPostStatus: 1, // 1: public, 2: private
         });
-        // updateDoc(doc(db, 'post', idPub), {
-        //   createdAt: serverTimestamp(),
-        //   text: (formData.get('text') ? formData.get('text') : ''),
-        //   URL: [...urls],
-        //   idTypePost: (urls.length === 0) ? 1 : 2, // text and image
-        //   idPostStatus: 1, // 1: public, 2: private
-        // }).catch((err) => err.message);
+        await StorageService.updateDirectory(urls, `${currentUser.uid}/posts/${idPost}`);
       });
       return 'The post has been updated';
     } catch (err) { return err.message; }

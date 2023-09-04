@@ -45,15 +45,12 @@ export const popup = (message) => {
     'The email to restore the password has been sent',
     'The post has been updated',
   ];
-  if (typeof message !== 'undefined' && typeof message === 'string') {
-    console.log('Linea 40');
+  if (typeof message !== 'undefined' && typeof message === 'string' && message !== '') {
     if (posibilities.includes(message)) {
-      console.log('Línea 42');
       title.innerHTML = 'Well done!';
       paragraph.innerHTML = message;
       card.classList.add('correct');
     } else {
-      console.log('Línea 46');
       switch (message) {
         case 'Firebase: Error (auth/email-already-in-use).':
           title.innerHTML = 'Firebase Error';

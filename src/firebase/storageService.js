@@ -31,6 +31,23 @@ const StorageService = {
       throw new Error(`Failed to delete file: ${error}`);
     }
   },
+
+  updateDirectory: async (urls, path) => {
+    try {
+      const directoryRef = ref(storage, path);
+      const listResult = await listAll(directoryRef);
+      listResult.items.forEach(async (item) => {
+        const theURL = await getDownloadURL(ref(storage, item));
+        if (!urls.includes(theURL)) {
+          console.log(item);
+          await deleteObject(item);
+        }
+      });
+      return listResult;
+    } catch (error) {
+      throw new Error(`Failed to delete file: ${error}`);
+    }
+  },
 };
 
 // Export the StorageService object as the default export
