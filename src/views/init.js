@@ -13,6 +13,7 @@
 //     body.classList.add('light-mode');
 //   }
 // };
+import { TITLE } from '../consts/consts';
 
 const init = (navigateTo) => {
   // load();
@@ -54,7 +55,7 @@ const init = (navigateTo) => {
     navigateTo('/signin');
   });
 
-  title.textContent = 'Caro PG';
+  title.textContent = TITLE;
 
   paragraph.innerHTML = 'Create Technology to make things happen! 🌎💻👣';
 

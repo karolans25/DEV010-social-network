@@ -67,7 +67,8 @@ export const myPosts = async (navigateTo) => {
   subSection.className = 'myPosts';
   sectionGetAllPosts.className = 'get-posts';
   sectionGetAllPosts.innerHTML = '';
-  title.innerHTML = 'Caro PG - My Posts';
+  title.innerHTML = 'My Posts';
+  title.style.marginTop = '50px';
   imgEdit.src = '../assets/icons/edit.png';
   imgEdit.alt = 'edit';
   imgDelete.src = '../assets/icons/delete.png';
@@ -92,6 +93,9 @@ export const myPosts = async (navigateTo) => {
     sectionGetAllPosts.innerHTML = '';
     if (posts.length === 0) {
       popup('You don\'t have any post yet');
+      const text = document.createElement('h2');
+      text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
+      sectionGetAllPosts.appendChild(text);
     }
     posts.forEach(async (item) => {
       const formatForEachPost = await formatPost(item);

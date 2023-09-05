@@ -1,8 +1,7 @@
 // export function navBar(navigateTo) {
 export const navbar = (navigateTo) => {
-  const nav = document.createElement('section');
+  const nav = document.createElement('nav');
   const ul = document.createElement('ul');
-  const div = document.createElement('div');
 
   nav.className = 'navigation';
 
@@ -30,8 +29,8 @@ export const navbar = (navigateTo) => {
     const img = document.createElement('img');
     li.id = `list-${icons[i].alt}`;
     li.classList.value = 'list';
-    if (i === 0) {
-      li.classList.value = 'list active';
+    if (window.location.pathname === icons[i].path) {
+      li.classList.add('active');
     }
     button.addEventListener('click', (e) => {
       e.preventDefault();
@@ -43,8 +42,6 @@ export const navbar = (navigateTo) => {
     li.appendChild(button);
     ul.append(li);
   }
-  div.className = 'indicator';
-  ul.append(div);
 
   nav.append(ul);
 

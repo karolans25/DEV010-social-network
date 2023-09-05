@@ -83,9 +83,11 @@ export const profile = async (navigateTo) => {
   const stringDate = date.toLocaleString('en-US', options);
 
   for (let i = 0; i < profileParts.length; i++) {
+    const sub = document.createElement('section');
     const imgPart = document.createElement('img');
-    const labelPart = document.createElement('label');
-    const paragraphPart = document.createElement('paragraph');
+    const labelPart = document.createElement('paragraph');
+    const paragraphPart = document.createElement('label');
+    sub.append(imgPart, labelPart);
     imgPart.src = profileParts[i][0];
     imgPart.alt = profileParts[i][1];
     labelPart.textContent = profileParts[i][1];
@@ -109,9 +111,9 @@ export const profile = async (navigateTo) => {
     if (i === 4) paragraphPart.textContent = stringDate;
 
     if (i === 2) {
-      sectionData.append(imgPart, labelPart, sectionReactions);
+      sectionData.append(sub, sectionReactions);
     } else {
-      sectionData.append(imgPart, labelPart, paragraphPart);
+      sectionData.append(sub, paragraphPart);
     }
   }
 

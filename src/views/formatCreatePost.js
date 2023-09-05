@@ -62,6 +62,7 @@ export const formatCreatePost = () => {
   file.name = 'file[]';
   buttonPublish.style.justifySelf = 'center';
   buttonPublish.innerHTML = 'Publish';
+  buttonPublish.classList.add('publish-button');
   // labelAddFile.htmlFor = 'file-upload';
   loadingContainer.id = 'loading-container';
   loadingGif.src = '../assets/icons/playground.gif';

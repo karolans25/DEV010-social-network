@@ -5,6 +5,7 @@ import { db } from '../firebase/firebaseConfig';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';
+import { TITLE } from '../consts/consts';
 
 export const feed = async (navigateTo) => {
   const section = document.createElement('section');
@@ -18,7 +19,8 @@ export const feed = async (navigateTo) => {
   section.classList.value = 'home';
   subSection.className = 'feed';
   sectionGetAllPosts.className = 'get-posts';
-  title.innerHTML = 'Caro PG';
+  title.innerHTML = TITLE;
+  title.style.marginTop = '50px';
 
   const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
   onSnapshot(q, (snapshot) => {
@@ -27,6 +29,12 @@ export const feed = async (navigateTo) => {
       posts.push({ ...documentPost.data(), id: documentPost.id });
     });
     sectionGetAllPosts.innerHTML = '';
+    if (posts.length === 0) {
+      const img = document.createElement('img');
+      const paragraph = document.createElement('paragraph');
+      img.src = '../src/assets/icons/not-found.png';
+      sectionGetAllPosts.append(img, paragraph);
+    }
     posts.forEach((item) => {
       const formatForEachPost = formatPost(item);
       formatForEachPost.classList.add('container-found-post', item.id);
