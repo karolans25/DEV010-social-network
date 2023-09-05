@@ -1,23 +1,17 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { JSDOM } from 'jsdom';
+import popup from '../src/views/popup';
 
-import popup from '../src/components/popup';
+const DOM = document.createElement('article');
 
-const { window } = new JSDOM();
-global.document = window.document;
+// Mock for navigateTo
+const navigateToMock = jest.fn();
 
-describe('Pop-up Component', () => {
+describe('Popup Component', () => {
   let popupComponent;
-  let message;
-  let pCardBody;
-  let buttonOk;
 
   // Configure the Init Component before each test
   beforeEach(() => {
-    message = 'test-message';
-    popupComponent = popup(message);
-    pCardBody = popupComponent.querySelector('.card-body p');
-    buttonOk = popupComponent.querySelector('.ok');
+    popupComponent = popup(navigateToMock);
+    DOM.appendChild(popupComponent);
   });
 
   // Clean after each test
@@ -26,73 +20,32 @@ describe('Pop-up Component', () => {
     jest.clearAllMocks();
   });
 
-  it('must be a function', () => {
-    expect(typeof popup).toBe('function');
-  });
+  test('Popup component renders with the correct message', () => {
+  // Render the component and get the overlay element
+    const overlay = popup('Error message');
 
-  it('popup function should return a section element', () => {
-    const section = popup();
-    expect(section.tagName).toBe('SECTION');
-  });
+    // Assert that the overlay exists
+    expect(overlay).toBeDefined();
 
-  //   if (typeof message !== 'undefined') {
-  //     if (message.includes('Firebase')) {
-  //       switch (message) {
-  //         case 'Firebase: Error (auth/email-already-in-use).':
-  //           // alert('Email already in use');
-  //           p.innerHTML = 'Email already in use';
-  //           break;
-  //         case 'Firebase: Error (auth/passwords-not-match).':
-  //           // alert('The passwords don\'t match');
-  //           p.innerHTML = 'The passwords don\'t match';
-  //           break;
-  //         case 'Firebase: Password should be at least 6 characters (auth/weak-password).':
-  //           // alert('Password should be at least 6 characters');
-  //           p.innerHTML = 'Password should be at least 6 characters';
-  //           break;
-  //         case 'Firebase: Error (auth/invalid-email).':
-  //           // alert('Invalid email');
-  //           p.innerHTML = 'Invalid email';
-  //           break;
-  //         case 'Firebase: Error (auth/user-not-found).':
-  //           // alert('User not found');
-  //           p.innerHTML = 'User not found';
-  //           break;
-  //         case 'Firebase: Error (auth/wrong-password).':
-  //           // alert('Wrong password');
-  //           p.innerHTML = 'Wrong password';
-  //           break;
-  //         case 'Firebase: Error (auth/too-many-requests).':
-  //           // alert('Too many requests');
-  //           p.innerHTML = 'Too many requests';
-  //           break;
-  //         case 'Firebase: Error ':
-  //           // There's an error about requiered an recent session
-  //           // alert('Another error');
-  //           p.innerHTML = 'Another error';
-  //           break;
-  //         default:
-  //           // alert(message);
-  //           p.innerHTML = message;
-  //           break;
-  //       }
-  //       ops.append(buttonOk);
-  //     } else if (message.includes('?')) {
-  //       card.className = 'confirm';
-  //       const buttonCancel = document.createElement('button');
-  //       buttonCancel.textContent = 'Cancel';
-  //       buttonCancel.className = 'cancel';
-  //       buttonOk.addEventListener('click', () => {
-  //         overlay.style.display = 'none';
-  //       });
-  //       buttonCancel.addEventListener('click', () => {
-  //         overlay.style.display = 'none';
-  //       });
-  //       ops.append(buttonOk, buttonCancel);
-  //     } else {
-  //       card.className = 'error';
-  //       p.innerHTML = message;
-  //       ops.append(buttonOk);
-  //     }
-  //   }
+    // Assert that the overlay has the correct classes
+    expect(overlay.className).toBe('overlay');
+
+    // Assert that the overlay contains the card element
+    const card = overlay.querySelector('.popup');
+    expect(card).toBeDefined();
+
+    // Assert that the card contains the header, message section, and footer
+    const header = card.querySelector('.card-header');
+    const messageSection = card.querySelector('.card-body');
+    const footer = card.querySelector('.card-footer');
+    expect(header).toBeDefined();
+    expect(messageSection).toBeDefined();
+    expect(footer).toBeDefined();
+
+    // Assert that the title and paragraph have the correct content
+    const title = header.querySelector('h2');
+    const paragraph = messageSection.querySelector('paragraph');
+    expect(title.innerHTML).toBe('Error');
+    expect(paragraph.innerHTML).toBe('Error message');
+  });
 });

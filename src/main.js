@@ -1,12 +1,16 @@
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase/firebaseConfig';
 // Este es el punto de entrada de tu aplicacion
 
-import init from './components/init.js';
-import error from './components/error.js';
-import signin from './components/signin.js';
-import signup from './components/signup.js';
-import password from './components/password.js';
-import feed from './components/feed.js';
-import popup from './components/popup.js';
+import init from './views/init';
+import error from './views/error.js';
+import { signin } from './views/signin';
+import { signup } from './views/signup';
+import { password } from './views/password';
+import { popup } from './views/popup';
+import { feed } from './views/feed';
+import { myPosts } from './views/myPosts';
+import { profile } from './views/profile';
 
 const routes = [
   { path: '/', component: init },
@@ -14,14 +18,16 @@ const routes = [
   { path: '/signin', component: signin },
   { path: '/signup', component: signup },
   { path: '/password', component: password },
-  { path: '/feed', component: feed },
   { path: '/popup', component: popup },
+  { path: '/feed', component: feed },
+  { path: '/myPosts', component: myPosts },
+  { path: '/profile', component: profile },
 ];
 
 const defaultRoute = '/';
 const root = document.getElementById('root');
 
-function navigateTo(hash) {
+async function navigateTo(hash) {
   const route = routes.find((routeFound) => routeFound.path === hash);
   if (route && route.component) {
     window.history.pushState(
@@ -32,7 +38,7 @@ function navigateTo(hash) {
     while (root.firstChild) {
       root.removeChild(root.firstChild);
     }
-    root.appendChild(route.component(navigateTo));
+    root.appendChild(await route.component(navigateTo));
   } else {
     navigateTo('/error');
   }
@@ -43,3 +49,21 @@ window.onpopstate = () => {
 };
 
 navigateTo(window.location.pathname || defaultRoute);
+
+onAuthStateChanged(auth, (user) => {
+  const path = window.location.pathname;
+  if (user) {
+    if (path === '/feed') {
+      navigateTo('/feed');
+    } else if (path === '/myPosts') {
+      navigateTo('/myPosts');
+    } else if (path === '/search') {
+      navigateTo('/search');
+    } else if (path === '/profile') {
+      navigateTo('/profile');
+    }
+  } else {
+    popup('Please sign in or sign up to start!');
+    navigateTo('/signin');
+  }
+});
