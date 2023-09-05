@@ -465,7 +465,7 @@
   }
   
   .signin img, .signup img, .pass img{
-      background: transparent;
+    background: transparent;
     width: 100%;
     height: 100%;
   }

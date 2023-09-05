@@ -68,7 +68,7 @@ const StoreService = {
   getDocumentById: async (collectionStore, id) => {
     try {
       // const docRef = await getDoc(doc(db, collectionStore, id));
-      const docRef = await getDoc(doc(collection(db, collectionStore), id));
+      const docRef = await getDoc(doc(db, collectionStore, id));
       if (docRef.exists) {
         return {
           id: docRef.id,

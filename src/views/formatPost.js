@@ -269,14 +269,14 @@ export const formatPost = (item) => {
 
   /** Add messages for existent reactions */
   const id = AuthService.getCurrentUser().uid;
-  const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`), where('idUser', '==', `${id}`));
-  onSnapshot(que2, (reactionSnapshot) => {
+  const que = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
+  onSnapshot(que, (reactionSnapshot) => {
     const likes = [];
     reactionSnapshot.docs.forEach((document) => {
       likes.push({ ...document.data(), id: document.id });
     });
     likes.forEach((like) => {
-      if (like.idUser === item.idUser) {
+      if (like.idUser === id) {
         feedHandler.getReactionMessage(like.idTypeLike).then((reaction) => {
           if (reaction) reactionMessage.style.display = 'block';
           reactionMessage.textContent = reaction.message;
