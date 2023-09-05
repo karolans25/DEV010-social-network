@@ -70,17 +70,20 @@ export const profile = async (navigateTo) => {
     typeLikes[pos] += 1;
   }
 
-  const date = posts[0].createdAt.toDate();
-  const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-    hour12: true,
-  };
-  const stringDate = date.toLocaleString('en-US', options);
+  let stringDate = '';
+  if (posts[0]) {
+    const date = posts[0].createdAt.toDate();
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true,
+    };
+    stringDate = date.toLocaleString('en-US', options);
+  }
 
   for (let i = 0; i < profileParts.length; i++) {
     const sub = document.createElement('section');
@@ -108,7 +111,7 @@ export const profile = async (navigateTo) => {
       }
     }
     if (i === 3) paragraphPart.textContent = `${5} friends`;
-    if (i === 4) paragraphPart.textContent = stringDate;
+    if (i === 4) paragraphPart.textContent = (stringDate !== '') ? stringDate : 'You haven\'t posted yet!';
 
     if (i === 2) {
       sectionData.append(sub, sectionReactions);
