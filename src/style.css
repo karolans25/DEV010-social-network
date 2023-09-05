@@ -1121,7 +1121,14 @@ body{
       gap: 5px;
       max-width: 100%;
     }
-  
+    .profile-data{
+      grid-template-rows: 1fr 1fr 2fr 1fr 1fr;
+    }
+    .profile-data .section-reaction{
+      grid-template-columns: 1fr 1fr 1fr;
+      min-height: 150px;
+      padding-top: 5px;
+    }
     .comment{
       position: relative;
       justify-content: end;
