@@ -5,6 +5,7 @@ import { db } from '../firebase/firebaseConfig';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';
+import { popup } from './popup';
 import { TITLE } from '../consts/consts';
 
 export const feed = async (navigateTo) => {
@@ -30,10 +31,10 @@ export const feed = async (navigateTo) => {
     });
     sectionGetAllPosts.innerHTML = '';
     if (posts.length === 0) {
-      const img = document.createElement('img');
-      const paragraph = document.createElement('paragraph');
-      img.src = '../src/assets/icons/not-found.png';
-      sectionGetAllPosts.append(img, paragraph);
+      popup('You don\'t have any post yet');
+      const text = document.createElement('h2');
+      text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
+      sectionGetAllPosts.appendChild(text);
     }
     posts.forEach((item) => {
       const formatForEachPost = formatPost(item);

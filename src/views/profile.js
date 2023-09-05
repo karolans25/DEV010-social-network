@@ -1,7 +1,3 @@
-import {
-  collection, query, orderBy, onSnapshot, where,
-} from 'firebase/firestore';
-import { db } from '../firebase/firebaseConfig';
 import { feedHandler } from '../handlers/feedHandler';
 import { navbar } from './navbar';
 import { profileHandler } from '../handlers/profileHandler';

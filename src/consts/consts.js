@@ -1,1 +1,1 @@
-export const TITLE = 'Tech-Net';
+export const TITLE = 'Powered Woman';
