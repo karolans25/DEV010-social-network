@@ -11,6 +11,12 @@ import { popup } from './popup';
 import { feedHandler } from '../handlers/feedHandler';
 import AuthService from '../firebase/authService';
 import { REACT_ICONS } from '../consts/consts';
+import imgUrl1 from '../assets/icons/voto-positivo.png';
+import imgUrl2 from '../assets/icons/voto-negativo.png';
+import imgUrl3 from '../assets/icons/salud-mental.png';
+import imgUrl4 from '../assets/icons/calidad-premium.png';
+import imgUrl5 from '../assets/icons/investigar.png';
+import imgUrl6 from '../assets/icons/comentario.png';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
@@ -121,7 +127,12 @@ export const formatPost = (item) => {
   for (let iterator = 0; iterator < REACT_ICONS.length; iterator++) {
     const button = document.createElement('button');
     const img = document.createElement('img');
-    img.src = REACT_ICONS[iterator].path;
+    if (iterator === 0) img.src = imgUrl1;
+    if (iterator === 1) img.src = imgUrl2;
+    if (iterator === 2) img.src = imgUrl3;
+    if (iterator === 3) img.src = imgUrl4;
+    if (iterator === 4) img.src = imgUrl5;
+    if (iterator === 5) img.src = imgUrl6;
     img.alt = `${iterator + 1}`;
     img.classList.add('react-button', `${iterator + 1}`, item.id);
     button.classList.add('button', `${iterator + 1}`, item.id);

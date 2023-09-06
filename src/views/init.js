@@ -14,6 +14,7 @@
 //   }
 // };
 import { TITLE } from '../consts/consts';
+import imgUrl from '../assets/1.png';
 
 const init = (navigateTo) => {
   // load();
@@ -45,7 +46,7 @@ const init = (navigateTo) => {
   // buttonMode.appendChild(imgMode);
   figure.className = 'init-figure';
 
-  img.src = './assets/1.png';
+  img.src = imgUrl;
   img.alt = 'imagen init';
   figure.append(img);
 
