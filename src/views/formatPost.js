@@ -11,12 +11,12 @@ import { popup } from './popup';
 import { feedHandler } from '../handlers/feedHandler';
 import AuthService from '../firebase/authService';
 import { REACT_ICONS } from '../consts/consts';
-import imgUrl1 from '../assets/icons/voto-positivo.png';
-import imgUrl2 from '../assets/icons/voto-negativo.png';
-import imgUrl3 from '../assets/icons/salud-mental.png';
-import imgUrl4 from '../assets/icons/calidad-premium.png';
-import imgUrl5 from '../assets/icons/investigar.png';
-import imgUrl6 from '../assets/icons/comentario.png';
+import imgUrl1 from '../assets/voto-positivo.png';
+import imgUrl2 from '../assets/voto-negativo.png';
+import imgUrl3 from '../assets/salud-mental.png';
+import imgUrl4 from '../assets/calidad-premium.png';
+import imgUrl5 from '../assets/investigar.png';
+import imgUrl6 from '../assets/comentario.png';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
@@ -106,7 +106,7 @@ export const formatPost = (item) => {
   userImg.alt = 'user img';
 
   loadingContainer.id = 'loading-container';
-  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.src = '../assets/playground.gif';
   loadingGif.alt = 'loading';
 
   feedHandler.getUserDataById(item.idUser)
