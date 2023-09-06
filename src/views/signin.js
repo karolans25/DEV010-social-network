@@ -2,6 +2,7 @@
 import { signinHandler } from '../handlers/signinHandler';
 import { popup } from './popup';
 import google from '../assets/icons/Google.png';
+import github from '../assets/icons/Github.png';
 
 export const signin = (navigateTo) => {
   const section = document.createElement('section');
@@ -74,7 +75,7 @@ export const signin = (navigateTo) => {
   buttonSignIn.name = 'signin-submit';
   buttonSignIn.type = 'submit';
   imgGoogle.src = google;
-  imgGithub.src = './assets/icons/Github.png';
+  imgGithub.src = github;
   imgGoogle.alt = 'Google';
   imgGithub.alt = 'Github';
   imgGoogle.classList.add('img-google');

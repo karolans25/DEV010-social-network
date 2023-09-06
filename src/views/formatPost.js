@@ -11,12 +11,13 @@ import { popup } from './popup';
 import { feedHandler } from '../handlers/feedHandler';
 import AuthService from '../firebase/authService';
 import { REACT_ICONS } from '../consts/consts';
-import imgUrl1 from '../assets/voto-positivo.png';
-import imgUrl2 from '../assets/voto-negativo.png';
-import imgUrl3 from '../assets/salud-mental.png';
-import imgUrl4 from '../assets/calidad-premium.png';
-import imgUrl5 from '../assets/investigar.png';
-import imgUrl6 from '../assets/comentario.png';
+import imgReactLike from '../assets/icons/voto-positivo.png';
+import imgReactDislike from '../assets/icons/voto-negativo.png';
+import imgReactLove from '../assets/icons/salud-mental.png';
+import imgReactStar from '../assets/icons/calidad-premium.png';
+import imgReactDoubts from '../assets/icons/investigar.png';
+import imgComment from '../assets/icons/comentario.png';
+import imgLoading from '../assets/icons/playground.gif';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
@@ -106,7 +107,7 @@ export const formatPost = (item) => {
   userImg.alt = 'user img';
 
   loadingContainer.id = 'loading-container';
-  loadingGif.src = '../assets/playground.gif';
+  loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
   feedHandler.getUserDataById(item.idUser)
@@ -127,12 +128,12 @@ export const formatPost = (item) => {
   for (let iterator = 0; iterator < REACT_ICONS.length; iterator++) {
     const button = document.createElement('button');
     const img = document.createElement('img');
-    if (iterator === 0) img.src = imgUrl1;
-    if (iterator === 1) img.src = imgUrl2;
-    if (iterator === 2) img.src = imgUrl3;
-    if (iterator === 3) img.src = imgUrl4;
-    if (iterator === 4) img.src = imgUrl5;
-    if (iterator === 5) img.src = imgUrl6;
+    if (iterator === 0) img.src = imgReactLike;
+    if (iterator === 1) img.src = imgReactDislike;
+    if (iterator === 2) img.src = imgReactLove;
+    if (iterator === 3) img.src = imgReactStar;
+    if (iterator === 4) img.src = imgReactDoubts;
+    if (iterator === 5) img.src = imgComment;
     img.alt = `${iterator + 1}`;
     img.classList.add('react-button', `${iterator + 1}`, item.id);
     button.classList.add('button', `${iterator + 1}`, item.id);
