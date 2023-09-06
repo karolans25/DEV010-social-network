@@ -10,6 +10,7 @@ import { popup } from './popup';
 
 import { feedHandler } from '../handlers/feedHandler';
 import AuthService from '../firebase/authService';
+import { REACT_ICONS } from '../consts/consts';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
@@ -66,14 +67,6 @@ export const formatPost = (item) => {
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
 
-  const reactIcons = [
-    ['../assets/icons/voto-positivo.png', 'Like'],
-    ['../assets/icons/voto-negativo.png', 'Dislike'],
-    ['../assets/icons/salud-mental.png', 'Love it'],
-    ['../assets/icons/calidad-premium.png', 'The best'],
-    ['../assets/icons/investigar.png', 'Make me doubt'],
-    ['../assets/icons/comentario.png', 'Comment'],
-  ];
   if (item.createdAt) {
     const date = item.createdAt.toDate();
     const options = {
@@ -125,16 +118,16 @@ export const formatPost = (item) => {
   fillPostData(item.URL, postFigureContainer);
 
   /** Create buttons section */
-  for (let iterator = 0; iterator < reactIcons.length; iterator++) {
+  for (let iterator = 0; iterator < REACT_ICONS.length; iterator++) {
     const button = document.createElement('button');
     const img = document.createElement('img');
-    img.src = reactIcons[iterator][0];
+    img.src = REACT_ICONS[iterator].path;
     img.alt = `${iterator + 1}`;
     img.classList.add('react-button', `${iterator + 1}`, item.id);
     button.classList.add('button', `${iterator + 1}`, item.id);
     button.setAttribute('data-type', iterator + 1);
     button.appendChild(img);
-    if (iterator === reactIcons.length - 1) {
+    if (iterator === REACT_ICONS.length - 1) {
       sectionComment.appendChild(button);
     } else {
       sectionReact.appendChild(button);
