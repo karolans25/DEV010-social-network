@@ -9,6 +9,10 @@ import { feedHandler } from '../handlers/feedHandler';
 import { popup } from './popup';
 import AuthService from '../firebase/authService';
 
+import imgLoading from '../assets/icons/playground.gif';
+import imgEditButton from '../assets/icons/edit.png';
+import imgDeleteButton from '../assets/icons/delete.png';
+
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
   closeButton.classList.add('close-button');
@@ -68,13 +72,13 @@ export const myPosts = async (navigateTo) => {
   sectionGetAllPosts.className = 'get-posts';
   sectionGetAllPosts.innerHTML = '';
   title.innerHTML = 'Caro PG - My Posts';
-  imgEdit.src = '../assets/icons/edit.png';
+  imgEdit.src = imgEditButton;
   imgEdit.alt = 'edit';
-  imgDelete.src = '../assets/icons/delete.png';
+  imgDelete.src = imgDeleteButton;
   imgDelete.alt = 'delete';
 
   loadingContainer.id = 'loading-container';
-  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
   // const posts = await feedHandler.getAllMyPost();

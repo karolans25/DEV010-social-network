@@ -1,4 +1,9 @@
-// export function navBar(navigateTo) {
+import imgHome from '../assets/icons/home.png';
+import imgRss from '../assets/icons/rss.png';
+import imgPlus from '../assets/icons/mas.png';
+import imgSearch from '../assets/icons/lupa.png';
+import imgUser from '../assets/icons/usuario.png';
+
 export const navbar = (navigateTo) => {
   const nav = document.createElement('section');
   const ul = document.createElement('ul');
@@ -8,19 +13,19 @@ export const navbar = (navigateTo) => {
 
   const icons = [
     {
-      src: './assets/icons/home.png', alt: 'feed', path: '/feed',
+      alt: 'feed', path: '/feed',
     },
     {
-      src: './assets/icons/rss.png', alt: 'my posts', path: '/myPosts',
+      alt: 'my posts', path: '/myPosts',
     },
     {
-      src: './assets/icons/mas.png', alt: 'plus', path: '/feed',
+      alt: 'plus', path: '/feed',
     },
     {
-      src: './assets/icons/lupa.png', alt: 'search', path: '/search',
+      alt: 'search', path: '/search',
     },
     {
-      src: './assets/icons/usuario.png', alt: 'user', path: '/profile',
+      alt: 'user', path: '/profile',
     },
   ];
 
@@ -37,7 +42,11 @@ export const navbar = (navigateTo) => {
       e.preventDefault();
       navigateTo(icons[i].path);
     });
-    img.src = icons[i].src;
+    if (i === 0) img.src = imgHome;
+    if (i === 1) img.src = imgRss;
+    if (i === 2) img.src = imgPlus;
+    if (i === 3) img.src = imgSearch;
+    if (i === 4) img.src = imgUser;
     img.alt = icons[i].alt;
     button.appendChild(img);
     li.appendChild(button);

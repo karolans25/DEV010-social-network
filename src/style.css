@@ -156,6 +156,7 @@
     display: grid;
     /*box-shadow: offset-x | offset-y | blur-radius | spread-radius | color ;*/
     box-shadow: 0 0.2rem var(--moving-things-color) ;
+    border-bottom: 1px solid var(--movin-things-color);
     /* min-width: 300px; */
     /* max-width: 500px; */
   }
@@ -261,8 +262,8 @@
   .signin figure, .pass figure, .signup figure, .profile figure{
     border: solid 5px var(--main-color);
     border-radius: 50%;
-    max-width: 162px;
-    max-height: 162px;
+    max-width: 120px;
+    max-height: 120px;
   }
   
   /* sign In */
@@ -278,36 +279,43 @@
       /* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
   }
   
-  .signin .link{
-    justify-self: end;
+  .link{
     width: fit-content;
-    padding-left: 10px;
-    padding-right: 10px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: row-reverse;
-    margin-right: 20px;
-    border: dotted 1px var(--moving-things-color);
+    /* padding-left: 10px;
+    padding-right: 10px; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* display: flex; */
+    /* flex-direction: row-reverse; */
+    /* margin-right: 20px; */
+    /* border: dotted 1px var(--main-color); */
+    border: none;
+    background-color: transparent;
+    color: var(--contrast-color);
+    font-size: 14px;
   }
   
-  .signin form .link{
-    margin-right: 0;
-    font-size: 12px;
-  }
-  .signin .google, .signin .github{
-    margin-left: 15px;
-    border-radius: 0;
-    border-bottom: 1px solid;
-    border-bottom-color: var(--principal-letter-color);
-    border-bottom-style: dashed;
-  }
+  /* .signin .google, .signin .github, .signin button{ */
+    /* max-width: 32px; */
+    /* max-height: 32px; */
+    /* margin-left: 15px; */
+    /* border-radius: 7px; */
+    /* border-bottom: 1px solid; */
+    /* border-bottom-color: var(--principal-letter-color); */
+    /* border-bottom-style: dashed; */
+  /* } */
   
+  .signin button img{
+    width: 32px;
+    height: 32px;
+  }
+
   .ops{
     display: flex;
     justify-content: space-evenly;
     border: dashed 1px var(--contrast-color);
-    margin-top: 15px;
+    margin-top: 10px;
+    height: fit-content;
     /* box-shadow: 0.3rem 0.3rem var(--moving-things-color); */
   }
   
@@ -326,7 +334,20 @@
     height: fit-content;
     padding: 0;
     background-color: var(--contrast-color);
-    border: solid 2px var(--contrast-color);
+  }
+  
+  .ops.extra{
+    border: 1px dotted var(--secondary-letter-color);
+    height: fit-content;
+  }
+
+  .ops.extra button{
+    /* background-color: var(--contrast-color); */
+    background-color: transparent;
+    border: 3px solid var(--secondary-letter-color);
+    padding: 5px 5px 5px 5px;
+    min-width: 50px;
+    min-height: 50px;
   }
   
   .signin form input, .signin form button, .signup form input, .signup form button, .pass form input, .pass form button{
@@ -346,6 +367,13 @@
     /* box-shadow: 0.3rem 0.3rem 2px var(--moving-things-color); */
   }
   
+  .signin form button{
+    margin: 0;
+    padding: 0;
+    min-width: 70px;
+    min-height: fit-content;
+  }
+    
   .signin img, .signup img, .pass img, .pass img, .profile img{
     background: transparent;
     width: 100%;
@@ -385,23 +413,24 @@
     justify-self: start;
   }
   
-  .signup figure{
-    width: 162px;
-    height: 162px;
+  /* .signup figure{
+    width: 120px;
+    height: 120px;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
     padding: 0;
-  }
+  } */
   
   .signup figure img, .profile figure img{
-    width: 162px;
-    height: 162px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     margin: 0;
     border: solid 3px var(--main-color);
     background-color: var(--contrast-color);
+    transform: translate(0vw, -4vh);
   }
   
   .icon-add-file{
@@ -432,16 +461,17 @@
   .profile img.icon-add-file{
     background-image: url('./assets/icons/file.png');
     background-color: var(--main-color);
-    background-size: 50px 50px;
-    width: 50px;
-    height: 50px;
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
     border-radius: 7px;
     vertical-align: middle;
     margin-right: 5px;
     box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /* border: 1px solid black; */
-    position: relative;
+    transform: translate(0vw, -25vh);
+    /* position: relative;
     top: -212px;
-    left: 0;
+    left: 0; */
   }
 
   .profile .profile-data img{
@@ -496,9 +526,9 @@
   }
   
   .profile .file{
-    position: relative;
-    top: -271px;
-    left: 41px;
+    width: 30px;
+    height: 30px;
+    transform: translate(3vw, -31vh);
     opacity: 0;
   }
 
@@ -540,22 +570,20 @@
     background-image: url('./assets/icons/file.png');
     background-color: var(--main-color);
     background-size: cover;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     vertical-align: middle;
     margin-right: 5px;
     box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;
     /* border: solid 3px var(--contrast-color); */
     border-radius: 7px;
-    position: relative;
-    top: -36px;
-    left: 0;
+    transform: translate(0.2vw, -25vh);
   }
   
   .signup .file-signup{
-    position: relative;
-    top: -93px;
-    left: 42px;
+    width: 60px;
+    height: 30px;
+    transform: translate(2.5vw, -31vh);
     opacity: 0;
   }
   

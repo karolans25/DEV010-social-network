@@ -1,4 +1,5 @@
 // import { loadDefaultImages } from '../lib/index';
+import imgInit from '../assets/1.png';
 
 const init = (navigateTo) => {
   const section = document.createElement('section');
@@ -11,7 +12,7 @@ const init = (navigateTo) => {
   section.className = 'init';
   figure.className = 'init-figure';
 
-  img.src = './assets/1.png';
+  img.src = imgInit;
   img.alt = 'imagen init';
   figure.append(img);
 

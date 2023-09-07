@@ -6,7 +6,7 @@ import imgAvatar from '../assets/icons/nina.png';
 
 export const signup = (navigateTo) => {
   const section = document.createElement('section');
-  const back = document.createElement('a');
+  const back = document.createElement('button');
   const sectionFig = document.createElement('section');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
@@ -32,11 +32,13 @@ export const signup = (navigateTo) => {
   section.className = 'signup';
 
   // link back
-  back.innerHTML = '👈 back';
+  // back.innerHTML = '👈 back';
+  back.innerHTML = 'back';
   iconAddFile.className = 'icon-add-file';
   file.classList.add('file', 'file-upload', 'file-signup');
-  back.href = '/signin';
+  // back.href = '/signin';
   back.name = 'back';
+  back.classList.add('link', 'back');
   figure.style.display = 'grid';
   file.name = 'file';
   file.type = 'file';
@@ -82,6 +84,11 @@ export const signup = (navigateTo) => {
   inputPassConfirm.type = 'password';
   inputPassConfirm.required = true;
   buttonSignUp.type = 'submit';
+
+  back.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/signin');
+  });
 
   buttonRight.addEventListener('click', () => { console.log('Right'); });
 

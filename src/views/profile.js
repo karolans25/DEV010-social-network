@@ -1,10 +1,20 @@
-import {
-  collection, query, orderBy, onSnapshot, where,
-} from 'firebase/firestore';
-import { db } from '../firebase/firebaseConfig';
 import { feedHandler } from '../handlers/feedHandler';
 import { navbar } from './navbar';
 import { profileHandler } from '../handlers/profileHandler';
+
+import imgExit from '../assets/icons/signout.png';
+import imgLike from '../assets/icons/voto-positivo.png';
+import imgDislike from '../assets/icons/voto-negativo.png';
+import imgLove from '../assets/icons/salud-mental.png';
+import imgBest from '../assets/icons/calidad-premium.png';
+import imgDoubts from '../assets/icons/investigar.png';
+import imgComment from '../assets/icons/comentario.png';
+// import imgLoading from '../assets/icons/playground.gif';
+import iconEmail from '../assets/icons/email.png';
+import iconPosts from '../assets/icons/posts.png';
+import iconReactions from '../assets/icons/reactions.png';
+import iconFriends from '../assets/icons/friends.png';
+import iconLast from '../assets/icons/last.png';
 
 export const profile = async (navigateTo) => {
   const section = document.createElement('section');
@@ -31,7 +41,7 @@ export const profile = async (navigateTo) => {
   iconAddFile.classList.add('icon-add-file');
   file.classList.add('file', 'file-upload', 'file-profile');
   buttonSignOut.classList.add('signout-button');
-  imgSignOut.src = '../assets/icons/logout.png';
+  imgSignOut.src = imgExit;
   imgSignOut.alt = 'sign out';
   figure.style.display = 'grid';
   file.name = 'file';
@@ -43,22 +53,9 @@ export const profile = async (navigateTo) => {
   title.style.textAlign = 'center';
   title.style.fontSize = '30px';
 
-  const reactIcons = [
-    ['../assets/icons/voto-positivo.png', 'Like'],
-    ['../assets/icons/voto-negativo.png', 'Dislike'],
-    ['../assets/icons/salud-mental.png', 'Love it'],
-    ['../assets/icons/calidad-premium.png', 'The best'],
-    ['../assets/icons/investigar.png', 'Make me doubt'],
-    ['../assets/icons/comentario.png', 'Comment'],
-  ];
+  const reactIcons = ['Like', 'Dislike', 'Love it', 'The best', 'Make me doubt', 'Comment'];
 
-  const profileParts = [
-    ['../assets/icons/email.png', 'Email'],
-    ['../assets/icons/posts.png', 'Posts'],
-    ['../assets/icons/reactions.png', 'Reactions'],
-    ['../assets/icons/friends.png', 'Friends'],
-    ['../assets/icons/last.png', 'Last post'],
-  ];
+  const profileParts = ['Email', 'Posts', 'Reactions', 'Friends', 'Last post'];
 
   const posts = await feedHandler.getAllMyPost();
 
@@ -70,25 +67,32 @@ export const profile = async (navigateTo) => {
     typeLikes[pos] += 1;
   }
 
-  const date = posts[0].createdAt.toDate();
-  const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-    hour12: true,
-  };
-  const stringDate = date.toLocaleString('en-US', options);
+  let stringDate = 'You haven\'t created any post yet!';
+  if (posts[0]) {
+    const date = posts[0].createdAt.toDate();
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true,
+    };
+    stringDate = date.toLocaleString('en-US', options);
+  }
 
   for (let i = 0; i < profileParts.length; i++) {
     const imgPart = document.createElement('img');
     const labelPart = document.createElement('label');
     const paragraphPart = document.createElement('paragraph');
-    imgPart.src = profileParts[i][0];
-    imgPart.alt = profileParts[i][1];
-    labelPart.textContent = profileParts[i][1];
+    if (i === 0) imgPart.src = iconEmail;
+    if (i === 1) imgPart.src = iconPosts;
+    if (i === 2) imgPart.src = iconReactions;
+    if (i === 3) imgPart.src = iconFriends;
+    if (i === 4) imgPart.src = iconLast;
+    imgPart.alt = profileParts[i];
+    labelPart.textContent = profileParts[i];
     if (i === 0) paragraphPart.textContent = data[3];
     if (i === 1) paragraphPart.textContent = (posts.length === 1) ? '1 post created' : `${posts.length} posts created`;
     if (i === 2) {
@@ -97,8 +101,13 @@ export const profile = async (navigateTo) => {
         const imgReaction = document.createElement('img');
         const labelReaction = document.createElement('label');
         reaction.classList.add('reaction');
-        imgReaction.src = reactIcons[j][0];
-        imgReaction.alt = reactIcons[j][1];
+        if (j === 0) imgReaction.src = imgLike;
+        if (j === 1) imgReaction.src = imgDislike;
+        if (j === 2) imgReaction.src = imgLove;
+        if (j === 3) imgReaction.src = imgBest;
+        if (j === 4) imgReaction.src = imgDoubts;
+        if (j === 5) imgReaction.src = imgComment;
+        imgReaction.alt = reactIcons[j];
         imgReaction.classList.add('react-image');
         labelReaction.textContent = typeLikes[j];
         reaction.append(imgReaction, labelReaction);

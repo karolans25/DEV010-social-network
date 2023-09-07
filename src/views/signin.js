@@ -2,9 +2,17 @@
 import { signinHandler } from '../handlers/signinHandler';
 import { popup } from './popup';
 
+import imgLoading from '../assets/icons/playground.gif';
+import imgAvatar from '../assets/icons/gorra.png';
+import google from '../assets/icons/Google.png';
+import github from '../assets/icons/Github.png';
+import imgSignin from '../assets/icons/signin.png';
+import imgSignup from '../assets/icons/signup.png';
+import imgPass from '../assets/icons/password.png';
+
 export const signin = (navigateTo) => {
   const section = document.createElement('section');
-  const back = document.createElement('a');
+  const back = document.createElement('button');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
   const title = document.createElement('h2');
@@ -19,8 +27,9 @@ export const signin = (navigateTo) => {
   const buttonSignIn = document.createElement('button');
   const buttonSignInGithub = document.createElement('button');
   const imgGithub = document.createElement('img');
-  const recoverPass = document.createElement('a');
-  const signUp = document.createElement('a');
+  const extra = document.createElement('section');
+  const recoverPass = document.createElement('button');
+  const signUp = document.createElement('button');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
 
@@ -28,24 +37,33 @@ export const signin = (navigateTo) => {
   section.className = 'signin';
 
   // link back
-  back.innerHTML = '👈 back';
+  // back.innerHTML = '👈 back';
+  back.innerHTML = 'back';
   back.setAttribute('name', 'back');
-  back.href = '/';
+  // back.href = '/';
+  back.classList.add('link', 'back');
 
   // link sign up
-  signUp.innerHTML = '👉 Sign Up';
+  // signUp.innerHTML = '';
+  const signup = document.createElement('img');
+  signup.src = imgSignup;
+  signup.alt = 'sign-up';
+  signUp.appendChild(signup);
   signUp.setAttribute('name', 'signup');
-  signUp.href = '/signup';
+  // signUp.href = '/signup';
   signUp.className = 'link';
 
   // link forgot password
-  recoverPass.innerHTML = 'Forgot password ?';
+  const pass = document.createElement('img');
+  pass.src = imgPass;
+  pass.alt = 'sign-up';
+  recoverPass.appendChild(pass);
   recoverPass.setAttribute('name', 'recover-pass');
-  recoverPass.href = '/password';
   recoverPass.className = 'link';
+  extra.classList.add('ops', 'extra');
 
   // image
-  img.src = './assets/icons/gorra.png';
+  img.src = imgAvatar;
   img.alt = 'user icon';
   figure.append(img);
 
@@ -53,8 +71,23 @@ export const signin = (navigateTo) => {
   title.textContent = 'Sign In';
 
   loadingContainer.id = 'loading-container';
-  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
+
+  back.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/');
+  });
+
+  recoverPass.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/password');
+  });
+
+  signUp.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/signup');
+  });
 
   // form
   labelEmail.innerHTML = 'Email: ';
@@ -69,17 +102,21 @@ export const signin = (navigateTo) => {
   inputPass.placeholder = 'Write password';
   inputPass.type = 'password';
   inputPass.required = true;
-  buttonSignIn.textContent = '👉 Sign In ';
+  // buttonSignIn.textContent = '👉 Sign In ';
   buttonSignIn.name = 'signin-submit';
   buttonSignIn.type = 'submit';
-  imgGoogle.src = './assets/icons/Google.png';
-  imgGithub.src = './assets/icons/Github.png';
+  const butSignin = document.createElement('img');
+  butSignin.src = imgSignin;
+  butSignin.alt = 'sign-in';
+  buttonSignIn.appendChild(butSignin);
+  imgGoogle.src = google;
+  imgGithub.src = github;
   imgGoogle.alt = 'Google';
   imgGithub.alt = 'Github';
   imgGoogle.classList.add('img-google');
   imgGoogle.classList.add('img-github');
 
-  form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn, recoverPass);
+  form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn);
 
   form.addEventListener('submit', async (e) => {
     try {
@@ -139,7 +176,8 @@ export const signin = (navigateTo) => {
   });
 
   ops.append(buttonSignInGoogle, buttonSignInGithub);
-  section.append(back, figure, title, form, ops, signUp);
+  extra.append(recoverPass, signUp);
+  section.append(back, figure, title, form, ops, extra);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);
 
