@@ -1,5 +1,6 @@
 // import { loadDefaultImages } from '../lib/index';
 import imgInit from '../assets/1.png';
+import { TITLE } from '../consts/const';
 
 const init = (navigateTo) => {
   const section = document.createElement('section');
@@ -22,7 +23,7 @@ const init = (navigateTo) => {
     navigateTo('/signin');
   });
 
-  title.textContent = 'Caro PG';
+  title.textContent = TITLE;
 
   paragraph.innerHTML = 'Create Technology to make things happen! 🌎💻👣';
 

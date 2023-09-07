@@ -13,6 +13,8 @@ import imgLoading from '../assets/icons/playground.gif';
 import imgEditButton from '../assets/icons/edit.png';
 import imgDeleteButton from '../assets/icons/delete.png';
 
+// import { TITLE } from '../consts/const';
+
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
   closeButton.classList.add('close-button');
@@ -71,7 +73,8 @@ export const myPosts = async (navigateTo) => {
   subSection.className = 'myPosts';
   sectionGetAllPosts.className = 'get-posts';
   sectionGetAllPosts.innerHTML = '';
-  title.innerHTML = 'Caro PG - My Posts';
+  // title.innerHTML = `${TITLE} - My Posts`;
+  title.innerHTML = 'My Posts';
   imgEdit.src = imgEditButton;
   imgEdit.alt = 'edit';
   imgDelete.src = imgDeleteButton;
@@ -94,8 +97,12 @@ export const myPosts = async (navigateTo) => {
       posts.push({ ...documentPost.data(), id: documentPost.id });
     });
     sectionGetAllPosts.innerHTML = '';
+    sectionGetAllPosts.innerHTML = '';
     if (posts.length === 0) {
       popup('You don\'t have any post yet');
+      const text = document.createElement('h2');
+      text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
+      sectionGetAllPosts.appendChild(text);
     }
     posts.forEach(async (item) => {
       const formatForEachPost = await formatPost(item);

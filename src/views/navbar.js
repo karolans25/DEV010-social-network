@@ -7,7 +7,6 @@ import imgUser from '../assets/icons/usuario.png';
 export const navbar = (navigateTo) => {
   const nav = document.createElement('section');
   const ul = document.createElement('ul');
-  const div = document.createElement('div');
 
   nav.className = 'navigation';
 
@@ -35,8 +34,8 @@ export const navbar = (navigateTo) => {
     const img = document.createElement('img');
     li.id = `list-${icons[i].alt}`;
     li.classList.value = 'list';
-    if (i === 0) {
-      li.classList.value = 'list active';
+    if (window.location.pathname === icons[i].path) {
+      li.classList.add('active');
     }
     button.addEventListener('click', (e) => {
       e.preventDefault();
@@ -47,27 +46,14 @@ export const navbar = (navigateTo) => {
     if (i === 2) img.src = imgPlus;
     if (i === 3) img.src = imgSearch;
     if (i === 4) img.src = imgUser;
+    // img.src = icons[i].src;
     img.alt = icons[i].alt;
     button.appendChild(img);
     li.appendChild(button);
     ul.append(li);
   }
-  div.className = 'indicator';
-  ul.append(div);
 
   nav.append(ul);
-
-  // console.clear();
-  // const nav = document.querySelector('.navigation');
-  // const list = document.querySelectorAll('.list');
-  // console.log(list);
-  // list.forEach((item) => item.addEventListener('click', (e) => {
-  //   console.log(item);
-  //   list.forEach((li) => li.classList.remove('active'));
-  //   e.preventDefault();
-  //   alert(e.currentTarget);
-  //   e.currentTarget.classList.add('active');
-  // }));
 
   return nav;
 };
