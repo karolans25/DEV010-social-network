@@ -17,12 +17,12 @@ const UserController = {
           email: user.email || email,
           createdAt: serverTimestamp(),
           friends: [],
-          displayName: user.displayName || '',
-          photoURL: user.photoURL || '',
+          name: user.displayName || '',
+          photo: user.photoURL || '',
         };
-        await StoreService.updateDocument('user', user.uid, data);
+        await StoreService.addDocumentWithId('user', user.uid, data);
         await AuthService.sendEmailVerify(user);
-        return 'The user has been registered. \nCheck your email to confirm the account';
+        return 'The user has been registered. Check your email to confirm the account';
       }
       return 'User not created';
     } catch (err) { return err.message; }
@@ -46,14 +46,24 @@ const UserController = {
       const user = await AuthService.loginGoogle();
       if (user) {
         const urlProfileImage = await StorageService.uploadFile(user.photoURL, `${user.uid}/profile`);
+        const storeDoc = await StoreService.getDocumentById('user', user.uid);
         const data = {
           email: user.email,
           createdAt: serverTimestamp(),
           friends: [],
-          displayName: user.displayName || '',
-          photoURL: urlProfileImage || '',
+          name: user.displayName || '',
+          photo: urlProfileImage || '',
         };
-        await StoreService.addDocument('user', data);
+        if (storeDoc.exists) {
+          console.log(storeDoc);
+          console.log('Línea 58 UserControler');
+          console.log(user.uid);
+          await StoreService.updateDocument('user', user.uid, data);
+        } else {
+          console.log('Línea 62 UserControler');
+          console.log(user.uid);
+          await StoreService.addDocumentWithId('user', user.uid, data);
+        }
         return 'The user has been logged';
       }
       return 'User not logged';
@@ -83,7 +93,12 @@ const UserController = {
 
   getUserDataById: async (idUser) => {
     const user = await StoreService.getDocumentById('user', idUser);
-    return [user.name, user.photo];
+    return {
+      id: user.id,
+      email: user.data().email,
+      name: user.data().name,
+      photo: user.data().photo,
+    };
   },
 };
 

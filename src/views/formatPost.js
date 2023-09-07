@@ -3,11 +3,6 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import { popup } from './popup';
-// import {
-//   reactPost, unreactPost, updateReactPost, hasReactedPost, deletePost,
-//   updatePost, getReactionMessage,
-// } from '../lib/user';
-
 import { feedHandler } from '../handlers/feedHandler';
 import AuthService from '../firebase/authService';
 
@@ -112,8 +107,8 @@ export const formatPost = (item) => {
 
   feedHandler.getUserDataById(item.idUser)
     .then((data) => {
-      userName.textContent = data[0];
-      userImg.src = data[1];
+      userName.textContent = data.name;
+      userImg.src = data.photo;
     });
   //   getDoc(doc(db, 'user', item.idUser))
   //     .then((documentUser) => {
