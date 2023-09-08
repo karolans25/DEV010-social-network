@@ -54,8 +54,8 @@ export const search = (navigateTo) => {
       text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
       sectionGetAllPosts.appendChild(text);
     }
-    posts.forEach((item) => {
-      const formatForEachPost = formatPost(item);
+    posts.forEach(async (item) => {
+      const formatForEachPost = await formatPost(item);
       formatForEachPost.classList.add('container-found-post', item.id);
       sectionGetAllPosts.append(formatForEachPost);
     });
@@ -70,8 +70,7 @@ export const search = (navigateTo) => {
 
   sectionSearch.appendChild(subtitle);
   sectionSearch.appendChild(searchText);
-  sectionFormatGetAllPost.append(sectionGetAllPosts);
-  subSection.append(sectionSearch, title, sectionFormatGetAllPost);
+  subSection.append(sectionSearch, title, sectionGetAllPosts);
   section.append(subSection, nav);
 
   return section;

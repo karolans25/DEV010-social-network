@@ -104,6 +104,7 @@ export const formatPost = async (item) => {
 
   loadingContainer.id = 'loading-container';
   loadingGif.src = imgLoading;
+  loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
   const dataUser = await feedHandler.getUserDataById(item.idUser);
@@ -195,17 +196,6 @@ export const formatPost = async (item) => {
         createThumbnail(urls[i], thumbnailId, postFigureContainer);
         formData.append(thumbnailId, urls[i]);
       }
-      //   getDoc(doc(db, 'post', item.id))
-      //     .then((document) => {
-      //   textarea.value = document.data().text;
-      //   const urls = document.data().URL;
-      //   postFigureContainer.innerText = '';
-      //   for (let i = 0; i < urls.length; i++) {
-      //     const thumbnailId = `${Math.floor(Math.random() * 10000)}_${Date.now()}`;
-      //     createThumbnail(urls[i], thumbnailId, postFigureContainer);
-      //     formData.append(thumbnailId, urls[i]);
-      //   }
-      // });
 
       postFigureContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('close-button')) {
@@ -316,48 +306,6 @@ export const formatPost = async (item) => {
   sectionComment.addEventListener('click', (e) => {
     console.log(e.target.classList);
   });
-
-  /** Add messages for existent reactions */
-  //   const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
-  //   onSnapshot(que2, (reactionSnapshot) => {
-  //     const likes = [];
-  //     reactionSnapshot.docs.forEach((document) => {
-  //       likes.push({ ...document.data(), id: document.id });
-  //     });
-  //     likes.forEach((like) => {
-  //       if (like.idUser === auth.currentUser.uid) {
-  //         getReactionMessage(like.idTypeLike).then((data) => {
-  //           if (data) reactionMessage.style.display = 'block';
-  //           reactionMessage.textContent = data.message;
-  //         });
-  //       }
-  //     });
-  //   });
-
-  //   /** Event listener for reaction buttons */
-  //   sectionReact.addEventListener('click', (e) => {
-  //     const [, type, idPub] = e.target.classList;
-  //     hasReactedPost(idPub)
-  //       .then((reactedSnapshot) => {
-  //         if (reactedSnapshot.size > 0) {
-  //           if (type === reactedSnapshot.docs[0].data().idTypeLike) {
-  //             unreactPost(reactedSnapshot.docs[0].id);
-  //             reactionMessage.style.display = 'none';
-  //           } else {
-  //             updateReactPost(type, reactedSnapshot.docs[0].id);
-  //             getReactionMessage(type).then((data) => {
-  //               reactionMessage.textContent = data.message;
-  //             });
-  //           }
-  //         } else {
-  //           reactPost(idPub, type);
-  //           reactionMessage.style.display = 'block';
-  //           getReactionMessage(type).then((data) => {
-  //             reactionMessage.textContent = data.message;
-  //           });
-  //         }
-  //       });
-  //   });
 
   /** Event listener for comments */
   sectionComment.addEventListener('click', (e) => {

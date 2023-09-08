@@ -149,17 +149,6 @@ export const signin = (navigateTo) => {
       if (res === 'The user has been logged') {
         navigateTo('/feed');
       }
-      /*
-      signInGoogle()
-        .then((response) => {
-          if (response.startsWith('The user has been registered and logged with email')) {
-            form.reset();
-            navigateTo('/feed');
-            popup(response);
-          }
-        })// .then(() => navigateTo('/feed'))
-        .catch((err) => popup(err.message));
-        */
     } catch (err) {
       loadingContainer.style.display = 'none';
       popup(err.message);

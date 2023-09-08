@@ -83,9 +83,12 @@ export const profile = async (navigateTo) => {
   }
 
   for (let i = 0; i < profileParts.length; i++) {
+    const sub = document.createElement('section');
     const imgPart = document.createElement('img');
     const labelPart = document.createElement('label');
     const paragraphPart = document.createElement('paragraph');
+    sub.classList.add('sub-part');
+    paragraphPart.style.alignItems = 'center';
     if (i === 0) imgPart.src = iconEmail;
     if (i === 1) imgPart.src = iconPosts;
     if (i === 2) imgPart.src = iconReactions;
@@ -115,12 +118,13 @@ export const profile = async (navigateTo) => {
       }
     }
     if (i === 3) paragraphPart.textContent = `${5} friends`;
-    if (i === 4) paragraphPart.textContent = stringDate;
+    if (i === 4) paragraphPart.textContent = (stringDate !== '') ? stringDate : 'You haven\'t posted yet!';
 
+    sub.append(imgPart, labelPart);
     if (i === 2) {
-      sectionData.append(imgPart, labelPart, sectionReactions);
+      sectionData.append(sub, sectionReactions);
     } else {
-      sectionData.append(imgPart, labelPart, paragraphPart);
+      sectionData.append(sub, paragraphPart);
     }
   }
 
@@ -133,11 +137,6 @@ export const profile = async (navigateTo) => {
     profileHandler.signout();
     navigateTo('/signin');
   });
-  //   sectionData.append(imgEmail, labelEmail, paragraphEmail);
-  //   sectionData.append(imgPost, labelPost, paragraphPost);
-  //   sectionData.append(imgReactions, labelReactions, sectionReactions);
-  //   sectionData.append(imgFriends, labelFriends, paragraphFriends);
-  //   sectionData.append(imgLastPost, labelLastPost, paragraphLastPost);
   buttonSignOut.appendChild(imgSignOut);
   figure.append(img, iconAddFile, file);
   subSection.appendChild(buttonSignOut);

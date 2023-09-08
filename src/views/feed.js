@@ -16,7 +16,6 @@ export const feed = async (navigateTo) => {
   const nav = navbar(navigateTo);
   const title = document.createElement('h2');
   const sectionFormatCreatePost = formatCreatePost();
-  const sectionFormatGetAllPost = document.createElement('section');
   const sectionGetAllPosts = document.createElement('section');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
@@ -55,8 +54,7 @@ export const feed = async (navigateTo) => {
       sectionGetAllPosts.append(formatForEachPost);
     });
   });
-  sectionFormatGetAllPost.append(sectionGetAllPosts);
-  subSection.append(sectionFormatCreatePost, title, sectionFormatGetAllPost);
+  subSection.append(sectionFormatCreatePost, title, sectionGetAllPosts);
   section.append(subSection, nav);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);

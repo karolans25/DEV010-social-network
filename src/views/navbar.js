@@ -5,7 +5,7 @@ import imgSearch from '../assets/icons/lupa.png';
 import imgUser from '../assets/icons/usuario.png';
 
 export const navbar = (navigateTo) => {
-  const nav = document.createElement('section');
+  const nav = document.createElement('nav');
   const ul = document.createElement('ul');
 
   nav.className = 'navigation';

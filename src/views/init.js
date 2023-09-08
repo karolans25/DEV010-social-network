@@ -2,7 +2,10 @@ import imgInit from '../assets/init.png';
 import { TITLE } from '../consts/const';
 
 const init = (navigateTo) => {
+  // load();
+
   const section = document.createElement('section');
+  // const buttonMode = document.createElement('button');
   const img = document.createElement('img');
   const title = document.createElement('h1');
   const buttonStart = document.createElement('button');
@@ -26,7 +29,7 @@ const init = (navigateTo) => {
 
   paragraph.innerHTML = 'Create Technology to make things happen! 🌎💻👣';
 
-  // section.append(figure, p, buttonStart, title);
+  // section.append(buttonMode, figure, title, paragraph, buttonStart);
   section.append(figure, title, paragraph, buttonStart);
 
   return section;
