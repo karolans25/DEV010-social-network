@@ -22,7 +22,8 @@ export const password = (navigateTo) => {
 
   // link back
   // back.innerHTML = '👈 back';
-  back.innerHTML = 'back';
+  // back.innerHTML = 'back';
+  back.innerHTML = '👈';
   back.classList.add('link', 'back');
   // back.href = '/signin';
 

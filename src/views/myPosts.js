@@ -77,6 +77,7 @@ export const myPosts = async (navigateTo) => {
   sectionGetAllPosts.innerHTML = '';
   // title.innerHTML = `${TITLE} - My Posts`;
   title.innerHTML = 'My Posts';
+  title.style.marginTop = '30px';
   imgEdit.src = imgEditButton;
   imgEdit.alt = 'edit';
   imgDelete.src = imgDeleteButton;

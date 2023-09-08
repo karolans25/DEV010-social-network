@@ -21,10 +21,11 @@ export const feed = async (navigateTo) => {
   const loadingGif = document.createElement('img');
 
   section.classList.value = 'home';
-  subSection.className = 'myPosts';
+  subSection.className = 'feed';
   sectionGetAllPosts.className = 'get-posts';
   sectionGetAllPosts.innerHTML = '';
   title.innerHTML = TITLE;
+  title.style.marginTop = '30px';
 
   loadingContainer.id = 'loading-container';
   loadingGif.src = imgLoading;
@@ -50,7 +51,7 @@ export const feed = async (navigateTo) => {
       imgSave.alt = 'save';
       const imgCancel = document.createElement('img');
       imgCancel.alt = 'cancel';
-      formatForEachPost.classList.add('container-found-post', item.id);
+      formatForEachPost.classList.add('show-post', item.id);
       sectionGetAllPosts.append(formatForEachPost);
     });
   });

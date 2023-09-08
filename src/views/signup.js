@@ -33,7 +33,8 @@ export const signup = (navigateTo) => {
 
   // link back
   // back.innerHTML = '👈 back';
-  back.innerHTML = 'back';
+  // back.innerHTML = 'back';
+  back.innerHTML = '👈';
   iconAddFile.className = 'icon-add-file';
   file.classList.add('file', 'file-upload', 'file-signup');
   // back.href = '/signin';

@@ -1,6 +1,7 @@
 import UserController from '../controllers/UserController';
 import PostController from '../controllers/PostController';
 import LikeController from '../controllers/LikeController';
+import CommentController from '../controllers/CommentController';
 
 export const feedHandler = {
   createPost: (formData) => PostController.createPostData(formData),
@@ -46,4 +47,12 @@ export const feedHandler = {
   unreactPost: (idLike) => LikeController.unreactPost(idLike),
 
   updateReactPost: (idLike, idTypeLike) => LikeController.updateReactPost(idLike, idTypeLike),
+
+  createComment: async (idPost, text) => {
+    console.log(idPost);
+    console.log(text);
+    const idRef = await CommentController.createComment(idPost, text);
+    if (idRef) return 'The comment has been published';
+    return 'The comment wasn\'t published';
+  },
 };

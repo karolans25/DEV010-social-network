@@ -44,6 +44,7 @@ export const popup = (message) => {
     'The email to confirm your account has been sent',
     'The email to restore the password has been sent',
     'The post has been updated',
+    'The comment has been published',
   ];
   if (typeof message !== 'undefined' && typeof message === 'string' && message !== '') {
     if (posibilities.includes(message)) {

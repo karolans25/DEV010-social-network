@@ -16,7 +16,6 @@ export const search = (navigateTo) => {
   const sectionSearch = document.createElement('section');
   const subtitle = document.createElement('h2');
   const searchText = document.createElement('input');
-  const sectionFormatGetAllPost = document.createElement('section');
   const sectionGetAllPosts = document.createElement('section');
 
   section.classList.value = 'home';

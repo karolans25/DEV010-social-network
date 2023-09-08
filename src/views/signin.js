@@ -1,4 +1,5 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
+// import { doc } from 'firebase/firestore';
 import { signinHandler } from '../handlers/signinHandler';
 import { popup } from './popup';
 
@@ -29,7 +30,10 @@ export const signin = (navigateTo) => {
   const imgGithub = document.createElement('img');
   const extra = document.createElement('section');
   const recoverPass = document.createElement('button');
+  const pass = document.createElement('img');
   const signUp = document.createElement('button');
+  const labelOr = document.createElement('label');
+  const sectionButtonsForm = document.createElement('section');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
 
@@ -38,7 +42,8 @@ export const signin = (navigateTo) => {
 
   // link back
   // back.innerHTML = '👈 back';
-  back.innerHTML = 'back';
+  // back.innerHTML = 'back';
+  back.innerHTML = '👈';
   back.setAttribute('name', 'back');
   // back.href = '/';
   back.classList.add('link', 'back');
@@ -48,16 +53,13 @@ export const signin = (navigateTo) => {
   const signup = document.createElement('img');
   signup.src = imgSignup;
   signup.alt = 'sign-up';
-  signUp.appendChild(signup);
   signUp.setAttribute('name', 'signup');
   // signUp.href = '/signup';
   signUp.className = 'link';
 
   // link forgot password
-  const pass = document.createElement('img');
   pass.src = imgPass;
   pass.alt = 'sign-up';
-  recoverPass.appendChild(pass);
   recoverPass.setAttribute('name', 'recover-pass');
   recoverPass.className = 'link';
   extra.classList.add('ops', 'extra');
@@ -65,11 +67,16 @@ export const signin = (navigateTo) => {
   // image
   img.src = imgAvatar;
   img.alt = 'user icon';
-  figure.append(img);
 
   // title
   title.textContent = 'Sign In';
 
+  labelOr.textContent = '------- or -------';
+  labelOr.style.textAlign = 'center';
+  labelOr.style.marginTop = '10px';
+  labelOr.style.marginBottom = '10px';
+  labelOr.style.color = 'var(--main-color)';
+  // labelOr.style.fontFamily = 'Style Script';
   loadingContainer.id = 'loading-container';
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
@@ -108,15 +115,14 @@ export const signin = (navigateTo) => {
   const butSignin = document.createElement('img');
   butSignin.src = imgSignin;
   butSignin.alt = 'sign-in';
-  buttonSignIn.appendChild(butSignin);
   imgGoogle.src = google;
   imgGithub.src = github;
   imgGoogle.alt = 'Google';
   imgGithub.alt = 'Github';
   imgGoogle.classList.add('img-google');
   imgGoogle.classList.add('img-github');
-
-  form.append(labelEmail, inputEmail, labelPass, inputPass, buttonSignIn);
+  sectionButtonsForm.style.display = 'flex';
+  sectionButtonsForm.style.justifyContent = 'space-around';
 
   form.addEventListener('submit', async (e) => {
     try {
@@ -139,7 +145,6 @@ export const signin = (navigateTo) => {
   ops.className = 'ops';
   buttonSignInGoogle.textContent = '';
   buttonSignInGoogle.id = 'google';
-  buttonSignInGoogle.appendChild(imgGoogle);
   buttonSignInGoogle.addEventListener('click', async (e) => {
     try {
       loadingContainer.style.display = 'block';
@@ -158,15 +163,26 @@ export const signin = (navigateTo) => {
   // sign in with Github
   buttonSignInGithub.textContent = '';
   buttonSignInGithub.id = 'github';
-  buttonSignInGithub.appendChild(imgGithub);
   buttonSignInGithub.addEventListener('click', () => {
     // signInAuthGoogle();
     // navigateTo('/home');
   });
 
+  signUp.appendChild(signup);
+  recoverPass.appendChild(pass);
+  figure.append(img);
+  buttonSignIn.appendChild(butSignin);
+  // sectionButtonsForm.appendChild(signUp);
+  // sectionButtonsForm.appendChild(recoverPass);
+  sectionButtonsForm.appendChild(buttonSignIn);
+  labelEmail.appendChild(signUp);
+  labelPass.appendChild(recoverPass);
+  form.append(labelEmail, inputEmail, labelPass, inputPass, sectionButtonsForm);
+  buttonSignInGoogle.appendChild(imgGoogle);
+  buttonSignInGithub.appendChild(imgGithub);
   ops.append(buttonSignInGoogle, buttonSignInGithub);
-  extra.append(recoverPass, signUp);
-  section.append(back, figure, title, form, ops, extra);
+  // section.append(back, figure, title, ops, labelOr, form);
+  section.append(back, figure, title, form, labelOr, ops);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);
 
