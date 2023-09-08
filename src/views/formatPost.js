@@ -52,7 +52,7 @@ const fillPostData = (urls, container) => {
   }
 };
 
-export const formatPost = (item) => {
+export const formatPost = async (item) => {
   const sectionFormatPost = document.createElement('section');
   const sectionUserData = document.createElement('section');
   const userName = document.createElement('p');
@@ -106,16 +106,9 @@ export const formatPost = (item) => {
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
-  feedHandler.getUserDataById(item.idUser)
-    .then((data) => {
-      userName.textContent = data.name;
-      userImg.src = data.photo;
-    });
-  //   getDoc(doc(db, 'user', item.idUser))
-  //     .then((documentUser) => {
-  //       userName.textContent = documentUser.data().name;
-  //       userImg.src = documentUser.data().photo;
-  //     }).catch((err) => popup(err.message));
+  const dataUser = await feedHandler.getUserDataById(item.idUser);
+  userName.textContent = dataUser.name;
+  userImg.src = dataUser.photo;
 
   /** Add the images of the post */
   fillPostData(item.URL, postFigureContainer);
@@ -271,14 +264,14 @@ export const formatPost = (item) => {
 
   /** Add messages for existent reactions */
   const id = AuthService.getCurrentUser().uid;
-  const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`), where('idUser', '==', `${id}`));
+  const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
   onSnapshot(que2, (reactionSnapshot) => {
     const likes = [];
     reactionSnapshot.docs.forEach((document) => {
       likes.push({ ...document.data(), id: document.id });
     });
     likes.forEach((like) => {
-      if (like.idUser === item.idUser) {
+      if (like.idUser === id) {
         feedHandler.getReactionMessage(like.idTypeLike).then((reaction) => {
           if (reaction) reactionMessage.style.display = 'block';
           reactionMessage.textContent = reaction.message;

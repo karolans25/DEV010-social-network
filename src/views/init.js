@@ -1,5 +1,4 @@
-// import { loadDefaultImages } from '../lib/index';
-import imgInit from '../assets/1.png';
+import imgInit from '../assets/init.png';
 import { TITLE } from '../consts/const';
 
 const init = (navigateTo) => {

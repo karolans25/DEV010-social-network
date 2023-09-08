@@ -45,7 +45,10 @@ const UserController = {
     try {
       const user = await AuthService.loginGoogle();
       if (user) {
-        const urlProfileImage = await StorageService.uploadFile(user.photoURL, `${user.uid}/profile`);
+        const res = await fetch(user.photoURL);
+        console.log(res);
+        const blob = await res.blob();
+        const urlProfileImage = await StorageService.uploadFile(blob, `${user.uid}/profile.${blob.type.split('/')[1]}`);
         const storeDoc = await StoreService.getDocumentById('user', user.uid);
         const data = {
           email: user.email,
@@ -94,12 +97,14 @@ const UserController = {
   getUserDataById: async (idUser) => {
     const user = await StoreService.getDocumentById('user', idUser);
     return {
-      id: user.id,
-      email: user.data().email,
-      name: user.data().name,
-      photo: user.data().photo,
+      id: idUser,
+      name: user.name,
+      photo: user.photo,
+      email: user.email,
     };
   },
+
+  getAllUsers: () => StoreService.getAllDocuments('user'),
 };
 
 // Export the UserController object as the default export

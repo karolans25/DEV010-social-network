@@ -1,0 +1,12 @@
+import StorageService from '../src/firebase/storageService';
+
+// Mock dependencies
+jest.mock('../src/firebase/storageService');
+
+// Import the module under test
+// const UserController = require('../src/controllers/UserController');
+describe('StorageService', () => {
+  it('should be an object', () => {
+    expect(typeof StorageService).toBe('object');
+  });
+});

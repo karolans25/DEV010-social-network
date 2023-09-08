@@ -1,0 +1,159 @@
+import AuthService from '../src/firebase/authService';
+
+// Mock the necessary dependencies or provide a valid authentication object
+jest.mock('./firebaseConfig', () => ({
+  auth: {
+    currentUser: {
+      // Mock the necessary properties of the currentUser object
+    },
+    onAuthStateChanged: jest.fn(),
+  },
+}));
+
+jest.mock('firebase/auth', () => ({
+  sendEmailVerification: jest.fn(),
+  sendPasswordResetEmail: jest.fn(),
+  createUserWithEmailAndPassword: jest.fn(),
+  signInWithEmailAndPassword: jest.fn(),
+  signInWithPopup: jest.fn(),
+  GoogleAuthProvider: jest.fn(),
+  signOut: jest.fn(),
+  updateProfile: jest.fn(),
+  fetchSignInMethodsForEmail: jest.fn(),
+}));
+
+describe('AuthService', () => {
+  describe('sendEmailVerify', () => {
+    it('should send a verification email and return success message', async () => {
+      // Mock the necessary dependencies or provide a valid user object
+      const user = {}; // Replace with a valid user object
+
+      // Mock the `sendEmailVerification` function
+      const sendEmailVerification = jest.fn().mockResolvedValue();
+
+      // Call the `sendEmailVerify` function
+      const result = await AuthService.sendEmailVerify(user);
+
+      // Assert that the `sendEmailVerification` function was called with the correct arguments
+      expect(sendEmailVerification).toHaveBeenCalledWith(user, expect.objectContaining({
+        url: expect.any(String),
+        handleCodeInApp: true,
+      }));
+
+      // Assert that the result is the success message
+      expect(result).toBe('The email to confirm your account has been sent');
+    });
+
+    it('should throw an error if sending the verification email fails', async () => {
+      // Mock the necessary dependencies or provide a valid user object
+      const user = {}; // Replace with a valid user object
+
+      // Mock the `sendEmailVerification` function to simulate an error
+      const errorMessage = 'An error occurred while sending the verification email';
+      const sendEmailVerification = jest.fn().mockRejectedValue(new Error(errorMessage));
+
+      try {
+        // Call the `sendEmailVerify` function
+        await AuthService.sendEmailVerify(user);
+
+        // The test should fail if the function does not throw an error
+        fail('Expected the function to throw an error');
+      } catch (error) {
+        // Assert that the error message is correct
+        expect(error.message).toBe(errorMessage);
+      }
+    });
+  });
+
+  // Write similar tests for other functions in the AuthService object
+});
+
+// import AuthService from '../src/firebase/authService';
+
+// // Mock dependencies
+// jest.mock('../src/firebase/authService');
+
+// // Import the module under test
+// // const UserController = require('../src/controllers/UserController');
+// describe('AuthService', () => {
+//   it('should be an object', () => {
+//     expect(typeof AuthService).toBe('object');
+//   });
+
+//   // Mock the necessary functions and objects
+//   const user = { email: 'test@example.com', password: 'password' };
+//   const auth = {
+//     sendEmailVerification: jest.fn().mockResolvedValue(),
+//     sendPasswordResetEmail: jest.fn().mockResolvedValue(),
+//     GoogleAuthProvider: jest.fn().mockResolvedValue(),
+//     updateProfile: jest.fn().mockResolvedValue(),
+//     fetchSignInMethodsForEmail: jest.fn().mockResolvedValue(),
+//     createUserWithEmailAndPassword: jest.fn().mockResolvedValue({ user }),
+//     signInWithEmailAndPassword: jest.fn().mockResolvedValue({ user }),
+//     signInWithPopup: jest.fn().mockResolvedValue({ user }),
+//     signOut: jest.fn().mockResolvedValue(),
+//     currentUser: user,
+//   };
+
+//   // Test the sendEmailVerify function
+//   describe('sendEmailVerify', () => {
+//     it('should send an email to confirm the account', async () => {
+//       const result = await AuthService.sendEmailVerify(user);
+//       console.log(result);
+//       // expect(result).toBe('The email to confirm your account has been sent');
+//     });
+
+//     it('should throw an error if sending email fails', async () => {
+//       const error = new Error('Failed to send email');
+//       auth.sendEmailVerification = jest.fn().mockRejectedValue(error);
+
+//       await expect(AuthService.sendEmailVerify(user)).rejects.toThrowError('Failed to send email');
+//     });
+//   });
+
+//   describe('sendPassResetEmail', () => {
+//     it('should send a password reset email and return success message', async () => {
+//       // Mock the necessary dependencies or provide a valid authentication object
+//       const email = 'test@example.com'; // Replace with a valid email address
+
+//       // Mock the `sendPasswordResetEmail` function
+//       const sendPasswordResetEmail = jest.fn().mockResolvedValue();
+
+//       // Call the `sendPassResetEmail` function
+//       const result = await sendPassResetEmail(auth, email, {
+//         /* actionCodeSettings options if needed */
+//       });
+
+//       // Assert that the `sendPasswordResetEmail` function was called with the correct arguments
+//       expect(sendPasswordResetEmail).toHaveBeenCalledWith(auth, email, {
+//         /* actionCodeSettings options if needed */
+//       });
+
+//       // Assert that the result is the success message
+//       expect(result).toBe('The email to restore the password has been sent');
+//     });
+
+//     it('should throw an error if sending the email fails', async () => {
+//       // Mock the necessary dependencies or provide a valid authentication object
+//       const auth = {}; // Replace with your valid authentication object
+//       const email = 'test@example.com'; // Replace with a valid email address
+
+//       // Mock the `sendPasswordResetEmail` function to simulate an error
+//       const errorMessage = 'An error occurred while sending the email';
+//       const sendPasswordResetEmail = jest.fn().mockRejectedValue(new Error(errorMessage));
+
+//       try {
+//         // Call the `sendPassResetEmail` function
+//         await sendPassResetEmail(auth, email, {
+//           /* actionCodeSettings options if needed */
+//         });
+
+//         // The test should fail if the function does not throw an error
+//         fail('Expected the function to throw an error');
+//       } catch (error) {
+//         // Assert that the error message is correct
+//         expect(error.message).toBe(errorMessage);
+//       }
+//     });
+//   });
+// });
