@@ -1,9 +1,12 @@
 import { signupHandler } from '../handlers/signupHandler';
 import { popup } from './popup';
 
+import gifLoading from '../assets/icons/playground.gif';
+import imgAvatar from '../assets/icons/nina.png';
+
 export const signup = (navigateTo) => {
   const section = document.createElement('section');
-  const back = document.createElement('a');
+  const back = document.createElement('button');
   const sectionFig = document.createElement('section');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
@@ -29,16 +32,18 @@ export const signup = (navigateTo) => {
   section.className = 'signup';
 
   // link back
-  back.innerHTML = '👈 back';
+  // back.innerHTML = '👈 back';
+  back.innerHTML = 'back';
   iconAddFile.className = 'icon-add-file';
   file.classList.add('file', 'file-upload', 'file-signup');
-  back.href = '/signin';
+  // back.href = '/signin';
   back.name = 'back';
+  back.classList.add('link', 'back');
   figure.style.display = 'grid';
   file.name = 'file';
   file.type = 'file';
   file.setAttribute('accept', 'image/*');
-  img.src = './assets/icons/nina.png';
+  img.src = imgAvatar;
   img.alt = 'user icon';
   sectionFig.className = 'sec-figure';
   buttonLeft.innerHTML = '◀️';
@@ -50,7 +55,7 @@ export const signup = (navigateTo) => {
   title.textContent = 'Sign Up';
   buttonSignUp.textContent = '👉 Sign Up';
   loadingContainer.id = 'loading-container';
-  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.src = gifLoading;
   loadingGif.alt = 'loading';
 
   // form
@@ -80,6 +85,11 @@ export const signup = (navigateTo) => {
   inputPassConfirm.required = true;
   buttonSignUp.type = 'submit';
 
+  back.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/signin');
+  });
+
   buttonRight.addEventListener('click', () => { console.log('Right'); });
 
   buttonLeft.addEventListener('click', () => { console.log('Left'); });
@@ -98,7 +108,7 @@ export const signup = (navigateTo) => {
         const res = await signupHandler.createUser(inputEmail.value, inputPass.value, img.src, inputName.value);
         loadingContainer.style.display = 'none';
         popup(res);
-        if (res.includes('The user has been registered with email')) {
+        if (res === 'The user has been registered. Check your email to confirm the account') {
           form.reset();
           navigateTo('/signin');
           popup(res);

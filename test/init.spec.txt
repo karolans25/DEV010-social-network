@@ -1,15 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-// import { JSDOM } from 'jsdom';
 import init from '../src/views/init';
 
-/**  * @jest-environment jsdom  */
-// test('use jsdom in this test file', () => {
-//   const element = document.createElement('div');
-//   expect(element).not.toBeNull();
-// });
-
-// const { window } = new JSDOM();
-// global.document = window.document;
 const DOM = document.createElement('article');
 
 // Mock for navigateTo

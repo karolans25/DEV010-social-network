@@ -1,9 +1,12 @@
 import { signinHandler } from '../handlers/signinHandler';
 import { popup } from './popup';
 
+import imgAvatar from '../assets/icons/genio.png';
+import imgLoading from '../assets/icons/playground.gif';
+
 export const password = (navigateTo) => {
   const section = document.createElement('section');
-  const back = document.createElement('a');
+  const back = document.createElement('button');
   const figure = document.createElement('figure');
   const img = document.createElement('img');
   const form = document.createElement('form');
@@ -18,11 +21,18 @@ export const password = (navigateTo) => {
   section.className = 'pass';
 
   // link back
-  back.innerHTML = '👈 back';
-  back.href = '/signin';
+  // back.innerHTML = '👈 back';
+  back.innerHTML = 'back';
+  back.classList.add('link', 'back');
+  // back.href = '/signin';
+
+  back.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/signin');
+  });
 
   // image
-  img.src = './assets/icons/genio.png';
+  img.src = imgAvatar;
   img.alt = 'genius icon';
   figure.append(img);
 
@@ -39,7 +49,7 @@ export const password = (navigateTo) => {
   buttonRecoverPassword.textContent = 'Recover Password';
   buttonRecoverPassword.type = 'submit';
   loadingContainer.id = 'loading-container';
-  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
   form.addEventListener('submit', async (e) => {

@@ -1,6 +1,6 @@
 import {
   addDoc, getDocs, onSnapshot, doc, collection, updateDoc, query, where, getDoc,
-  deleteDoc, orderBy,
+  deleteDoc, orderBy, setDoc,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 import AuthService from './authService';
@@ -18,6 +18,13 @@ const StoreService = {
       // console.error(`Error adding document: ${error}`);
       throw new Error('Failed to add document');
     }
+  },
+
+  addDocumentWithId: async (collectionStore, id, data) => {
+    try {
+      const storeDoc = await doc(collection(db, collectionStore), id);
+      return await setDoc(storeDoc, data);
+    } catch (err) { return err.message; }
   },
 
   // Get the static database
@@ -68,17 +75,16 @@ const StoreService = {
   getDocumentById: async (collectionStore, id) => {
     try {
       // const docRef = await getDoc(doc(db, collectionStore, id));
-      const docRef = await getDoc(doc(db, collectionStore, id));
-      if (docRef.exists) {
-        return {
-          id: docRef.id,
-          ...docRef.data(),
-        };
+      const docSnap = await getDoc(doc(db, collectionStore, id));
+      if (docSnap.exists()) {
+        console.log('Store Service 80: ', id);
+        console.log(docSnap.data());
+        return docSnap.data();
       }
-      throw new Error('Document not found');
-    } catch (error) {
-      // console.error(`Error getting document: ${error}`);
-      throw new Error('Failed to get document');
+      throw new Error('Document not found line 92 store service');
+    } catch (err) {
+      return err.message;
+      // throw new Error('Failed to get document');
     }
   },
 

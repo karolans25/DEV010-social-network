@@ -37,7 +37,7 @@ export const popup = (message) => {
   been created', 'The email to restore the password has been sent'];
   */
   const posibilities = [
-    'The user has been registered. \nCheck your email to confirm the account',
+    'The user has been registered. Check your email to confirm the account',
     'The user has been logged',
     'The user has been registered and logged with',
     'The post has been created',

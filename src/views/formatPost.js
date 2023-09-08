@@ -3,19 +3,14 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import { popup } from './popup';
-// import {
-//   reactPost, unreactPost, updateReactPost, hasReactedPost, deletePost,
-//   updatePost, getReactionMessage,
-// } from '../lib/user';
-
 import { feedHandler } from '../handlers/feedHandler';
 import AuthService from '../firebase/authService';
-import { REACT_ICONS } from '../consts/consts';
-import imgReactLike from '../assets/icons/voto-positivo.png';
-import imgReactDislike from '../assets/icons/voto-negativo.png';
-import imgReactLove from '../assets/icons/salud-mental.png';
-import imgReactStar from '../assets/icons/calidad-premium.png';
-import imgReactDoubts from '../assets/icons/investigar.png';
+
+import imgLike from '../assets/icons/voto-positivo.png';
+import imgDislike from '../assets/icons/voto-negativo.png';
+import imgLove from '../assets/icons/salud-mental.png';
+import imgBest from '../assets/icons/calidad-premium.png';
+import imgDoubts from '../assets/icons/investigar.png';
 import imgComment from '../assets/icons/comentario.png';
 import imgLoading from '../assets/icons/playground.gif';
 
@@ -57,7 +52,7 @@ const fillPostData = (urls, container) => {
   }
 };
 
-export const formatPost = (item) => {
+export const formatPost = async (item) => {
   const sectionFormatPost = document.createElement('section');
   const sectionUserData = document.createElement('section');
   const userName = document.createElement('p');
@@ -74,6 +69,7 @@ export const formatPost = (item) => {
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
 
+  const reactIcons = ['Like', 'Dislike', 'Love it', 'The best', 'Make me doubt', 'Comment'];
   if (item.createdAt) {
     const date = item.createdAt.toDate();
     const options = {
@@ -108,38 +104,33 @@ export const formatPost = (item) => {
 
   loadingContainer.id = 'loading-container';
   loadingGif.src = imgLoading;
+  loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
-  feedHandler.getUserDataById(item.idUser)
-    .then((data) => {
-      userName.textContent = data[0];
-      userImg.src = data[1];
-    });
-  //   getDoc(doc(db, 'user', item.idUser))
-  //     .then((documentUser) => {
-  //       userName.textContent = documentUser.data().name;
-  //       userImg.src = documentUser.data().photo;
-  //     }).catch((err) => popup(err.message));
+  const dataUser = await feedHandler.getUserDataById(item.idUser);
+  userName.textContent = dataUser.name;
+  userImg.src = dataUser.photo;
 
   /** Add the images of the post */
   fillPostData(item.URL, postFigureContainer);
 
   /** Create buttons section */
-  for (let iterator = 0; iterator < REACT_ICONS.length; iterator++) {
+  for (let iterator = 0; iterator < reactIcons.length; iterator++) {
     const button = document.createElement('button');
     const img = document.createElement('img');
-    if (iterator === 0) img.src = imgReactLike;
-    if (iterator === 1) img.src = imgReactDislike;
-    if (iterator === 2) img.src = imgReactLove;
-    if (iterator === 3) img.src = imgReactStar;
-    if (iterator === 4) img.src = imgReactDoubts;
+    if (iterator === 0) img.src = imgLike;
+    if (iterator === 1) img.src = imgDislike;
+    if (iterator === 2) img.src = imgLove;
+    if (iterator === 3) img.src = imgBest;
+    if (iterator === 4) img.src = imgDoubts;
     if (iterator === 5) img.src = imgComment;
+    // img.src = reactIcons[iterator][0];
     img.alt = `${iterator + 1}`;
     img.classList.add('react-button', `${iterator + 1}`, item.id);
     button.classList.add('button', `${iterator + 1}`, item.id);
     button.setAttribute('data-type', iterator + 1);
     button.appendChild(img);
-    if (iterator === REACT_ICONS.length - 1) {
+    if (iterator === reactIcons.length - 1) {
       sectionComment.appendChild(button);
     } else {
       sectionReact.appendChild(button);
@@ -205,17 +196,6 @@ export const formatPost = (item) => {
         createThumbnail(urls[i], thumbnailId, postFigureContainer);
         formData.append(thumbnailId, urls[i]);
       }
-      //   getDoc(doc(db, 'post', item.id))
-      //     .then((document) => {
-      //   textarea.value = document.data().text;
-      //   const urls = document.data().URL;
-      //   postFigureContainer.innerText = '';
-      //   for (let i = 0; i < urls.length; i++) {
-      //     const thumbnailId = `${Math.floor(Math.random() * 10000)}_${Date.now()}`;
-      //     createThumbnail(urls[i], thumbnailId, postFigureContainer);
-      //     formData.append(thumbnailId, urls[i]);
-      //   }
-      // });
 
       postFigureContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('close-button')) {
@@ -274,8 +254,8 @@ export const formatPost = (item) => {
 
   /** Add messages for existent reactions */
   const id = AuthService.getCurrentUser().uid;
-  const que = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
-  onSnapshot(que, (reactionSnapshot) => {
+  const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
+  onSnapshot(que2, (reactionSnapshot) => {
     const likes = [];
     reactionSnapshot.docs.forEach((document) => {
       likes.push({ ...document.data(), id: document.id });
@@ -326,48 +306,6 @@ export const formatPost = (item) => {
   sectionComment.addEventListener('click', (e) => {
     console.log(e.target.classList);
   });
-
-  /** Add messages for existent reactions */
-  //   const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
-  //   onSnapshot(que2, (reactionSnapshot) => {
-  //     const likes = [];
-  //     reactionSnapshot.docs.forEach((document) => {
-  //       likes.push({ ...document.data(), id: document.id });
-  //     });
-  //     likes.forEach((like) => {
-  //       if (like.idUser === auth.currentUser.uid) {
-  //         getReactionMessage(like.idTypeLike).then((data) => {
-  //           if (data) reactionMessage.style.display = 'block';
-  //           reactionMessage.textContent = data.message;
-  //         });
-  //       }
-  //     });
-  //   });
-
-  //   /** Event listener for reaction buttons */
-  //   sectionReact.addEventListener('click', (e) => {
-  //     const [, type, idPub] = e.target.classList;
-  //     hasReactedPost(idPub)
-  //       .then((reactedSnapshot) => {
-  //         if (reactedSnapshot.size > 0) {
-  //           if (type === reactedSnapshot.docs[0].data().idTypeLike) {
-  //             unreactPost(reactedSnapshot.docs[0].id);
-  //             reactionMessage.style.display = 'none';
-  //           } else {
-  //             updateReactPost(type, reactedSnapshot.docs[0].id);
-  //             getReactionMessage(type).then((data) => {
-  //               reactionMessage.textContent = data.message;
-  //             });
-  //           }
-  //         } else {
-  //           reactPost(idPub, type);
-  //           reactionMessage.style.display = 'block';
-  //           getReactionMessage(type).then((data) => {
-  //             reactionMessage.textContent = data.message;
-  //           });
-  //         }
-  //       });
-  //   });
 
   /** Event listener for comments */
   sectionComment.addEventListener('click', (e) => {
