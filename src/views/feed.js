@@ -55,6 +55,7 @@ export const feed = async (navigateTo) => {
       sectionGetAllPosts.append(formatForEachPost);
     });
   });
+
   subSection.append(sectionFormatCreatePost, title, sectionGetAllPosts);
   section.append(subSection, nav);
   loadingContainer.append(loadingGif);

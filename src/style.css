@@ -739,8 +739,12 @@
     max-height: 200px;
     margin: 0;
     padding: 0;
-    background: var(--contrast-color);
-    border: solid 3px var(--main-color);
+    background: var(--accompanying-color);
+    border: solid 2px var(--principal-letter-color);
+  }
+
+  .create-comment textarea{
+    background-color: var(--contrast-color);
   }
 
   .header-post{
@@ -754,6 +758,11 @@
     position: relative; 
   }
   
+  .head-line{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+  }
+
   /*.header-post .user-figure{*/
   .user-figure{
     width: 60px;
@@ -923,14 +932,23 @@
 
   .get-posts .container-found-post{
     display: grid;
-    grid-template-columns: 2fr 6fr;
+    grid-template-columns: 1fr 6fr;
     height: fit-content;
+  }
+  .get-posts .container-found-comment{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: fit-content;
+    /* border: 1px solid var(--secondary-letter-color); */
+    /* background-color: var(--main-color); */
+    margin: 10px 0px 10px 0px;
+    padding: 15px;
   }
   
   .get-posts .show-post{
     margin-bottom: 20px;
     padding: 15px;
-    border: solid 1px var(--principal-letter-color);
+    border: solid 2px var(--main-color);
     height: fit-content;
   }
 
@@ -955,7 +973,7 @@
     height: 50px;
   }
   
-  .get-posts .container-found-post .data-user .user-name{
+  .get-posts .container-found-post .data-user .user-name, .user-name{
     color: var(--secondary-letter-color);
     font-weight: bold;
     text-align: center;
@@ -971,7 +989,7 @@
     gap: 10px;
   }
   
-  .get-posts .container-found-post .data-post .created-timestamp{
+  .get-posts .container-found-post .data-post .created-timestamp, .created-timestamp{
     color: var(--moving-things-color);
     font-size: 11px;
     font-weight: bold;
