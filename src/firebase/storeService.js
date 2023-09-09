@@ -11,11 +11,9 @@ const StoreService = {
   // Function to create a document in a collection
   addDocument: async (collectionStore, data) => {
     try {
-      const docRef = await addDoc(collection(db, collectionStore), data); // addDoc
-      // console.log(`Document added with ID: ${docRef.id}`);
+      const docRef = await addDoc(collection(db, collectionStore), data);
       return docRef.id;
     } catch (error) {
-      // console.error(`Error adding document: ${error}`);
       throw new Error('Failed to add document');
     }
   },
@@ -37,7 +35,6 @@ const StoreService = {
       }));
       return documents;
     } catch (error) {
-      // console.error(`Error getting documents: ${error}`);
       throw new Error('Failed to get documents');
     }
   },
@@ -52,7 +49,6 @@ const StoreService = {
       }));
       return documents;
     } catch (error) {
-      // console.error(`Error getting documents: ${error}`);
       throw new Error('Failed to get documents');
     }
   },
@@ -67,7 +63,6 @@ const StoreService = {
       });
       return likes;
     } catch (error) {
-      // console.error(`Error getting documents with filter: ${error}`);
       throw new Error('Failed to get documents');
     }
   },
@@ -77,14 +72,11 @@ const StoreService = {
       // const docRef = await getDoc(doc(db, collectionStore, id));
       const docSnap = await getDoc(doc(db, collectionStore, id));
       if (docSnap.exists()) {
-        console.log('Store Service 80: ', id);
-        console.log(docSnap.data());
         return docSnap.data();
       }
       throw new Error('Document not found line 92 store service');
     } catch (err) {
       return err.message;
-      // throw new Error('Failed to get document');
     }
   },
 
@@ -127,10 +119,7 @@ const StoreService = {
   updateDocument: async (collectionStore, id, data) => {
     try {
       return updateDoc(doc(collection(db, collectionStore), id), data);
-      // console.log(`Document updated with ID: ${id}`);
     } catch (err) {
-      // console.error(`Error updating document: ${error}`);
-      // throw new Error('Failed to update document');
       return err.message;
     }
   },
@@ -138,10 +127,7 @@ const StoreService = {
   deleteDocument: async (collectionStore, id) => {
     try {
       return deleteDoc(doc(db, collectionStore, id));
-      // console.log(`Document deleted with ID: ${id}`);
     } catch (err) {
-      // console.error(`Error deleting document: ${error}`);
-      // throw new Error('Failed to delete document');
       return err.message;
     }
   },

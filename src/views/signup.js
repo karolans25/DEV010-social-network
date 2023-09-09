@@ -3,6 +3,7 @@ import { popup } from './popup';
 
 import gifLoading from '../assets/icons/playground.gif';
 import imgAvatar from '../assets/icons/nina.png';
+import imgIconAddFile from '../assets/icons/file.png';
 
 export const signup = (navigateTo) => {
   const section = document.createElement('section');
@@ -36,6 +37,7 @@ export const signup = (navigateTo) => {
   // back.innerHTML = 'back';
   back.innerHTML = '👈';
   iconAddFile.className = 'icon-add-file';
+  iconAddFile.src = imgIconAddFile;
   file.classList.add('file', 'file-upload', 'file-signup');
   // back.href = '/signin';
   back.name = 'back';

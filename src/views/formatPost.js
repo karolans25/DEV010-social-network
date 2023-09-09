@@ -1,5 +1,5 @@
 import {
-  onSnapshot, query, collection, where,
+  onSnapshot, query, collection, where, orderBy,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import AuthService from '../firebase/authService';
@@ -16,26 +16,26 @@ import imgComment from '../assets/icons/comentario.png';
 import imgLoading from '../assets/icons/playground.gif';
 import { formatComment } from './formatComment';
 
-const createCloseButton = (thumbnailId) => {
-  const closeButton = document.createElement('section');
-  closeButton.classList.add('close-button');
-  closeButton.innerText = 'x';
-  document.getElementsByClassName(`${thumbnailId}`)[0].appendChild(closeButton);
-};
+// const createCloseButton = (thumbnailId) => {
+//   const closeButton = document.createElement('section');
+//   closeButton.classList.add('close-button');
+//   closeButton.innerText = 'x';
+//   document.getElementsByClassName(`${thumbnailId}`)[0].appendChild(closeButton);
+// };
 
-const createThumbnail = (file, id, container) => {
-  const thumbnail = document.createElement('figure');
-  thumbnail.classList.add('thumbnail', id);
-  thumbnail.dataset.id = id;
-  if (file instanceof File) {
-    thumbnail.setAttribute('style', `background-image: url(${URL.createObjectURL(file)})`);
-  } else {
-    thumbnail.setAttribute('style', `background-image: url(${file})`);
-  }
-  container.appendChild(thumbnail);
-  container.style.display = 'grid';
-  createCloseButton(id);
-};
+// const createThumbnail = (file, id, container) => {
+//   const thumbnail = document.createElement('figure');
+//   thumbnail.classList.add('thumbnail', id);
+//   thumbnail.dataset.id = id;
+//   if (file instanceof File) {
+//     thumbnail.setAttribute('style', `background-image: url(${URL.createObjectURL(file)})`);
+//   } else {
+//     thumbnail.setAttribute('style', `background-image: url(${file})`);
+//   }
+//   container.appendChild(thumbnail);
+//   container.style.display = 'grid';
+//   createCloseButton(id);
+// };
 
 const fillPostData = (urls, container) => {
   if (Array.isArray(urls)) {
@@ -194,34 +194,38 @@ export const formatPost = async (item) => {
   /** Event listener for comments */
   const createComment = formatCreateComment(item.id);
   let commentText = document.createElement('section');
+  const container = document.createElement('section');
+  container.classList.add('container-comments');
   sectionComment.addEventListener('click', (e) => {
     e.preventDefault();
+    container.innerHTML = '';
     if (createComment.style.display === 'grid') {
       createComment.style.display = 'none';
       sectionFormatPost.after(createComment);
-      commentText.style.display = 'none';
-      const commentsDOM = document.querySelectorAll('.container-found-comment');
-      commentsDOM.forEach((element) => {
-        const parent = element.parentNode;
-        parent.removeChild(element);
-      });
-      console.log(commentsDOM);
+      // container.style.display = 'none';
+      principalSection.removeChild(container);
     } else {
       createComment.style.display = 'grid';
       sectionFormatPost.after(createComment);
-      commentText.style.display = 'grid';
-      const que3 = query(collection(db, 'comment'), where('idPost', '==', `${item.id}`));
+      container.style.display = 'grid';
+
+      // const que3 = query(collection(db, 'comment'), orderBy('createdAt', 'desc'), where('idPost', '==', `${item.id}`));
+      const que3 = query(collection(db, 'comment'), orderBy('createdAt', 'desc'));
       onSnapshot(que3, (commentSnapshot) => {
+        container.innerHTML = '';
         const comments = [];
-        commentSnapshot.docs.forEach((document) => {
-          comments.push({ ...document.data(), id: document.id });
+        commentSnapshot.docs.forEach((element) => {
+          console.log(element.data().idPost);
+          if (element.data().idPost === item.id) {
+            comments.push({ ...element.data(), id: element.id });
+          }
         });
         comments.forEach(async (comment) => {
-          console.log(comment);
           commentText = await formatComment(comment);
-          principalSection.append(commentText);
+          container.append(commentText);
         });
       });
+      principalSection.append(container);
     }
   });
 

@@ -1,6 +1,6 @@
 import imgHome from '../assets/icons/home.png';
 import imgRss from '../assets/icons/rss.png';
-import imgPlus from '../assets/icons/mas.png';
+import imgPlus from '../assets/icons/plus.png';
 import imgSearch from '../assets/icons/lupa.png';
 import imgUser from '../assets/icons/usuario.png';
 

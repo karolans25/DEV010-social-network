@@ -2,6 +2,8 @@
 import { feedHandler } from '../handlers/feedHandler';
 import { popup } from './popup';
 
+import imgLoading from '../assets/icons/playground.gif';
+
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
   closeButton.classList.add('close-button');
@@ -65,7 +67,7 @@ export const formatCreatePost = () => {
   buttonPublish.classList.add('publish-button');
   // labelAddFile.htmlFor = 'file-upload';
   loadingContainer.id = 'loading-container';
-  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
   postImgContainer.className = 'post-figure';

@@ -172,8 +172,6 @@ export const signin = (navigateTo) => {
   recoverPass.appendChild(pass);
   figure.append(img);
   buttonSignIn.appendChild(butSignin);
-  // sectionButtonsForm.appendChild(signUp);
-  // sectionButtonsForm.appendChild(recoverPass);
   sectionButtonsForm.appendChild(buttonSignIn);
   labelEmail.appendChild(signUp);
   labelPass.appendChild(recoverPass);
@@ -181,7 +179,6 @@ export const signin = (navigateTo) => {
   buttonSignInGoogle.appendChild(imgGoogle);
   buttonSignInGithub.appendChild(imgGithub);
   ops.append(buttonSignInGoogle, buttonSignInGithub);
-  // section.append(back, figure, title, ops, labelOr, form);
   section.append(back, figure, title, form, labelOr, ops);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);

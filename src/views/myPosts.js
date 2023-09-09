@@ -64,7 +64,6 @@ export const myPosts = async (navigateTo) => {
   const nav = navbar(navigateTo);
   const title = document.createElement('h2');
   const sectionFormatCreatePost = formatCreatePost();
-  const sectionFormatGetAllPost = document.createElement('section');
   const sectionGetAllPosts = document.createElement('section');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
@@ -122,6 +121,8 @@ export const myPosts = async (navigateTo) => {
 
       let formData = new FormData();
 
+      formatForEachPost.classList.add('show-post', item.id);
+      sectionGetAllPosts.append(formatForEachPost);
       initButtons.classList.add('init-buttons', item.id);
       updateButtons.classList.add('edit-file-update');
 
@@ -251,12 +252,12 @@ export const myPosts = async (navigateTo) => {
         }
       });
 
-      formatForEachPost.classList.add('container-found-post', item.id);
+      formatForEachPost.classList.add('show-post', item.id);
       sectionGetAllPosts.append(formatForEachPost);
     });
   });
-  sectionFormatGetAllPost.append(sectionGetAllPosts);
-  subSection.append(sectionFormatCreatePost, title, sectionFormatGetAllPost);
+  // sectionFormatGetAllPost.append(sectionGetAllPosts);
+  subSection.append(sectionFormatCreatePost, title, sectionGetAllPosts);
   section.append(subSection, nav);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);

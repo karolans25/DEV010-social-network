@@ -3,6 +3,7 @@ import { navbar } from './navbar';
 import { profileHandler } from '../handlers/profileHandler';
 
 import imgExit from '../assets/icons/signout.png';
+import imgIconAddFile from '../assets/icons/file.png';
 import imgLike from '../assets/icons/voto-positivo.png';
 import imgDislike from '../assets/icons/voto-negativo.png';
 import imgLove from '../assets/icons/salud-mental.png';
@@ -39,6 +40,7 @@ export const profile = async (navigateTo) => {
   sectionReactions.classList.add('section-reaction');
 
   iconAddFile.classList.add('icon-add-file');
+  iconAddFile.src = imgIconAddFile;
   file.classList.add('file', 'file-upload', 'file-profile');
   buttonSignOut.classList.add('signout-button');
   imgSignOut.src = imgExit;

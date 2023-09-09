@@ -55,17 +55,10 @@ export const search = (navigateTo) => {
     }
     posts.forEach(async (item) => {
       const formatForEachPost = await formatPost(item);
-      formatForEachPost.classList.add('container-found-post', item.id);
+      formatForEachPost.classList.add('show-post', item.id);
       sectionGetAllPosts.append(formatForEachPost);
     });
   });
-  // const posts = await feedHandler.getAllPost();
-  // sectionGetAllPosts.innerHTML = '';
-  // posts.forEach(async (item) => {
-  //   const formatForEachPost = await formatPost(item);
-  //   formatForEachPost.classList.add('container-found-post', item.id);
-  //   sectionGetAllPosts.append(formatForEachPost);
-  // });
 
   sectionSearch.appendChild(subtitle);
   sectionSearch.appendChild(searchText);
