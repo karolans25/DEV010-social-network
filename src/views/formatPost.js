@@ -193,26 +193,36 @@ export const formatPost = async (item) => {
 
   /** Event listener for comments */
   const createComment = formatCreateComment(item.id);
+  let commentText = document.createElement('section');
   sectionComment.addEventListener('click', (e) => {
     e.preventDefault();
     if (createComment.style.display === 'grid') {
       createComment.style.display = 'none';
+      sectionFormatPost.after(createComment);
+      commentText.style.display = 'none';
+      const commentsDOM = document.querySelectorAll('.container-found-comment');
+      commentsDOM.forEach((element) => {
+        const parent = element.parentNode;
+        parent.removeChild(element);
+      });
+      console.log(commentsDOM);
     } else {
       createComment.style.display = 'grid';
+      sectionFormatPost.after(createComment);
+      commentText.style.display = 'grid';
+      const que3 = query(collection(db, 'comment'), where('idPost', '==', `${item.id}`));
+      onSnapshot(que3, (commentSnapshot) => {
+        const comments = [];
+        commentSnapshot.docs.forEach((document) => {
+          comments.push({ ...document.data(), id: document.id });
+        });
+        comments.forEach(async (comment) => {
+          console.log(comment);
+          commentText = await formatComment(comment);
+          principalSection.append(commentText);
+        });
+      });
     }
-    principalSection.append(createComment);
-    const que3 = query(collection(db, 'comment'), where('idPost', '==', `${item.id}`));
-    onSnapshot(que3, (reactionSnapshot) => {
-      const comments = [];
-      reactionSnapshot.docs.forEach((document) => {
-        comments.push({ ...document.data(), id: document.id });
-      });
-      comments.forEach(async (comment) => {
-        console.log(comment);
-        const commentText = await formatComment(comment);
-        principalSection.append(commentText);
-      });
-    });
   });
 
   /** Append y append childs for sections */
