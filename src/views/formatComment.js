@@ -2,7 +2,7 @@ import { feedHandler } from '../handlers/feedHandler';
 
 import imgLoading from '../assets/icons/playground.gif';
 
-export const formatComment = async (item) => {
+export const formatComment = (item) => {
   const sectionFormatComment = document.createElement('section');
   const sectionData = document.createElement('section');
   const sectionComment = document.createElement('section');
@@ -42,8 +42,10 @@ export const formatComment = async (item) => {
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
-  const dataUser = await feedHandler.getUserDataById(item.idUser);
-  userName.textContent = dataUser.name;
+  feedHandler.getUserDataById(item.idUser)
+    .then((dataUser) => {
+      userName.textContent = dataUser.name;
+    });
 
   /** Append y append childs for sections */
   sectionData.append(userName, createdAt);

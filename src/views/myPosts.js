@@ -1,5 +1,5 @@
 import {
-  onSnapshot, query, collection, orderBy, where,
+  onSnapshot, query, collection, orderBy,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import { navbar } from './navbar';

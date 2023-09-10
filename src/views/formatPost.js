@@ -54,7 +54,7 @@ const fillPostData = (urls, container) => {
   }
 };
 
-export const formatPost = async (item) => {
+export const formatPost = (item) => {
   const principalSection = document.createElement('section');
   const sectionFormatPost = document.createElement('section');
   const sectionUserData = document.createElement('section');
@@ -111,9 +111,11 @@ export const formatPost = async (item) => {
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
-  const dataUser = await feedHandler.getUserDataById(item.idUser);
-  userName.textContent = dataUser.name;
-  userImg.src = dataUser.photo;
+  feedHandler.getUserDataById(item.idUser)
+    .then((dataUser) => {
+      userName.textContent = dataUser.name;
+      userImg.src = dataUser.photo;
+    });
 
   /** Add the images of the post */
   fillPostData(item.URL, postFigureContainer);
@@ -214,8 +216,8 @@ export const formatPost = async (item) => {
           }
         });
         // const max = comments.length;
-        comments.forEach(async (element) => {
-          const temp = await formatComment(element);
+        comments.forEach((element) => {
+          const temp = formatComment(element);
           container.append(temp);
           if (element.idUser === id) {
             createCloseButton(temp);

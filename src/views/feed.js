@@ -46,15 +46,21 @@ export const feed = async (navigateTo) => {
     }
     sectionGetAllPosts.innerHTML = '';
     console.log(posts);
-    posts.forEach(async (item) => {
-      console.log(item);
-      const formatForEachPost = await formatPost(item);
+    posts.forEach((item) => {
+      const formatForEachPost = formatPost(item);
       const imgSave = document.createElement('img');
       imgSave.alt = 'save';
       const imgCancel = document.createElement('img');
       imgCancel.alt = 'cancel';
       formatForEachPost.classList.add('show-post', item.id);
       sectionGetAllPosts.append(formatForEachPost);
+      // const formatForEachPost = formatPost(item);
+      // const imgSave = document.createElement('img');
+      // imgSave.alt = 'save';
+      // const imgCancel = document.createElement('img');
+      // imgCancel.alt = 'cancel';
+      // formatForEachPost.classList.add('show-post', item.id);
+      // sectionGetAllPosts.append(formatForEachPost);
     });
   });
 
