@@ -3,12 +3,13 @@ import { feedHandler } from '../handlers/feedHandler';
 import { popup } from './popup';
 
 import imgLoading from '../assets/icons/playground.gif';
+import imgAddFile from '../assets/icons/file.png';
 
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
   closeButton.classList.add('close-button');
   closeButton.innerText = 'x';
-  // document.querySelector(`.${thumbnailId}`).appendChild(closeButton); => NO
+  // document.querySelector(`.${thumbnailId}`).appendChild(closeButton); => DOESN'T WORK
   document.getElementsByClassName(`${thumbnailId}`)[0].appendChild(closeButton);
 };
 
@@ -30,7 +31,7 @@ export const formatCreatePost = async () => {
   const sectionPost = document.createElement('section');
   const userFigure = document.createElement('figure');
   const userImg = document.createElement('img');
-  const userName = document.createElement('h2');
+  const userName = document.createElement('h3');
   // const labelAddFile = document.createElement('label');
   const iconAddFile = document.createElement('img');
   const file = document.createElement('input');
@@ -55,8 +56,9 @@ export const formatCreatePost = async () => {
 
   // labelAddFile.className = 'label-add-file';
   iconAddFile.className = 'icon-add-file';
+  iconAddFile.src = imgAddFile;
+  iconAddFile.alt = 'add file';
   file.classList.add('file', 'file-upload');
-
   file.type = 'file';
   file.setAttribute('accept', 'image/*,video/*');
   file.setAttribute('multiple', 'true');
@@ -81,7 +83,7 @@ export const formatCreatePost = async () => {
       createThumbnail(e.target.files[iterator], thumbnailId);
       formData.append(thumbnailId, e.target.files[iterator]); // key: thumbnailId, value: file
     }
-    e.target.value = ''; // The data is saved in form Data and clear the input file value
+    e.target.value = '';
   });
 
   postImgContainer.addEventListener('click', (e) => {
@@ -119,7 +121,6 @@ export const formatCreatePost = async () => {
     }
   });
 
-  // labelAddFile.appendChild(iconAddFile);
   sectionTitle.append(userFigure, userName, iconAddFile, file);
   userFigure.append(userImg);
   sectionPost.appendChild(postText);

@@ -1,7 +1,8 @@
 import {
-  onSnapshot, query, collection, orderBy,
+  onSnapshot, query, collection, orderBy, where,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
+import { header } from './header';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';
@@ -61,6 +62,7 @@ const fillPostData = (urls, container) => {
 export const myPosts = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
+  const head = await header(navigateTo);
   const nav = navbar(navigateTo);
   const title = document.createElement('h2');
   const sectionFormatCreatePost = await formatCreatePost();
@@ -88,14 +90,12 @@ export const myPosts = async (navigateTo) => {
 
   const id = AuthService.getCurrentUser().uid;
 
-  const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
+  const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'), where('idUser', '==', id));
   onSnapshot(q, (snapshot) => {
     sectionGetAllPosts.innerHTML = '';
     const posts = [];
     snapshot.docs.forEach((documentPost) => {
-      if (documentPost.data().idUser === id) {
-        posts.push({ ...documentPost.data(), id: documentPost.id });
-      }
+      posts.push({ ...documentPost.data(), id: documentPost.id });
     });
     if (posts.length === 0) {
       popup('You don\'t have any post yet');
@@ -198,6 +198,7 @@ export const myPosts = async (navigateTo) => {
           e.target.value = '';
         });
 
+        // Save the changes for the post
         saveButton.addEventListener('click', async () => {
           try {
             if (textarea.value !== '') {
@@ -213,7 +214,6 @@ export const myPosts = async (navigateTo) => {
                 postText.style.display = 'block';
                 postFigureContainer.innerHTML = '';
                 fillPostData(item.URL, postFigureContainer);
-                // formData.forEach((value, key) => formData.delete(key));
                 formData = new FormData();
               }
             } else {
@@ -225,6 +225,7 @@ export const myPosts = async (navigateTo) => {
           }
         });
 
+        // Ignore the changes edited
         cancelButton.addEventListener('click', () => {
           updateButtons.style.display = 'none';
           textarea.style.display = 'none';
@@ -237,6 +238,7 @@ export const myPosts = async (navigateTo) => {
         });
       });
 
+      // Delete the post
       deleteButton.addEventListener('click', async () => {
         try {
           loadingContainer.style.display = 'block';
@@ -256,7 +258,7 @@ export const myPosts = async (navigateTo) => {
   });
   // sectionFormatGetAllPost.append(sectionGetAllPosts);
   subSection.append(sectionFormatCreatePost, title, sectionGetAllPosts);
-  section.append(subSection, nav);
+  section.append(head, subSection, nav);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);
 

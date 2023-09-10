@@ -29,7 +29,7 @@ export const formatCreateComment = (idPost) => {
         const res = await feedHandler.createComment(idPost, commentText.value);
         loadingContainer.style.display = 'none';
         popup(res);
-        if (res === 'The comment has been created') {
+        if (res === 'The comment has been published') {
           commentText.value = '';
         }
       } else {

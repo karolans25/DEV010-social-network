@@ -3,14 +3,16 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import { formatPost } from './formatPost';
+import { header } from './header';
 import { navbar } from './navbar';
 import { popup } from './popup';
 import { TITLE } from '../consts/const';
 import { searchHandler } from '../handlers/searchHandler';
 
-export const search = (navigateTo) => {
+export const search = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
+  const head = await header(navigateTo);
   const nav = navbar(navigateTo);
   const title = document.createElement('h2');
   const sectionSearch = document.createElement('section');
@@ -22,7 +24,7 @@ export const search = (navigateTo) => {
   subSection.className = 'feed';
   sectionGetAllPosts.className = 'get-posts';
   subtitle.style.marginTop = '20px';
-  title.innerHTML = TITLE;
+  title.innerHTML = 'Results';
   title.style.marginTop = '10px';
   sectionSearch.className = 'search-user';
   subtitle.textContent = 'Search user:';
@@ -64,7 +66,7 @@ export const search = (navigateTo) => {
   sectionSearch.appendChild(subtitle);
   sectionSearch.appendChild(searchText);
   subSection.append(sectionSearch, title, sectionGetAllPosts);
-  section.append(subSection, nav);
+  section.append(head, subSection, nav);
 
   return section;
 };

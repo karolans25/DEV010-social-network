@@ -1,4 +1,5 @@
 import { feedHandler } from '../handlers/feedHandler';
+import { header } from './header';
 import { navbar } from './navbar';
 import { profileHandler } from '../handlers/profileHandler';
 
@@ -22,6 +23,7 @@ import iconLast from '../assets/icons/last.png';
 export const profile = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
+  const head = await header(navigateTo);
   const nav = navbar(navigateTo);
   const buttonSignOut = document.createElement('button');
   const imgSignOut = document.createElement('img');
@@ -141,11 +143,14 @@ export const profile = async (navigateTo) => {
     profileHandler.signout();
     navigateTo('/signin');
   });
-  buttonSignOut.appendChild(imgSignOut);
+
+  // buttonSignOut.appendChild(imgSignOut);
   figure.append(img, iconAddFile, file);
-  subSection.appendChild(buttonSignOut);
-  subSection.append(buttonSignOut, figure, title, sectionData);
-  section.append(subSection, nav);
+  // subSection.appendChild(buttonSignOut);
+  // subSection.append(buttonSignOut, figure, title, sectionData);
+  // subSection.append(figure, title, sectionData);
+  subSection.append(title, sectionData);
+  section.append(head, subSection, nav);
 
   return section;
 };

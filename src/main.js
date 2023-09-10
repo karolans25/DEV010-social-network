@@ -10,6 +10,7 @@ import { password } from './views/password';
 import { popup } from './views/popup';
 import { feed } from './views/feed';
 import { myPosts } from './views/myPosts';
+import { plus } from './views/plus';
 import { search } from './views/search';
 import { profile } from './views/profile';
 
@@ -22,6 +23,7 @@ const routes = [
   { path: '/popup', component: popup },
   { path: '/feed', component: feed },
   { path: '/myPosts', component: myPosts },
+  { path: '/plus', component: plus },
   { path: '/search', component: search },
   { path: '/profile', component: profile },
 ];

@@ -18,7 +18,7 @@ export const navbar = (navigateTo) => {
       alt: 'my posts', path: '/myPosts',
     },
     {
-      alt: 'plus', path: '/feed',
+      alt: 'plus', path: '/plus',
     },
     {
       alt: 'search', path: '/search',

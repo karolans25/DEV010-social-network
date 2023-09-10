@@ -2,6 +2,7 @@ import {
   onSnapshot, query, collection, orderBy,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
+import { header } from './header';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';
@@ -13,6 +14,7 @@ import imgLoading from '../assets/icons/playground.gif';
 export const feed = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
+  const head = await header(navigateTo);
   const nav = navbar(navigateTo);
   const title = document.createElement('h2');
   const sectionFormatCreatePost = await formatCreatePost();
@@ -24,7 +26,7 @@ export const feed = async (navigateTo) => {
   subSection.className = 'feed';
   sectionGetAllPosts.className = 'get-posts';
   sectionGetAllPosts.innerHTML = '';
-  title.innerHTML = TITLE;
+  title.innerHTML = 'Feed';
   title.style.marginTop = '30px';
 
   loadingContainer.id = 'loading-container';
@@ -45,7 +47,6 @@ export const feed = async (navigateTo) => {
       sectionGetAllPosts.appendChild(text);
     }
     sectionGetAllPosts.innerHTML = '';
-    console.log(posts);
     posts.forEach((item) => {
       const formatForEachPost = formatPost(item);
       const imgSave = document.createElement('img');
@@ -54,18 +55,11 @@ export const feed = async (navigateTo) => {
       imgCancel.alt = 'cancel';
       formatForEachPost.classList.add('show-post', item.id);
       sectionGetAllPosts.append(formatForEachPost);
-      // const formatForEachPost = formatPost(item);
-      // const imgSave = document.createElement('img');
-      // imgSave.alt = 'save';
-      // const imgCancel = document.createElement('img');
-      // imgCancel.alt = 'cancel';
-      // formatForEachPost.classList.add('show-post', item.id);
-      // sectionGetAllPosts.append(formatForEachPost);
     });
   });
 
   subSection.append(sectionFormatCreatePost, title, sectionGetAllPosts);
-  section.append(subSection, nav);
+  section.append(head, subSection, nav);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);
 
