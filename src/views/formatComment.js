@@ -28,6 +28,7 @@ export const formatComment = async (item) => {
   }
 
   sectionFormatComment.classList.add('container-found-comment');
+  sectionFormatComment.setAttribute('data-id', item.id);
   sectionData.className = 'head-line';
   userName.className = 'user-name';
   sectionComment.className = 'data-comment';

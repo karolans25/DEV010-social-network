@@ -1,5 +1,5 @@
 import {
-  onSnapshot, query, collection, where, orderBy,
+  onSnapshot, query, collection, where, orderBy, serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import AuthService from '../firebase/authService';
@@ -16,12 +16,27 @@ import imgComment from '../assets/icons/comentario.png';
 import imgLoading from '../assets/icons/playground.gif';
 import { formatComment } from './formatComment';
 
-// const createCloseButton = (thumbnailId) => {
-//   const closeButton = document.createElement('section');
-//   closeButton.classList.add('close-button');
-//   closeButton.innerText = 'x';
-//   document.getElementsByClassName(`${thumbnailId}`)[0].appendChild(closeButton);
-// };
+const createCloseButton = (container) => {
+  const closeButton = document.createElement('section');
+  closeButton.classList.add('close-button');
+  closeButton.innerText = 'x';
+  closeButton.style.width = '25px';
+  closeButton.style.height = '25px';
+  closeButton.style.background = 'var(--main-color)';
+  closeButton.style.borderRadius = '50%';
+  // closeButton.style.color = 'var(--acompanying-color)';
+  // closeButton.style.color = 'var(--text-color)';
+  closeButton.style.color = 'black';
+  closeButton.style.fontWeight = 'bold';
+  closeButton.style.textAlign = 'center';
+  closeButton.style.cursor = 'pointer';
+  const userName = container.querySelector('.user-name');
+  const headLine = container.querySelector('.head-line');
+  headLine.style.display = 'grid';
+  headLine.style.gridTemplateColumns = '1fr 2fr 6fr';
+  userName.before(closeButton);
+  // container.appendChild(closeButton);
+};
 
 // const createThumbnail = (file, id, container) => {
 //   const thumbnail = document.createElement('figure');
@@ -193,7 +208,7 @@ export const formatPost = async (item) => {
 
   /** Event listener for comments */
   const createComment = formatCreateComment(item.id);
-  let commentText = document.createElement('section');
+  // let commentText = document.createElement('section');
   const container = document.createElement('section');
   container.classList.add('container-comments');
   sectionComment.addEventListener('click', (e) => {
@@ -209,24 +224,35 @@ export const formatPost = async (item) => {
       sectionFormatPost.after(createComment);
       container.style.display = 'grid';
 
-      // const que3 = query(collection(db, 'comment'), orderBy('createdAt', 'desc'), where('idPost', '==', `${item.id}`));
       const que3 = query(collection(db, 'comment'), orderBy('createdAt', 'desc'));
       onSnapshot(que3, (commentSnapshot) => {
         container.innerHTML = '';
         const comments = [];
         commentSnapshot.docs.forEach((element) => {
-          console.log(element.data().idPost);
           if (element.data().idPost === item.id) {
             comments.push({ ...element.data(), id: element.id });
           }
         });
-        comments.forEach(async (comment) => {
-          commentText = await formatComment(comment);
-          container.append(commentText);
+        // const max = comments.length;
+        comments.forEach(async (element) => {
+          const temp = await formatComment(element);
+          container.append(temp);
+          if (element.idUser === id) {
+            createCloseButton(temp);
+          }
         });
       });
       principalSection.append(container);
     }
+  });
+
+  container.addEventListener('click', (e) => {
+    e.preventDefault();
+    const parentParent = e.target.parentNode.parentNode;
+    const idComment = parentParent.getAttribute('data-id');
+    console.log(idComment);
+    parentParent.parentNode.removeChild(parentParent);
+    feedHandler.deleteComment(idComment);
   });
 
   /** Append y append childs for sections */

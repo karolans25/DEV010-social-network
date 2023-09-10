@@ -55,4 +55,8 @@ export const feedHandler = {
     if (idRef) return 'The comment has been published';
     return 'The comment wasn\'t published';
   },
+
+  deleteComment: async (idComment) => {
+    CommentController.deleteComment(idComment);
+  },
 };

@@ -13,5 +13,7 @@ const CommentController = {
     };
     return StoreService.addDocument('comment', data);
   },
+
+  deleteComment: (idComment) => StoreService.deleteDocument('comment', idComment),
 };
 export default CommentController;
