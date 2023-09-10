@@ -3,6 +3,7 @@ import { popup } from './popup';
 
 import imgAvatar from '../assets/icons/genio.png';
 import imgLoading from '../assets/icons/playground.gif';
+import imgPass from '../assets/icons/sendEmail.png';
 
 export const password = (navigateTo) => {
   const section = document.createElement('section');
@@ -11,8 +12,13 @@ export const password = (navigateTo) => {
   const img = document.createElement('img');
   const form = document.createElement('form');
   const title = document.createElement('h2');
+
+  const sectionEmail = document.createElement('section');
   const labelEmail = document.createElement('label');
+  const spanEmail = document.createElement('span');
   const inputEmail = document.createElement('input');
+
+  const imgRecover = document.createElement('img');
   const buttonRecoverPassword = document.createElement('button');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
@@ -27,31 +33,35 @@ export const password = (navigateTo) => {
   back.classList.add('link', 'back');
   // back.href = '/signin';
 
-  back.addEventListener('click', (e) => {
-    e.preventDefault();
-    navigateTo('/signin');
-  });
-
   // image
   img.src = imgAvatar;
   img.alt = 'genius icon';
   figure.append(img);
 
   // title
-  title.innerHTML = 'Recover Password';
+  title.innerHTML = 'Recover Pass';
 
   // form
-  labelEmail.innerHTML = 'Email';
-  labelEmail.htmlFor = inputEmail.name;
-  inputEmail.placeholder = 'Write email';
+  // form
+  // labelEmail.innerHTML = 'Email: ';
+  // labelEmail.htmlFor = inputEmail.name;
+  spanEmail.textContent = 'Write email *';
   inputEmail.name = 'email';
+  // inputEmail.placeholder = 'Write email';
   inputEmail.type = 'email';
   inputEmail.required = true;
-  buttonRecoverPassword.textContent = 'Recover Password';
+  imgRecover.src = imgPass;
+  imgRecover.alt = 'recover pass';
+  // buttonRecoverPassword.textContent = 'Recover Password';
   buttonRecoverPassword.type = 'submit';
   loadingContainer.id = 'loading-container';
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
+
+  back.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigateTo('/signin');
+  });
 
   form.addEventListener('submit', async (e) => {
     try {
@@ -71,10 +81,33 @@ export const password = (navigateTo) => {
     }
   });
 
-  form.append(labelEmail, inputEmail, buttonRecoverPassword);
+  labelEmail.appendChild(spanEmail);
+  labelEmail.appendChild(inputEmail);
+  sectionEmail.appendChild(labelEmail);
+
+  buttonRecoverPassword.appendChild(imgRecover);
+  form.append(sectionEmail, buttonRecoverPassword);
   section.append(back, figure, title, form);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);
+
+  const inputs = form.querySelectorAll('input');
+  inputs.forEach((input) => {
+    input.onfocus = () => {
+      input.previousElementSibling.classList.add('top');
+      input.previousElementSibling.classList.add('focus');
+      input.parentNode.classList.add('focus');
+    };
+    input.onblur = () => {
+      input.value = input.value.trim();
+      if (input.value.length === 0) {
+        input.previousElementSibling.classList.remove('top');
+      }
+      input.previousElementSibling.classList.remove('focus');
+      // previus.parentNode.classList.remove('top');
+      input.parentNode.classList.remove('focus');
+    };
+  });
 
   return section;
 };

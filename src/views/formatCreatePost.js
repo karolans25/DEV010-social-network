@@ -31,7 +31,7 @@ export const formatCreatePost = async () => {
   const sectionPost = document.createElement('section');
   const userFigure = document.createElement('figure');
   const userImg = document.createElement('img');
-  const userName = document.createElement('h3');
+  const userName = document.createElement('h2');
   // const labelAddFile = document.createElement('label');
   const iconAddFile = document.createElement('img');
   const file = document.createElement('input');
@@ -51,6 +51,7 @@ export const formatCreatePost = async () => {
   sectionTitle.className = 'header-post';
   sectionPost.className = 'body-post';
 
+  userName.style.fontSize = '30px';
   userFigure.className = 'user-figure';
   userImg.className = 'user-img';
 
