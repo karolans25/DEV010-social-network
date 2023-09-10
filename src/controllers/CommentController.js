@@ -14,6 +14,18 @@ const CommentController = {
     return StoreService.addDocument('comment', data);
   },
 
+  getAllMyComments: async () => {
+    const user = await AuthService.getCurrentUser();
+    const comments = await StoreService.getAllDocuments('comment');
+    const myComments = [];
+    for (let i = 0; i < comments.length; i++) {
+      if (comments[i].idUser === user.uid) {
+        myComments.push(comments[i]);
+      }
+    }
+    return myComments;
+  },
+
   deleteComment: (idComment) => StoreService.deleteDocument('comment', idComment),
 };
 export default CommentController;

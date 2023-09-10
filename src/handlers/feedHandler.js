@@ -49,12 +49,12 @@ export const feedHandler = {
   updateReactPost: (idLike, idTypeLike) => LikeController.updateReactPost(idLike, idTypeLike),
 
   createComment: async (idPost, text) => {
-    console.log(idPost);
-    console.log(text);
     const idRef = await CommentController.createComment(idPost, text);
     if (idRef) return 'The comment has been published';
     return 'The comment wasn\'t published';
   },
+
+  getAllMyComments: () => CommentController.getAllMyComments(),
 
   deleteComment: async (idComment) => {
     CommentController.deleteComment(idComment);

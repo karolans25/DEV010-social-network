@@ -63,7 +63,7 @@ export const myPosts = async (navigateTo) => {
   const subSection = document.createElement('section');
   const nav = navbar(navigateTo);
   const title = document.createElement('h2');
-  const sectionFormatCreatePost = formatCreatePost();
+  const sectionFormatCreatePost = await formatCreatePost();
   const sectionGetAllPosts = document.createElement('section');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
@@ -86,26 +86,24 @@ export const myPosts = async (navigateTo) => {
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
-  // const posts = await feedHandler.getAllMyPost();
-
-  // const [id, ,] = feedHandler.getUserData();
-  // console.log(id);
   const id = AuthService.getCurrentUser().uid;
 
-  const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'), where('idUser', '==', id));
+  const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
   onSnapshot(q, (snapshot) => {
+    sectionGetAllPosts.innerHTML = '';
     const posts = [];
     snapshot.docs.forEach((documentPost) => {
-      posts.push({ ...documentPost.data(), id: documentPost.id });
+      if (documentPost.data().idUser === id) {
+        posts.push({ ...documentPost.data(), id: documentPost.id });
+      }
     });
-    sectionGetAllPosts.innerHTML = '';
-    sectionGetAllPosts.innerHTML = '';
     if (posts.length === 0) {
       popup('You don\'t have any post yet');
       const text = document.createElement('h2');
       text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
       sectionGetAllPosts.appendChild(text);
     }
+    sectionGetAllPosts.innerHTML = '';
     posts.forEach(async (item) => {
       const formatForEachPost = await formatPost(item);
 

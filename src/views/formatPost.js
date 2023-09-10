@@ -1,11 +1,12 @@
 import {
-  onSnapshot, query, collection, where, orderBy, serverTimestamp,
+  onSnapshot, query, collection, where, orderBy,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import AuthService from '../firebase/authService';
 import { popup } from './popup';
 import { feedHandler } from '../handlers/feedHandler';
 import { formatCreateComment } from './formatCreateComment';
+import { formatComment } from './formatComment';
 
 import imgLike from '../assets/icons/voto-positivo.png';
 import imgDislike from '../assets/icons/voto-negativo.png';
@@ -14,7 +15,6 @@ import imgBest from '../assets/icons/calidad-premium.png';
 import imgDoubts from '../assets/icons/investigar.png';
 import imgComment from '../assets/icons/comentario.png';
 import imgLoading from '../assets/icons/playground.gif';
-import { formatComment } from './formatComment';
 
 const createCloseButton = (container) => {
   const closeButton = document.createElement('section');
@@ -35,22 +35,7 @@ const createCloseButton = (container) => {
   headLine.style.display = 'grid';
   headLine.style.gridTemplateColumns = '1fr 2fr 6fr';
   userName.before(closeButton);
-  // container.appendChild(closeButton);
 };
-
-// const createThumbnail = (file, id, container) => {
-//   const thumbnail = document.createElement('figure');
-//   thumbnail.classList.add('thumbnail', id);
-//   thumbnail.dataset.id = id;
-//   if (file instanceof File) {
-//     thumbnail.setAttribute('style', `background-image: url(${URL.createObjectURL(file)})`);
-//   } else {
-//     thumbnail.setAttribute('style', `background-image: url(${file})`);
-//   }
-//   container.appendChild(thumbnail);
-//   container.style.display = 'grid';
-//   createCloseButton(id);
-// };
 
 const fillPostData = (urls, container) => {
   if (Array.isArray(urls)) {
@@ -164,41 +149,36 @@ export const formatPost = async (item) => {
     reactionSnapshot.docs.forEach((document) => {
       likes.push({ ...document.data(), id: document.id });
     });
-    likes.forEach((like) => {
+    likes.forEach(async (like) => {
       if (like.idUser === id) {
-        feedHandler.getReactionMessage(like.idTypeLike).then((reaction) => {
-          if (reaction) reactionMessage.style.display = 'block';
-          reactionMessage.textContent = reaction.message;
-        });
+        const reaction = await feedHandler.getReactionMessage(like.idTypeLike);
+        if (reaction) reactionMessage.style.display = 'block';
+        reactionMessage.textContent = reaction.message;
       }
     });
   });
 
   /** Event listener for reaction buttons */
-  sectionReact.addEventListener('click', (e) => {
+  sectionReact.addEventListener('click', async (e) => {
     try {
       loadingContainer.style.display = 'block';
       const [, type, idPost] = e.target.classList;
-      feedHandler.hasReactedPost(idPost)
-        .then((reactedSnapshot) => {
-          if (reactedSnapshot.size > 0) {
-            if (type === reactedSnapshot.docs[0].data().idTypeLike) {
-              feedHandler.unreactPost(reactedSnapshot.docs[0].id);
-              reactionMessage.style.display = 'none';
-            } else {
-              feedHandler.updateReactPost(reactedSnapshot.docs[0].id, type);
-              feedHandler.getReactionMessage(type).then((reaction) => {
-                reactionMessage.textContent = reaction.message;
-              });
-            }
-          } else {
-            feedHandler.reactPost(idPost, type);
-            reactionMessage.style.display = 'block';
-            feedHandler.getReactionMessage(type).then((reaction) => {
-              reactionMessage.textContent = reaction.message;
-            });
-          }
-        });
+      const reactedSnapshot = await feedHandler.hasReactedPost(idPost);
+      if (reactedSnapshot.size > 0) {
+        if (type === reactedSnapshot.docs[0].data().idTypeLike) {
+          feedHandler.unreactPost(reactedSnapshot.docs[0].id);
+          reactionMessage.style.display = 'none';
+        } else {
+          feedHandler.updateReactPost(reactedSnapshot.docs[0].id, type);
+          const reaction = await feedHandler.getReactionMessage(type);
+          reactionMessage.textContent = reaction.message;
+        }
+      } else {
+        feedHandler.reactPost(idPost, type);
+        reactionMessage.style.display = 'block';
+        const reaction = await feedHandler.getReactionMessage(type);
+        reactionMessage.textContent = reaction.message;
+      }
       loadingContainer.style.display = 'none';
     } catch (err) {
       loadingContainer.style.display = 'none';
@@ -250,7 +230,6 @@ export const formatPost = async (item) => {
     e.preventDefault();
     const parentParent = e.target.parentNode.parentNode;
     const idComment = parentParent.getAttribute('data-id');
-    console.log(idComment);
     parentParent.parentNode.removeChild(parentParent);
     feedHandler.deleteComment(idComment);
   });

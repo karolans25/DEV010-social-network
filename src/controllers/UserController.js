@@ -46,7 +46,6 @@ const UserController = {
       const user = await AuthService.loginGoogle();
       if (user) {
         const res = await fetch(user.photoURL);
-        console.log(res);
         const blob = await res.blob();
         const urlProfileImage = await StorageService.uploadFile(blob, `${user.uid}/profile.${blob.type.split('/')[1]}`);
         const storeDoc = await StoreService.getDocumentById('user', user.uid);
@@ -58,13 +57,8 @@ const UserController = {
           photo: urlProfileImage || '',
         };
         if (storeDoc.exists) {
-          console.log(storeDoc);
-          console.log('Línea 58 UserControler');
-          console.log(user.uid);
           await StoreService.updateDocument('user', user.uid, data);
         } else {
-          console.log('Línea 62 UserControler');
-          console.log(user.uid);
           await StoreService.addDocumentWithId('user', user.uid, data);
         }
         return 'The user has been logged';
@@ -80,14 +74,6 @@ const UserController = {
   signout: () => AuthService.logout(),
 
   resetPassword: (email) => AuthService.sendPassResetEmail(email),
-  // {
-  // const signInMethods = await AuthService.checkEmailRegistered(email);
-  // if (signInMethods.length === 0) {
-  //   await AuthService.sendPassResetEmail(email);
-  //   return 'The email to reset password has been sent';
-  // }
-  // return 'The email hasn\'t been registered yet';
-  // },
 
   getUserData: async () => {
     const user = await AuthService.getCurrentUser();

@@ -8,14 +8,13 @@ const PostController = {
 
   getMyReactions: async (collectionStore) => {
     const user = await AuthService.getCurrentUser();
-    const likes = await StoreService.getAllDocumentsRealTime(collectionStore);
+    const likes = await StoreService.getAllDocuments(collectionStore);
     const myLikes = [];
     for (let i = 0; i < likes.length; i++) {
       if (likes[i].idUser === user.uid) {
         myLikes.push(likes[i]);
       }
     }
-    console.log(myLikes);
     return myLikes;
   },
 

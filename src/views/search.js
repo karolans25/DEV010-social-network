@@ -42,17 +42,18 @@ export const search = (navigateTo) => {
 
   const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'));
   onSnapshot(q, (snapshot) => {
+    sectionGetAllPosts.innerHTML = '';
     const posts = [];
     snapshot.docs.forEach((documentPost) => {
       posts.push({ ...documentPost.data(), id: documentPost.id });
     });
-    sectionGetAllPosts.innerHTML = '';
     if (posts.length === 0) {
       popup('You don\'t have any post yet');
       const text = document.createElement('h2');
       text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
       sectionGetAllPosts.appendChild(text);
     }
+    sectionGetAllPosts.innerHTML = '';
     posts.forEach(async (item) => {
       const formatForEachPost = await formatPost(item);
       formatForEachPost.classList.add('show-post', item.id);

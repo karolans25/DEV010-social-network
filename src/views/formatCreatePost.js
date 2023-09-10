@@ -24,7 +24,7 @@ const createThumbnail = (file, id) => {
   createCloseButton(id);
 };
 
-export const formatCreatePost = () => {
+export const formatCreatePost = async () => {
   const sectionCreatePost = document.createElement('section');
   const sectionTitle = document.createElement('section');
   const sectionPost = document.createElement('section');
@@ -42,10 +42,9 @@ export const formatCreatePost = () => {
 
   let formData = new FormData();
 
-  feedHandler.getUserData().then((data) => {
-    userName.innerHTML = data[1];
-    userImg.src = data[2];
-  }).catch((err) => popup(err.message));
+  const data = await feedHandler.getUserData();
+  userName.innerHTML = data[1];
+  userImg.src = data[2];
 
   sectionCreatePost.className = 'create-post';
   sectionTitle.className = 'header-post';

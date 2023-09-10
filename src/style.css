@@ -744,10 +744,6 @@
     background-color: var(--contrast-color);
   }
 
-  .head-line{
-    height: fit-content;
-  }
-
   .header-post{
     display: grid;
     grid-template-columns: 1fr 6fr 1fr 1fr;
@@ -761,7 +757,8 @@
   
   .head-line{
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    height: fit-content;
+    grid-template-columns: 2fr 6fr;
   }
 
   /*.header-post .user-figure{*/
