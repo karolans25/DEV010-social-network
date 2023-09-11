@@ -3,6 +3,8 @@ import { popup } from './popup';
 
 import gifLoading from '../assets/icons/playground.gif';
 import imgAvatar from '../assets/icons/nina.png';
+import imgIconAddFile from '../assets/icons/file.png';
+import imgSignup from '../assets/icons/signup.png';
 
 export const signup = (navigateTo) => {
   const section = document.createElement('section');
@@ -16,15 +18,29 @@ export const signup = (navigateTo) => {
   const file = document.createElement('input');
   const title = document.createElement('h2');
   const form = document.createElement('form');
-  const inputName = document.createElement('input');
-  const inputEmail = document.createElement('input');
-  const inputPass = document.createElement('input');
-  const inputPassConfirm = document.createElement('input');
+
+  const sectionUserName = document.createElement('section');
   const labelName = document.createElement('label');
+  const spanName = document.createElement('span');
+  const inputName = document.createElement('input');
+
+  const sectionEmail = document.createElement('section');
   const labelEmail = document.createElement('label');
+  const spanEmail = document.createElement('span');
+  const inputEmail = document.createElement('input');
+
+  const sectionPass = document.createElement('section');
   const labelPass = document.createElement('label');
+  const spanPass = document.createElement('span');
+  const inputPass = document.createElement('input');
+
+  const sectionPassConfirm = document.createElement('section');
   const labelPassConfirm = document.createElement('label');
+  const spanPassConfirm = document.createElement('span');
+  const inputPassConfirm = document.createElement('input');
+
   const buttonSignUp = document.createElement('button');
+  const imgSignUp = document.createElement('img');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
 
@@ -33,8 +49,10 @@ export const signup = (navigateTo) => {
 
   // link back
   // back.innerHTML = '👈 back';
-  back.innerHTML = 'back';
+  // back.innerHTML = 'back';
+  back.innerHTML = '👈';
   iconAddFile.className = 'icon-add-file';
+  iconAddFile.src = imgIconAddFile;
   file.classList.add('file', 'file-upload', 'file-signup');
   // back.href = '/signin';
   back.name = 'back';
@@ -53,37 +71,44 @@ export const signup = (navigateTo) => {
   buttonRight.name = 'right';
   buttonRight.style.padding = '0';
   title.textContent = 'Sign Up';
-  buttonSignUp.textContent = '👉 Sign Up';
+  imgSignUp.src = imgSignup;
+  imgSignUp.alt = 'sign up';
+  // buttonSignUp.textContent = '👉 Sign Up';
   loadingContainer.id = 'loading-container';
   loadingGif.src = gifLoading;
   loadingGif.alt = 'loading';
 
   // form
-  labelName.innerHTML = 'Display Name:';
-  labelName.htmlFor = inputName.name;
+  // labelName.innerHTML = 'Display Name:';
+  // labelName.htmlFor = inputName.name;
+  spanName.textContent = 'Write display name';
   inputName.name = 'name';
-  inputName.placeholder = 'Write display name';
+  // inputName.placeholder = 'Write display name';
   inputName.type = 'text';
   inputName.required = false;
-  labelEmail.innerHTML = 'Email: ';
-  labelEmail.htmlFor = inputEmail.name;
+  // labelEmail.innerHTML = 'Email: ';
+  // labelEmail.htmlFor = inputEmail.name;
+  spanEmail.textContent = 'Write email *';
   inputEmail.name = 'email';
-  inputEmail.placeholder = 'Write email';
+  // inputEmail.placeholder = 'Write email';
   inputEmail.type = 'email';
   inputEmail.required = true;
-  labelPass.innerHTML = 'Password: ';
-  labelPass.htmlFor = inputPass.name;
+  // labelPass.innerHTML = 'Password: ';
+  // labelPass.htmlFor = inputPass.name;
+  spanPass.textContent = 'Write password *';
   inputPass.name = 'pass';
-  inputPass.placeholder = 'Write password';
+  // inputPass.placeholder = 'Write password';
   inputPass.type = 'password';
   inputPass.required = true;
-  labelPassConfirm.innerHTML = 'Confirm Password: ';
-  labelPassConfirm.htmlFor = inputPassConfirm.name;
+  // labelPassConfirm.innerHTML = 'Confirm Password: ';
+  // labelPassConfirm.htmlFor = inputPassConfirm.name;
+  spanPassConfirm.textContent = 'Write password again *';
   inputPassConfirm.name = 'pass-check';
-  inputPassConfirm.placeholder = 'Write password again';
+  // inputPassConfirm.placeholder = 'Write password again';
   inputPassConfirm.type = 'password';
   inputPassConfirm.required = true;
   buttonSignUp.type = 'submit';
+  // form.setAttribute('autocomplete', 'off');
 
   back.addEventListener('click', (e) => {
     e.preventDefault();
@@ -123,22 +148,49 @@ export const signup = (navigateTo) => {
     }
   });
 
-  form.append(
-    labelName,
-    inputName,
-    labelEmail,
-    inputEmail,
-    labelPass,
-    inputPass,
-    labelPassConfirm,
-    inputPassConfirm,
-    buttonSignUp,
-  );
+  labelName.appendChild(spanName);
+  labelName.appendChild(inputName);
+  sectionUserName.appendChild(labelName);
+
+  labelEmail.appendChild(spanEmail);
+  labelEmail.appendChild(inputEmail);
+  sectionEmail.appendChild(labelEmail);
+
+  labelPass.appendChild(spanPass);
+  labelPass.appendChild(inputPass);
+  sectionPass.appendChild(labelPass);
+
+  labelPassConfirm.appendChild(spanPassConfirm);
+  labelPassConfirm.appendChild(inputPassConfirm);
+  sectionPassConfirm.appendChild(labelPassConfirm);
+
+  buttonSignUp.appendChild(imgSignUp);
+
+  form.append(sectionUserName, sectionEmail, sectionPass, sectionPassConfirm, buttonSignUp);
+
   figure.append(img, iconAddFile, file);
   sectionFig.append(buttonLeft, figure, buttonRight);
   section.append(back, sectionFig, title, form);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);
+
+  const inputs = form.querySelectorAll('input');
+  inputs.forEach((input) => {
+    input.onfocus = () => {
+      input.previousElementSibling.classList.add('top');
+      input.previousElementSibling.classList.add('focus');
+      input.parentNode.classList.add('focus');
+    };
+    input.onblur = () => {
+      input.value = input.value.trim();
+      if (input.value.length === 0) {
+        input.previousElementSibling.classList.remove('top');        
+      }
+      input.previousElementSibling.classList.remove('focus');
+      // previus.parentNode.classList.remove('top');
+      input.parentNode.classList.remove('focus');
+    };
+  });
 
   return section;
 };

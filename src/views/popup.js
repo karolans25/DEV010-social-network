@@ -41,9 +41,12 @@ export const popup = (message) => {
     'The user has been logged',
     'The user has been registered and logged with',
     'The post has been created',
+    'The post has been updated',
+    'The post has been deleted',
     'The email to confirm your account has been sent',
     'The email to restore the password has been sent',
-    'The post has been updated',
+    'The comment has been published',
+    'The comment has been deleted',
   ];
   if (typeof message !== 'undefined' && typeof message === 'string' && message !== '') {
     if (posibilities.includes(message)) {

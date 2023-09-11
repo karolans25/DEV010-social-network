@@ -78,8 +78,9 @@ const PostController = {
   deletePostData: async (idPost) => {
     const user = await AuthService.getCurrentUser();
     await StorageService.deleteFile(`${user.uid}/posts/${idPost}`);
-    await StoreService.deleteDocument('post', idPost);
     await StoreService.deleteLikesPost(idPost);
+    await StoreService.deleteDocument('post', idPost);
+    return 'The post has been deleted';
   },
 
   getRealTimeData: (collectionStore) => StoreService.getDocumentByFilter(collectionStore),

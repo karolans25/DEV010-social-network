@@ -2,11 +2,14 @@
 import { feedHandler } from '../handlers/feedHandler';
 import { popup } from './popup';
 
+import imgLoading from '../assets/icons/playground.gif';
+import imgAddFile from '../assets/icons/file.png';
+
 const createCloseButton = (thumbnailId) => {
   const closeButton = document.createElement('section');
   closeButton.classList.add('close-button');
   closeButton.innerText = 'x';
-  // document.querySelector(`.${thumbnailId}`).appendChild(closeButton); => NO
+  // document.querySelector(`.${thumbnailId}`).appendChild(closeButton); => DOESN'T WORK
   document.getElementsByClassName(`${thumbnailId}`)[0].appendChild(closeButton);
 };
 
@@ -22,7 +25,7 @@ const createThumbnail = (file, id) => {
   createCloseButton(id);
 };
 
-export const formatCreatePost = () => {
+export const formatCreatePost = async () => {
   const sectionCreatePost = document.createElement('section');
   const sectionTitle = document.createElement('section');
   const sectionPost = document.createElement('section');
@@ -40,22 +43,23 @@ export const formatCreatePost = () => {
 
   let formData = new FormData();
 
-  feedHandler.getUserData().then((data) => {
-    userName.innerHTML = data[1];
-    userImg.src = data[2];
-  }).catch((err) => popup(err.message));
+  const data = await feedHandler.getUserData();
+  userName.innerHTML = data[1];
+  userImg.src = data[2];
 
   sectionCreatePost.className = 'create-post';
   sectionTitle.className = 'header-post';
   sectionPost.className = 'body-post';
 
+  userName.style.fontSize = '30px';
   userFigure.className = 'user-figure';
   userImg.className = 'user-img';
 
   // labelAddFile.className = 'label-add-file';
   iconAddFile.className = 'icon-add-file';
+  iconAddFile.src = imgAddFile;
+  iconAddFile.alt = 'add file';
   file.classList.add('file', 'file-upload');
-
   file.type = 'file';
   file.setAttribute('accept', 'image/*,video/*');
   file.setAttribute('multiple', 'true');
@@ -65,7 +69,7 @@ export const formatCreatePost = () => {
   buttonPublish.classList.add('publish-button');
   // labelAddFile.htmlFor = 'file-upload';
   loadingContainer.id = 'loading-container';
-  loadingGif.src = '../assets/icons/playground.gif';
+  loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
   postImgContainer.className = 'post-figure';
@@ -80,7 +84,7 @@ export const formatCreatePost = () => {
       createThumbnail(e.target.files[iterator], thumbnailId);
       formData.append(thumbnailId, e.target.files[iterator]); // key: thumbnailId, value: file
     }
-    e.target.value = ''; // The data is saved in form Data and clear the input file value
+    e.target.value = '';
   });
 
   postImgContainer.addEventListener('click', (e) => {
@@ -118,7 +122,6 @@ export const formatCreatePost = () => {
     }
   });
 
-  // labelAddFile.appendChild(iconAddFile);
   sectionTitle.append(userFigure, userName, iconAddFile, file);
   userFigure.append(userImg);
   sectionPost.appendChild(postText);

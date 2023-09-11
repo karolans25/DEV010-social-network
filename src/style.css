@@ -78,9 +78,24 @@
     letter-spacing: 5px;
     font-family: 'Style Script';  
     padding: 15px 15px 15px 15px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
   }
-  
+
+  h3{
+    height: fit-content;
+    width: fit-content;
+    line-height: 25px;
+    background: transparent;
+    color: var(--accompanying-color);
+    /* font-style: oblique; */
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 5px;
+    font-family: 'Style Script';  
+    padding: 15px 15px 15px 15px;
+    /* margin-top: 10px; */
+  }
+
   button{
     background: var(--main-color);
     color: var(--accompanying-color);
@@ -139,28 +154,28 @@
   input{
     background: var(--accompanying-color);
     border: none;
-    color: var(--moving-things-color);
+    /* color: var(--moving-things-color); */
     color: var(--secondary-letter-color);
     font-weight: normal;
-    padding: 5px 5px 5px 5px;
-    margin: 5px 10px 15px 10px;
+    padding: 5px 5px 5px 10px;
+    /* margin: 5px 10px 15px 10px; */
     font-size: medium;
-    width: 85%;
+    width: 100%;
     height: 40px;
     display: grid;
     /*box-shadow: offset-x | offset-y | blur-radius | spread-radius | color ;*/
     box-shadow: 0 0.2rem var(--moving-things-color) ;
-    border-bottom: 1px solid var(--movin-things-color);
+    border-bottom: 1px solid var(--principal-letter-color);
     /* min-width: 300px; */
     /* max-width: 500px; */
   }
   
   input:focus{
-    background-color: var(--moving-things-color);
+    background-color: var(--contrast-color);
     opacity: 0.8;
     font-weight: bold;
-    color: var(--contrast-color);
-    /*outline: none;*/
+    color: var(--accent-color);
+    /* outline: none; */
   }
   
   input[type='file']{
@@ -186,6 +201,37 @@
     align-self: center;
   }
   
+  .header{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    display: grid;
+    grid-template-columns: 5fr 1fr 2fr 1fr;
+    width: 100%;
+    height: 80px;
+    background: var(--main-color);
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    margin: 0;
+    padding: 0;
+    color: var(--contrast-color);
+    z-index: 1;
+  }
+  .header h2{
+    color: var(--contrast-color);
+  }
+
+  .header figure img{
+    border: 3px solid var(--contrast-color);
+  }
+
+  .search-user .post-text{
+    background-color: var(--contrast-color);
+    color: var(--secondary-letter-color);
+  }
+
   .init, .signin, .signup, .pass, .feed, .myPosts, .mybuttons, .search{
     padding: 30px 30px 30px 30px;
       /* background-image: url(assets/signup.png); */
@@ -259,7 +305,7 @@
     left: 0%;
     display: grid;
     width: 100%;
-    height: 70px;
+    height: 50px;
     background: var(--main-color);
     /* display: flex; */
     justify-content: center;
@@ -273,7 +319,7 @@
     background: var(--main-color);
     width: 360px;
     display: flex;
-    height: 60px;
+    height: 50px;
     align-items: center;
     justify-content: center;
 }
@@ -304,8 +350,8 @@
 }
 
 .navigation ul li button img{
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   position: relative;
   /* border: solid 2px var(--contrast-color); */
   border-radius: 50%;
@@ -321,12 +367,14 @@
 .navigation ul li.active button{
   transform: translate(-8px, -8px);
   transition-delay: 0.5s;
-  border: solid 10px var(--principal-letter-color);
+  
 }
 .navigation ul li.active button img{
   border: solid 5px var(--main-color);
-  transform: translate(-8px, -8px);
+  transform: translate(-2px, -3px);
   transition-delay: 0.5s;
+  width: 60px;
+  height: 60px;
 }
 
   .signin figure, .pass figure, .signup figure, .profile figure{
@@ -350,7 +398,6 @@
   }
   
   .link{
-    width: fit-content;
     /* padding-left: 10px;
     padding-right: 10px; */
     /* justify-content: center; */
@@ -359,10 +406,13 @@
     /* flex-direction: row-reverse; */
     /* margin-right: 20px; */
     /* border: dotted 1px var(--main-color); */
+    min-width: 35px;
+    width: fit-content;
     border: none;
     background-color: transparent;
     color: var(--text-color);
     font-size: 14px;
+    margin: 0;
   }
   
   /* .signin .google, .signin .github, .signin button{ */
@@ -383,9 +433,11 @@
   .ops{
     display: flex;
     justify-content: space-evenly;
-    border: dashed 1px var(--dashed-border);
-    margin-top: 10px;
+    border: dashed 1px var(--main-color);
+    /* margin-top: 10px; */
     height: fit-content;
+    box-shadow: 0.3rem 0.3rem 2px var(--moving-things-color);
+
     /* box-shadow: 0.3rem 0.3rem var(--moving-things-color); */
   }
   
@@ -407,7 +459,7 @@
   }
   
   .ops.extra{
-    border: 1px dotted var(--secondary-letter-color);
+    border: 1px dashed var(--main-color);
     height: fit-content;
   }
 
@@ -432,18 +484,83 @@
     justify-self: center;
     width: fit-content;
     height: fit-content;
-    border: dashed 1px var(--dashed-border);
+    border: dashed 1px var(--main-color);
     padding: 15px 15px 15px 15px;
-    /* box-shadow: 0.3rem 0.3rem 2px var(--moving-things-color); */
+    box-shadow: 0.3rem 0.3rem 2px var(--moving-things-color);
+    /* margin-top: 10px; */
   }
   
-  .signin form button{
+  form section{
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  form label{
+    display: block;
+    width: 100%;
+    height: fit-content;
+    padding: 8px 10px;
+    position: relative;
+    transition: .3s;
+  }
+
+  form label span{
+    width: fit-content;
+    height: fit-content;
+    color: var(--text-color);
+    position: absolute;
+    top: 19px;
+    left: 19px; 
+    font-weight: bold;
+    font-size: medium;
+    background-color: transparent;
+    transition: .3s;
+  }
+  /* focus */
+  form label.focus{
+    border: 1px solid var(--secondary-letter-color);
+  }
+
+  /* top */
+  form label span.top{
+    color: var(--secondary-letter-color);
+    left: 2px;
+    top: -10px;
+    font-size: 12px;
+    padding: 0px 10px;
+    font-weight: normal;
+    background-color: var(--accompanying-color);
+  }
+
+  .signin form section{
+    display: grid;
+    max-width: 260px;
+    grid-template-columns: 4fr 1fr;
+  }
+
+  .signin form button[tyep='submit'], .signup form button[tyep='submit'], .pass form button[tyep='submit']{
+    background-color: var(--main-color);
+  }
+
+  .signin form button, .signup form button, .pass form button{
     margin: 0;
     padding: 0;
-    min-width: 70px;
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
     min-height: fit-content;
+    background-color: var(--contrast-color);
   }
-    
+
+  .signin form button, .signup form button, .pass form button{
+    border: 1px solid var(--secondary-letter-color);
+  }
+
+  .signin form button img, .signup form button img, .pass form button img{
+    width: 35px;
+    height: 35px;
+  }
+  
   .signin img, .signup img, .pass img, .pass img, .profile img{
     background: transparent;
     width: 100%;
@@ -463,6 +580,7 @@
   .signup .sec-figure{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
+    background: transparent;
   }
   
   .signup .sec-figure button{
@@ -504,7 +622,7 @@
   }
   
   .icon-add-file{
-    background-image: url('./assets/icons/file.png');
+    /* background-image: url('./assets/icons/file.png'); */
     background-color: var(--main-color);
     background-size: 50px 50px;
     width: 50px;
@@ -527,14 +645,9 @@
     justify-self:center;
     justify-content: center;
   }
-  .profile figure img{
-    position: relative;
-    top: -25px;
-    left: 0;
-  }
     
   .profile img.icon-add-file{
-    background-image: url('./assets/icons/file.png');
+    /* background-image: url('./assets/icons/file.png'); */
     background-color: var(--main-color);
     background-size: 30px 30px;
     width: 30px;
@@ -576,11 +689,11 @@
     grid-template-rows: 0.5fr 0.5fr;
     justify-content: center;
   }
-  .profile-data label{
+  /* .profile-data label{
     position: relative;
     top: 20px;
     left: 0;
-  }
+  } */
 
   .profile-data .section-reaction{
     display: grid;
@@ -662,7 +775,7 @@
   }
   
   .signup .sec-figure figure .icon-add-file{
-    background-image: url('./assets/icons/file.png');
+    /* background-image: url('./assets/icons/file.png'); */
     background-color: var(--main-color);
     background-size: cover;
     width: 30px;
@@ -687,8 +800,8 @@
     width: 100%;
     height: fit-content;
     padding: 10px 10px 10px 10px;
-      background-size: 100% 100%;
-      display: grid;
+    background-size: 100% 100%;
+    display: grid;
     justify-content: center;
   }
   
@@ -703,12 +816,13 @@
     /* padding: 20px 20px 20px 20px; */
     width: 100%;
     height: calc(100% - 70px);
+    padding-top: 100px;
     padding-bottom: 100px;
     /*overflow: scroll;*/
   }
 
   .profile{
-    background-image: url(assets/profile.png);
+    /* background-image: url(assets/profile.png); */
     grid-template-rows: 1fr;
   }
   
@@ -725,11 +839,24 @@
     box-shadow: 0.5rem 0.5rem var(--moving-things-color) ;
   }
   
-  .create-post h2{
-    color: var(--main-color);
-    font-size: 30px;
+  .create-comment{
+    max-width: 90%;
+    max-height: 200px;
+    margin: 20px;
+    padding: 20px;
+    background: var(--accompanying-color);
+    border: solid 2px var(--principal-letter-color);
+    display: 'none';
+    /* display: grid; */
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    gap: 10px;
   }
-  
+
+  .create-comment textarea{
+    background-color: var(--contrast-color);
+  }
+
   .header-post{
     display: grid;
     grid-template-columns: 1fr 6fr 1fr 1fr;
@@ -741,6 +868,12 @@
     position: relative; 
   }
   
+  .head-line{
+    display: grid;
+    height: fit-content;
+    grid-template-columns: 2fr 6fr;
+  }
+
   /*.header-post .user-figure{*/
   .user-figure{
     width: 60px;
@@ -810,7 +943,7 @@
   }
   
   /*.body-post .post-text{*/
-  .post-text{
+  .post-text, .comment-text{
     background-color: var(--accompanying-color);
     color: var(--text-color);
     max-height: fit-content;
@@ -818,7 +951,15 @@
     margin: 0;
     font-size: 17px;
   }
-  
+
+  .comment-text{
+    font-size: 14px;
+  }
+
+  .create-comment .comment-text{
+    font-weight: bold;
+    color: var(--secondary-letter-color)
+  }
   /*.body-post .post-figure{*/
     /* width: 100%; */
     /* background-color: var(--contrast-color); */
@@ -909,14 +1050,27 @@
   }
 
   .get-posts .container-found-post{
-    margin-bottom: 20px;
-    padding: 15px;
-    border: solid 1px var(--principal-letter-color);
     display: grid;
-    grid-template-columns: 2fr 6fr;
+    grid-template-columns: 1fr 6fr;
     height: fit-content;
   }
+  .get-posts .container-found-comment{
+    display: grid;
+    /* grid-template-rows: 1fr 1fr; */
+    grid-template-columns: repeat(auto-fit, minmax(fit-content, 1fr));  
+    height: fit-content;
+    min-height: 100px;
+    /* margin: 10px 0px 10px 0px; */
+    padding: 20px;
+  }
   
+  .get-posts .show-post{
+    margin-bottom: 20px;
+    padding: 15px;
+    border: solid 2px var(--main-color);
+    height: fit-content;
+  }
+
   .get-posts .container-found-post .data-user{
     margin: 10px;
     display: grid;
@@ -938,7 +1092,7 @@
     height: 50px;
   }
   
-  .get-posts .container-found-post .data-user .user-name{
+  .get-posts .container-found-post .data-user .user-name, .user-name{
     color: var(--secondary-letter-color);
     font-weight: bold;
     text-align: center;
@@ -954,7 +1108,7 @@
     gap: 10px;
   }
   
-  .get-posts .container-found-post .data-post .created-timestamp{
+  .get-posts .container-found-post .data-post .created-timestamp, .created-timestamp{
     color: var(--moving-things-color);
     font-size: 11px;
     font-weight: bold;
@@ -1006,7 +1160,7 @@
     justify-items: last baseline;
     align-items: center;
   }
-  
+
   .post-react .button{
     min-width: 35px;
     min-height: 35px;
@@ -1086,7 +1240,7 @@
     grid-template-columns: 2fr 1fr 1fr;
     max-height: 1px;
   }
-  
+
   @media screen and (max-width: 540px) {
     .post-buttons{
       grid-template-columns: 1fr;
@@ -1354,6 +1508,14 @@
       max-width: 100%;
     }
   
+    .reaction{
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .section-reaction{
+      grid-template-rows: repeat(auto-fit, minmax(50px, 100px));
+    }
+
     .comment{
       position: relative;
       justify-content: end;

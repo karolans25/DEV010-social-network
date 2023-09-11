@@ -1,8 +1,12 @@
 import { feedHandler } from '../handlers/feedHandler';
+import { header } from './header';
 import { navbar } from './navbar';
 import { profileHandler } from '../handlers/profileHandler';
 
+import { REACT_ICONS, PROFILE_PARTS } from '../consts/const';
+
 import imgExit from '../assets/icons/signout.png';
+import imgIconAddFile from '../assets/icons/file.png';
 import imgLike from '../assets/icons/voto-positivo.png';
 import imgDislike from '../assets/icons/voto-negativo.png';
 import imgLove from '../assets/icons/salud-mental.png';
@@ -19,6 +23,7 @@ import iconLast from '../assets/icons/last.png';
 export const profile = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
+  const head = await header(navigateTo);
   const nav = navbar(navigateTo);
   const buttonSignOut = document.createElement('button');
   const imgSignOut = document.createElement('img');
@@ -39,6 +44,7 @@ export const profile = async (navigateTo) => {
   sectionReactions.classList.add('section-reaction');
 
   iconAddFile.classList.add('icon-add-file');
+  iconAddFile.src = imgIconAddFile;
   file.classList.add('file', 'file-upload', 'file-profile');
   buttonSignOut.classList.add('signout-button');
   imgSignOut.src = imgExit;
@@ -53,19 +59,19 @@ export const profile = async (navigateTo) => {
   title.style.textAlign = 'center';
   title.style.fontSize = '30px';
 
-  const reactIcons = ['Like', 'Dislike', 'Love it', 'The best', 'Make me doubt', 'Comment'];
-
-  const profileParts = ['Email', 'Posts', 'Reactions', 'Friends', 'Last post'];
-
   const posts = await feedHandler.getAllMyPost();
 
   const likes = await feedHandler.getAllMyReactions();
+
+  const comments = await feedHandler.getAllMyComments();
 
   const typeLikes = [0, 0, 0, 0, 0, 0];
   for (let i = 0; i < likes.length; i++) {
     const pos = parseInt(likes[i].idTypeLike, 10) - 1;
     typeLikes[pos] += 1;
   }
+
+  typeLikes[REACT_ICONS.length - 1] = comments.length;
 
   let stringDate = 'You haven\'t created any post yet!';
   if (posts[0]) {
@@ -82,7 +88,7 @@ export const profile = async (navigateTo) => {
     stringDate = date.toLocaleString('en-US', options);
   }
 
-  for (let i = 0; i < profileParts.length; i++) {
+  for (let i = 0; i < PROFILE_PARTS.length; i++) {
     const sub = document.createElement('section');
     const imgPart = document.createElement('img');
     const labelPart = document.createElement('label');
@@ -94,12 +100,12 @@ export const profile = async (navigateTo) => {
     if (i === 2) imgPart.src = iconReactions;
     if (i === 3) imgPart.src = iconFriends;
     if (i === 4) imgPart.src = iconLast;
-    imgPart.alt = profileParts[i];
-    labelPart.textContent = profileParts[i];
+    imgPart.alt = PROFILE_PARTS[i];
+    labelPart.textContent = PROFILE_PARTS[i];
     if (i === 0) paragraphPart.textContent = data[3];
     if (i === 1) paragraphPart.textContent = (posts.length === 1) ? '1 post created' : `${posts.length} posts created`;
     if (i === 2) {
-      for (let j = 0; j < reactIcons.length; j++) {
+      for (let j = 0; j < REACT_ICONS.length; j++) {
         const reaction = document.createElement('aside');
         const imgReaction = document.createElement('img');
         const labelReaction = document.createElement('label');
@@ -110,7 +116,7 @@ export const profile = async (navigateTo) => {
         if (j === 3) imgReaction.src = imgBest;
         if (j === 4) imgReaction.src = imgDoubts;
         if (j === 5) imgReaction.src = imgComment;
-        imgReaction.alt = reactIcons[j];
+        imgReaction.alt = REACT_ICONS[j];
         imgReaction.classList.add('react-image');
         labelReaction.textContent = typeLikes[j];
         reaction.append(imgReaction, labelReaction);
@@ -137,11 +143,14 @@ export const profile = async (navigateTo) => {
     profileHandler.signout();
     navigateTo('/signin');
   });
-  buttonSignOut.appendChild(imgSignOut);
+
+  // buttonSignOut.appendChild(imgSignOut);
   figure.append(img, iconAddFile, file);
-  subSection.appendChild(buttonSignOut);
-  subSection.append(buttonSignOut, figure, title, sectionData);
-  section.append(subSection, nav);
+  // subSection.appendChild(buttonSignOut);
+  // subSection.append(buttonSignOut, figure, title, sectionData);
+  // subSection.append(figure, title, sectionData);
+  subSection.append(title, sectionData);
+  section.append(head, subSection, nav);
 
   return section;
 };

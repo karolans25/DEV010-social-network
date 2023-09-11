@@ -2,6 +2,7 @@ import {
   onSnapshot, query, collection, orderBy, where,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
+import { header } from './header';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';
@@ -61,10 +62,10 @@ const fillPostData = (urls, container) => {
 export const myPosts = async (navigateTo) => {
   const section = document.createElement('section');
   const subSection = document.createElement('section');
+  const head = await header(navigateTo);
   const nav = navbar(navigateTo);
   const title = document.createElement('h2');
-  const sectionFormatCreatePost = formatCreatePost();
-  const sectionFormatGetAllPost = document.createElement('section');
+  const sectionFormatCreatePost = await formatCreatePost();
   const sectionGetAllPosts = document.createElement('section');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
@@ -77,6 +78,7 @@ export const myPosts = async (navigateTo) => {
   sectionGetAllPosts.innerHTML = '';
   // title.innerHTML = `${TITLE} - My Posts`;
   title.innerHTML = 'My Posts';
+  title.style.marginTop = '30px';
   imgEdit.src = imgEditButton;
   imgEdit.alt = 'edit';
   imgDelete.src = imgDeleteButton;
@@ -86,26 +88,22 @@ export const myPosts = async (navigateTo) => {
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
-  // const posts = await feedHandler.getAllMyPost();
-
-  // const [id, ,] = feedHandler.getUserData();
-  // console.log(id);
   const id = AuthService.getCurrentUser().uid;
 
   const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'), where('idUser', '==', id));
   onSnapshot(q, (snapshot) => {
+    sectionGetAllPosts.innerHTML = '';
     const posts = [];
     snapshot.docs.forEach((documentPost) => {
       posts.push({ ...documentPost.data(), id: documentPost.id });
     });
-    sectionGetAllPosts.innerHTML = '';
-    sectionGetAllPosts.innerHTML = '';
     if (posts.length === 0) {
       popup('You don\'t have any post yet');
       const text = document.createElement('h2');
       text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
       sectionGetAllPosts.appendChild(text);
     }
+    sectionGetAllPosts.innerHTML = '';
     posts.forEach(async (item) => {
       const formatForEachPost = await formatPost(item);
 
@@ -121,6 +119,8 @@ export const myPosts = async (navigateTo) => {
 
       let formData = new FormData();
 
+      formatForEachPost.classList.add('show-post', item.id);
+      sectionGetAllPosts.append(formatForEachPost);
       initButtons.classList.add('init-buttons', item.id);
       updateButtons.classList.add('edit-file-update');
 
@@ -198,6 +198,7 @@ export const myPosts = async (navigateTo) => {
           e.target.value = '';
         });
 
+        // Save the changes for the post
         saveButton.addEventListener('click', async () => {
           try {
             if (textarea.value !== '') {
@@ -213,7 +214,6 @@ export const myPosts = async (navigateTo) => {
                 postText.style.display = 'block';
                 postFigureContainer.innerHTML = '';
                 fillPostData(item.URL, postFigureContainer);
-                // formData.forEach((value, key) => formData.delete(key));
                 formData = new FormData();
               }
             } else {
@@ -225,6 +225,7 @@ export const myPosts = async (navigateTo) => {
           }
         });
 
+        // Ignore the changes edited
         cancelButton.addEventListener('click', () => {
           updateButtons.style.display = 'none';
           textarea.style.display = 'none';
@@ -237,6 +238,7 @@ export const myPosts = async (navigateTo) => {
         });
       });
 
+      // Delete the post
       deleteButton.addEventListener('click', async () => {
         try {
           loadingContainer.style.display = 'block';
@@ -250,13 +252,13 @@ export const myPosts = async (navigateTo) => {
         }
       });
 
-      formatForEachPost.classList.add('container-found-post', item.id);
+      formatForEachPost.classList.add('show-post', item.id);
       sectionGetAllPosts.append(formatForEachPost);
     });
   });
-  sectionFormatGetAllPost.append(sectionGetAllPosts);
-  subSection.append(sectionFormatCreatePost, title, sectionFormatGetAllPost);
-  section.append(subSection, nav);
+  // sectionFormatGetAllPost.append(sectionGetAllPosts);
+  subSection.append(sectionFormatCreatePost, title, sectionGetAllPosts);
+  section.append(head, subSection, nav);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);
 
