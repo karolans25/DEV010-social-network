@@ -1,12 +1,6 @@
-import {
-  query, collection, orderBy, onSnapshot,
-} from 'firebase/firestore';
-import { db } from '../firebase/firebaseConfig';
 import { formatPost } from './formatPost';
 import { header } from './header';
 import { navbar } from './navbar';
-import { popup } from './popup';
-import { TITLE } from '../consts/const';
 import { searchHandler } from '../handlers/searchHandler';
 import { feedHandler } from '../handlers/feedHandler';
 

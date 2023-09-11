@@ -184,7 +184,7 @@ export const signup = (navigateTo) => {
     input.onblur = () => {
       input.value = input.value.trim();
       if (input.value.length === 0) {
-        input.previousElementSibling.classList.remove('top');        
+        input.previousElementSibling.classList.remove('top');
       }
       input.previousElementSibling.classList.remove('focus');
       // previus.parentNode.classList.remove('top');

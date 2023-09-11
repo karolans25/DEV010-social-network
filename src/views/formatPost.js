@@ -24,17 +24,16 @@ const createCloseButton = (container) => {
   closeButton.style.height = '25px';
   closeButton.style.background = 'var(--main-color)';
   closeButton.style.borderRadius = '50%';
-  // closeButton.style.color = 'var(--acompanying-color)';
-  // closeButton.style.color = 'var(--text-color)';
   closeButton.style.color = 'black';
   closeButton.style.fontWeight = 'bold';
   closeButton.style.textAlign = 'center';
   closeButton.style.cursor = 'pointer';
   const userName = container.querySelector('.user-name');
-  const headLine = container.querySelector('.head-line');
-  headLine.style.display = 'grid';
-  headLine.style.gridTemplateColumns = '1fr 2fr 6fr';
+  // const headLine = container.querySelector('.head-line');
+  // headLine.style.display = 'grid';
+  // headLine.style.gridTemplateColumns = '1fr 2fr 6fr';
   userName.before(closeButton);
+  userName.parentNode.style.display = 'flex';
 };
 
 const fillPostData = (urls, container) => {
@@ -58,6 +57,7 @@ export const formatPost = (item) => {
   const principalSection = document.createElement('section');
   const sectionFormatPost = document.createElement('section');
   const sectionUserData = document.createElement('section');
+  const sectionName = document.createElement('section');
   const userName = document.createElement('p');
   const userFigure = document.createElement('figure');
   const userImg = document.createElement('img');
@@ -230,7 +230,8 @@ export const formatPost = (item) => {
 
   container.addEventListener('click', (e) => {
     e.preventDefault();
-    const parentParent = e.target.parentNode.parentNode;
+    // container-found-comment <= head-line <= aside <= e.target
+    const parentParent = e.target.parentNode.parentNode.parentNode;
     const idComment = parentParent.getAttribute('data-id');
     parentParent.parentNode.removeChild(parentParent);
     feedHandler.deleteComment(idComment);
@@ -238,7 +239,8 @@ export const formatPost = (item) => {
 
   /** Append y append childs for sections */
   userFigure.append(userImg);
-  sectionUserData.append(userName, userFigure);
+  sectionName.appendChild(userName);
+  sectionUserData.append(sectionName, userFigure);
   sectionReact.appendChild(reactionMessage);
   sectionButtons.appendChild(sectionReact);
   sectionButtons.appendChild(sectionComment);

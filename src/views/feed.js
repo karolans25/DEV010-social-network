@@ -8,7 +8,6 @@ import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';
 import { popup } from './popup';
 
-import { TITLE } from '../consts/const';
 import imgLoading from '../assets/icons/playground.gif';
 
 export const feed = async (navigateTo) => {
@@ -28,6 +27,7 @@ export const feed = async (navigateTo) => {
   sectionGetAllPosts.innerHTML = '';
   title.innerHTML = 'Feed';
   title.style.marginTop = '30px';
+  title.style.justifySelf = 'center';
 
   loadingContainer.id = 'loading-container';
   loadingGif.src = imgLoading;
