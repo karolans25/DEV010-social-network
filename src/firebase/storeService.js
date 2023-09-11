@@ -80,16 +80,6 @@ const StoreService = {
     }
   },
 
-  // getDocumentByFilter: (collectionStore) => {
-  //   const q = query(collection(db, collectionStore), orderBy('createdAt', 'desc'));
-  //   // return onSnapshot(q);
-  //   // onSnapshot(q).then((snapshot) => console.log(snapshot.docs.length));
-  //   onSnapshot(q, (snapshot) => {
-  //     const docs = [];
-  //     snapshot.docs.forEach((element) => docs.push({ ...element.data(), id: element.id }));
-  //   });
-  // },
-
   getDocumentByFilter: (collectionStore) => {
     const q = query(collection(db, collectionStore), orderBy('createdAt', 'desc'));
     return new Promise((resolve, reject) => {
