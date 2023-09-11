@@ -6,6 +6,7 @@ export const formatComment = (item) => {
   const sectionFormatComment = document.createElement('section');
   const sectionData = document.createElement('section');
   const sectionComment = document.createElement('section');
+  const sectionName = document.createElement('aside');
   const userName = document.createElement('p');
   const createdAt = document.createElement('p');
   const commentText = document.createElement('p');
@@ -48,7 +49,8 @@ export const formatComment = (item) => {
     });
 
   /** Append y append childs for sections */
-  sectionData.append(userName, createdAt);
+  sectionName.appendChild(userName);
+  sectionData.append(sectionName, createdAt);
   sectionComment.append(commentText);
   sectionFormatComment.append(sectionData, sectionComment);
   loadingContainer.append(loadingGif);
