@@ -46,7 +46,6 @@ export const signin = (navigateTo) => {
   const sectionButtonsForm = document.createElement('section');
   const loadingContainer = document.createElement('aside');
   const loadingGif = document.createElement('img');
-
   // section
   section.className = 'signin';
 
@@ -145,11 +144,12 @@ export const signin = (navigateTo) => {
       loadingContainer.style.display = 'block';
       e.preventDefault();
       const res = await signinHandler.signin(inputEmail.value, inputPass.value);
-      loadingContainer.style.display = 'none';
       popup(res);
+      loadingContainer.style.display = 'none';
       if (res === 'The user has been logged') {
         form.reset();
         navigateTo('/feed');
+        loadingContainer.style.display = 'none';
       }
     } catch (err) {
       loadingContainer.style.display = 'none';

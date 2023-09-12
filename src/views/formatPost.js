@@ -145,6 +145,7 @@ export const formatPost = (item) => {
 
   /** Add messages for existent reactions */
   const id = AuthService.getCurrentUser().uid;
+  console.log(id);
   const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
   onSnapshot(que2, (reactionSnapshot) => {
     const likes = [];
@@ -152,6 +153,8 @@ export const formatPost = (item) => {
       likes.push({ ...document.data(), id: document.id });
     });
     likes.forEach(async (like) => {
+      console.log(like.id);
+      console.log(like.idUser);
       if (like.idUser === id) {
         const reaction = await feedHandler.getReactionMessage(like.idTypeLike);
         if (reaction) reactionMessage.style.display = 'block';

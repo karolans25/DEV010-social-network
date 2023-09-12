@@ -88,7 +88,7 @@ export const myPosts = async (navigateTo) => {
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
-  const id = AuthService.getCurrentUser().uid;
+  const id = await AuthService.getCurrentUser().uid;
 
   const q = query(collection(db, 'post'), orderBy('createdAt', 'desc'), where('idUser', '==', id));
   onSnapshot(q, (snapshot) => {
