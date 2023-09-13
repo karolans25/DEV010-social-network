@@ -53,7 +53,7 @@ const fillPostData = (urls, container) => {
   }
 };
 
-export const formatPost = (item) => {
+export const formatPost = async (item) => {
   const principalSection = document.createElement('section');
   const sectionFormatPost = document.createElement('section');
   const sectionUserData = document.createElement('section');
@@ -143,9 +143,16 @@ export const formatPost = (item) => {
     }
   }
 
+  const likesPost = await feedHandler.getReactionsOfPost(item.id);
+  console.log(likesPost);
+  // const typeLikes = [0, 0, 0, 0, 0, 0];
+  // for (let i = 0; i < likesPost.length; i++) {
+  //   const pos = parseInt(likesPost[i].idTypeLike, 10) - 1;
+  //   typeLikes[pos] += 1;
+  // }
+
   /** Add messages for existent reactions */
   const id = AuthService.getCurrentUser().uid;
-  console.log(id);
   const que2 = query(collection(db, 'like'), where('idPost', '==', `${item.id}`));
   onSnapshot(que2, (reactionSnapshot) => {
     const likes = [];
@@ -153,8 +160,9 @@ export const formatPost = (item) => {
       likes.push({ ...document.data(), id: document.id });
     });
     likes.forEach(async (like) => {
-      console.log(like.id);
-      console.log(like.idUser);
+      console.log(item.id);
+      console.log(like.idTypeLike);
+      console.log();
       if (like.idUser === id) {
         const reaction = await feedHandler.getReactionMessage(like.idTypeLike);
         if (reaction) reactionMessage.style.display = 'block';

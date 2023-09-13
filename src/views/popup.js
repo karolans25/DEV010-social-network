@@ -80,8 +80,6 @@ export const popup = async (message) => {
     }
   }
 
-  // strMessage += '\n\nClick anyway to continue!';
-  dialog.textContent = strMessage;
   dialog.innerHTML = `<h3>${title.innerHTML}</h3><br>${strMessage} <br><h3>Click anyway to continue!</h3>`;
   dialog.addEventListener('click', () => {
     overlay.remove();

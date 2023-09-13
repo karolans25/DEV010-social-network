@@ -148,8 +148,8 @@ export const profile = async (navigateTo) => {
   figure.append(img, iconAddFile, file);
   // subSection.appendChild(buttonSignOut);
   // subSection.append(buttonSignOut, figure, title, sectionData);
-  // subSection.append(figure, title, sectionData);
-  subSection.append(title, sectionData);
+  subSection.append(figure, title, sectionData);
+  // subSection.append(title, sectionData);
   section.append(head, subSection, nav);
 
   return section;

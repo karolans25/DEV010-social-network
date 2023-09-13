@@ -642,7 +642,7 @@
     margin: 0;
     border: solid 5px var(--main-color);
     background-color: var(--contrast-color);
-    transform: translate(0vw, -4vh);
+    transform: translate(0vw, -3vh);
   }
   
   .icon-add-file{
@@ -670,17 +670,17 @@
     justify-content: center;
   }
     
-  .profile img.icon-add-file{
+  .profile figure img.icon-add-file{
     /* background-image: url('./assets/icons/file.png'); */
     background-color: var(--main-color);
-    background-size: 30px 30px;
-    width: 30px;
-    height: 30px;
+    background-size: 35px 35px;
+    width: 35px;
+    height: 35px;
     border-radius: 7px;
     vertical-align: middle;
     margin-right: 5px;
     box-shadow: 0.2rem 0.2rem var(--moving-things-color) ;  /* border: 1px solid black; */
-    transform: translate(0vw, -25vh);
+    transform: translate(0.3vw, -7vh);
     /* position: relative;
     top: -212px;
     left: 0; */
@@ -840,7 +840,7 @@
     /* padding: 20px 20px 20px 20px; */
     width: 100%;
     height: calc(100% - 70px);
-    padding-top: 85px;
+    padding-top: 100px;
     padding-bottom: 70px;
     /*overflow: scroll;*/
   }

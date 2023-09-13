@@ -98,7 +98,7 @@ export const myPosts = async (navigateTo) => {
       posts.push({ ...documentPost.data(), id: documentPost.id });
     });
     if (posts.length === 0) {
-      popup('You don\'t have any post yet');
+      // popup('You don\'t have any post yet');
       const text = document.createElement('h2');
       text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
       sectionGetAllPosts.appendChild(text);

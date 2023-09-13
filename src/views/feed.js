@@ -6,7 +6,7 @@ import { header } from './header';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';
-import { popup } from './popup';
+// import { popup } from './popup';
 
 import imgLoading from '../assets/icons/playground.gif';
 
@@ -41,14 +41,14 @@ export const feed = async (navigateTo) => {
       posts.push({ ...documentPost.data(), id: documentPost.id });
     });
     if (posts.length === 0) {
-      popup('You don\'t have any post yet');
+      // popup('You don\'t have any post yet');
       const text = document.createElement('h2');
       text.innerHTML = '😓 There\'s no post yet!<br>This is your chance to start 😎🥳';
       sectionGetAllPosts.appendChild(text);
     }
     sectionGetAllPosts.innerHTML = '';
-    posts.forEach((item) => {
-      const formatForEachPost = formatPost(item);
+    posts.forEach(async (item) => {
+      const formatForEachPost = await formatPost(item);
       const imgSave = document.createElement('img');
       imgSave.alt = 'save';
       const imgCancel = document.createElement('img');
