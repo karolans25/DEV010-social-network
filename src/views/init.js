@@ -16,6 +16,7 @@ const init = (navigateTo) => {
   figure.className = 'init-figure';
 
   img.src = imgInit;
+  // img.src = '../assets/init.png';
   img.alt = 'imagen init';
   figure.append(img);
 

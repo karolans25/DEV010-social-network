@@ -1,4 +1,6 @@
-# Social network for girls from 6 years-old and wome who loves electronic
+# Social network for girls from 6 years-old and everyone who loves electronics, robotics, technologies and projects for solving problems
+
+## 
 
 ## Context
 

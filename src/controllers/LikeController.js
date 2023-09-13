@@ -18,6 +18,8 @@ const PostController = {
     return myLikes;
   },
 
+  getReactionsOfPost: (idPost) => StoreService.getDocumentById(idPost),
+
   hasReactedPost: (idPost) => StoreService.hasReactedPost(idPost),
 
   reactPost: (idPub, idType) => {

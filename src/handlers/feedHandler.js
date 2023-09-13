@@ -38,6 +38,11 @@ export const feedHandler = {
 
   getAllMyReactions: () => LikeController.getMyReactions('like'),
 
+  getReactionsOfPost: async (idPost) => {
+    const likes = await LikeController.getReactionsOfPost(idPost);
+    console.log(likes);
+  },
+
   getReactionMessage: (idTypeReaction) => LikeController.getReactionMessage(idTypeReaction),
 
   hasReactedPost: (idPost) => LikeController.hasReactedPost(idPost),
