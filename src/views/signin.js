@@ -113,7 +113,7 @@ export const signin = (navigateTo) => {
   buttonSignInGithub.textContent = '';
   buttonSignInGithub.id = 'github';
 
-  labelOr.textContent = '------- or -------';
+  labelOr.textContent = '------- or Sign in with -------';
   labelOr.style.textAlign = 'center';
   labelOr.style.marginTop = '10px';
   labelOr.style.marginBottom = '10px';

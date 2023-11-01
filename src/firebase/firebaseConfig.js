@@ -8,13 +8,21 @@ import { getAuth } from 'firebase/auth';
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyD1k1NAyCqN-At-Um6MrejqTyHvMMA83fI',
+//   authDomain: 'social-network-karolans25.firebaseapp.com',
+//   projectId: 'social-network-karolans25',
+//   storageBucket: 'social-network-karolans25.appspot.com',
+//   messagingSenderId: '236349133039',
+//   appId: '1:236349133039:web:0c71132ba72b7d473d8b1a',
+// };
 const firebaseConfig = {
-  apiKey: 'AIzaSyD1k1NAyCqN-At-Um6MrejqTyHvMMA83fI',
-  authDomain: 'social-network-karolans25.firebaseapp.com',
-  projectId: 'social-network-karolans25',
-  storageBucket: 'social-network-karolans25.appspot.com',
-  messagingSenderId: '236349133039',
-  appId: '1:236349133039:web:0c71132ba72b7d473d8b1a',
+  apiKey: "AIzaSyAVXfLEwzwLiUxU78D5a2Wr_5m4jdQpc3Y",
+  authDomain: "dev010-social-network-6c61f.firebaseapp.com",
+  projectId: "dev010-social-network-6c61f",
+  storageBucket: "dev010-social-network-6c61f.appspot.com",
+  messagingSenderId: "368124745038",
+  appId: "1:368124745038:web:b9ea52ca7d3ce04fd2ba1f"
 };
 
 // Initialize Firebase
