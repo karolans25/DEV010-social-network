@@ -2,7 +2,7 @@ import {
   onSnapshot, query, collection, orderBy, where,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
-import { header } from './header';
+import { header } from './header/header';
 import { navbar } from './navbar';
 import { formatCreatePost } from './formatCreatePost';
 import { formatPost } from './formatPost';

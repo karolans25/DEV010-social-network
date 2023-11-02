@@ -1,17 +1,26 @@
 // import { signInAuth, signInAuthGoogle } from '../lib/auth';
 // import { doc } from 'firebase/firestore';
-import { signinHandler } from '../handlers/signinHandler';
-import { popup } from './popup';
+import { signinHandler } from '../../handlers/signinHandler';
+import { popup } from '../popup';
 
-import imgLoading from '../assets/icons/playground.gif';
-import imgAvatar from '../assets/icons/gorra.png';
-import google from '../assets/icons/Google.png';
-import github from '../assets/icons/Github.png';
-import imgSignin from '../assets/icons/signin.png';
-import imgSignup from '../assets/icons/signup.png';
-import imgPass from '../assets/icons/password.png';
+import imgLoading from '../../assets/icons/playground.gif';
+import imgAvatar from '../../assets/icons/gorra.png';
+import google from '../../assets/icons/Google.png';
+import github from '../../assets/icons/Github.png';
+import imgSignin from '../../assets/icons/signin.png';
+import imgSignup from '../../assets/icons/signup.png';
+import imgPass from '../../assets/icons/password.png';
 
 export const signin = (navigateTo) => {
+
+  const linkElement = document.createElement('link');
+  linkElement.rel = 'stylesheet';
+  linkElement.type = 'text/css';
+  linkElement.href = './views/signin/signin.style.css';
+
+  // Agrega el elemento <link> al encabezado (head) del documento
+  document.head.appendChild(linkElement);
+
   const section = document.createElement('section');
   const back = document.createElement('button');
   const figure = document.createElement('figure');
@@ -124,6 +133,98 @@ export const signin = (navigateTo) => {
   loadingGif.src = imgLoading;
   loadingGif.alt = 'loading';
 
+  // EVE
+  const eve = document.createElement('section');
+  eve.classList = ['eve'];
+
+  // HEAD
+  const headContainer = document.createElement('section');
+  headContainer.classList = ['head-container'];
+  const head = document.createElement('section');
+  head.classList = ['head'];
+  const face = document.createElement('section');
+  face.classList = ['ellipse', 'face'];
+  const leftEye = document.createElement('section');
+  leftEye.classList = ['left', 'eye'];
+  const rightEye = document.createElement('section');
+  leftEye.classList = ['right', 'eye'];
+  face.appendChild(leftEye);
+  face.appendChild(rightEye);
+  head.appendChild(face);
+  headContainer.appendChild(head);
+    // <div class="head-container">
+      // <div class="head">
+        // <div class="ellipse face">
+          // <div class="left eye"></div>
+          // <div class="right eye"></div>
+        // </div>
+      // </div>
+    // </div>
+
+
+  // BODY
+  const bodyContainer = document.createElement('section');
+  bodyContainer.classList = ['body-container'];
+  const scanner = document.createElement('section');
+  scanner.classList = ['scanner'];
+  const leftArm = document.createElement('section');
+  leftArm.classList = ['left', 'arm'];
+  const body = document.createElement('section');
+  body.classList = ['body'];
+  const panel = document.createElement('section');
+  panel.classList = ['panel'];
+  const dot1 = document.createElement('section');
+  dot1.classList = ['dot', 'dot-1'];
+  const dot2 = document.createElement('section');
+  dot2.classList = ['dot', 'dot-2'];
+  const dot3 = document.createElement('section');
+  dot3.classList = ['dot', 'dot-3'];
+  const bigDot = document.createElement('section');
+  bigDot.classList = ['bigdot'];
+  const rightContainer = document.createElement('section');
+  rightContainer.classList = ['right-container'];
+  const rightArm = document.createElement('section');
+  rightArm.classList = ['right', 'arm'];  face.appendChild(leftEye);
+  bodyContainer.appendChild(scanner);
+  bodyContainer.appendChild(leftArm);
+  bodyContainer.appendChild(body);
+  bodyContainer.appendChild(rightContainer);
+  body.appendChild(panel);
+  panel.appendChild(dot1);
+  panel.appendChild(dot2);
+  panel.appendChild(dot3);
+  panel.appendChild(bigDot);
+  rightContainer.appendChild(rightArm);
+
+      // <div class="body-container">
+      // <div class="scanner"></div>
+      // <div class="left arm"></div>
+      // <div class="body">
+        // <div class="panel">
+          // <div class="dot dot-1"></div>
+          // <div class="dot dot-2"></div>
+          // <div class="dot dot-3"></div>
+          // <div class="bigdot"></div>
+        // </div>
+      // </div>
+      // <div class="right-container">
+        // <div class="right arm"></div>
+      // </div>
+
+  // SHADOW
+  const shadow = document.createElement('section');
+  shadow.classList = ['shadow'];
+
+  eve.appendChild(headContainer);
+  eve.appendChild(bodyContainer);
+  eve.appendChild(shadow);
+
+  // <div class="eve">
+    // <div class="head-container">
+    // <div class="body-container">
+    // <div class="shadow"></div>
+  // </div>
+
   back.addEventListener('click', (e) => {
     e.preventDefault();
     navigateTo('/');
@@ -198,7 +299,8 @@ export const signin = (navigateTo) => {
   buttonSignInGoogle.appendChild(imgGoogle);
   buttonSignInGithub.appendChild(imgGithub);
   ops.append(buttonSignInGoogle, buttonSignInGithub);
-  section.append(back, figure, title, form, labelOr, ops);
+  section.append(back, figure, title, form, labelOr, ops, eve);
+  // section.append(eve);
   loadingContainer.append(loadingGif);
   section.append(loadingContainer);
 

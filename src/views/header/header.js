@@ -1,9 +1,9 @@
-import { profileHandler } from '../handlers/profileHandler';
-import { feedHandler } from '../handlers/feedHandler';
+import { profileHandler } from '../../handlers/profileHandler';
+import { feedHandler } from '../../handlers/feedHandler';
 
-import { TITLE } from '../consts/const';
+import { TITLE } from '../../consts/const';
 
-import imgExit from '../assets/icons/signout.png';
+import imgExit from '../../assets/icons/signout.png';
 
 export const header = async (navigateTo) => {
   const head = document.createElement('header');

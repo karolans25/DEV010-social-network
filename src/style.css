@@ -40,7 +40,7 @@
   --dashed-border: var(--contrast-color);
   }
 }
-  
+
   body{
     max-width: 1000px;
     height: 100%;
@@ -298,7 +298,7 @@
     color: var(--secondary-letter-color);
   }
 
-  .init, .signin, .signup, .pass, .feed, .myPosts, .mybuttons, .search{
+  .signin, .signup, .pass, .feed, .myPosts, .mybuttons, .search{
     padding: 30px 30px 30px 30px;
       /* background-image: url(assets/signup.png); */
       background-size: 100% auto;
@@ -310,61 +310,7 @@
     justify-self:center;
     justify-content: center;
   }
-  
-  /* Init */
-  .init{
-    background: var(--main-color);
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    display: grid;
-    grid-template-rows: 3fr 1fr 1fr 1fr;
-    padding: 10px 10px 10px 10px;
-  }
-  
-  .init button{
-    width: 80%;
-    max-width: 300px;
-    height: 50px;
-    background: var(--contrast-color);
-    color: var(--accent-color);
-    box-shadow: 0.5rem 0.5rem var(--moving-things-color) ;
-    align-self: baseline;
-    justify-self: center;
-    font-size: 31px;
-  }
-  
-  .init figure{
-    background: var(--main-color);
-    background: transparent;
-    max-width: 520px;
-    max-height: 520px;
-      width: 85%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    align-items: center;
-  }
-  
-  .init img{
-    background: transparent;
-      width: 100%;
-      height: 70%;
-    max-width: 400px;
-    max-height: 200px;
-  }
-  
-  .init paragraph{
-    background: transparent;
-    color: var(--accompanying-color);
-    font-weight: bold;
-    justify-self: center;
-    width: 270px;
-    text-align: center;
-    align-self: center;
-    font-size: 20px;
-  }
-  
+   
   .navigation {
     display: grid;
     position: fixed;
@@ -447,21 +393,21 @@
     border: solid 5px var(--main-color);
     border-radius: 50%;
     max-width: 120px;
-    max-height: 120px;
+    /* max-height: 120px; */
   }
   
   /* sign In */
-  .signin{
+  /* .signin{
     width: 100%;
-    /* height: 100%; */
+
     height: fit-content;
     padding: 10px 10px 10px 10px;
-    /* background-image: url(assets/signin.png); */
+    
     background-size: 100% 100%;
     display: grid;
     justify-content: center;
-      /* grid-template-rows: 3fr 1fr 2fr 1fr 1fr 1fr; */
-  }
+
+  } */
   
   .link{
     /* padding-left: 10px;
@@ -1532,3 +1478,425 @@
       max-width: 100%;
     }
   }
+
+
+  /* @use postcss-nested; */
+
+  /* @font-face {
+    font-family: "Wellbutrin";
+    src:
+      url(https://manzdev.github.io/twitch-wall-e/wellbutrin.b47e231a.woff2) format("woff2"),
+      url(https://manzdev.github.io/twitch-wall-e/wellbutrin.b47e231a.woff) format("woff");
+    font-display: swap;
+  } */
+  
+  /* :root {
+    --size: 350px;
+    --fontname: "Wellbutrin", sans-serif;
+    --wall-e-border-style: 5px solid var(--wall-e-border-color);
+    --wall-e-border-color: #2b2b35;
+    --wall-e-metal-color: #dadada;
+    --wall-e-metal-shadow-color: #a8a5a5;
+    --wall-e-pupil-color: #5d493d;
+    --wall-e-screw-color: #5f5f66;
+    --wall-e-head-color: #bab2a5;
+    --wall-e-head-shadow-color: #716d6c;
+    --wall-e-body-color: #ffd33b;
+    --wall-e-body-shine-color: #ffe58c;
+    --wall-e-body-shadow-color: #cdaa2d;
+    --wall-e-lcd-color: #3da5d0;
+    --wall-e-wheel-color: #9a9a9a;
+    --wall-e-wheel-shadow-color: #747474;
+    --custom-filter:
+      drop-shadow(-4px 0 0 var(--wall-e-border-color))
+      drop-shadow(4px 0 0 var(--wall-e-border-color))
+      drop-shadow(0 -4px 0 var(--wall-e-border-color))
+      drop-shadow(0 4px 0 var(--wall-e-border-color));
+  } */
+  
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+  .eve {
+    width: 250px;
+    height: auto;
+    transform: translate(0, -20px);
+  }
+  .eva .head-container {
+      width: 200px;
+      height: 125px;
+      margin: auto;
+      animation: moveHeadEve 3s ease infinite alternate;
+      position: relative;
+      z-index: 5;
+  }
+   .eva .head-container .head {
+        background: white;
+        background-image:
+          radial-gradient(100% 250% ellipse at 0% 50%, #fff 25%, transparent 35%),
+          radial-gradient(circle at 0% 0%, white, #aaa);
+        width: 150px;
+        height: 110px;
+        margin: auto;
+        border-radius: 50% 50% 35% 35%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translate(0, 10px);
+        box-shadow: 0 0 35px rgba(0, 0, 0, 0.3);
+      }
+  
+      .eva .head-container .face {
+        background: linear-gradient(to bottom, #353535, #111);
+        width: 115px;
+        height: 70px;
+        border-radius: 50% 50% 46% 46% / 60% 60% 37% 37%;
+        border: 2px solid black;
+        transform: translate(0, -4px);
+        display: flex;
+        justify-content: space-evenly;
+        overflow: hidden;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+        perspective: 100px;
+        transform-style: preserve-3d;
+      }
+
+      .eva .head-container .face::after {
+        content: "";
+        display: block;
+        background: #111;
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        transform: translate(25px, 0);
+        z-index: -1;
+      }
+
+      .eva .head-container .face .happy .eye {
+        width: 38px;
+        height: 20px;
+        background: transparent;
+        border-radius: 50%;
+        transform: translate(0, 27px);
+        box-shadow: 0 -6px 0 #1aa1d8;
+        animation: changeEyes 2s linear infinite alternate;
+      }
+
+      .eva .head-container .face .circle .eye {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        box-shadow: 0 0 3px 2px #00b2e5;
+        transform: translate(0, 20px);
+        background: repeating-linear-gradient(29deg, #09e0ff 10%, #00b2e5 20%);
+      }
+
+      .eva .head-container .face .ellipse .eye {
+        width: 36px;
+        height: 20px;
+        border-radius: 50%;
+        box-shadow: 0 0 3px 2px #00b2e5;
+        transform: translate(0, 28px) rotate(20deg);
+        background: repeating-linear-gradient(29deg, #09e0ff 10%, #00b2e5 20%);
+      }
+      .eva .head-container .face .ellipse .eye .right {
+          transform: translate(0, 28px) rotate(-20deg);
+        }
+
+    .eva .body-container {
+      display: flex;
+      justify-content: center;
+      animation: moveBody 3s ease infinite alternate;
+    }
+    .eva .body-container .right-container {
+        perspective: 200px;
+      }
+  
+      .eva .body-container .arm {
+        background: white;
+        width: 30px;
+        height: 130px;
+        border-radius: 40% 40% 75% 75%;
+      }
+      .eva .body-container .arm  .left {
+          transform: translate(10px, 25px);
+          box-shadow: 4px 0 0 #bbb;
+          background-image: linear-gradient(to left, #fff 60%, #ccc 90%);
+          position: relative;
+          z-index: 2;
+        }
+  
+        .eva .body-container .arm .right {
+          transform: translate(-10px, 25px) rotateY(184deg) skewX(-2deg);
+          box-shadow: -4px 0 0 #bbb;
+          background-image: linear-gradient(to right, #fff 40%, #ccc 80%);
+        }
+  
+      .eva .body-container .body {
+        background: white;
+        background-image:
+          radial-gradient(ellipse 250% 250% at 80% 120%, #ccc 15%, transparent 25%),
+          radial-gradient(100% 250% ellipse at 0% 50%, #fff 25%, transparent 35%),
+          linear-gradient(to right, #fff, #ccc);
+        width: 150px;
+        height: 200px;
+        border-radius: 25% 25% 50% 50% / 25px 25px 60% 60%;
+        box-shadow:
+          0 0 35px rgba(0, 0, 0, 0.3),
+          2px 2px 15px rgba(0, 0, 0, 0.12);
+        position: relative;
+        z-index: 1;
+      }
+      .eva .body-container .body .panel {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          width: 45px;
+          height: 15px;
+          transform: translate(25px, 10px);
+      }
+          .eva .body-container .body .panel.animated .dot-1 {
+              animation: dotAppears 10s linear 2s 1 forwards;
+            }
+  
+            .eva .body-container .body .panel.animated .dot-2 {
+              animation: dotAppears 10s linear 4s 1 forwards;
+            }
+  
+            .eva .body-container .body .panel.animated .dot-3 {
+              animation: dotAppears 10s linear 6s 1 forwards;
+            }
+  
+            .eva .body-container .body .panel.animated .bigdot {
+              animation: bigDot 2s linear 10s 1 forwards;
+            }
+  
+          .eva .body-container .body .panel .dot {
+            --color: #7392a3;
+  
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--color);
+            box-shadow: 0 0 4px 1px var(--color);
+            opacity: 0;
+          }
+  
+          .eva .body-container .body .panel .bigdot {
+            --color: #6bbc6d;
+  
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--color);
+            box-shadow: 0 0 4px 1px var(--color);
+            opacity: 0;
+          }
+  
+        .eva .body-container .body ::before {
+          content: "";
+          display: block;
+          width: 130px;
+          height: 20px;
+          background: #bbb;
+          background-image: radial-gradient(circle, #999, #bbb);
+          margin: auto;
+          border-radius: 50%;
+          filter: blur(4px);
+        }
+  
+    .eva .shadow {
+      width: 100px;
+      height: 10px;
+      border-radius: 50%;
+      filter: blur(2px);
+      margin: auto;
+      animation: moveShadow 3s ease infinite alternate;
+    }
+  
+    .eva .scanner {
+      background: linear-gradient(blue, transparent);
+      opacity: 0;
+      position: absolute;
+      top: 6px;
+      width: 100%;
+      height: 250px;
+      z-index: 10;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      transform-origin: 50% 0;
+  
+      &.animated {
+        animation: moveScanner 3s linear alternate 2 backwards;
+      }
+    }
+  
+  @keyframes changeEyes {
+    0% {
+      transform: translate(0, 27px) rotateX(-10deg);
+    }
+  
+    100% {
+      transform: translate(0, 27px) rotateX(60deg);
+    }
+  }
+  
+  @keyframes moveScanner {
+    0% {
+      transform: skew(50deg);
+      opacity: 0.3;
+    }
+  
+    100% {
+      transform: skew(-50deg);
+      opacity: 0.3;
+    }
+  }
+  
+  @keyframes dotAppears {
+  
+    0%,
+    22% {
+      opacity: 0;
+    }
+  
+    25%,
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes bigDot {
+  
+    0%,
+    4%,
+    10%,
+    14%,
+    20%,
+    24%,
+    30%,
+    34%,
+    40%,
+    44%,
+    50%,
+    54% {
+      opacity: 0;
+    }
+  
+    5%,
+    9%,
+    15%,
+    19%,
+    25%,
+    29%,
+    35%,
+    39%,
+    45%,
+    49%,
+    55%,
+    59%,
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes moveShadow {
+    0% {
+      transform: translate(0, 15px) scale(1, 1);
+      background: #ddd;
+    }
+  
+    100% {
+      transform: translate(0, 15px) scale(0.8, 0.8);
+      background: #ccc;
+    }
+  }
+  
+  @keyframes moveBody {
+    0% {
+      transform: translate(0, -10px);
+    }
+  
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  @keyframes moveHeadEve {
+    0% {
+      transform: translate(0, 0);
+    }
+  
+    100% {
+      transform: translate(0, 15px);
+    }
+  }
+  
+  @keyframes moveHand {
+    0% {
+      --hand-x: 8px;
+    }
+  
+    100% {
+      --hand-x: -8px;
+    }
+  }
+  
+  @keyframes wheelMove {
+    0% {
+      background-position: 0 0;
+    }
+  
+    100% {
+      background-position: 0 18px;
+    }
+  }
+  
+  /* .created {
+    background: 
+      url(https://assets.codepen.io/154065/internal/avatars/users/default.png) left bottom,
+      linear-gradient(to bottom, #884ced, #ec1cce) bottom;
+    background-size: 75px 75px, 100% 75px;
+    background-color: #884ced;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 115px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 2em;
+    text-align: center;
+    
+    & span,
+    & h2,
+    & p,
+    & a {
+      font-family: Montserrat;
+      margin: 0;
+    }
+    
+    & a,
+    & p,
+    & span {
+      color: #fff;    
+    }
+    
+    & h2 {
+      font-weight: 700;
+      transform: translate(0, -4px);    
+    }
+    
+    & a {
+      text-decoration-color: rgba(255,255,255,0.4);
+    }
+    
+    & a:hover {
+      color: #e6e82a;
+    }
+  } */

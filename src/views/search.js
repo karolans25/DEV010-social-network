@@ -1,5 +1,5 @@
 import { formatPost } from './formatPost';
-import { header } from './header';
+import { header } from './header/header';
 import { navbar } from './navbar';
 import { searchHandler } from '../handlers/searchHandler';
 import { feedHandler } from '../handlers/feedHandler';

@@ -1,7 +1,13 @@
-import imgInit from '../assets/init.png';
-import { TITLE } from '../consts/const';
+import imgInit from '../../assets/init.png';
+import { TITLE } from '../../consts/const';
 
 const init = (navigateTo) => {
+
+  const linkElement = document.createElement('link');
+  linkElement.rel = 'stylesheet';
+  linkElement.type = 'text/css';
+  linkElement.href = './views/init/init.style.css';
+
   // load();
 
   const section = document.createElement('section');

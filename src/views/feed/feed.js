@@ -1,14 +1,14 @@
 import {
   onSnapshot, query, collection, orderBy,
 } from 'firebase/firestore';
-import { db } from '../firebase/firebaseConfig';
-import { header } from './header';
-import { navbar } from './navbar';
-import { formatCreatePost } from './formatCreatePost';
-import { formatPost } from './formatPost';
+import { db } from '../../firebase/firebaseConfig';
+import { header } from '../header/header';
+import { navbar } from '../navbar';
+import { formatCreatePost } from '../formatCreatePost';
+import { formatPost } from '../formatPost';
 // import { popup } from './popup';
 
-import imgLoading from '../assets/icons/playground.gif';
+import imgLoading from '../../assets/icons/playground.gif';
 
 export const feed = async (navigateTo) => {
   const section = document.createElement('section');

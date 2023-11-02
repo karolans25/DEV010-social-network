@@ -2,13 +2,14 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase/firebaseConfig';
 // Este es el punto de entrada de tu aplicacion
 
-import init from './views/init';
-import error from './views/error.js';
-import { signin } from './views/signin';
-import { signup } from './views/signup';
+import init from './views/init/init';
+import error from './views/error/error';
+import { signin } from './views/signin/signin';
+import { signup } from './views/signup/signup';
+import { feed } from './views/feed/feed';
+
 import { password } from './views/password';
 import { popup } from './views/popup';
-import { feed } from './views/feed';
 import { myPosts } from './views/myPosts';
 import { plus } from './views/plus';
 import { search } from './views/search';

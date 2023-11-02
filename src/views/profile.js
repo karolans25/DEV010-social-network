@@ -1,5 +1,5 @@
 import { feedHandler } from '../handlers/feedHandler';
-import { header } from './header';
+import { header } from './header/header';
 import { navbar } from './navbar';
 import { profileHandler } from '../handlers/profileHandler';
 

@@ -1,4 +1,4 @@
-import { header } from './header';
+import { header } from './header/header';
 import { navbar } from './navbar';
 
 import imgLoading from '../assets/icons/playground.gif';

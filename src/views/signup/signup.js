@@ -1,10 +1,10 @@
-import { signupHandler } from '../handlers/signupHandler';
-import { popup } from './popup';
+import { signupHandler } from '../../handlers/signupHandler';
+import { popup } from '../popup';
 
-import gifLoading from '../assets/icons/playground.gif';
-import imgAvatar from '../assets/icons/nina.png';
-import imgIconAddFile from '../assets/icons/file.png';
-import imgSignup from '../assets/icons/signup.png';
+import gifLoading from '../../assets/icons/playground.gif';
+import imgAvatar from '../../assets/icons/nina.png';
+import imgIconAddFile from '../../assets/icons/file.png';
+import imgSignup from '../../assets/icons/signup.png';
 
 export const signup = (navigateTo) => {
   const section = document.createElement('section');
